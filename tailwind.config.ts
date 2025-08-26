@@ -65,11 +65,11 @@ export default {
 					foreground: 'hsl(var(--highlight-foreground))'
 				}
 			},
-			fontFamily: {
-				'display': ['GFS Didot', 'serif'],
-				'ui': ['Inter', 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-				'sans': ['Inter', 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
-			},
+      fontFamily: {
+        'display': ['GFS Didot', 'serif'],
+        'ui': ['Inter', 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        'sans': ['Inter', 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+      },
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-highlight': 'var(--gradient-highlight)',

@@ -7,37 +7,32 @@
 
 @layer base {
   :root {
-    /* Institutional Matte Black Theme */
-    --background: 13 13 13; /* True matte black #0D0D0D */
-    --foreground: 255 255 255; /* Pure white #FFFFFF */
-    --card: 18 18 18; /* Card background #121212 */
-    --card-foreground: 255 255 255; /* Pure white */
-    --popover: 18 18 18;
-    --popover-foreground: 255 255 255;
-    --primary: 28 42 76; /* Janus Navy Blue #1C2A4C */
-    --primary-foreground: 255 255 255;
-    --secondary: 26 26 26; /* Section background #1A1A1A */
-    --secondary-foreground: 192 192 192; /* Soft grey #C0C0C0 */
-    --muted: 26 26 26; /* Muted panels #1A1A1A */
-    --muted-foreground: 192 192 192; /* Soft grey #C0C0C0 */
-    --accent: 28 42 76; /* Navy accent */
-    --accent-foreground: 255 255 255;
-    --destructive: 255 76 76; /* Alert red #FF4C4C */
-    --destructive-foreground: 255 255 255;
-    --border: 45 45 45; /* Lines/dividers #2D2D2D */
-    --input: 18 18 18;
-    --ring: 28 42 76;
-    --radius: 0; /* No border radius for sharp, institutional look */
+    /* Corrected Institutional Matte Black Theme - All HSL values */
+    --background: 0 0% 5%; /* Matte black #0D0D0D */
+    --foreground: 0 0% 100%; /* Pure white #FFFFFF */
+    --card: 0 0% 7%; /* Card background #121212 */
+    --card-foreground: 0 0% 100%; /* Pure white */
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 220 43% 19%; /* Navy Blue #1C2A4C */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 18%; /* Section background - slightly lighter black */
+    --secondary-foreground: 0 0% 75%; /* Cool grey #C0C0C0 */
+    --muted: 0 0% 7%; /* Same as card */
+    --muted-foreground: 0 0% 75%; /* Cool grey #C0C0C0 */
+    --accent: 220 43% 19%; /* Navy accent */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%; /* Alert red */
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 18%; /* Dark grey borders #2E2E2E */
+    --input: 0 0% 7%;
+    --ring: 220 43% 19%;
+    --radius: 0; /* No border radius for sharp institutional look */
     
-    /* Professional colors */
-    --success: 0 255 148; /* Digital green #00FF94 for AI status */
-    --warning: 234 179 8; /* Warning yellow */
-    --highlight: 0 255 148; /* Digital green for highlights */
-    
-    /* Minimal shadows and effects */
-    --shadow-none: none;
-    --transition-smooth: all 0.2s ease-out;
-    --transition-fast: all 0.1s ease-out;
+    /* Professional accent colors */
+    --success: 146 100% 47%; /* Digital green #00FF94 */
+    --warning: 48 96% 53%; /* Warning yellow */
+    --highlight: 146 100% 47%; /* Digital green for highlights */
   }
 }
 
@@ -47,96 +42,28 @@
   }
 
   body {
-    @apply bg-background text-foreground font-ui;
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
+    font-family: 'GFS Didot', serif;
     font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer components {
-  /* Professional cold patterns */
-  .intelligence-grid {
-    @apply grid gap-6 p-6;
-    background: radial-gradient(ellipse at top, hsl(216 41% 21% / 0.02), transparent 50%);
-  }
-  
-  .data-card {
-    @apply bg-card border border-border rounded-lg p-6;
-    background-image: var(--gradient-surface);
-    box-shadow: var(--shadow-elite);
-    transition: var(--transition-smooth);
-  }
-  
-  .data-card:hover {
-    box-shadow: var(--shadow-professional);
-    transform: translateY(-1px);
-  }
-  
-  .agent-status {
-    @apply inline-flex items-center gap-2 px-3 py-1 rounded-md text-sm font-medium;
-  }
-  
-  .agent-status.running {
-    @apply bg-success/10 text-success border border-success/20;
-    box-shadow: 0 0 8px hsl(151 55% 41% / 0.15);
-  }
-  
-  .agent-status.idle {
-    @apply bg-muted text-muted-foreground border border-border;
-  }
-  
-  .agent-status.processing {
-    @apply bg-highlight/10 text-highlight border border-highlight/20;
-    box-shadow: var(--shadow-highlight);
-  }
-  
-  .deal-row {
-    @apply border-b border-border hover:bg-secondary/30 transition-all duration-200;
-  }
-  
-  .deal-row:hover {
-    box-shadow: inset 0 0 0 1px hsl(216 41% 21% / 0.08);
-  }
-  
-  .score-high {
-    @apply text-success bg-success/10 border border-success/20 rounded px-2 py-1;
-  }
-  
-  .score-medium {
-    @apply text-warning bg-warning/10 border border-warning/20 rounded px-2 py-1;
-  }
-  
-  .score-low {
-    @apply text-destructive bg-destructive/10 border border-destructive/20 rounded px-2 py-1;
-  }
-  
-  /* Professional effects */
-  .glow-primary {
-    box-shadow: var(--shadow-professional);
-  }
-  
-  .glow-highlight {
-    box-shadow: var(--shadow-highlight);
-  }
-  
-  /* Professional spacing */
-  .professional-section {
-    @apply py-20 px-6;
-  }
-  
-  .professional-container {
-    @apply max-w-6xl mx-auto;
-  }
-  
-  /* Institutional flat UI components */
+  /* Clean institutional UI components */
   .institutional-card {
-    @apply bg-card text-foreground border border-[hsl(var(--border))];
+    @apply bg-card text-foreground border border-border;
     box-shadow: none;
-    transition: var(--transition-smooth);
+    transition: all 0.2s ease-out;
   }
   
   .institutional-card:hover {
@@ -144,12 +71,12 @@
   }
 
   .institutional-panel {
-    @apply bg-secondary text-foreground border border-[hsl(var(--border))];
+    @apply bg-secondary text-foreground border border-border;
     box-shadow: none;
   }
 
   .ai-status-active {
-    @apply text-[hsl(var(--success))] bg-[hsl(var(--success))]/10 border border-[hsl(var(--success))]/20;
+    @apply text-success bg-success/10 border border-success/20;
   }
 
   /* Professional button styles - flat design */
@@ -168,7 +95,7 @@
   }
 
   .btn-ai-active {
-    @apply bg-[hsl(var(--success))] text-[hsl(var(--background))] hover:bg-[hsl(var(--success))]/90 transition-all duration-200 font-medium;
+    @apply bg-success text-background hover:bg-success/90 transition-all duration-200 font-medium;
     box-shadow: none;
   }
 
@@ -190,5 +117,14 @@
 
   .nav-link.active {
     @apply text-primary;
+  }
+
+  /* Professional spacing */
+  .professional-section {
+    @apply py-20 px-6;
+  }
+
+  .professional-container {
+    @apply max-w-6xl mx-auto;
   }
 }
