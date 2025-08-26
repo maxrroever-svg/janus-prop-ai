@@ -82,8 +82,8 @@ const getAnimationVariants = (type: string) => {
 
 export const AgentStackSection = () => {
   return (
-    <section className="py-32 px-6">
-      <div className="max-w-7xl mx-auto">
+    <section className="professional-section bg-background">
+      <div className="professional-container">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -91,14 +91,12 @@ export const AgentStackSection = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="font-display text-5xl md:text-6xl font-bold mb-6">
-            Meet Your AI
+          <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
+            Built with Modular
             <br />
-            <span className="bg-gradient-success bg-clip-text text-transparent">
-              Agent Stack
-            </span>
+            <span className="text-primary">Intelligence</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Five specialized AI agents working in harmony to deliver
             institutional-grade real estate intelligence
           </p>
@@ -119,17 +117,17 @@ export const AgentStackSection = () => {
               >
                 <div className="flex items-center gap-8">
                   <motion.div
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    className="flex-shrink-0 w-20 h-20 bg-gradient-primary rounded-xl flex items-center justify-center"
+                    whileHover={{ scale: 1.05 }}
+                    className="flex-shrink-0 w-16 h-16 bg-primary rounded-lg flex items-center justify-center"
                   >
-                    <IconComponent className="w-10 h-10 text-white" />
+                    <IconComponent className="w-8 h-8 text-primary-foreground" />
                   </motion.div>
                   
                   <div className="flex-1">
-                    <h3 className="font-display text-2xl md:text-3xl font-bold mb-2">
+                    <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">
                       {agent.name}
                     </h3>
-                    <p className="text-muted-foreground text-lg mb-4">
+                    <p className="text-muted-foreground mb-4">
                       {agent.description}
                     </p>
                     <div className="flex items-center gap-4">
@@ -137,7 +135,7 @@ export const AgentStackSection = () => {
                         <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
                         Running
                       </div>
-                      <span className="text-success font-semibold">
+                      <span className="text-success font-medium">
                         {agent.stats}
                       </span>
                     </div>
