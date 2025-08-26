@@ -5,10 +5,9 @@ import { Button } from "@/components/ui/button";
 
 const sections = [
   { id: "hero", label: "Home" },
-  { id: "home-assistance", label: "Home Assistance" },
-  { id: "investment-intelligence", label: "Investment Intelligence" },
   { id: "lien-intelligence", label: "Lien Intelligence" },
-  { id: "pipeline", label: "Real-Time Data Pipeline" },
+  { id: "investment-intelligence", label: "Investment Intelligence" },
+  { id: "pipeline", label: "Real-Time Pipeline" },
   { id: "architecture", label: "Architecture" },
   { id: "demo", label: "Request Demo" },
 ];
@@ -53,35 +52,33 @@ export const ScrollNavigation = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border"
+      className="fixed top-0 left-0 right-0 z-50 bg-[hsl(var(--background))] backdrop-blur-lg border-b border-[hsl(var(--border))]"
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="font-display text-xl font-bold text-foreground cursor-pointer"
+            className="font-display text-xl font-bold text-[hsl(var(--foreground))] cursor-pointer"
             onClick={() => scrollToSection("hero")}
           >
             Janus AI
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-8">
             {sections.map((section) => (
-              <Button
+              <button
                 key={section.id}
-                variant="ghost"
-                size="sm"
                 onClick={() => scrollToSection(section.id)}
-                className={`text-sm font-medium transition-all duration-200 hover:text-[hsl(var(--terminal-green))] ${
+                className={`text-sm font-medium font-display transition-all duration-200 hover:text-[hsl(var(--terminal-green))] ${
                   activeSection === section.id
-                    ? "text-[hsl(var(--terminal-green))] bg-[hsl(var(--terminal-green))]/10"
-                    : "text-muted-foreground"
+                    ? "nav-active"
+                    : "text-[hsl(var(--foreground))]"
                 }`}
               >
                 {section.label}
-              </Button>
+              </button>
             ))}
           </div>
 
@@ -89,7 +86,7 @@ export const ScrollNavigation = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden"
+            className="md:hidden text-[hsl(var(--foreground))] hover:text-[hsl(var(--terminal-green))]"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -103,23 +100,21 @@ export const ScrollNavigation = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden mt-4 py-4 border-t border-border"
+            className="md:hidden mt-4 py-4 border-t border-[hsl(var(--border))]"
           >
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
               {sections.map((section) => (
-                <Button
+                <button
                   key={section.id}
-                  variant="ghost"
-                  size="sm"
                   onClick={() => scrollToSection(section.id)}
-                  className={`justify-start text-sm font-medium transition-all duration-200 hover:text-[hsl(var(--terminal-green))] ${
+                  className={`text-left text-sm font-medium font-display transition-all duration-200 hover:text-[hsl(var(--terminal-green))] ${
                     activeSection === section.id
-                      ? "text-[hsl(var(--terminal-green))] bg-[hsl(var(--terminal-green))]/10"
-                      : "text-muted-foreground"
+                      ? "text-[hsl(var(--terminal-green))]"
+                      : "text-[hsl(var(--foreground))]"
                   }`}
                 >
                   {section.label}
-                </Button>
+                </button>
               ))}
             </div>
           </motion.div>

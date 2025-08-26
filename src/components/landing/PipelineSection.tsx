@@ -10,8 +10,8 @@ const dataSources = [
 
 export const PipelineSection = () => {
   return (
-    <section className="py-32 px-6 bg-gradient-surface">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-32 px-6 bg-background">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -19,10 +19,10 @@ export const PipelineSection = () => {
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="font-display text-5xl md:text-6xl font-bold mb-6">
+          <h2 className="font-display text-5xl md:text-6xl text-foreground mb-6">
             Real-Time Data
             <br />
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
+            <span className="terminal-green">
               Pipeline
             </span>
           </h2>
@@ -32,16 +32,16 @@ export const PipelineSection = () => {
           </p>
         </motion.div>
 
-        <div className="relative max-w-5xl mx-auto">
-          {/* Central Janus Core - Fixed overlap */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            viewport={{ once: true }}
-            className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
-          >
-            <div className="w-24 h-24 terminal-panel flex items-center justify-center relative">
+        {/* Central Hub - Fixed positioning and size */}
+        <div className="relative mb-20">
+          <div className="flex justify-center mb-16">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="terminal-panel p-6 w-32 h-32 flex items-center justify-center relative"
+            >
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
@@ -50,31 +50,31 @@ export const PipelineSection = () => {
                 JANUS
               </motion.div>
               
-              {/* Pulsing rings - reduced size to prevent overlap */}
+              {/* Controlled pulsing rings */}
               {[...Array(2)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute border border-[hsl(var(--terminal-green))]/30 rounded-full"
+                  className="absolute border border-[hsl(var(--terminal-green))]/20 rounded-full pointer-events-none"
                   style={{
-                    width: `${100 + i * 20}px`,
-                    height: `${100 + i * 20}px`,
+                    width: `${140 + i * 24}px`,
+                    height: `${140 + i * 24}px`,
                   }}
                   animate={{
                     scale: [1, 1.05, 1],
-                    opacity: [0.3, 0.1, 0.3],
+                    opacity: [0.2, 0.1, 0.2],
                   }}
                   transition={{
-                    duration: 2,
+                    duration: 3,
                     repeat: Infinity,
-                    delay: i * 0.5,
+                    delay: i * 0.8,
                   }}
                 />
               ))}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
 
-          {/* Data Source Cards - Bloomberg Terminal style */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+          {/* Data Source Cards - Properly spaced grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {dataSources.map((source, index) => {
               const IconComponent = source.icon;
               
@@ -84,18 +84,18 @@ export const PipelineSection = () => {
                   initial={{ 
                     opacity: 0, 
                     x: index % 2 === 0 ? -60 : 60,
+                    y: 20
                   }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.15 }}
                   viewport={{ once: true }}
-                  className="terminal-panel p-6 relative"
-                  style={{ marginBottom: index >= 2 ? '3rem' : '0' }}
+                  className="terminal-data-panel p-6"
                 >
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-10 h-10 terminal-panel-contrast rounded-sm flex items-center justify-center">
-                      <IconComponent className={`w-5 h-5 ${source.color.replace('text-', 'text-[hsl(var(--')}.replace(')', '))')]')}`} />
+                      <IconComponent className="w-5 h-5 terminal-green" />
                     </div>
-                    <h3 className="text-lg font-semibold text-[hsl(var(--terminal-text))]">{source.name}</h3>
+                    <h3 className="text-lg font-semibold text-foreground font-display">{source.name}</h3>
                   </div>
                   
                   <div className="flex items-center gap-2 text-sm terminal-green">
@@ -113,14 +113,14 @@ export const PipelineSection = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
             viewport={{ once: true }}
-            className="text-center terminal-panel p-6"
+            className="text-center terminal-panel p-8"
           >
-            <div className="flex items-center justify-center gap-4 text-lg">
-              <span className="text-[hsl(var(--terminal-text))]">Raw Data</span>
+            <div className="flex items-center justify-center gap-6 text-lg flex-wrap">
+              <span className="text-muted-foreground font-display">Raw Data</span>
               <ArrowRight className="terminal-green" />
-              <span className="terminal-green font-semibold">AI Processing</span>
+              <span className="terminal-green font-semibold font-display">AI Processing</span>
               <ArrowRight className="terminal-green" />
-              <span className="text-[hsl(var(--terminal-text))] font-semibold">Investment Intelligence</span>
+              <span className="text-foreground font-semibold font-display">Investment Intelligence</span>
             </div>
           </motion.div>
         </div>

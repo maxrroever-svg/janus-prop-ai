@@ -6,22 +6,22 @@ import { Link } from "react-router-dom";
 export const HeroSection = () => {
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background pt-20">
-      {/* Subtle animated background nodes */}
+      {/* Terminal-style animated background nodes */}
       <div className="absolute inset-0">
-        {[...Array(12)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-primary/20 rounded-full"
+            className="absolute w-1 h-1 terminal-green-bg rounded-full"
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.4, 0.2],
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 0.8, 0.3],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
+              duration: 4 + Math.random() * 2,
               repeat: Infinity,
               delay: Math.random() * 3,
               ease: "linear",
@@ -30,25 +30,25 @@ export const HeroSection = () => {
         ))}
       </div>
 
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
+      {/* Dark gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
 
       <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="mb-8"
         >
           {/* Professional logo mark */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="mb-12"
           >
             <div className="inline-flex items-center gap-3 mb-8">
-              <Brain className="w-8 h-8 text-primary" />
+              <Brain className="w-8 h-8 terminal-green" />
               <span className="font-display text-2xl text-foreground">Janus AI</span>
             </div>
           </motion.div>
@@ -56,14 +56,14 @@ export const HeroSection = () => {
           <h1 className="font-display text-5xl md:text-7xl font-normal mb-6 text-foreground leading-tight">
             The Real Estate
             <br />
-            <span className="text-primary">Intelligence Engine</span>
+            <span className="terminal-green">Intelligence Engine</span>
           </h1>
         </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
         >
           AI-powered insights for investors, homeowners, and institutions.
@@ -74,19 +74,19 @@ export const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
           <Button 
             size="lg" 
-            className="btn-highlight text-base px-8 py-3 font-medium"
+            className="btn-terminal text-base px-8 py-3 font-medium"
           >
             Request Access
           </Button>
           <Button 
             size="lg" 
             variant="outline" 
-            className="text-base px-8 py-3 font-medium border-border hover:bg-secondary"
+            className="text-base px-8 py-3 font-medium border-border hover:bg-secondary text-foreground hover:text-terminal-green"
           >
             Schedule Demo
           </Button>
@@ -95,11 +95,11 @@ export const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.2 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
           className="mt-16"
         >
           <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">
-            <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
+            <div className="w-2 h-2 terminal-green-bg rounded-full animate-pulse" />
             Trusted by institutional investors managing $2.4B+ in real estate assets
           </div>
         </motion.div>
@@ -108,18 +108,18 @@ export const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.8 }}
+          transition={{ duration: 0.8, delay: 1.8 }}
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-primary/30 rounded-full flex justify-center"
+            className="w-6 h-10 border-2 border-[hsl(var(--terminal-green))]/30 rounded-full flex justify-center"
           >
             <motion.div
               animate={{ y: [0, 12, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-3 bg-primary/50 rounded-full mt-2"
+              className="w-1 h-3 terminal-green-bg rounded-full mt-2"
             />
           </motion.div>
         </motion.div>

@@ -94,7 +94,7 @@ export const AgentStackSection = () => {
           <h2 className="font-display text-4xl md:text-5xl text-foreground mb-6">
             Built with Modular
             <br />
-            <span className="text-primary">Intelligence</span>
+            <span className="terminal-green">Intelligence</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Five specialized AI agents working in harmony to deliver
@@ -124,10 +124,10 @@ export const AgentStackSection = () => {
                   </motion.div>
                   
                   <div className="flex-1">
-                    <h3 className="font-display text-xl md:text-2xl text-[hsl(var(--terminal-text))] mb-2">
+                    <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">
                       {agent.name}
                     </h3>
-                    <p className="text-[hsl(var(--terminal-text))]/70 mb-4">
+                    <p className="text-muted-foreground mb-4">
                       {agent.description}
                     </p>
                     <div className="flex items-center gap-4">
