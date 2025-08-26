@@ -1,6 +1,7 @@
 import { HeroSection } from "@/components/landing/HeroSection";
 import { LienIntelligenceSection } from "@/components/landing/LienIntelligenceSection";
 import { AgentStackSection } from "@/components/landing/AgentStackSection";
+import { IntelligenceSystemSection } from "@/components/landing/IntelligenceSystemSection";
 import { PipelineSection } from "@/components/landing/PipelineSection";
 import { DealIntelligenceSection } from "@/components/landing/DealIntelligenceSection";
 import { ClosingSection } from "@/components/landing/ClosingSection";
@@ -18,6 +19,9 @@ const Landing = () => {
       </div>
       <div id="investment-intelligence">
         <AgentStackSection />
+      </div>
+      <div id="ai-system">
+        <IntelligenceSystemSection />
       </div>
       <div id="pipeline">
         <PipelineSection />

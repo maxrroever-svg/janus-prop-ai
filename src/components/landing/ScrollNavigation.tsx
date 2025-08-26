@@ -7,9 +7,10 @@ const sections = [
   { id: "hero", label: "Home" },
   { id: "lien-intelligence", label: "Lien Intelligence" },
   { id: "investment-intelligence", label: "Investment Intelligence" },
-  { id: "pipeline", label: "Real-Time Pipeline" },
-  { id: "architecture", label: "Architecture" },
-  { id: "demo", label: "Request Demo" },
+  { id: "ai-system", label: "AI Agents" },
+  { id: "pipeline", label: "Live Opportunities" },
+  { id: "architecture", label: "The System" },
+  { id: "demo", label: "Contact" },
 ];
 
 export const ScrollNavigation = () => {
