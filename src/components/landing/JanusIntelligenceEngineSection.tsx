@@ -1,77 +1,11 @@
 import { motion } from "framer-motion";
 import { 
-  Brain, 
-  Search, 
-  Scale, 
-  Calculator, 
-  FileText, 
-  GitBranch, 
-  TrendingUp, 
-  Database, 
-  Shield,
   Target,
   Network,
   BarChart3,
   Zap
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-
-const agents = [
-  {
-    name: "Eden",
-    role: "Executive Strategist", 
-    description: "Makes ROI-based acquisition calls",
-    icon: Brain
-  },
-  {
-    name: "Orion",
-    role: "Market Scanner",
-    description: "Finds distressed or high-potential assets", 
-    icon: Search
-  },
-  {
-    name: "Atelius",
-    role: "Legal Parser",
-    description: "Reads liens, code violations, and court docs",
-    icon: Scale
-  },
-  {
-    name: "Osiris", 
-    role: "Financial Modeler",
-    description: "Forecasts returns, redemption risk, yield",
-    icon: Calculator
-  },
-  {
-    name: "Celestia",
-    role: "Report Creator",
-    description: "Writes investor-ready summaries",
-    icon: FileText
-  },
-  {
-    name: "Aurora",
-    role: "Task Coordinator", 
-    description: "Connects agents and times workflows",
-    icon: GitBranch
-  },
-  {
-    name: "Valyria",
-    role: "Market Forecaster",
-    description: "Predicts rent growth, demand, risk shifts",
-    icon: TrendingUp
-  },
-  {
-    name: "Elysia",
-    role: "Data Integrator",
-    description: "Prepares and links public and private data", 
-    icon: Database
-  },
-  {
-    name: "Spring",
-    role: "Quality Control",
-    description: "Ensures accuracy and fixes edge cases",
-    icon: Shield
-  }
-];
 
 const processSteps = [
   {
@@ -144,48 +78,6 @@ export const JanusIntelligenceEngineSection = () => {
             A system of autonomous agents built to think, reason, and execute like elite real estate investors.
           </p>
         </motion.div>
-
-        {/* Agent Grid */}
-        <div className="mb-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {agents.map((agent, index) => {
-              const IconComponent = agent.icon;
-              const isLeft = index % 2 === 0;
-              
-              return (
-                <motion.div
-                  key={agent.name}
-                  initial={{ opacity: 0, x: isLeft ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className="h-full"
-                >
-                  <Card className="institutional-card h-full">
-                    <CardContent className="p-6 flex flex-col h-full">
-                      <div className="flex items-start gap-4 mb-4">
-                        <div className="p-2 rounded-lg bg-accent/10 text-accent shrink-0">
-                          <IconComponent className="w-6 h-6" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-display font-bold text-lg mb-1 text-foreground">
-                            {agent.name}
-                          </h4>
-                          <p className="text-sm font-medium text-accent mb-2">
-                            {agent.role}
-                          </p>
-                        </div>
-                      </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                        {agent.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
 
         {/* Process Flow */}
         <div className="mb-32">
