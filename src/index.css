@@ -7,66 +7,58 @@
 
 @layer base {
   :root {
-    /* Core Brand Colors - Cold Professional Light Mode */
-    --background: 0 0% 96%; /* #F5F5F5 - Light neutral grey */
-    --foreground: 0 0% 10%; /* #1A1A1A - Near-black primary text */
-    --muted-foreground: 0 0% 29%; /* #4B4B4B - Cold grey secondary text */
+    /* Core Brand Colors - Bloomberg Terminal Style */
+    --background: 245 245 245; /* Light grey #F5F5F5 */
+    --foreground: 26 26 26; /* Near-black #1A1A1A */
+    --card: 255 255 255; /* White */
+    --card-foreground: 26 26 26; /* Near-black */
+    --popover: 255 255 255;
+    --popover-foreground: 26 26 26;
+    --primary: 28 42 76; /* Navy Blue #1C2A4C */
+    --primary-foreground: 255 255 255;
+    --secondary: 239 239 239; /* Light grey for secondary elements */
+    --secondary-foreground: 75 75 75; /* Cold grey */
+    --muted: 229 229 229; /* Lighter grey for muted elements */
+    --muted-foreground: 75 75 75; /* Cold grey #4B4B4B */
+    --accent: 229 229 229;
+    --accent-foreground: 26 26 26;
+    --destructive: 220 38 38;
+    --destructive-foreground: 255 255 255;
+    --border: 214 214 214; /* Light border */
+    --input: 214 214 214;
+    --ring: 28 42 76; /* Navy Blue */
+    --chart-1: 28 42 76; /* Navy */
+    --chart-2: 75 75 75; /* Cold grey */
+    --chart-3: 163 163 163; /* Medium grey */
+    --chart-4: 214 214 214; /* Light grey */
+    --chart-5: 245 245 245; /* Very light grey */
+    --radius: 0.25rem; /* Sharper corners for Bloomberg Terminal feel */
     
-    /* Janus AI Professional Accent Colors */
-    --primary: 216 41% 21%; /* #1C2A4C - Navy blue accent */
-    --primary-foreground: 0 0% 100%;
+    /* Bloomberg Terminal colors */
+    --terminal-dark: 26 26 26; /* #1A1A1A for data panels */
+    --terminal-darker: 44 44 44; /* #2C2C2C for contrast panels */
+    --terminal-green: 0 255 148; /* #00FF94 digital green for live data */
+    --terminal-text: 255 255 255; /* White text on dark panels */
     
-    --success: 151 55% 41%; /* #2D7D32 - Professional green */
-    --success-foreground: 0 0% 100%;
+    /* Professional gradient colors */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+    --gradient-surface: linear-gradient(180deg, hsl(var(--background)), hsl(var(--muted)));
+    --gradient-terminal: linear-gradient(180deg, hsl(var(--terminal-dark)), hsl(var(--terminal-darker)));
     
-    --warning: 35 91% 65%; /* #FB8C00 - Professional amber */
-    --warning-foreground: 0 0% 0%;
+    /* Professional shadows */
+    --shadow-soft: 0 2px 8px hsl(var(--primary) / 0.08);
+    --shadow-medium: 0 4px 16px hsl(var(--primary) / 0.12);
+    --shadow-strong: 0 8px 32px hsl(var(--primary) / 0.16);
+    --shadow-terminal: 0 4px 20px hsl(var(--terminal-dark) / 0.3);
     
-    --destructive: 0 84% 50%; /* #DC2626 - Error red */
-    --destructive-foreground: 0 0% 100%;
+    /* Professional transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     
-    --highlight: 207 100% 50%; /* #0090FF - CTA button highlight */
-    --highlight-foreground: 0 0% 100%;
-    
-    /* UI Components */
-    --card: 0 0% 100%; /* #FFFFFF - Pure white cards */
-    --card-foreground: 0 0% 10%;
-    
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 10%;
-    
-    --secondary: 0 0% 98%; /* #FAFAFA - Elevated surfaces */
-    --secondary-foreground: 0 0% 10%;
-    
-    --muted: 0 0% 94%; /* #F0F0F0 - Muted backgrounds */
-    
-    --accent: 216 41% 21%; /* Same as primary navy */
-    --accent-foreground: 0 0% 100%;
-    
-    --border: 0 0% 87%; /* #DEDEDE - Professional borders */
-    --input: 0 0% 100%; /* #FFFFFF - White inputs */
-    --ring: 216 41% 21%;
-    
-    --radius: 0.5rem;
-    
-    /* Custom Janus Professional Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(216 41% 21%), hsl(216 41% 16%));
-    --gradient-highlight: linear-gradient(135deg, hsl(207 100% 50%), hsl(207 100% 45%));
-    --gradient-surface: linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 98%));
-    --gradient-cold: linear-gradient(180deg, hsl(0 0% 96%), hsl(0 0% 94%));
-    
-    /* Shadows - Professional subtle shadows */
-    --shadow-elite: 0 2px 12px -2px hsl(0 0% 0% / 0.08);
-    --shadow-professional: 0 4px 16px -4px hsl(216 41% 21% / 0.12);
-    --shadow-highlight: 0 0 16px hsl(207 100% 50% / 0.2);
-    
-    /* Typography */
-    --font-display: 'GFS Didot', serif;
-    --font-ui: 'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-    
-    /* Animations - Linear and professional */
-    --transition-smooth: all 0.2s ease-out;
-    --transition-fast: all 0.1s ease-out;
+    /* Success and warning colors */
+    --success: 34 197 94; /* Green */
+    --warning: 234 179 8; /* Yellow */
+    --highlight: 59 130 246; /* Blue highlight */
   }
 }
 
@@ -161,16 +153,34 @@
     @apply max-w-6xl mx-auto;
   }
   
-  /* Cold button style */
-  .btn-professional {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 
-           px-6 py-3 rounded-md font-medium transition-all duration-200
-           shadow-sm hover:shadow-md;
+  /* Bloomberg Terminal styles */
+  .terminal-panel {
+    @apply bg-[hsl(var(--terminal-dark))] text-[hsl(var(--terminal-text))] border border-[hsl(var(--terminal-darker))] rounded-sm;
+    box-shadow: var(--shadow-terminal);
   }
-  
+
+  .terminal-panel-contrast {
+    @apply bg-[hsl(var(--terminal-darker))] text-[hsl(var(--terminal-text))] border border-[hsl(var(--terminal-dark))];
+  }
+
+  .terminal-green {
+    @apply text-[hsl(var(--terminal-green))];
+  }
+
+  .terminal-green-bg {
+    @apply bg-[hsl(var(--terminal-green))];
+  }
+
+  /* Professional button styles */
+  .btn-professional {
+    @apply bg-primary text-primary-foreground border border-primary/20 hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg rounded-sm;
+  }
+
   .btn-highlight {
-    @apply bg-highlight text-highlight-foreground hover:bg-highlight/90 
-           px-6 py-3 rounded-md font-medium transition-all duration-200
-           shadow-sm hover:shadow-md glow-highlight;
+    @apply bg-gradient-primary text-primary-foreground border-0 hover:shadow-strong transition-all duration-300 rounded-sm;
+  }
+
+  .btn-terminal {
+    @apply bg-[hsl(var(--terminal-green))] text-[hsl(var(--terminal-dark))] hover:bg-[hsl(var(--terminal-green))]/90 transition-all duration-200 rounded-sm;
   }
 }

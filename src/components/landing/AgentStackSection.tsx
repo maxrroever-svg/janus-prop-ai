@@ -112,30 +112,30 @@ export const AgentStackSection = () => {
                 key={agent.name}
                 {...variants}
                 viewport={{ once: true }}
-                className="data-card group hover:glow-primary transition-all duration-500"
+                className="terminal-panel p-8 group hover:shadow-[var(--shadow-terminal)] transition-all duration-500"
                 style={{ "--delay": `${index * 0.2}s` } as any}
               >
                 <div className="flex items-center gap-8">
                   <motion.div
                     whileHover={{ scale: 1.05 }}
-                    className="flex-shrink-0 w-16 h-16 bg-primary rounded-lg flex items-center justify-center"
+                    className="flex-shrink-0 w-16 h-16 terminal-panel-contrast rounded-sm flex items-center justify-center"
                   >
-                    <IconComponent className="w-8 h-8 text-primary-foreground" />
+                    <IconComponent className="w-8 h-8 terminal-green" />
                   </motion.div>
                   
                   <div className="flex-1">
-                    <h3 className="font-display text-xl md:text-2xl text-foreground mb-2">
+                    <h3 className="font-display text-xl md:text-2xl text-[hsl(var(--terminal-text))] mb-2">
                       {agent.name}
                     </h3>
-                    <p className="text-muted-foreground mb-4">
+                    <p className="text-[hsl(var(--terminal-text))]/70 mb-4">
                       {agent.description}
                     </p>
                     <div className="flex items-center gap-4">
-                      <div className="agent-status running">
-                        <div className="w-2 h-2 bg-success rounded-full animate-pulse" />
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-sm text-sm font-medium bg-[hsl(var(--terminal-green))]/10 text-[hsl(var(--terminal-green))] border border-[hsl(var(--terminal-green))]/20">
+                        <div className="w-2 h-2 terminal-green-bg rounded-full animate-pulse" />
                         Running
                       </div>
-                      <span className="text-success font-medium">
+                      <span className="terminal-green font-medium">
                         {agent.stats}
                       </span>
                     </div>
@@ -151,7 +151,7 @@ export const AgentStackSection = () => {
                       repeat: Infinity,
                       delay: index * 0.3
                     }}
-                    className="hidden md:block w-12 h-12 border-2 border-primary/30 rounded-full"
+                    className="hidden md:block w-12 h-12 border border-[hsl(var(--terminal-green))]/30 rounded-full"
                   />
                 </div>
               </motion.div>

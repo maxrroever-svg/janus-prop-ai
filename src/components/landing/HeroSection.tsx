@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background pt-20">
       {/* Subtle animated background nodes */}
       <div className="absolute inset-0">
         {[...Array(12)].map((_, i) => (

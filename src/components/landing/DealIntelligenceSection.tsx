@@ -31,10 +31,10 @@ const mockDeals = [
 
 const getRiskColor = (risk: string) => {
   switch (risk) {
-    case "low": return "score-high";
-    case "medium": return "score-medium";
-    case "high": return "score-low";
-    default: return "score-medium";
+    case "low": return "bg-[hsl(var(--terminal-green))]/10 text-[hsl(var(--terminal-green))] border border-[hsl(var(--terminal-green))]/20";
+    case "medium": return "bg-[hsl(var(--warning))]/10 text-[hsl(var(--warning))] border border-[hsl(var(--warning))]/20";
+    case "high": return "bg-[hsl(var(--destructive))]/10 text-[hsl(var(--destructive))] border border-[hsl(var(--destructive))]/20";
+    default: return "bg-[hsl(var(--terminal-green))]/10 text-[hsl(var(--terminal-green))] border border-[hsl(var(--terminal-green))]/20";
   }
 };
 
@@ -67,10 +67,10 @@ export const DealIntelligenceSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="data-card"
+          className="terminal-panel p-8"
         >
           {/* Table Header */}
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-4 p-4 border-b border-border/30 text-sm font-semibold text-muted-foreground">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-4 p-4 border-b border-[hsl(var(--terminal-darker))] text-sm font-semibold text-[hsl(var(--terminal-text))]">
             <div>Property Address</div>
             <div className="hidden md:block">Lien Score</div>
             <div className="hidden md:block">Cap Rate</div>
@@ -87,30 +87,30 @@ export const DealIntelligenceSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="deal-row grid grid-cols-2 md:grid-cols-6 gap-4 p-4 hover:bg-secondary/30 transition-all duration-200 group"
+              className="grid grid-cols-2 md:grid-cols-6 gap-4 p-4 hover:bg-[hsl(var(--terminal-darker))]/30 transition-all duration-200 group border-b border-[hsl(var(--terminal-darker))]/30"
             >
-              <div className="font-medium">
+              <div className="font-medium text-[hsl(var(--terminal-text))]">
                 {deal.address}
               </div>
               
               <div className="hidden md:block">
-                <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getRiskColor(deal.riskLevel)}`}>
+                <span className={`inline-flex items-center px-2 py-1 rounded-sm text-xs font-medium ${getRiskColor(deal.riskLevel)}`}>
                   {deal.lienScore}
                 </span>
               </div>
               
-              <div className="hidden md:flex items-center">
-                <TrendingUp className="w-4 h-4 mr-1 text-success" />
+              <div className="hidden md:flex items-center terminal-green font-mono">
+                <TrendingUp className="w-4 h-4 mr-1" />
                 {deal.capRate}
               </div>
               
               <div className="hidden md:block">
-                <span className="px-2 py-1 bg-primary/20 text-primary rounded text-xs">
+                <span className="px-2 py-1 bg-[hsl(var(--primary))]/20 text-[hsl(var(--primary))] rounded-sm text-xs">
                   {deal.strategy}
                 </span>
               </div>
               
-              <div className="text-sm text-muted-foreground">
+              <div className="text-sm text-[hsl(var(--terminal-text))]/70">
                 {deal.aiSummary}
               </div>
               
@@ -118,16 +118,16 @@ export const DealIntelligenceSection = () => {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors"
+                  className="p-2 terminal-panel-contrast rounded-sm hover:bg-[hsl(var(--terminal-green))]/10 transition-colors"
                 >
-                  <Eye className="w-4 h-4" />
+                  <Eye className="w-4 h-4 terminal-green" />
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="p-2 bg-secondary rounded-lg hover:bg-secondary/80 transition-colors opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="p-2 terminal-panel-contrast rounded-sm hover:bg-[hsl(var(--terminal-green))]/10 transition-colors opacity-0 group-hover:opacity-100 transition-opacity"
                 >
-                  <Archive className="w-4 h-4" />
+                  <Archive className="w-4 h-4 text-[hsl(var(--terminal-text))]/60" />
                 </motion.button>
               </div>
             </motion.div>
@@ -139,13 +139,13 @@ export const DealIntelligenceSection = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             viewport={{ once: true }}
-            className="p-4 border-t border-border/30 text-center"
+            className="p-4 border-t border-[hsl(var(--terminal-darker))] text-center"
           >
-            <div className="flex items-center justify-center gap-2 text-muted-foreground text-sm">
+            <div className="flex items-center justify-center gap-2 text-[hsl(var(--terminal-text))]/70 text-sm">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full"
+                className="w-4 h-4 border-2 border-[hsl(var(--terminal-green))] border-t-transparent rounded-full"
               />
               AI analyzing 847 more properties...
             </div>
@@ -159,7 +159,7 @@ export const DealIntelligenceSection = () => {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <Button size="lg" className="bg-gradient-primary text-lg px-8 py-6">
+          <Button size="lg" className="btn-terminal text-lg px-8 py-6">
             Run Your Own Portfolio Analysis
           </Button>
         </motion.div>
