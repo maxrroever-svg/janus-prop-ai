@@ -43,15 +43,11 @@ export const PipelineSection = () => {
               viewport={{ once: true }}
               className="institutional-card p-12 w-56 h-56 flex items-center justify-center relative"
             >
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                className="text-success font-display text-lg font-bold text-center"
-              >
+              <div className="text-success font-display text-lg font-bold text-center">
                 JANUS
                 <br />
                 <span className="text-sm font-normal text-muted-foreground">AI CORE</span>
-              </motion.div>
+              </div>
               
               {/* Contained indicator rings */}
               {[...Array(2)].map((_, i) => (
