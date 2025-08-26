@@ -59,6 +59,10 @@ export default {
 				warning: {
 					DEFAULT: 'hsl(var(--warning))',
 					foreground: 'hsl(var(--warning-foreground))'
+				},
+				highlight: {
+					DEFAULT: 'hsl(var(--highlight))',
+					foreground: 'hsl(var(--highlight-foreground))'
 				}
 			},
 			fontFamily: {
@@ -68,14 +72,14 @@ export default {
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
-				'gradient-success': 'var(--gradient-success)',
-				'gradient-light': 'var(--gradient-light)',
-				'gradient-surface': 'var(--gradient-surface)'
+				'gradient-highlight': 'var(--gradient-highlight)',
+				'gradient-surface': 'var(--gradient-surface)',
+				'gradient-cold': 'var(--gradient-cold)'
 			},
 			boxShadow: {
 				'elite': 'var(--shadow-elite)',
-				'glow': 'var(--shadow-glow)',
-				'success': 'var(--shadow-success)'
+				'professional': 'var(--shadow-professional)',
+				'highlight': 'var(--shadow-highlight)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

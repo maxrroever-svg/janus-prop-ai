@@ -2,68 +2,71 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Janus AI Design System - Minimal Luxury Real Estate Platform */
+/* Janus AI Design System - Cold Professional Intelligence Platform */
 /* All colors in HSL format for semantic design tokens */
 
 @layer base {
   :root {
-    /* Core Brand Colors - Light Mode */
-    --background: 0 0% 100%; /* #FFFFFF - Pure white */
-    --foreground: 0 0% 0%; /* #000000 - Primary black text */
-    --muted-foreground: 0 0% 33%; /* #555555 - Secondary grey text */
+    /* Core Brand Colors - Cold Professional Light Mode */
+    --background: 0 0% 96%; /* #F5F5F5 - Light neutral grey */
+    --foreground: 0 0% 10%; /* #1A1A1A - Near-black primary text */
+    --muted-foreground: 0 0% 29%; /* #4B4B4B - Cold grey secondary text */
     
-    /* Janus AI Accent Colors */
-    --primary: 217 91% 20%; /* #1A2541 - Navy blue accent */
+    /* Janus AI Professional Accent Colors */
+    --primary: 216 41% 21%; /* #1C2A4C - Navy blue accent */
     --primary-foreground: 0 0% 100%;
     
-    --success: 151 55% 41%; /* #2D7D32 - Refined green */
+    --success: 151 55% 41%; /* #2D7D32 - Professional green */
     --success-foreground: 0 0% 100%;
     
-    --warning: 35 91% 65%; /* #FB8C00 - Refined amber */
+    --warning: 35 91% 65%; /* #FB8C00 - Professional amber */
     --warning-foreground: 0 0% 0%;
     
     --destructive: 0 84% 50%; /* #DC2626 - Error red */
     --destructive-foreground: 0 0% 100%;
     
+    --highlight: 207 100% 50%; /* #0090FF - CTA button highlight */
+    --highlight-foreground: 0 0% 100%;
+    
     /* UI Components */
-    --card: 0 0% 98%; /* #FAFAFA - Subtle card background */
-    --card-foreground: 0 0% 0%;
+    --card: 0 0% 100%; /* #FFFFFF - Pure white cards */
+    --card-foreground: 0 0% 10%;
     
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 0 0% 10%;
     
-    --secondary: 0 0% 96%; /* #F5F5F5 - Elevated surfaces */
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 0 0% 98%; /* #FAFAFA - Elevated surfaces */
+    --secondary-foreground: 0 0% 10%;
     
-    --muted: 0 0% 96%;
+    --muted: 0 0% 94%; /* #F0F0F0 - Muted backgrounds */
     
-    --accent: 217 91% 20%; /* Same as primary */
+    --accent: 216 41% 21%; /* Same as primary navy */
     --accent-foreground: 0 0% 100%;
     
-    --border: 0 0% 90%; /* #E5E5E5 - Subtle borders */
-    --input: 0 0% 90%;
-    --ring: 217 91% 20%;
+    --border: 0 0% 87%; /* #DEDEDE - Professional borders */
+    --input: 0 0% 100%; /* #FFFFFF - White inputs */
+    --ring: 216 41% 21%;
     
-    --radius: 0.75rem;
+    --radius: 0.5rem;
     
-    /* Custom Janus Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 20%), hsl(217 91% 15%));
-    --gradient-success: linear-gradient(135deg, hsl(151 55% 41%), hsl(151 55% 36%));
-    --gradient-light: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 98%));
-    --gradient-surface: linear-gradient(180deg, hsl(0 0% 98%), hsl(0 0% 96%));
+    /* Custom Janus Professional Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(216 41% 21%), hsl(216 41% 16%));
+    --gradient-highlight: linear-gradient(135deg, hsl(207 100% 50%), hsl(207 100% 45%));
+    --gradient-surface: linear-gradient(180deg, hsl(0 0% 100%), hsl(0 0% 98%));
+    --gradient-cold: linear-gradient(180deg, hsl(0 0% 96%), hsl(0 0% 94%));
     
-    /* Shadows - Luxury subtle shadows */
-    --shadow-elite: 0 4px 20px -4px hsl(0 0% 0% / 0.1);
-    --shadow-glow: 0 0 20px hsl(217 91% 20% / 0.15);
-    --shadow-success: 0 0 15px hsl(151 55% 41% / 0.2);
+    /* Shadows - Professional subtle shadows */
+    --shadow-elite: 0 2px 12px -2px hsl(0 0% 0% / 0.08);
+    --shadow-professional: 0 4px 16px -4px hsl(216 41% 21% / 0.12);
+    --shadow-highlight: 0 0 16px hsl(207 100% 50% / 0.2);
     
     /* Typography */
     --font-display: 'GFS Didot', serif;
     --font-ui: 'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     
-    /* Animations */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Animations - Linear and professional */
+    --transition-smooth: all 0.2s ease-out;
+    --transition-fast: all 0.1s ease-out;
   }
 }
 
@@ -84,72 +87,90 @@
 }
 
 @layer components {
-  /* Minimal luxury patterns */
-  .terminal-grid {
-    @apply grid gap-8 p-8;
-    background: radial-gradient(ellipse at top, hsl(217 91% 20% / 0.03), transparent 50%);
+  /* Professional cold patterns */
+  .intelligence-grid {
+    @apply grid gap-6 p-6;
+    background: radial-gradient(ellipse at top, hsl(216 41% 21% / 0.02), transparent 50%);
   }
   
   .data-card {
-    @apply bg-card border border-border rounded-xl p-8;
+    @apply bg-card border border-border rounded-lg p-6;
     background-image: var(--gradient-surface);
     box-shadow: var(--shadow-elite);
     transition: var(--transition-smooth);
   }
   
   .data-card:hover {
-    box-shadow: 0 8px 32px -8px hsl(0 0% 0% / 0.15);
-    transform: translateY(-2px);
+    box-shadow: var(--shadow-professional);
+    transform: translateY(-1px);
   }
   
   .agent-status {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium;
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-md text-sm font-medium;
   }
   
   .agent-status.running {
     @apply bg-success/10 text-success border border-success/20;
-    box-shadow: var(--shadow-success);
+    box-shadow: 0 0 8px hsl(151 55% 41% / 0.15);
   }
   
   .agent-status.idle {
     @apply bg-muted text-muted-foreground border border-border;
   }
   
+  .agent-status.processing {
+    @apply bg-highlight/10 text-highlight border border-highlight/20;
+    box-shadow: var(--shadow-highlight);
+  }
+  
   .deal-row {
-    @apply border-b border-border hover:bg-secondary/50 transition-all duration-300;
+    @apply border-b border-border hover:bg-secondary/30 transition-all duration-200;
   }
   
   .deal-row:hover {
-    box-shadow: inset 0 0 0 1px hsl(217 91% 20% / 0.1);
+    box-shadow: inset 0 0 0 1px hsl(216 41% 21% / 0.08);
   }
   
   .score-high {
-    @apply text-success bg-success/10 border border-success/20 rounded-lg px-3 py-1;
+    @apply text-success bg-success/10 border border-success/20 rounded px-2 py-1;
   }
   
   .score-medium {
-    @apply text-warning bg-warning/10 border border-warning/20 rounded-lg px-3 py-1;
+    @apply text-warning bg-warning/10 border border-warning/20 rounded px-2 py-1;
   }
   
   .score-low {
-    @apply text-destructive bg-destructive/10 border border-destructive/20 rounded-lg px-3 py-1;
+    @apply text-destructive bg-destructive/10 border border-destructive/20 rounded px-2 py-1;
   }
   
-  /* Subtle luxury effects */
+  /* Professional effects */
   .glow-primary {
-    box-shadow: var(--shadow-glow);
+    box-shadow: var(--shadow-professional);
   }
   
-  .glow-success {
-    box-shadow: var(--shadow-success);
+  .glow-highlight {
+    box-shadow: var(--shadow-highlight);
   }
   
-  /* Luxury spacing */
-  .luxury-section {
-    @apply py-24 px-8;
+  /* Professional spacing */
+  .professional-section {
+    @apply py-20 px-6;
   }
   
-  .luxury-container {
-    @apply max-w-7xl mx-auto;
+  .professional-container {
+    @apply max-w-6xl mx-auto;
+  }
+  
+  /* Cold button style */
+  .btn-professional {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 
+           px-6 py-3 rounded-md font-medium transition-all duration-200
+           shadow-sm hover:shadow-md;
+  }
+  
+  .btn-highlight {
+    @apply bg-highlight text-highlight-foreground hover:bg-highlight/90 
+           px-6 py-3 rounded-md font-medium transition-all duration-200
+           shadow-sm hover:shadow-md glow-highlight;
   }
 }
