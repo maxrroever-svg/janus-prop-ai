@@ -13,16 +13,16 @@ export const PipelineSection = () => {
     <section className="py-32 px-6 bg-background">
       <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           className="text-center mb-20"
         >
           <h2 className="font-display text-5xl md:text-6xl text-foreground mb-6">
             Real-Time Data
             <br />
-            <span className="terminal-green">
+            <span className="text-[hsl(var(--success))]">
               Pipeline
             </span>
           </h2>
@@ -32,49 +32,51 @@ export const PipelineSection = () => {
           </p>
         </motion.div>
 
-        {/* Central Hub - Fixed positioning and size */}
-        <div className="relative mb-20">
-          <div className="flex justify-center mb-16">
+        {/* Clean, centered layout */}
+        <div className="space-y-16">
+          {/* Central Processing Hub */}
+          <div className="flex justify-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true }}
-              className="terminal-panel p-6 w-32 h-32 flex items-center justify-center relative"
+              className="institutional-card p-8 w-48 h-48 flex items-center justify-center relative"
             >
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                className="terminal-green font-display text-sm font-bold"
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="text-[hsl(var(--success))] font-display text-lg font-bold"
               >
                 JANUS
+                <br />
+                <span className="text-sm font-normal">AI CORE</span>
               </motion.div>
               
-              {/* Controlled pulsing rings */}
+              {/* Subtle indicator rings */}
               {[...Array(2)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute border border-[hsl(var(--terminal-green))]/20 rounded-full pointer-events-none"
+                  className="absolute border border-[hsl(var(--success))]/20"
                   style={{
-                    width: `${140 + i * 24}px`,
-                    height: `${140 + i * 24}px`,
+                    width: `${200 + i * 32}px`,
+                    height: `${200 + i * 32}px`,
                   }}
                   animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.2, 0.1, 0.2],
+                    opacity: [0.1, 0.3, 0.1],
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 4,
                     repeat: Infinity,
-                    delay: i * 0.8,
+                    delay: i * 1,
                   }}
                 />
               ))}
             </motion.div>
           </div>
 
-          {/* Data Source Cards - Properly spaced grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {/* Data Source Grid - Clean layout */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {dataSources.map((source, index) => {
               const IconComponent = source.icon;
               
@@ -83,44 +85,43 @@ export const PipelineSection = () => {
                   key={source.name}
                   initial={{ 
                     opacity: 0, 
-                    x: index % 2 === 0 ? -60 : 60,
                     y: 20
                   }}
-                  whileInView={{ opacity: 1, x: 0, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="terminal-data-panel p-6"
+                  className="institutional-panel p-6"
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-10 h-10 terminal-panel-contrast rounded-sm flex items-center justify-center">
-                      <IconComponent className="w-5 h-5 terminal-green" />
+                    <div className="w-10 h-10 bg-card border border-[hsl(var(--border))] flex items-center justify-center">
+                      <IconComponent className="w-5 h-5 text-[hsl(var(--success))]" />
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground font-display">{source.name}</h3>
+                    <h3 className="text-lg font-medium text-foreground font-display">{source.name}</h3>
                   </div>
                   
-                  <div className="flex items-center gap-2 text-sm terminal-green">
-                    <div className="w-2 h-2 terminal-green-bg rounded-full animate-pulse" />
-                    Live Data Stream
+                  <div className="ai-status-active inline-flex items-center gap-2 text-sm px-3 py-1">
+                    <div className="w-2 h-2 bg-[hsl(var(--success))] animate-pulse" />
+                    Live Stream
                   </div>
                 </motion.div>
               );
             })}
           </div>
 
-          {/* Data Flow Animation - Bloomberg style */}
+          {/* Data Flow Visualization */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
             viewport={{ once: true }}
-            className="text-center terminal-panel p-8"
+            className="text-center institutional-panel p-8"
           >
-            <div className="flex items-center justify-center gap-6 text-lg flex-wrap">
+            <div className="flex items-center justify-center gap-8 text-lg flex-wrap">
               <span className="text-muted-foreground font-display">Raw Data</span>
-              <ArrowRight className="terminal-green" />
-              <span className="terminal-green font-semibold font-display">AI Processing</span>
-              <ArrowRight className="terminal-green" />
-              <span className="text-foreground font-semibold font-display">Investment Intelligence</span>
+              <ArrowRight className="text-[hsl(var(--success))]" />
+              <span className="text-[hsl(var(--success))] font-medium font-display">AI Processing</span>
+              <ArrowRight className="text-[hsl(var(--success))]" />
+              <span className="text-foreground font-medium font-display">Investment Intelligence</span>
             </div>
           </motion.div>
         </div>

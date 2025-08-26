@@ -49,17 +49,16 @@ export const ScrollNavigation = () => {
 
   return (
     <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-[hsl(var(--background))] backdrop-blur-lg border-b border-[hsl(var(--border))]"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-[hsl(var(--border))]"
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <motion.div
-            whileHover={{ scale: 1.02 }}
-            className="font-display text-xl font-bold text-[hsl(var(--foreground))] cursor-pointer"
+            className="font-display text-xl font-bold text-foreground cursor-pointer"
             onClick={() => scrollToSection("hero")}
           >
             Janus AI
@@ -71,10 +70,8 @@ export const ScrollNavigation = () => {
               <button
                 key={section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={`text-sm font-medium font-display transition-all duration-200 hover:text-[hsl(var(--terminal-green))] ${
-                  activeSection === section.id
-                    ? "nav-active"
-                    : "text-[hsl(var(--foreground))]"
+                className={`nav-link text-sm font-medium font-display ${
+                  activeSection === section.id ? "active" : ""
                 }`}
               >
                 {section.label}
@@ -86,7 +83,7 @@ export const ScrollNavigation = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden text-[hsl(var(--foreground))] hover:text-[hsl(var(--terminal-green))]"
+            className="md:hidden text-foreground hover:text-primary"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -99,7 +96,7 @@ export const ScrollNavigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
             className="md:hidden mt-4 py-4 border-t border-[hsl(var(--border))]"
           >
             <div className="flex flex-col gap-4">
@@ -107,10 +104,8 @@ export const ScrollNavigation = () => {
                 <button
                   key={section.id}
                   onClick={() => scrollToSection(section.id)}
-                  className={`text-left text-sm font-medium font-display transition-all duration-200 hover:text-[hsl(var(--terminal-green))] ${
-                    activeSection === section.id
-                      ? "text-[hsl(var(--terminal-green))]"
-                      : "text-[hsl(var(--foreground))]"
+                  className={`text-left nav-link text-sm font-medium font-display ${
+                    activeSection === section.id ? "active" : ""
                   }`}
                 >
                   {section.label}

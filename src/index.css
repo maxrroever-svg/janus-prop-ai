@@ -7,58 +7,37 @@
 
 @layer base {
   :root {
-    /* Bloomberg Terminal Dark Theme */
-    --background: 15 15 15; /* Matte black #0F0F0F */
-    --foreground: 242 242 242; /* Soft white #F2F2F2 */
-    --card: 26 26 26; /* Dark grey #1A1A1A */
-    --card-foreground: 242 242 242; /* Soft white */
-    --popover: 26 26 26;
-    --popover-foreground: 242 242 242;
-    --primary: 28 42 76; /* Navy Blue #1C2A4C */
+    /* Institutional Matte Black Theme */
+    --background: 13 13 13; /* True matte black #0D0D0D */
+    --foreground: 255 255 255; /* Pure white #FFFFFF */
+    --card: 18 18 18; /* Card background #121212 */
+    --card-foreground: 255 255 255; /* Pure white */
+    --popover: 18 18 18;
+    --popover-foreground: 255 255 255;
+    --primary: 28 42 76; /* Janus Navy Blue #1C2A4C */
     --primary-foreground: 255 255 255;
-    --secondary: 18 18 18; /* Very dark grey #121212 */
-    --secondary-foreground: 176 176 176; /* Grey #B0B0B0 */
-    --muted: 28 28 28; /* Dark panels #1C1C1C */
-    --muted-foreground: 176 176 176; /* Grey #B0B0B0 */
-    --accent: 28 42 76;
-    --accent-foreground: 242 242 242;
-    --destructive: 220 38 38;
+    --secondary: 26 26 26; /* Section background #1A1A1A */
+    --secondary-foreground: 192 192 192; /* Soft grey #C0C0C0 */
+    --muted: 26 26 26; /* Muted panels #1A1A1A */
+    --muted-foreground: 192 192 192; /* Soft grey #C0C0C0 */
+    --accent: 28 42 76; /* Navy accent */
+    --accent-foreground: 255 255 255;
+    --destructive: 255 76 76; /* Alert red #FF4C4C */
     --destructive-foreground: 255 255 255;
-    --border: 51 51 51; /* Borders #333333 */
-    --input: 26 26 26;
+    --border: 45 45 45; /* Lines/dividers #2D2D2D */
+    --input: 18 18 18;
     --ring: 28 42 76;
-    --chart-1: 28 42 76; /* Navy */
-    --chart-2: 176 176 176; /* Grey */
-    --chart-3: 51 51 51; /* Dark border */
-    --chart-4: 26 26 26; /* Card background */
-    --chart-5: 15 15 15; /* Main background */
-    --radius: 0.125rem; /* Sharp corners for terminal feel */
+    --radius: 0; /* No border radius for sharp, institutional look */
     
-    /* Bloomberg Terminal colors */
-    --terminal-dark: 26 26 26; /* #1A1A1A for data panels */
-    --terminal-darker: 18 18 18; /* #121212 for contrast panels */
-    --terminal-green: 0 255 148; /* #00FF94 digital green for live data */
-    --terminal-text: 242 242 242; /* Soft white text */
-    
-    /* Professional gradient colors - minimal for dark theme */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
-    --gradient-surface: linear-gradient(180deg, hsl(var(--background)), hsl(var(--secondary)));
-    --gradient-terminal: linear-gradient(180deg, hsl(var(--terminal-dark)), hsl(var(--terminal-darker)));
-    
-    /* Professional shadows for dark theme */
-    --shadow-soft: 0 2px 8px hsl(0 0% 0% / 0.3);
-    --shadow-medium: 0 4px 16px hsl(0 0% 0% / 0.4);
-    --shadow-strong: 0 8px 32px hsl(0 0% 0% / 0.5);
-    --shadow-terminal: 0 4px 20px hsl(0 0% 0% / 0.6);
-    
-    /* Professional transitions */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-    
-    /* Success and warning colors */
-    --success: 0 255 148; /* Digital green */
-    --warning: 234 179 8; /* Yellow */
+    /* Professional colors */
+    --success: 0 255 148; /* Digital green #00FF94 for AI status */
+    --warning: 234 179 8; /* Warning yellow */
     --highlight: 0 255 148; /* Digital green for highlights */
+    
+    /* Minimal shadows and effects */
+    --shadow-none: none;
+    --transition-smooth: all 0.2s ease-out;
+    --transition-fast: all 0.1s ease-out;
   }
 }
 
@@ -153,53 +132,63 @@
     @apply max-w-6xl mx-auto;
   }
   
-  /* Bloomberg Terminal styles */
-  .terminal-panel {
-    @apply bg-[hsl(var(--terminal-dark))] text-[hsl(var(--terminal-text))] border border-[hsl(var(--border))] rounded-sm;
-    box-shadow: var(--shadow-terminal);
+  /* Institutional flat UI components */
+  .institutional-card {
+    @apply bg-card text-foreground border border-[hsl(var(--border))];
+    box-shadow: none;
+    transition: var(--transition-smooth);
+  }
+  
+  .institutional-card:hover {
+    @apply border-primary/50;
   }
 
-  .terminal-panel-contrast {
-    @apply bg-[hsl(var(--terminal-darker))] text-[hsl(var(--terminal-text))] border border-[hsl(var(--border))];
+  .institutional-panel {
+    @apply bg-secondary text-foreground border border-[hsl(var(--border))];
+    box-shadow: none;
   }
 
-  .terminal-green {
-    @apply text-[hsl(var(--terminal-green))];
+  .ai-status-active {
+    @apply text-[hsl(var(--success))] bg-[hsl(var(--success))]/10 border border-[hsl(var(--success))]/20;
   }
 
-  .terminal-green-bg {
-    @apply bg-[hsl(var(--terminal-green))];
-  }
-
-  .terminal-data-panel {
-    @apply bg-[hsl(var(--muted))] text-[hsl(var(--foreground))] border border-[hsl(var(--border))] rounded-sm;
-    box-shadow: var(--shadow-soft);
-  }
-
-  /* Professional button styles */
+  /* Professional button styles - flat design */
   .btn-professional {
-    @apply bg-primary text-primary-foreground border border-primary/20 hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg rounded-sm;
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 font-medium;
+    box-shadow: none;
+    border: 1px solid hsl(var(--primary));
   }
 
-  .btn-highlight {
-    @apply bg-gradient-primary text-primary-foreground border-0 hover:shadow-lg transition-all duration-300 rounded-sm;
+  .btn-professional:hover {
+    @apply border-primary/70;
   }
 
-  .btn-terminal {
-    @apply bg-[hsl(var(--terminal-green))] text-[hsl(var(--background))] hover:bg-[hsl(var(--terminal-green))]/90 transition-all duration-200 rounded-sm font-medium;
+  .btn-institutional {
+    @apply bg-transparent text-primary border border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 font-medium;
+  }
+
+  .btn-ai-active {
+    @apply bg-[hsl(var(--success))] text-[hsl(var(--background))] hover:bg-[hsl(var(--success))]/90 transition-all duration-200 font-medium;
+    box-shadow: none;
   }
 
   /* Navigation styles */
-  .nav-active {
-    @apply text-[hsl(var(--terminal-green))] relative;
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: hsl(var(--terminal-green));
-    }
+  .nav-link {
+    @apply text-foreground hover:text-primary transition-colors duration-200 relative;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: hsl(var(--primary));
+  }
+
+  .nav-link.active {
+    @apply text-primary;
   }
 }

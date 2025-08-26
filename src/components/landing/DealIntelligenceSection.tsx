@@ -31,28 +31,28 @@ const mockDeals = [
 
 const getRiskColor = (risk: string) => {
   switch (risk) {
-    case "low": return "bg-[hsl(var(--terminal-green))]/10 text-[hsl(var(--terminal-green))] border border-[hsl(var(--terminal-green))]/20";
+    case "low": return "bg-[hsl(var(--success))]/10 text-[hsl(var(--success))] border border-[hsl(var(--success))]/20";
     case "medium": return "bg-[hsl(var(--warning))]/10 text-[hsl(var(--warning))] border border-[hsl(var(--warning))]/20";
     case "high": return "bg-[hsl(var(--destructive))]/10 text-[hsl(var(--destructive))] border border-[hsl(var(--destructive))]/20";
-    default: return "bg-[hsl(var(--terminal-green))]/10 text-[hsl(var(--terminal-green))] border border-[hsl(var(--terminal-green))]/20";
+    default: return "bg-[hsl(var(--success))]/10 text-[hsl(var(--success))] border border-[hsl(var(--success))]/20";
   }
 };
 
 export const DealIntelligenceSection = () => {
   return (
-    <section className="py-32 px-6">
+    <section className="py-32 px-6 bg-background">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <h2 className="font-display text-5xl md:text-6xl font-bold mb-6">
+          <h2 className="font-display text-5xl md:text-6xl text-foreground mb-6">
             Live Deal
             <br />
-            <span className="bg-gradient-success bg-clip-text text-transparent">
+            <span className="text-[hsl(var(--success))]">
               Intelligence
             </span>
           </h2>
@@ -63,103 +63,105 @@ export const DealIntelligenceSection = () => {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 60 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
-          className="terminal-panel p-8"
+          className="institutional-panel p-8 mb-8"
         >
-          {/* Table Header */}
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-4 p-4 border-b border-[hsl(var(--terminal-darker))] text-sm font-semibold text-[hsl(var(--terminal-text))]">
-            <div>Property Address</div>
-            <div className="hidden md:block">Lien Score</div>
-            <div className="hidden md:block">Cap Rate</div>
-            <div className="hidden md:block">Strategy</div>
-            <div>AI Summary</div>
-            <div>Action</div>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-[hsl(var(--border))]">
+                  <th className="text-left py-4 px-4 text-foreground font-medium font-display">Property</th>
+                  <th className="text-right py-4 px-4 text-foreground font-medium font-display">Lien Score</th>
+                  <th className="text-right py-4 px-4 text-foreground font-medium font-display">Cap Rate</th>
+                  <th className="text-left py-4 px-4 text-foreground font-medium font-display">Strategy</th>
+                  <th className="text-left py-4 px-4 text-foreground font-medium font-display">AI Summary</th>
+                  <th className="text-right py-4 px-4 text-foreground font-medium font-display">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mockDeals.map((deal, index) => (
+                  <motion.tr
+                    key={deal.address}
+                    initial={{ opacity: 0, x: -15 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="border-b border-[hsl(var(--border))]/30 hover:bg-secondary/30 transition-colors duration-200"
+                  >
+                    <td className="py-4 px-4">
+                      <div className="text-foreground font-medium">{deal.address}</div>
+                    </td>
+                    <td className="py-4 px-4 text-right">
+                      <span className={`inline-flex items-center px-2 py-1 text-xs font-medium ${getRiskColor(deal.riskLevel)}`}>
+                        {deal.lienScore}
+                      </span>
+                    </td>
+                    <td className="py-4 px-4 text-right text-[hsl(var(--success))] font-mono">
+                      {deal.capRate}
+                    </td>
+                    <td className="py-4 px-4">
+                      <span className="text-muted-foreground text-sm">{deal.strategy}</span>
+                    </td>
+                    <td className="py-4 px-4">
+                      <span className="text-muted-foreground text-sm">{deal.aiSummary}</span>
+                    </td>
+                    <td className="py-4 px-4 text-right">
+                      <div className="flex gap-2 justify-end">
+                        <button className="text-[hsl(var(--success))] hover:text-primary text-sm font-medium transition-colors">
+                          View
+                        </button>
+                        <button className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors">
+                          Archive
+                        </button>
+                      </div>
+                    </td>
+                  </motion.tr>
+                ))}
+              </tbody>
+            </table>
           </div>
 
-          {/* Table Rows */}
-          {mockDeals.map((deal, index) => (
-            <motion.div
-              key={deal.address}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="grid grid-cols-2 md:grid-cols-6 gap-4 p-4 hover:bg-[hsl(var(--terminal-darker))]/30 transition-all duration-200 group border-b border-[hsl(var(--terminal-darker))]/30"
-            >
-              <div className="font-medium text-[hsl(var(--terminal-text))]">
-                {deal.address}
-              </div>
-              
-              <div className="hidden md:block">
-                <span className={`inline-flex items-center px-2 py-1 rounded-sm text-xs font-medium ${getRiskColor(deal.riskLevel)}`}>
-                  {deal.lienScore}
-                </span>
-              </div>
-              
-              <div className="hidden md:flex items-center terminal-green font-mono">
-                <TrendingUp className="w-4 h-4 mr-1" />
-                {deal.capRate}
-              </div>
-              
-              <div className="hidden md:block">
-                <span className="px-2 py-1 bg-[hsl(var(--primary))]/20 text-[hsl(var(--primary))] rounded-sm text-xs">
-                  {deal.strategy}
-                </span>
-              </div>
-              
-              <div className="text-sm text-[hsl(var(--terminal-text))]/70">
-                {deal.aiSummary}
-              </div>
-              
-              <div className="flex gap-2">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 terminal-panel-contrast rounded-sm hover:bg-[hsl(var(--terminal-green))]/10 transition-colors"
-                >
-                  <Eye className="w-4 h-4 terminal-green" />
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-2 terminal-panel-contrast rounded-sm hover:bg-[hsl(var(--terminal-green))]/10 transition-colors opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                  <Archive className="w-4 h-4 text-[hsl(var(--terminal-text))]/60" />
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
-
-          {/* Loading animation for more deals */}
+          {/* Loading indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
             viewport={{ once: true }}
-            className="p-4 border-t border-[hsl(var(--terminal-darker))] text-center"
+            className="flex items-center justify-center gap-3 mt-8 pt-6 border-t border-[hsl(var(--border))]"
           >
-            <div className="flex items-center justify-center gap-2 text-[hsl(var(--terminal-text))]/70 text-sm">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                className="w-4 h-4 border-2 border-[hsl(var(--terminal-green))] border-t-transparent rounded-full"
-              />
-              AI analyzing 847 more properties...
+            <div className="flex gap-1">
+              {[...Array(3)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="w-2 h-2 bg-[hsl(var(--success))]"
+                  animate={{
+                    opacity: [0.3, 1, 0.3],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: i * 0.2,
+                  }}
+                />
+              ))}
             </div>
+            <span className="text-muted-foreground text-sm">
+              AI analyzing 847 more properties...
+            </span>
           </motion.div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mt-12"
+          className="text-center"
         >
-          <Button size="lg" className="btn-terminal text-lg px-8 py-6">
+          <Button size="lg" className="btn-professional text-lg px-8 py-6">
             Run Your Own Portfolio Analysis
           </Button>
         </motion.div>

@@ -114,14 +114,13 @@ export const ClosingSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button 
             size="lg" 
-            className="btn-terminal text-base px-8 py-3"
+            className="btn-professional text-base px-8 py-3"
           >
             Apply for Access
           </Button>
           <Button 
             size="lg" 
-            variant="outline" 
-            className="text-base px-8 py-3 border-border hover:bg-secondary"
+            className="btn-institutional text-base px-8 py-3"
           >
             Request Demo
           </Button>
