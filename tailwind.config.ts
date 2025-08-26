@@ -63,13 +63,13 @@ export default {
 			},
 			fontFamily: {
 				'display': ['GFS Didot', 'serif'],
-				'ui': ['DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-				'sans': ['DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
+				'ui': ['Inter', 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+				'sans': ['Inter', 'DM Sans', '-apple-system', 'BlinkMacSystemFont', 'sans-serif']
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-success': 'var(--gradient-success)',
-				'gradient-dark': 'var(--gradient-dark)',
+				'gradient-light': 'var(--gradient-light)',
 				'gradient-surface': 'var(--gradient-surface)'
 			},
 			boxShadow: {
