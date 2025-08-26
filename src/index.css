@@ -177,7 +177,7 @@
   }
 
   .btn-highlight {
-    @apply bg-gradient-primary text-primary-foreground border-0 hover:shadow-strong transition-all duration-300 rounded-sm;
+    @apply bg-gradient-primary text-primary-foreground border-0 hover:shadow-lg transition-all duration-300 rounded-sm;
   }
 
   .btn-terminal {
