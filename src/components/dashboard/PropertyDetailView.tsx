@@ -422,9 +422,9 @@ export function PropertyDetailView({ property, open, onClose }: PropertyDetailVi
                         <div className="w-8 h-8 bg-ice/20 rounded-full flex items-center justify-center shrink-0">
                           <Search className="w-4 h-4 text-ice" />
                         </div>
-                        <div>
+                        <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-ice mb-1">Multi-Agent Analysis</p>
-                          <p className="text-sm text-foreground leading-relaxed italic">
+                          <p className="text-sm text-foreground leading-relaxed italic break-words">
                             "Eden: Final ranking places this in top 8% of all opportunities. Orion identified through foreclosure monitoring. 
                             Osiris projects {equityPercentage}% equity gain with 18-month timeline. Atelius confirms clean title. 
                             Valyria forecasts 15% neighborhood appreciation. Spring validated all data points. 

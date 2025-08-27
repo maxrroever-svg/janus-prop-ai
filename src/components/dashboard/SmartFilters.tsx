@@ -78,13 +78,15 @@ export function SmartFilters() {
                 key={index}
                 variant={rec.active ? "default" : "outline"}
                 size="sm"
-                className={`w-full justify-between ${rec.active ? 'bg-ice text-ice-foreground hover:bg-ice/90' : 'border-border hover:bg-muted'}`}
+                className={`w-full justify-between h-auto min-h-[36px] py-2 px-3 ${rec.active ? 'bg-ice text-ice-foreground hover:bg-ice/90' : 'border-border hover:bg-muted'}`}
               >
-                <div className="flex items-center gap-2">
-                  <IconComponent className="w-4 h-4" />
-                  <span className="text-sm">{rec.label}</span>
+                <div className="flex items-center gap-2 flex-1 min-w-0">
+                  <IconComponent className="w-4 h-4 flex-shrink-0" />
+                  <span className="text-xs leading-tight text-left break-words overflow-hidden">
+                    {rec.label}
+                  </span>
                 </div>
-                <Badge variant="secondary" className="bg-muted text-muted-foreground">
+                <Badge variant="secondary" className="bg-muted text-muted-foreground ml-2 flex-shrink-0 text-xs">
                   {rec.count}
                 </Badge>
               </Button>

@@ -143,9 +143,9 @@ export function PropertyPreview({ property }: PropertyPreviewProps) {
               <div className="w-8 h-8 bg-ice/20 rounded-full flex items-center justify-center shrink-0">
                 <Bot className="w-4 h-4 text-ice" />
               </div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-ice mb-1">Eden & Orion Analysis</p>
-                <p className="text-sm text-foreground leading-relaxed italic">
+                <p className="text-sm text-foreground leading-relaxed italic break-words">
                   "Eden: This {property.type.toLowerCase()} ranks in our top 15% of opportunities based on multi-agent analysis. 
                   Orion identified it through foreclosure monitoring, while Osiris projects {equityPercentage}% upside. 
                   Atelius confirms clean legal status. Our coordinated analysis suggests immediate action for this high-value target."
