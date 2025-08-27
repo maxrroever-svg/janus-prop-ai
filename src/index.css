@@ -7,32 +7,51 @@
 
 @layer base {
   :root {
-    /* Corrected Institutional Matte Black Theme - All HSL values */
-    --background: 0 0% 5%; /* Matte black #0D0D0D */
+    /* Janus Prop AI - Bloomberg Terminal Inspired Design System */
+    --background: 220 14% 6%; /* Dark navy #0F1419 */
     --foreground: 0 0% 100%; /* Pure white #FFFFFF */
-    --card: 0 0% 7%; /* Card background #121212 */
+    --card: 220 12% 9%; /* Card background #151922 */
     --card-foreground: 0 0% 100%; /* Pure white */
-    --popover: 0 0% 7%;
+    --popover: 220 12% 9%;
     --popover-foreground: 0 0% 100%;
     --primary: 220 43% 19%; /* Navy Blue #1C2A4C */
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 18%; /* Section background - slightly lighter black */
+    --secondary: 220 10% 12%; /* Section background #1E2329 */
     --secondary-foreground: 0 0% 75%; /* Cool grey #C0C0C0 */
-    --muted: 0 0% 7%; /* Same as card */
-    --muted-foreground: 0 0% 75%; /* Cool grey #C0C0C0 */
-    --accent: 220 43% 19%; /* Navy accent */
-    --accent-foreground: 0 0% 100%;
+    --muted: 220 8% 15%; /* Muted backgrounds #252B33 */
+    --muted-foreground: 0 0% 65%; /* Muted text #A6A6A6 */
+    --accent: 195 100% 50%; /* Icy blue accent #00BFFF */
+    --accent-foreground: 220 14% 6%;
     --destructive: 0 84% 60%; /* Alert red */
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 18%; /* Dark grey borders #2E2E2E */
-    --input: 0 0% 7%;
-    --ring: 220 43% 19%;
-    --radius: 0; /* No border radius for sharp institutional look */
+    --border: 220 8% 18%; /* Dark borders #2A313A */
+    --input: 220 10% 12%;
+    --ring: 195 100% 50%;
+    --radius: 16px; /* 2xl rounded corners for luxury feel */
     
-    /* Professional accent colors */
-    --success: 146 100% 47%; /* Digital green #00FF94 */
+    /* Janus AI Brand Colors */
+    --gold: 51 100% 60%; /* Gold highlights #FFD700 */
+    --gold-foreground: 220 14% 6%;
+    --ice: 195 100% 50%; /* Icy blue #00BFFF */
+    --ice-foreground: 220 14% 6%;
+    --success: 146 100% 40%; /* Professional green #00CC80 */
+    --success-foreground: 220 14% 6%;
     --warning: 48 96% 53%; /* Warning yellow */
-    --highlight: 146 100% 47%; /* Digital green for highlights */
+    --warning-foreground: 220 14% 6%;
+    
+    /* Professional Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(220, 43%, 19%), hsl(220, 43%, 25%));
+    --gradient-gold: linear-gradient(135deg, hsl(51, 100%, 60%), hsl(45, 100%, 65%));
+    --gradient-ice: linear-gradient(135deg, hsl(195, 100%, 50%), hsl(195, 100%, 60%));
+    --gradient-surface: linear-gradient(180deg, hsl(220, 12%, 9%), hsl(220, 10%, 12%));
+    
+    /* Professional Shadows */
+    --shadow-professional: 0 10px 30px -10px hsl(220 14% 6% / 0.3);
+    --shadow-gold: 0 0 40px hsl(51 100% 60% / 0.2);
+    --shadow-ice: 0 0 40px hsl(195 100% 50% / 0.2);
+    
+    /* Smooth transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 

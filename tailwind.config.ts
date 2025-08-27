@@ -52,6 +52,14 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				gold: {
+					DEFAULT: 'hsl(var(--gold))',
+					foreground: 'hsl(var(--gold-foreground))'
+				},
+				ice: {
+					DEFAULT: 'hsl(var(--ice))',
+					foreground: 'hsl(var(--ice-foreground))'
+				},
 				success: {
 					DEFAULT: 'hsl(var(--success))',
 					foreground: 'hsl(var(--success-foreground))'
@@ -59,10 +67,6 @@ export default {
 				warning: {
 					DEFAULT: 'hsl(var(--warning))',
 					foreground: 'hsl(var(--warning-foreground))'
-				},
-				highlight: {
-					DEFAULT: 'hsl(var(--highlight))',
-					foreground: 'hsl(var(--highlight-foreground))'
 				}
 			},
       fontFamily: {

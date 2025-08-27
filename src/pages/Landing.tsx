@@ -2,8 +2,10 @@ import { HeroSection } from "@/components/landing/HeroSection";
 import { LienIntelligenceSection } from "@/components/landing/LienIntelligenceSection";
 import { JanusIntelligenceEngineSection } from "@/components/landing/JanusIntelligenceEngineSection";
 import { JanusAgentsSection } from "@/components/landing/JanusAgentsSection";
+import { MainDashboard } from "@/components/dashboard/MainDashboard";
 import { PipelineSection } from "@/components/landing/PipelineSection";
 import { DealIntelligenceSection } from "@/components/landing/DealIntelligenceSection";
+import { LeadManagement } from "@/components/dashboard/LeadManagement";
 import { ClosingSection } from "@/components/landing/ClosingSection";
 import { ScrollNavigation } from "@/components/landing/ScrollNavigation";
 
@@ -23,11 +25,17 @@ const Landing = () => {
       <div id="agents">
         <JanusAgentsSection />
       </div>
+      <div id="dashboard">
+        <MainDashboard />
+      </div>
       <div id="pipeline">
         <PipelineSection />
       </div>
       <div id="architecture">
         <DealIntelligenceSection />
+      </div>
+      <div id="leads">
+        <LeadManagement />
       </div>
       <div id="demo">
         <ClosingSection />
