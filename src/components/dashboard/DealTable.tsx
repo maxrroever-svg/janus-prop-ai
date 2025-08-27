@@ -145,102 +145,109 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
         </CardHeader>
         
         <CardContent className="p-0">
-          <Table>
-            <TableHeader>
-              <TableRow className="border-b border-border/30">
-                <TableHead>Property</TableHead>
-                <TableHead>Lien Score</TableHead>
-                <TableHead>Cap Rate</TableHead>
-                <TableHead>Strategy</TableHead>
-                <TableHead>AI Summary</TableHead>
-                <TableHead>Actions</TableHead>
-              </TableRow>
-            </TableHeader>
-            
-            <TableBody>
-              {filteredDeals.map((deal) => (
-                <TableRow 
-                  key={deal.id} 
-                  className="deal-row cursor-pointer"
-                  onClick={() => onPropertySelect(deal)}
-                >
-                  <TableCell>
-                    <div className="space-y-1">
-                      <div className="font-medium">{deal.address}</div>
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <span className="flex items-center gap-1">
-                          <DollarSign className="w-3 h-3" />
-                          {deal.price}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
-                          {deal.rentEstimate}
-                        </span>
-                      </div>
-                    </div>
-                  </TableCell>
-                  
-                  <TableCell>
-                    <Badge className={`${getScoreColor(deal.lienScore)} font-mono`}>
-                      {deal.lienScore}
-                    </Badge>
-                  </TableCell>
-                  
-                  <TableCell>
-                    <span className="font-mono text-success font-medium">
-                      {deal.capRate}%
-                    </span>
-                  </TableCell>
-                  
-                  <TableCell>
-                    <Badge 
-                      variant="outline" 
-                      className="bg-primary/10 text-primary border-primary/30"
-                    >
-                      {deal.strategy}
-                    </Badge>
-                  </TableCell>
-                  
-                  <TableCell className="max-w-xs">
-                    <p className="text-sm text-muted-foreground truncate">
-                      {deal.aiSummary}
-                    </p>
-                  </TableCell>
-                  
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button 
-                        size="sm" 
-                        variant="ghost"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onPropertySelect(deal);
-                        }}
-                      >
-                        <Eye className="w-4 h-4" />
-                      </Button>
-                      
-                      <Button 
-                        size="sm" 
-                        variant="ghost"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Star className="w-4 h-4" />
-                      </Button>
-                      
-                      <Button 
-                        size="sm" 
-                        variant="ghost"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Archive className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </TableCell>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow className="border-b border-border/30">
+                  <TableHead className="w-[280px] min-w-[280px]">Property</TableHead>
+                  <TableHead className="w-[100px] text-center">Lien Score</TableHead>
+                  <TableHead className="w-[100px] text-center">Cap Rate</TableHead>
+                  <TableHead className="w-[140px]">Strategy</TableHead>
+                  <TableHead className="w-[300px] min-w-[300px]">AI Summary</TableHead>
+                  <TableHead className="w-[120px] text-center">Actions</TableHead>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHeader>
+              
+              <TableBody>
+                {filteredDeals.map((deal) => (
+                  <TableRow 
+                    key={deal.id} 
+                    className="deal-row cursor-pointer"
+                    onClick={() => onPropertySelect(deal)}
+                  >
+                    <TableCell className="w-[280px] min-w-[280px]">
+                      <div className="space-y-1">
+                        <div className="font-medium text-sm leading-tight break-words">
+                          {deal.address}
+                        </div>
+                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                          <span className="flex items-center gap-1 whitespace-nowrap">
+                            <DollarSign className="w-3 h-3 flex-shrink-0" />
+                            {deal.price}
+                          </span>
+                          <span className="flex items-center gap-1 whitespace-nowrap">
+                            <MapPin className="w-3 h-3 flex-shrink-0" />
+                            {deal.rentEstimate}
+                          </span>
+                        </div>
+                      </div>
+                    </TableCell>
+                    
+                    <TableCell className="w-[100px] text-center">
+                      <Badge className={`${getScoreColor(deal.lienScore)} font-mono text-xs`}>
+                        {deal.lienScore}
+                      </Badge>
+                    </TableCell>
+                    
+                    <TableCell className="w-[100px] text-center">
+                      <span className="font-mono text-success font-medium text-sm">
+                        {deal.capRate}%
+                      </span>
+                    </TableCell>
+                    
+                    <TableCell className="w-[140px]">
+                      <Badge 
+                        variant="outline" 
+                        className="bg-primary/10 text-primary border-primary/30 text-xs whitespace-nowrap"
+                      >
+                        {deal.strategy}
+                      </Badge>
+                    </TableCell>
+                    
+                    <TableCell className="w-[300px] min-w-[300px]">
+                      <div className="text-sm text-muted-foreground leading-relaxed break-words">
+                        {deal.aiSummary}
+                      </div>
+                    </TableCell>
+                    
+                    <TableCell className="w-[120px]">
+                      <div className="flex items-center justify-center gap-1">
+                        <Button 
+                          size="sm" 
+                          variant="ghost"
+                          className="h-8 w-8 p-0"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onPropertySelect(deal);
+                          }}
+                        >
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                        
+                        <Button 
+                          size="sm" 
+                          variant="ghost"
+                          className="h-8 w-8 p-0"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Star className="w-4 h-4" />
+                        </Button>
+                        
+                        <Button 
+                          size="sm" 
+                          variant="ghost"
+                          className="h-8 w-8 p-0"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Archive className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     </div>
