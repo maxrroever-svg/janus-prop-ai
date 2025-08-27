@@ -22,10 +22,10 @@ import {
 } from "lucide-react";
 
 const aiRecommendations = [
-  { label: "Highly Recommended", icon: Star, count: 47, active: true },
-  { label: "High Distress Score", icon: AlertTriangle, count: 23, active: false },
-  { label: "Strong Rental Potential", icon: TrendingUp, count: 31, active: false },
-  { label: "Quick Flip Opportunities", icon: Zap, count: 18, active: false }
+  { label: "Eden Highly Recommended", icon: Star, count: 47, active: true },
+  { label: "Orion High Distress Score", icon: AlertTriangle, count: 23, active: false },
+  { label: "Valyria Strong Rental Potential", icon: TrendingUp, count: 31, active: false },
+  { label: "Osiris Quick Flip Opportunities", icon: Zap, count: 18, active: false }
 ];
 
 export function SmartFilters() {

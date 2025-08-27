@@ -75,9 +75,11 @@ const mockComparables = [
 ];
 
 const recommendedAgents = [
-  { name: "Celestia", role: "Analysis Expert", task: "Deeper financial modeling", icon: FileText },
-  { name: "Valyria", role: "Outreach Agent", task: "Draft personalized letter to owner", icon: Phone },
-  { name: "Eden", role: "Pricing Strategist", task: "Suggest optimal bid price", icon: Brain }
+  { name: "Celestia", role: "Report Generator", task: "Generate comprehensive investment memo", icon: FileText },
+  { name: "Valyria", role: "Market Forecaster", task: "Analyze neighborhood market trends", icon: Phone },
+  { name: "Eden", role: "Executive Strategist", task: "Recommend optimal acquisition strategy", icon: Brain },
+  { name: "Osiris", role: "Financial Modeler", task: "Create detailed cash flow projections", icon: Calculator },
+  { name: "Atelius", role: "Legal Intelligence", task: "Complete legal due diligence review", icon: Shield }
 ];
 
 export function PropertyDetailView({ property, open, onClose }: PropertyDetailViewProps) {
@@ -421,13 +423,13 @@ export function PropertyDetailView({ property, open, onClose }: PropertyDetailVi
                           <Search className="w-4 h-4 text-ice" />
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-ice mb-1">Orion Analysis</p>
+                          <p className="text-sm font-medium text-ice mb-1">Multi-Agent Analysis</p>
                           <p className="text-sm text-foreground leading-relaxed italic">
-                            "This {property.type?.toLowerCase()} is identified as significantly undervalued. 
-                            Key factors: asking price is {equityPercentage}% below our AI-calculated value; 
-                            it's been on market for 9 months indicating seller motivation; and three nearby 
-                            comparable sales averaged 20% higher. This combination suggests a distress sale 
-                            scenario where a quick acquisition could yield substantial equity gains."
+                            "Eden: Final ranking places this in top 8% of all opportunities. Orion identified through foreclosure monitoring. 
+                            Osiris projects {equityPercentage}% equity gain with 18-month timeline. Atelius confirms clean title. 
+                            Valyria forecasts 15% neighborhood appreciation. Spring validated all data points. 
+                            Aurora coordinated this comprehensive analysis. Elysia enriched with comparable sales data. 
+                            This represents a rare combination of high return potential with verified low risk."
                           </p>
                         </div>
                       </div>
@@ -461,19 +463,23 @@ export function PropertyDetailView({ property, open, onClose }: PropertyDetailVi
                       <CardContent className="space-y-3">
                         <Button className="w-full justify-start bg-ice text-ice-foreground hover:bg-ice/90">
                           <Phone className="w-4 h-4 mr-2" />
-                          Contact Owner
+                          Contact Owner (Valyria)
                         </Button>
                         <Button variant="outline" className="w-full justify-start border-border hover:bg-muted">
                           <Plus className="w-4 h-4 mr-2" />
-                          Add to Leads
+                          Add to Leads (Aurora)
                         </Button>
                         <Button variant="outline" className="w-full justify-start border-border hover:bg-muted">
                           <Calculator className="w-4 h-4 mr-2" />
-                          Run Rehab Estimator
+                          Rehab Estimator (Osiris)
                         </Button>
                         <Button variant="outline" className="w-full justify-start border-border hover:bg-muted">
                           <FileText className="w-4 h-4 mr-2" />
-                          Draft Offer Letter
+                          Draft Offer (Celestia)
+                        </Button>
+                        <Button variant="outline" className="w-full justify-start border-border hover:bg-muted">
+                          <Shield className="w-4 h-4 mr-2" />
+                          Legal Review (Atelius)
                         </Button>
                       </CardContent>
                     </CollapsibleContent>

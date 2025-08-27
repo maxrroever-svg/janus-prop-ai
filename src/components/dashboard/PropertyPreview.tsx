@@ -144,12 +144,11 @@ export function PropertyPreview({ property }: PropertyPreviewProps) {
                 <Bot className="w-4 h-4 text-ice" />
               </div>
               <div>
-                <p className="text-sm font-medium text-ice mb-1">Celestia Analysis</p>
+                <p className="text-sm font-medium text-ice mb-1">Eden & Orion Analysis</p>
                 <p className="text-sm text-foreground leading-relaxed italic">
-                  "This {property.type.toLowerCase()} appears ~{equityPercentage}% undervalued due to absentee ownership, 
-                  a 9-month listing duration, and three nearby flips that sold 20% higher. 
-                  The combination suggests a distress sale scenario where a quick acquisition 
-                  could yield significant equity gains."
+                  "Eden: This {property.type.toLowerCase()} ranks in our top 15% of opportunities based on multi-agent analysis. 
+                  Orion identified it through foreclosure monitoring, while Osiris projects {equityPercentage}% upside. 
+                  Atelius confirms clean legal status. Our coordinated analysis suggests immediate action for this high-value target."
                 </p>
               </div>
             </div>
@@ -221,7 +220,7 @@ export function PropertyPreview({ property }: PropertyPreviewProps) {
           <Button variant="ghost" size="sm" className="w-full justify-start hover:bg-muted text-left">
             <Phone className="w-4 h-4 mr-2 text-ice" />
             <div>
-              <p className="font-medium">Contact Owner</p>
+              <p className="font-medium">Contact Owner (Valyria)</p>
               <p className="text-xs text-muted-foreground">Pre-filled outreach template</p>
             </div>
           </Button>
@@ -229,7 +228,7 @@ export function PropertyPreview({ property }: PropertyPreviewProps) {
           <Button variant="ghost" size="sm" className="w-full justify-start hover:bg-muted text-left">
             <TrendingUp className="w-4 h-4 mr-2 text-gold" />
             <div>
-              <p className="font-medium">Run Rehab Estimator</p>
+              <p className="font-medium">Run Rehab Estimator (Osiris)</p>
               <p className="text-xs text-muted-foreground">AI cost analysis</p>
             </div>
           </Button>
@@ -237,8 +236,16 @@ export function PropertyPreview({ property }: PropertyPreviewProps) {
           <Button variant="ghost" size="sm" className="w-full justify-start hover:bg-muted text-left">
             <FileText className="w-4 h-4 mr-2 text-success" />
             <div>
-              <p className="font-medium">Draft Offer Letter</p>
+              <p className="font-medium">Draft Offer Letter (Celestia)</p>
               <p className="text-xs text-muted-foreground">AI-generated template</p>
+            </div>
+          </Button>
+
+          <Button variant="ghost" size="sm" className="w-full justify-start hover:bg-muted text-left">
+            <Bot className="w-4 h-4 mr-2 text-warning" />
+            <div>
+              <p className="font-medium">Legal Review (Atelius)</p>
+              <p className="text-xs text-muted-foreground">Title and lien analysis</p>
             </div>
           </Button>
         </div>

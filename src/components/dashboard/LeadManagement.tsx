@@ -31,7 +31,7 @@ const mockLeads = [
     lastActivity: "Offer Drafted",
     lastActivityDate: "Jan 20, 2024",
     nextAction: "Follow up with owner",
-    agentTip: "Valyria: It's been 1 week since contact – follow up with the owner?",
+    agentTip: "Valyria: Owner engagement patterns suggest 15% price reduction possible. Market timing favors quick action.",
     price: 485000,
     estimatedValue: 620000,
     image: "/placeholder.svg",
@@ -47,7 +47,7 @@ const mockLeads = [
     lastActivity: "Owner Contacted",
     lastActivityDate: "Jan 18, 2024",
     nextAction: "Schedule property viewing",
-    agentTip: "Eden: Price just dropped 5%, consider revising your offer.",
+    agentTip: "Eden: Price dropped 5% - revise offer strategy. Osiris updated projections show improved IRR.",
     price: 325000,
     estimatedValue: 415000,
     image: "/placeholder.svg",
@@ -63,7 +63,7 @@ const mockLeads = [
     lastActivity: "Analysis Complete",
     lastActivityDate: "Jan 16, 2024",
     nextAction: "Contact property owner",
-    agentTip: "Celestia: New comparable sales data suggests higher upside potential.",
+    agentTip: "Spring: Data validation complete. Elysia enriched with new comparables. Atelius confirms clean title.",
     price: 195000,
     estimatedValue: 280000,
     image: "/placeholder.svg",
@@ -272,19 +272,19 @@ export function LeadManagement() {
                             </Card>
 
                             {/* Actions */}
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-3">
                               <div className="flex items-center gap-3">
                                 <Button size="sm" variant="outline" className="border-border hover:bg-muted">
                                   <Phone className="w-4 h-4 mr-2" />
-                                  Contact
+                                  Contact (Valyria)
                                 </Button>
                                 <Button size="sm" variant="outline" className="border-border hover:bg-muted">
                                   <FileText className="w-4 h-4 mr-2" />
-                                  Update Analysis
+                                  Update Analysis (Celestia)
                                 </Button>
                                 <Button size="sm" variant="outline" className="border-border hover:bg-muted">
                                   <Calendar className="w-4 h-4 mr-2" />
-                                  Schedule
+                                  Schedule (Aurora)
                                 </Button>
                               </div>
                               <div className="flex items-center gap-2">

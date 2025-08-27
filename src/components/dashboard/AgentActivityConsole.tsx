@@ -53,7 +53,7 @@ const mockActivities = [
     message: "Analyzing 47 pre-foreclosure homes in Brooklyn...",
     status: "in-progress",
     timestamp: "Just now",
-    details: "Scanning MLS data, court filings, and auction schedules for distressed properties"
+    details: "Scanning MLS data, court filings, and auction schedules for distressed properties across 15 zip codes"
   },
   {
     id: 2,
@@ -61,39 +61,71 @@ const mockActivities = [
     message: "Generated 3 new investment reports",
     status: "completed",
     timestamp: "2 min ago",
-    details: "Created comprehensive analysis for properties on Oak Street, Maple Ave, and Pine Road"
+    details: "Created comprehensive analysis reports for properties on Oak Street, Maple Ave, and Pine Road with ROI projections"
   },
   {
     id: 3,
     agent: "Eden",
-    message: "Completed ROI analysis for 12 properties",
+    message: "Completed deal ranking for 12 properties",
     status: "completed",
     timestamp: "5 min ago",
-    details: "Evaluated investment potential and ranked opportunities by expected returns"
+    details: "Evaluated investment potential using all agent signals and ranked opportunities by expected returns and risk profile"
   },
   {
     id: 4,
     agent: "Valyria",
     message: "Market forecast updated for Queens zip codes",
     status: "completed",
-    timestamp: "12 min ago",
-    details: "Analyzed rental demand trends and price movement predictions"
+    timestamp: "8 min ago",
+    details: "Analyzed migration patterns, rental demand trends, and price movement predictions for 23 neighborhoods"
   },
   {
     id: 5,
     agent: "Atelius",
     message: "Flagged legal risk on Pine Road property",
     status: "alert",
-    timestamp: "18 min ago",
-    details: "Discovered pending litigation that may affect property title"
+    timestamp: "12 min ago",
+    details: "Discovered pending litigation that may affect property title - requires further investigation"
   },
   {
     id: 6,
     agent: "Osiris",
     message: "Financial modeling complete for 8 properties",
     status: "completed",
+    timestamp: "15 min ago",
+    details: "Projected cash flows, redemption windows, and yield forecasts with 89% accuracy confidence"
+  },
+  {
+    id: 7,
+    agent: "Elysia",
+    message: "Data integration from Redfin and Zillow complete",
+    status: "completed",
+    timestamp: "18 min ago",
+    details: "Enriched property database with 2,847 new records including market comparables and pricing history"
+  },
+  {
+    id: 8,
+    agent: "Spring",
+    message: "Quality audit found 3 data inconsistencies",
+    status: "alert",
+    timestamp: "22 min ago",
+    details: "Identified discrepancies in tax assessment data for Brooklyn properties - corrections in progress"
+  },
+  {
+    id: 9,
+    agent: "Aurora",
+    message: "Coordinated analysis workflow for 15 new properties",
+    status: "completed",
     timestamp: "25 min ago",
-    details: "Projected cash flows, redemption windows, and yield forecasts"
+    details: "Orchestrated task distribution among all agents for incoming property batch from Manhattan district"
+  },
+  {
+    id: 10,
+    agent: "Orion",
+    message: "Court filing monitoring detected new foreclosure filings",
+    status: "completed",
+    timestamp: "28 min ago",
+    details: "Identified 8 new foreclosure cases in target neighborhoods with upcoming auction dates"
   }
 ];
 

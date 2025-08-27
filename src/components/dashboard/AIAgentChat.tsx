@@ -28,63 +28,63 @@ const agentProfiles = {
     color: "text-gold",
     bgColor: "bg-gold/10",
     role: "Executive Strategist",
-    specialty: "Investment decisions and deal ranking"
+    specialty: "Makes final investment decisions using all agent signals and ranks deals by return and fit"
   },
   "Orion": {
     icon: Search,
     color: "text-ice",
     bgColor: "bg-ice/10", 
     role: "Market Intelligence Scanner",
-    specialty: "Property discovery and market analysis"
+    specialty: "Monitors and collects tax liens, auctions, violations, and court activity in real time"
   },
   "Atelius": {
     icon: Shield,
     color: "text-success",
     bgColor: "bg-success/10",
     role: "Legal Intelligence Agent", 
-    specialty: "Legal risk assessment and compliance"
+    specialty: "Parses court filings, redemption rules, legal risks, and title chains"
   },
   "Osiris": {
     icon: Calculator,
     color: "text-warning",
     bgColor: "bg-warning/10",
     role: "Financial Modeler",
-    specialty: "ROI projections and financial analysis"
+    specialty: "Projects returns, redemption windows, and yield forecasts on every deal"
   },
   "Celestia": {
     icon: FileText,
     color: "text-ice",
     bgColor: "bg-ice/10",
     role: "Report Generator",
-    specialty: "Investment reports and documentation"
+    specialty: "Creates investor-ready memos, overviews, and PDFs for every opportunity"
   },
   "Valyria": {
     icon: TrendingUp,
     color: "text-gold",
     bgColor: "bg-gold/10",
     role: "Market Forecaster", 
-    specialty: "Market trends and price predictions"
+    specialty: "Analyzes migration, rental demand, and zip-code-level shifts to predict price movement"
   },
   "Spring": {
     icon: CheckCircle,
     color: "text-success",
     bgColor: "bg-success/10",
-    role: "Quality Control Agent",
-    specialty: "Data accuracy and validation"
+    role: "Quality Control & Audit Agent",
+    specialty: "Reviews all outputs for accuracy, completeness, and logic"
   },
   "Elysia": {
     icon: Database,
     color: "text-ice",
     bgColor: "bg-ice/10",
     role: "Data Integrator",
-    specialty: "Data processing and enrichment"
+    specialty: "Cleans, enriches, and joins external data (e.g., Redfin, Zillow, gov filings)"
   },
   "Aurora": {
     icon: GitBranch,
     color: "text-gold",
     bgColor: "bg-gold/10",
     role: "Workflow Orchestrator",
-    specialty: "Agent coordination and task management"
+    specialty: "Coordinates all agents, routes tasks, and ensures real-time flow of intelligence"
   }
 };
 
@@ -92,7 +92,7 @@ const mockConversations = [
   {
     id: 1,
     agent: "Eden",
-    message: "I've analyzed the Oak Street property. The numbers look solid with a 12.4% IRR. Should we prioritize this over the Maple Ave deal?",
+    message: "I've analyzed the Oak Street property using signals from all agents. The numbers show a 12.4% IRR with low risk profile. This should be prioritized over the Maple Ave deal based on our scoring matrix.",
     timestamp: "2 min ago",
     isUser: false
   },
@@ -106,8 +106,22 @@ const mockConversations = [
   {
     id: 3,
     agent: "Atelius",
-    message: "Oak Street has clean title with no liens. Maple Ave has 2 minor code violations that could cost ~$15K to resolve. Both are low legal risk overall.",
+    message: "Legal analysis complete: Oak Street has clean title with no liens. Maple Ave has 2 minor code violations that could cost ~$15K to resolve. Overall legal risk remains low for both properties.",
+    timestamp: "45s ago",
+    isUser: false
+  },
+  {
+    id: 4,
+    agent: "Osiris",
+    message: "Financial projections updated: Oak Street shows 11.2% cash-on-cash return with 18-month break-even. Maple Ave projects 9.8% return with 22-month break-even due to renovation costs.",
     timestamp: "30s ago",
+    isUser: false
+  },
+  {
+    id: 5,
+    agent: "Valyria",
+    message: "Market forecast indicates Brooklyn Heights rental demand will increase 12% over next 24 months. Both properties are well-positioned for appreciation.",
+    timestamp: "15s ago",
     isUser: false
   }
 ];
@@ -136,10 +150,11 @@ export function AIAgentChat() {
     setTimeout(() => {
       const agentProfile = agentProfiles[selectedAgent as keyof typeof agentProfiles];
       const responses = [
-        `I'll analyze that right away. Based on my ${agentProfile.specialty.toLowerCase()}, here's what I found...`,
-        `Great question! Let me run the numbers using my specialized algorithms...`,
-        `I can help with that. My analysis suggests several key factors to consider...`,
-        `Understood. I'll cross-reference this with current market data and provide recommendations...`
+        `Based on my ${agentProfile.specialty.toLowerCase()}, I've completed the analysis. Here are the key findings...`,
+        `I'll cross-reference this with my specialized data. ${agentProfile.specialty} shows several important factors...`,
+        `My analysis using ${agentProfile.specialty.toLowerCase()} indicates strong potential. Let me break down the details...`,
+        `I've processed this through my algorithms. As your ${agentProfile.role.toLowerCase()}, I recommend the following approach...`,
+        `Data analysis complete. ${agentProfile.specialty} reveals some interesting insights about this opportunity...`
       ];
       
       const agentResponse = {
