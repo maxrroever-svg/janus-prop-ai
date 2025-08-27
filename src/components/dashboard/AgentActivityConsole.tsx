@@ -121,11 +121,27 @@ const mockActivities = [
   },
   {
     id: 10,
-    agent: "Orion",
-    message: "Court filing monitoring detected new foreclosure filings",
+    agent: "Elysia",
+    message: "Real-time data sync with external APIs active",
+    status: "in-progress",
+    timestamp: "30 min ago",
+    details: "Maintaining live connections to Zillow, Redfin, and county databases for instant updates"
+  },
+  {
+    id: 11,
+    agent: "Spring",
+    message: "Data quality validation complete for 150 records",
     status: "completed",
-    timestamp: "28 min ago",
-    details: "Identified 8 new foreclosure cases in target neighborhoods with upcoming auction dates"
+    timestamp: "35 min ago",
+    details: "Verified accuracy of property valuations and market data across all integrated sources"
+  },
+  {
+    id: 12,
+    agent: "Aurora",
+    message: "Workflow optimization reduced processing time by 23%",
+    status: "completed",
+    timestamp: "40 min ago",
+    details: "Improved task routing and parallel processing capabilities across all agent modules"
   }
 ];
 
@@ -201,8 +217,8 @@ export function AgentActivityConsole() {
             </div>
 
             {/* Activity Feed */}
-            <ScrollArea className="h-[600px] pr-4">
-              <div className="space-y-4">
+            <ScrollArea className="h-[600px] pr-2">
+              <div className="space-y-3">
                 <AnimatePresence>
                   {activities.map((activity, index) => {
                     const IconComponent = agentIcons[activity.agent as keyof typeof agentIcons];
@@ -214,29 +230,29 @@ export function AgentActivityConsole() {
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
                       >
-                        <Card className="bg-secondary border-border">
-                          <CardContent className="p-4">
+                        <Card className="bg-secondary/50 border-border hover:bg-secondary transition-colors">
+                          <CardContent className="p-3">
                             <div className="flex items-start gap-3">
                               {/* Agent Avatar */}
-                              <div className="w-8 h-8 bg-muted rounded-full flex items-center justify-center shrink-0">
-                                <IconComponent className={`w-4 h-4 ${agentColor}`} />
+                              <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center shrink-0 border border-border">
+                                {IconComponent && <IconComponent className={`w-4 h-4 ${agentColor}`} />}
                               </div>
                               
                               {/* Activity Content */}
                               <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2 mb-1">
-                                  <span className="font-medium text-foreground text-sm">
+                                  <span className="font-medium text-foreground text-sm truncate">
                                     {activity.agent}
                                   </span>
                                   {getStatusIcon(activity.status)}
-                                  <span className="text-xs text-muted-foreground ml-auto">
+                                  <span className="text-xs text-muted-foreground ml-auto shrink-0">
                                     {activity.timestamp}
                                   </span>
                                 </div>
                                 
-                                <p className="text-sm text-foreground mb-2">
+                                <p className="text-sm text-foreground mb-2 leading-relaxed">
                                   {activity.message}
                                 </p>
                                 

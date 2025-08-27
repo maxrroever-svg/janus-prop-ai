@@ -242,50 +242,52 @@ export function AIAgentChat() {
             </div>
 
             {/* Chat Messages */}
-            <div className="flex-1 p-6 overflow-y-auto space-y-4">
-              {conversations.map((conv, index) => {
-                const isUser = conv.isUser;
-                const agentProfile = isUser ? null : agentProfiles[conv.agent as keyof typeof agentProfiles];
-                const AgentIcon = agentProfile?.icon;
+            <div className="flex-1 p-4 overflow-y-auto">
+              <div className="space-y-4 max-w-full">
+                {conversations.map((conv, index) => {
+                  const isUser = conv.isUser;
+                  const agentProfile = isUser ? null : agentProfiles[conv.agent as keyof typeof agentProfiles];
+                  const AgentIcon = agentProfile?.icon;
 
-                return (
-                  <motion.div
-                    key={conv.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className={`flex gap-3 ${isUser ? 'flex-row-reverse' : ''}`}
-                  >
-                    {/* Avatar */}
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
-                      isUser ? 'bg-primary' : agentProfile?.bgColor
-                    }`}>
-                      {isUser ? (
-                        <User className="w-4 h-4 text-primary-foreground" />
-                      ) : AgentIcon ? (
-                        <AgentIcon className={`w-4 h-4 ${agentProfile?.color}`} />
-                      ) : (
-                        <Bot className="w-4 h-4" />
-                      )}
-                    </div>
-
-                    {/* Message */}
-                    <div className={`max-w-xs lg:max-w-md ${isUser ? 'text-right' : ''}`}>
-                      <div className={`p-3 rounded-lg ${
-                        isUser 
-                          ? 'bg-primary text-primary-foreground' 
-                          : 'bg-muted text-foreground'
+                  return (
+                    <motion.div
+                      key={conv.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className={`flex gap-3 w-full ${isUser ? 'flex-row-reverse' : ''}`}
+                    >
+                      {/* Avatar */}
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1 ${
+                        isUser ? 'bg-primary' : agentProfile?.bgColor || 'bg-muted'
                       }`}>
-                        {!isUser && (
-                          <p className="text-xs font-medium mb-1 opacity-75">{conv.agent}</p>
+                        {isUser ? (
+                          <User className="w-4 h-4 text-primary-foreground" />
+                        ) : AgentIcon ? (
+                          <AgentIcon className={`w-4 h-4 ${agentProfile?.color}`} />
+                        ) : (
+                          <Bot className="w-4 h-4 text-muted-foreground" />
                         )}
-                        <p className="text-sm leading-relaxed">{conv.message}</p>
                       </div>
-                      <p className="text-xs text-muted-foreground mt-1">{conv.timestamp}</p>
-                    </div>
-                  </motion.div>
-                );
-              })}
+
+                      {/* Message */}
+                      <div className={`flex-1 max-w-[75%] ${isUser ? 'text-right' : ''}`}>
+                        <div className={`inline-block p-3 rounded-lg ${
+                          isUser 
+                            ? 'bg-primary text-primary-foreground ml-auto' 
+                            : 'bg-muted text-foreground'
+                        }`}>
+                          {!isUser && (
+                            <p className="text-xs font-medium mb-1 opacity-75">{conv.agent}</p>
+                          )}
+                          <p className="text-sm leading-relaxed whitespace-pre-wrap">{conv.message}</p>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1 px-1">{conv.timestamp}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Chat Input */}
