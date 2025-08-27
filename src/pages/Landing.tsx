@@ -6,6 +6,7 @@ import { MainDashboard } from "@/components/dashboard/MainDashboard";
 import { PipelineSection } from "@/components/landing/PipelineSection";
 import { DealIntelligenceSection } from "@/components/landing/DealIntelligenceSection";
 import { LeadManagement } from "@/components/dashboard/LeadManagement";
+import { MarketIntelligence } from "@/components/dashboard/MarketIntelligence";
 import { ClosingSection } from "@/components/landing/ClosingSection";
 import { ScrollNavigation } from "@/components/landing/ScrollNavigation";
 
@@ -27,6 +28,9 @@ const Landing = () => {
       </div>
       <div id="dashboard">
         <MainDashboard />
+      </div>
+      <div id="market-intelligence">
+        <MarketIntelligence />
       </div>
       <div id="pipeline">
         <PipelineSection />

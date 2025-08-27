@@ -52,9 +52,10 @@ const mockProperties = [
 
 interface MapListViewProps {
   onPropertySelect: (property: any) => void;
+  onPropertyDetail: (property: any) => void;
 }
 
-export function MapListView({ onPropertySelect }: MapListViewProps) {
+export function MapListView({ onPropertySelect, onPropertyDetail }: MapListViewProps) {
   const [viewMode, setViewMode] = useState<'map' | 'list'>('list');
 
   const getScoreColor = (score: number) => {
@@ -204,7 +205,15 @@ export function MapListView({ onPropertySelect }: MapListViewProps) {
 
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-4">
-                            <Button size="sm" variant="outline" className="border-border hover:bg-muted">
+                            <Button 
+                              size="sm" 
+                              variant="outline" 
+                              className="border-border hover:bg-muted"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onPropertyDetail(property);
+                              }}
+                            >
                               <Eye className="w-4 h-4 mr-2" />
                               View Details
                             </Button>
