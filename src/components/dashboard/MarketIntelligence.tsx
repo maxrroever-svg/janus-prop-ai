@@ -87,7 +87,7 @@ const aiInsights = [
 
 export function MarketIntelligence() {
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background relative z-10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
           <h2 className="font-display text-3xl font-semibold text-foreground mb-4">
@@ -112,14 +112,15 @@ export function MarketIntelligence() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="relative z-20"
               >
-                <Card className="bg-card border-border">
+                <Card className="bg-card border-border h-full">
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between mb-4">
-                      <div className={`w-10 h-10 rounded-lg bg-secondary flex items-center justify-center`}>
+                      <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center shrink-0">
                         <IconComponent className={`w-5 h-5 ${metric.color}`} />
                       </div>
-                      <div className="flex items-center gap-1">
+                      <div className="flex items-center gap-1 shrink-0">
                         {isPositive ? (
                           <TrendingUp className="w-4 h-4 text-success" />
                         ) : (
@@ -133,9 +134,9 @@ export function MarketIntelligence() {
                       </div>
                     </div>
                     <div className="mb-2">
-                      <p className="text-2xl font-bold text-foreground">{metric.value}</p>
+                      <p className="text-2xl font-bold text-foreground break-words">{metric.value}</p>
                     </div>
-                    <p className="text-sm text-muted-foreground">{metric.title}</p>
+                    <p className="text-sm text-muted-foreground leading-tight">{metric.title}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -150,25 +151,26 @@ export function MarketIntelligence() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="relative z-20"
           >
             <Card className="bg-card border-border h-full">
-              <CardHeader>
+              <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-foreground">
-                  <MapPin className="w-5 h-5 text-ice" />
-                  Top Markets by Opportunity
+                  <MapPin className="w-5 h-5 text-ice shrink-0" />
+                  <span className="truncate">Top Markets by Opportunity</span>
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-3">
                 {topMarkets.map((market, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 bg-secondary rounded-lg">
-                    <div>
-                      <p className="font-medium text-foreground">{market.location}</p>
-                      <p className="text-sm text-muted-foreground">
+                  <div key={index} className="flex items-center justify-between p-3 bg-secondary rounded-lg min-h-[60px]">
+                    <div className="flex-1 min-w-0 pr-3">
+                      <p className="font-medium text-foreground truncate">{market.location}</p>
+                      <p className="text-sm text-muted-foreground truncate">
                         {market.properties.toLocaleString()} properties • Score: {market.avgScore}
                       </p>
                     </div>
-                    <div className="text-right">
-                      <Badge variant="outline" className="border-success text-success">
+                    <div className="shrink-0">
+                      <Badge variant="outline" className="border-success text-success whitespace-nowrap">
                         {market.growth}
                       </Badge>
                     </div>
@@ -184,12 +186,13 @@ export function MarketIntelligence() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
+            className="relative z-20"
           >
             <Card className="bg-card border-border h-full">
-              <CardHeader>
+              <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-2 text-foreground">
-                  <Activity className="w-5 h-5 text-gold" />
-                  AI Market Insights
+                  <Activity className="w-5 h-5 text-gold shrink-0" />
+                  <span className="truncate">AI Market Insights</span>
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -211,25 +214,25 @@ export function MarketIntelligence() {
                   };
 
                   return (
-                    <div key={index} className={`p-4 border rounded-lg ${getPriorityColor()}`}>
+                    <div key={index} className={`p-4 border rounded-lg ${getPriorityColor()} relative`}>
                       <div className="flex items-start gap-3">
-                        <div className="mt-0.5">
+                        <div className="mt-0.5 shrink-0">
                           {getIcon()}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center justify-between mb-2">
-                            <h4 className="font-medium text-foreground">{insight.title}</h4>
+                          <div className="flex items-start justify-between mb-2 gap-2">
+                            <h4 className="font-medium text-foreground leading-tight flex-1">{insight.title}</h4>
                             <Badge 
                               variant="outline" 
-                              className={insight.priority === 'high' ? 'border-destructive text-destructive' : 'border-warning text-warning'}
+                              className={`shrink-0 ${insight.priority === 'high' ? 'border-destructive text-destructive' : 'border-warning text-warning'}`}
                             >
                               {insight.priority}
                             </Badge>
                           </div>
-                          <p className="text-sm text-muted-foreground mb-3">{insight.description}</p>
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs text-muted-foreground">Confidence</span>
-                            <div className="flex items-center gap-2">
+                          <p className="text-sm text-muted-foreground mb-3 leading-relaxed">{insight.description}</p>
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-xs text-muted-foreground shrink-0">Confidence</span>
+                            <div className="flex items-center gap-2 shrink-0">
                               <Progress value={insight.confidence} className="w-16 h-1" />
                               <span className="text-xs font-medium text-foreground">{insight.confidence}%</span>
                             </div>
@@ -250,29 +253,30 @@ export function MarketIntelligence() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
+          className="relative z-20"
         >
           <Card className="bg-card border-border">
-            <CardHeader>
+            <CardHeader className="pb-4">
               <CardTitle className="flex items-center gap-2 text-foreground">
-                <Clock className="w-5 h-5 text-ice" />
-                Real-time Market Activity
+                <Clock className="w-5 h-5 text-ice shrink-0" />
+                <span className="truncate">Real-time Market Activity</span>
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="text-center p-4 bg-secondary rounded-lg">
+                <div className="text-center p-4 bg-secondary rounded-lg min-h-[100px] flex flex-col justify-center">
                   <div className="text-2xl font-bold text-ice mb-1">47</div>
-                  <div className="text-sm text-muted-foreground">New Properties Analyzed</div>
+                  <div className="text-sm text-muted-foreground leading-tight">New Properties Analyzed</div>
                   <div className="text-xs text-success mt-1">Last hour</div>
                 </div>
-                <div className="text-center p-4 bg-secondary rounded-lg">
+                <div className="text-center p-4 bg-secondary rounded-lg min-h-[100px] flex flex-col justify-center">
                   <div className="text-2xl font-bold text-gold mb-1">23</div>
-                  <div className="text-sm text-muted-foreground">High-Opportunity Flags</div>
+                  <div className="text-sm text-muted-foreground leading-tight">High-Opportunity Flags</div>
                   <div className="text-xs text-success mt-1">Last hour</div>
                 </div>
-                <div className="text-center p-4 bg-secondary rounded-lg">
+                <div className="text-center p-4 bg-secondary rounded-lg min-h-[100px] flex flex-col justify-center">
                   <div className="text-2xl font-bold text-success mb-1">12</div>
-                  <div className="text-sm text-muted-foreground">Investment Reports Generated</div>
+                  <div className="text-sm text-muted-foreground leading-tight">Investment Reports Generated</div>
                   <div className="text-xs text-success mt-1">Last hour</div>
                 </div>
               </div>
