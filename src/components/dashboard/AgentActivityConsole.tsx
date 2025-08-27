@@ -147,7 +147,11 @@ const mockActivities = [
 
 export function AgentActivityConsole() {
   const [isOpen, setIsOpen] = useState(false);
-  const [activities] = useState(mockActivities);
+  const [activities, setActivities] = useState(mockActivities);
+  
+  const dismissActivity = (activityId: number) => {
+    setActivities(prev => prev.filter(a => a.id !== activityId));
+  };
   
   const activeActivities = activities.filter(a => a.status === 'in-progress').length;
   const recentAlerts = activities.filter(a => a.status === 'alert').length;
@@ -191,17 +195,17 @@ export function AgentActivityConsole() {
           </Button>
         </SheetTrigger>
 
-        <SheetContent className="w-96 bg-card border-l border-border">
-          <SheetHeader>
+        <SheetContent className="w-96 bg-card border-l border-border flex flex-col">
+          <SheetHeader className="shrink-0">
             <SheetTitle className="flex items-center gap-2 text-foreground">
               <Bot className="w-5 h-5 text-ice" />
               Agent Activity Console
             </SheetTitle>
           </SheetHeader>
 
-          <div className="mt-6">
+          <div className="flex-1 flex flex-col min-h-0 mt-6">
             {/* Activity Summary */}
-            <div className="grid grid-cols-2 gap-3 mb-6">
+            <div className="grid grid-cols-2 gap-3 mb-6 shrink-0">
               <Card className="bg-secondary border-border">
                 <CardContent className="p-3 text-center">
                   <div className="text-lg font-bold text-ice">{activeActivities}</div>
@@ -217,74 +221,88 @@ export function AgentActivityConsole() {
             </div>
 
             {/* Activity Feed */}
-            <ScrollArea className="h-[600px] pr-2">
-              <div className="space-y-3">
-                <AnimatePresence>
-                  {activities.map((activity, index) => {
-                    const IconComponent = agentIcons[activity.agent as keyof typeof agentIcons];
-                    const agentColor = agentColors[activity.agent as keyof typeof agentColors];
-                    
-                    return (
-                      <motion.div
-                        key={activity.id}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.3, delay: index * 0.05 }}
-                      >
-                        <Card className="bg-secondary/50 border-border hover:bg-secondary transition-colors">
-                          <CardContent className="p-3">
-                            <div className="flex items-start gap-3">
-                              {/* Agent Avatar */}
-                              <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center shrink-0 border border-border">
-                                {IconComponent && <IconComponent className={`w-4 h-4 ${agentColor}`} />}
-                              </div>
-                              
-                              {/* Activity Content */}
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-1">
-                                  <span className="font-medium text-foreground text-sm truncate">
-                                    {activity.agent}
-                                  </span>
-                                  {getStatusIcon(activity.status)}
-                                  <span className="text-xs text-muted-foreground ml-auto shrink-0">
-                                    {activity.timestamp}
-                                  </span>
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <ScrollArea className="h-full">
+                <div className="space-y-3 pr-2">
+                  <AnimatePresence>
+                    {activities.map((activity, index) => {
+                      const IconComponent = agentIcons[activity.agent as keyof typeof agentIcons];
+                      const agentColor = agentColors[activity.agent as keyof typeof agentColors];
+                      
+                      return (
+                        <motion.div
+                          key={activity.id}
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                          transition={{ duration: 0.3, delay: index * 0.05 }}
+                        >
+                          <Card className="bg-secondary/50 border-border hover:bg-secondary transition-colors relative">
+                            <CardContent className="p-3">
+                              <div className="flex items-start gap-3">
+                                {/* Agent Avatar */}
+                                <div className="w-8 h-8 bg-background rounded-full flex items-center justify-center shrink-0 border border-border">
+                                  {IconComponent && <IconComponent className={`w-4 h-4 ${agentColor}`} />}
                                 </div>
                                 
-                                <p className="text-sm text-foreground mb-2 leading-relaxed">
-                                  {activity.message}
-                                </p>
-                                
-                                <p className="text-xs text-muted-foreground leading-relaxed">
-                                  {activity.details}
-                                </p>
-                                
-                                {activity.status === 'in-progress' && (
-                                  <div className="mt-3">
-                                    <div className="w-full bg-muted rounded-full h-1.5">
-                                      <motion.div
-                                        className="bg-ice h-1.5 rounded-full"
-                                        initial={{ width: "0%" }}
-                                        animate={{ width: "75%" }}
-                                        transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
-                                      />
-                                    </div>
+                                {/* Activity Content */}
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <span className="font-medium text-foreground text-sm truncate">
+                                      {activity.agent}
+                                    </span>
+                                    {getStatusIcon(activity.status)}
+                                    <span className="text-xs text-muted-foreground ml-auto shrink-0">
+                                      {activity.timestamp}
+                                    </span>
                                   </div>
+                                  
+                                  <p className="text-sm text-foreground mb-2 leading-relaxed">
+                                    {activity.message}
+                                  </p>
+                                  
+                                  <p className="text-xs text-muted-foreground leading-relaxed">
+                                    {activity.details}
+                                  </p>
+                                  
+                                  {activity.status === 'in-progress' && (
+                                    <div className="mt-3">
+                                      <div className="w-full bg-muted rounded-full h-1.5">
+                                        <motion.div
+                                          className="bg-ice h-1.5 rounded-full"
+                                          initial={{ width: "0%" }}
+                                          animate={{ width: "75%" }}
+                                          transition={{ duration: 2, repeat: Infinity, repeatType: "reverse" }}
+                                        />
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                                
+                                {/* Dismiss Button */}
+                                {(activity.status === 'alert' || activity.status === 'completed') && (
+                                  <Button
+                                    size="sm"
+                                    variant="ghost"
+                                    className="w-6 h-6 p-0 shrink-0 opacity-50 hover:opacity-100"
+                                    onClick={() => dismissActivity(activity.id)}
+                                  >
+                                    <X className="w-3 h-3" />
+                                  </Button>
                                 )}
                               </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
-                    );
-                  })}
-                </AnimatePresence>
-              </div>
-            </ScrollArea>
+                            </CardContent>
+                          </Card>
+                        </motion.div>
+                      );
+                    })}
+                  </AnimatePresence>
+                </div>
+              </ScrollArea>
+            </div>
 
             {/* Console Actions */}
-            <div className="mt-6 pt-4 border-t border-border">
+            <div className="pt-4 border-t border-border shrink-0">
               <div className="flex gap-2">
                 <Button size="sm" variant="outline" className="flex-1 border-border hover:bg-muted">
                   <Bot className="w-4 h-4 mr-2" />

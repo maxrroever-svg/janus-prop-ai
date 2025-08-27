@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   MessageSquare, 
   Send, 
@@ -181,50 +182,52 @@ export function AIAgentChat() {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-4xl h-[80vh] bg-card border-border p-0">
-        <div className="flex h-full">
+      <DialogContent className="max-w-4xl h-[85vh] bg-card border-border p-0 flex flex-col">
+        <div className="flex h-full min-h-0">
           {/* Agent Selection Sidebar */}
-          <div className="w-80 bg-secondary border-r border-border">
-            <DialogHeader className="p-6 border-b border-border">
+          <div className="w-80 bg-secondary border-r border-border flex flex-col">
+            <DialogHeader className="p-4 border-b border-border shrink-0">
               <DialogTitle className="flex items-center gap-2 text-foreground">
                 <Bot className="w-5 h-5 text-ice" />
                 Janus AI Agents
               </DialogTitle>
             </DialogHeader>
 
-            <div className="p-4 space-y-2">
-              {Object.entries(agentProfiles).map(([name, profile]) => {
-                const IconComponent = profile.icon;
-                return (
-                  <Button
-                    key={name}
-                    variant={selectedAgent === name ? "default" : "ghost"}
-                    className={`w-full justify-start p-3 h-auto ${
-                      selectedAgent === name 
-                        ? 'bg-ice text-ice-foreground' 
-                        : 'hover:bg-muted'
-                    }`}
-                    onClick={() => setSelectedAgent(name)}
-                  >
-                    <div className="flex items-center gap-3 w-full">
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center ${profile.bgColor}`}>
-                        <IconComponent className={`w-4 h-4 ${profile.color}`} />
+            <ScrollArea className="flex-1 p-4">
+              <div className="space-y-2">
+                {Object.entries(agentProfiles).map(([name, profile]) => {
+                  const IconComponent = profile.icon;
+                  return (
+                    <Button
+                      key={name}
+                      variant={selectedAgent === name ? "default" : "ghost"}
+                      className={`w-full justify-start p-3 h-auto ${
+                        selectedAgent === name 
+                          ? 'bg-ice text-ice-foreground' 
+                          : 'hover:bg-muted'
+                      }`}
+                      onClick={() => setSelectedAgent(name)}
+                    >
+                      <div className="flex items-center gap-3 w-full">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${profile.bgColor}`}>
+                          <IconComponent className={`w-4 h-4 ${profile.color}`} />
+                        </div>
+                        <div className="text-left flex-1 min-w-0">
+                          <p className="font-medium truncate">{name}</p>
+                          <p className="text-xs opacity-75 truncate">{profile.role}</p>
+                        </div>
                       </div>
-                      <div className="text-left flex-1 min-w-0">
-                        <p className="font-medium truncate">{name}</p>
-                        <p className="text-xs opacity-75 truncate">{profile.role}</p>
-                      </div>
-                    </div>
-                  </Button>
-                );
-              })}
-            </div>
+                    </Button>
+                  );
+                })}
+              </div>
+            </ScrollArea>
           </div>
 
           {/* Chat Interface */}
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col min-h-0">
             {/* Chat Header */}
-            <div className="p-6 border-b border-border bg-card">
+            <div className="p-4 border-b border-border bg-card shrink-0">
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center ${selectedProfile.bgColor}`}>
                   <SelectedIcon className={`w-5 h-5 ${selectedProfile.color}`} />
@@ -242,56 +245,58 @@ export function AIAgentChat() {
             </div>
 
             {/* Chat Messages */}
-            <div className="flex-1 p-4 overflow-y-auto">
-              <div className="space-y-4 max-w-full">
-                {conversations.map((conv, index) => {
-                  const isUser = conv.isUser;
-                  const agentProfile = isUser ? null : agentProfiles[conv.agent as keyof typeof agentProfiles];
-                  const AgentIcon = agentProfile?.icon;
+            <div className="flex-1 min-h-0 overflow-hidden">
+              <ScrollArea className="h-full">
+                <div className="p-4 space-y-4">
+                  {conversations.map((conv, index) => {
+                    const isUser = conv.isUser;
+                    const agentProfile = isUser ? null : agentProfiles[conv.agent as keyof typeof agentProfiles];
+                    const AgentIcon = agentProfile?.icon;
 
-                  return (
-                    <motion.div
-                      key={conv.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
-                      className={`flex gap-3 w-full ${isUser ? 'flex-row-reverse' : ''}`}
-                    >
-                      {/* Avatar */}
-                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1 ${
-                        isUser ? 'bg-primary' : agentProfile?.bgColor || 'bg-muted'
-                      }`}>
-                        {isUser ? (
-                          <User className="w-4 h-4 text-primary-foreground" />
-                        ) : AgentIcon ? (
-                          <AgentIcon className={`w-4 h-4 ${agentProfile?.color}`} />
-                        ) : (
-                          <Bot className="w-4 h-4 text-muted-foreground" />
-                        )}
-                      </div>
-
-                      {/* Message */}
-                      <div className={`flex-1 max-w-[75%] ${isUser ? 'text-right' : ''}`}>
-                        <div className={`inline-block p-3 rounded-lg ${
-                          isUser 
-                            ? 'bg-primary text-primary-foreground ml-auto' 
-                            : 'bg-muted text-foreground'
+                    return (
+                      <motion.div
+                        key={conv.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        className={`flex gap-3 w-full ${isUser ? 'flex-row-reverse' : ''}`}
+                      >
+                        {/* Avatar */}
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 mt-1 ${
+                          isUser ? 'bg-primary' : agentProfile?.bgColor || 'bg-muted'
                         }`}>
-                          {!isUser && (
-                            <p className="text-xs font-medium mb-1 opacity-75">{conv.agent}</p>
+                          {isUser ? (
+                            <User className="w-4 h-4 text-primary-foreground" />
+                          ) : AgentIcon ? (
+                            <AgentIcon className={`w-4 h-4 ${agentProfile?.color}`} />
+                          ) : (
+                            <Bot className="w-4 h-4 text-muted-foreground" />
                           )}
-                          <p className="text-sm leading-relaxed whitespace-pre-wrap">{conv.message}</p>
                         </div>
-                        <p className="text-xs text-muted-foreground mt-1 px-1">{conv.timestamp}</p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
+
+                        {/* Message */}
+                        <div className={`flex-1 max-w-[80%] ${isUser ? 'text-right' : ''}`}>
+                          <div className={`inline-block p-3 rounded-lg ${
+                            isUser 
+                              ? 'bg-primary text-primary-foreground ml-auto' 
+                              : 'bg-muted text-foreground'
+                          }`}>
+                            {!isUser && (
+                              <p className="text-xs font-medium mb-1 opacity-75">{conv.agent}</p>
+                            )}
+                            <p className="text-sm leading-relaxed whitespace-pre-wrap break-words">{conv.message}</p>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1 px-1">{conv.timestamp}</p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </ScrollArea>
             </div>
 
             {/* Chat Input */}
-            <div className="p-6 border-t border-border bg-card">
+            <div className="p-4 border-t border-border bg-card shrink-0">
               <div className="flex gap-3">
                 <Input
                   value={message}
