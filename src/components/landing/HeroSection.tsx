@@ -73,12 +73,14 @@ export const HeroSection = () => {
           transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Button 
-            size="lg" 
-            className="btn-professional text-base px-8 py-3 font-medium"
-          >
-            Request Access
-          </Button>
+          <Link to="/auth">
+            <Button 
+              size="lg" 
+              className="btn-professional text-base px-8 py-3 font-medium"
+            >
+              Request Access
+            </Button>
+          </Link>
           <Button 
             size="lg" 
             className="btn-institutional text-base px-8 py-3 font-medium"
