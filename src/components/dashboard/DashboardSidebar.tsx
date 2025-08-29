@@ -24,7 +24,6 @@ import {
 const navigation = [
   { name: "Deal Canvas", href: "/dashboard", icon: Home },
   { name: "Active Deals", href: "/dashboard/deals", icon: Target },
-  { name: "Agent Stack", href: "/dashboard/agents", icon: Users },
   { name: "Intelligence", href: "/dashboard/intelligence", icon: BarChart3 },
   { name: "IC Memos", href: "/dashboard/memos", icon: FileText },
   { name: "Outreach", href: "/dashboard/outreach", icon: MessageSquare },

@@ -31,7 +31,6 @@ const App = () => (
             <Route path="/dashboard/portfolio" element={<Portfolio />} />
             <Route path="/dashboard/outreach" element={<Outreach />} />
             <Route path="/dashboard/memos" element={<ICMemos />} />
-            <Route path="/dashboard/agents" element={<Agents />} />
             <Route path="/dashboard/intelligence" element={<Intelligence />} />
             <Route path="/dashboard/assistant" element={<Assistant />} />
             <Route path="/dashboard/settings" element={<Settings />} />
