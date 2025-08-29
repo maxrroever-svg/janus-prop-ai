@@ -13,6 +13,7 @@ import Agents from "./pages/dashboard/Agents";
 import Settings from "./pages/dashboard/Settings";
 import AuditLog from "./pages/dashboard/AuditLog";
 import Assistant from "./pages/dashboard/Assistant";
+import Intelligence from "./pages/dashboard/Intelligence";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/dashboard/outreach" element={<Outreach />} />
             <Route path="/dashboard/memos" element={<ICMemos />} />
             <Route path="/dashboard/agents" element={<Agents />} />
+            <Route path="/dashboard/intelligence" element={<Intelligence />} />
             <Route path="/dashboard/assistant" element={<Assistant />} />
             <Route path="/dashboard/settings" element={<Settings />} />
             <Route path="/dashboard/audit" element={<AuditLog />} />
