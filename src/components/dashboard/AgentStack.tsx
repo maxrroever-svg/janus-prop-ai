@@ -184,11 +184,11 @@ export function AgentStack({ runs }: AgentStackProps) {
                 )}
                 
                 <div className="flex gap-2">
-                  <Button size="sm" variant="outline" className="text-xs h-7 flex-1">
+                  <Button size="sm" variant="outline" className="text-xs h-7 flex-1 truncate">
                     Configure
                   </Button>
-                  <Button size="sm" variant="ghost" className="text-xs h-7 flex-1">
-                    View Logs
+                  <Button size="sm" variant="ghost" className="text-xs h-7 flex-1 truncate">
+                    Logs
                   </Button>
                 </div>
               </div>

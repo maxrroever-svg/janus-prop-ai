@@ -5,7 +5,7 @@ import { GlobalIntelligence } from "@/components/dashboard/GlobalIntelligence";
 import { AgentModules } from "@/components/dashboard/AgentModules";
 import { DealTable } from "@/components/dashboard/DealTable";
 import { PropertyModal } from "@/components/dashboard/PropertyModal";
-import { AskJanusButton } from "@/components/dashboard/AskJanusButton";
+
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 const Index = () => {
@@ -42,7 +42,7 @@ const Index = () => {
           onClose={() => setIsPropertyModalOpen(false)}
         />
         
-        <AskJanusButton />
+        
       </div>
     </SidebarProvider>
   );

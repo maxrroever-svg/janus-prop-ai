@@ -3,6 +3,7 @@ import { AgentStack } from "./AgentStack";
 import { DealMap } from "./DealMap";
 import { ExplainPanel } from "./ExplainPanel";
 import { CommandBar } from "./CommandBar";
+import { AIAssistantSection } from "./AIAssistantSection";
 
 export function DealCanvas() {
   const [selectedDeal, setSelectedDeal] = useState<any>(null);
@@ -28,9 +29,14 @@ export function DealCanvas() {
         </div>
       </div>
       
-      {/* Right Panel - Explain */}
-      <div className="w-96 border-l border-border bg-secondary/30">
-        <ExplainPanel deal={selectedDeal} />
+      {/* Right Panel - Split between Explain and AI Assistant */}
+      <div className="w-96 border-l border-border bg-secondary/30 flex flex-col">
+        <div className="flex-1 border-b border-border">
+          <ExplainPanel deal={selectedDeal} />
+        </div>
+        <div className="h-80">
+          <AIAssistantSection />
+        </div>
       </div>
     </div>
   );
