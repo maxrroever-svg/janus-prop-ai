@@ -1,6 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
-import { Header } from "@/components/layout/Header";
+import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { AgentStack } from "@/components/dashboard/AgentStack";
 import { DecisionHistory } from "@/components/dashboard/DecisionHistory";
 import { InvestmentMap } from "@/components/analytics/InvestmentMap";
@@ -13,7 +13,7 @@ const Intelligence = () => {
       <div className="min-h-screen w-full bg-background flex">
         <DashboardSidebar />
         <div className="flex-1 flex flex-col">
-          <Header />
+          <DashboardHeader />
           <main className="flex-1 p-6">
             <div className="max-w-7xl mx-auto">
               <div className="mb-6">

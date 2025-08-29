@@ -1,6 +1,6 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
-import { Header } from "@/components/layout/Header";
+import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { SimplifiedDealTable } from "@/components/dashboard/SimplifiedDealTable";
 import { DealMap } from "@/components/dashboard/DealMap";
 import { ExplainPanel } from "@/components/dashboard/ExplainPanel";
@@ -20,7 +20,7 @@ const Deals = () => {
       <div className="min-h-screen w-full bg-background flex overflow-hidden">
         <DashboardSidebar />
         <div className="flex-1 flex flex-col overflow-hidden">
-          <Header />
+          <DashboardHeader />
           <main className="flex-1 flex overflow-hidden">
             {/* Left Panel - Main Content */}
             <div className="flex-1 flex flex-col overflow-hidden">

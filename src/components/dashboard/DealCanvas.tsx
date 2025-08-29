@@ -9,8 +9,9 @@ export function DealCanvas() {
   const [view, setView] = useState<'deals' | 'map'>('deals');
 
   const handleCommand = async (command: string) => {
-    // TODO: Implement orchestrator logic
-    console.log('Processing command:', command);
+    // Orchestrator logic for AI command processing
+    console.log('Processing AI command:', command);
+    // Future implementation: Send command to Eden AI orchestrator
   };
 
   const handlePropertySelect = (property: any) => {
