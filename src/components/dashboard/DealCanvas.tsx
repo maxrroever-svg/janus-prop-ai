@@ -6,7 +6,7 @@ import { SimplifiedDealTable } from "./SimplifiedDealTable";
 
 export function DealCanvas() {
   const [selectedDeal, setSelectedDeal] = useState<any>(null);
-  const [view, setView] = useState<'map' | 'deals'>('deals');
+  const [view, setView] = useState<'deals' | 'map'>('deals');
 
   const handleCommand = async (command: string) => {
     // TODO: Implement orchestrator logic
@@ -18,39 +18,58 @@ export function DealCanvas() {
   };
 
   return (
-    <div className="h-full flex">
-      {/* Center Panel - Deals Table or Map with Command Bar */}
-      <div className="flex-1 flex flex-col">
+    <div className="h-screen flex flex-col overflow-hidden">
+      {/* Command Bar */}
+      <div className="shrink-0 border-b border-border">
         <CommandBar onCommand={handleCommand} />
-        <div className="flex-1 p-6 overflow-y-auto">
-          <div className="mb-4">
+      </div>
+      
+      {/* Main Content Area */}
+      <div className="flex-1 flex overflow-hidden">
+        {/* Left Panel - Main Content */}
+        <div className="flex-1 flex flex-col overflow-hidden">
+          {/* View Toggle */}
+          <div className="shrink-0 p-4 border-b border-border bg-secondary/30">
             <div className="flex gap-2">
               <button 
                 onClick={() => setView('deals')} 
-                className={`px-4 py-2 rounded-lg transition-colors ${view === 'deals' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'}`}
+                className={`px-4 py-2 rounded-lg transition-colors ${
+                  view === 'deals' 
+                    ? 'bg-primary text-primary-foreground' 
+                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                }`}
               >
                 Deal Table
               </button>
               <button 
                 onClick={() => setView('map')} 
-                className={`px-4 py-2 rounded-lg transition-colors ${view === 'map' ? 'bg-primary text-primary-foreground' : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'}`}
+                className={`px-4 py-2 rounded-lg transition-colors ${
+                  view === 'map' 
+                    ? 'bg-primary text-primary-foreground' 
+                    : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                }`}
               >
                 Map View
               </button>
             </div>
           </div>
           
-          {view === 'deals' ? (
-            <SimplifiedDealTable onPropertySelect={handlePropertySelect} />
-          ) : (
-            <DealMap onDealSelect={setSelectedDeal} />
-          )}
+          {/* Content Area */}
+          <div className="flex-1 overflow-auto">
+            <div className="p-6">
+              {view === 'deals' ? (
+                <SimplifiedDealTable onPropertySelect={handlePropertySelect} />
+              ) : (
+                <DealMap onDealSelect={setSelectedDeal} />
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-      
-      {/* Right Panel - Explain Panel */}
-      <div className="w-96 border-l border-border bg-secondary/30">
-        <ExplainPanel deal={selectedDeal} />
+        
+        {/* Right Panel - Property Details */}
+        <div className="w-96 shrink-0 border-l border-border bg-secondary/30 overflow-hidden">
+          <ExplainPanel deal={selectedDeal} />
+        </div>
       </div>
     </div>
   );

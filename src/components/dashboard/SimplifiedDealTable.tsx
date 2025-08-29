@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -8,9 +7,7 @@ import {
   Filter, 
   Eye, 
   Star, 
-  TrendingUp,
-  MapPin,
-  DollarSign
+  MapPin
 } from "lucide-react";
 
 const mockDeals = [
@@ -84,8 +81,8 @@ export function SimplifiedDealTable({ onPropertySelect }: SimplifiedDealTablePro
   );
 
   return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
+    <div className="w-full max-w-none overflow-hidden">
+      <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="font-display text-xl font-normal">Active Opportunities</h2>
           <p className="text-muted-foreground text-sm">
@@ -93,7 +90,7 @@ export function SimplifiedDealTable({ onPropertySelect }: SimplifiedDealTablePro
           </p>
         </div>
         
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input 
@@ -104,7 +101,7 @@ export function SimplifiedDealTable({ onPropertySelect }: SimplifiedDealTablePro
             />
           </div>
           
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="sm" className="shrink-0">
             <Filter className="w-4 h-4 mr-2" />
             Filter
           </Button>
@@ -114,64 +111,64 @@ export function SimplifiedDealTable({ onPropertySelect }: SimplifiedDealTablePro
       <div className="space-y-4">
         {filteredDeals.map((deal) => (
           <div key={deal.id} 
-               className="institutional-card p-4 cursor-pointer hover:border-primary/30 transition-colors"
+               className="institutional-card p-6 cursor-pointer hover:border-primary/30 transition-colors w-full"
                onClick={() => onPropertySelect(deal)}>
             
-            <div className="flex items-start justify-between mb-3">
+            <div className="flex items-start justify-between mb-4">
               <div className="flex-1 min-w-0 mr-4">
-                <h3 className="font-medium text-foreground mb-1 break-words">
+                <h3 className="font-medium text-foreground mb-2 break-words">
                   {deal.address}
                 </h3>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <MapPin className="w-3 h-3 shrink-0" />
+                  <MapPin className="w-4 h-4 shrink-0" />
                   <span>{deal.city}</span>
                 </div>
               </div>
-              <Badge className={getScoreColor(deal.lienScore)}>
+              <Badge className={`${getScoreColor(deal.lienScore)} shrink-0`}>
                 {deal.lienScore}
               </Badge>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-4">
               <div>
-                <span className="text-xs text-muted-foreground block">Price</span>
-                <p className="font-medium text-sm">{deal.price}</p>
+                <span className="text-sm text-muted-foreground block mb-1">Price</span>
+                <p className="font-semibold text-foreground">{deal.price}</p>
               </div>
               <div>
-                <span className="text-xs text-muted-foreground block">Cap Rate</span>
-                <p className="font-medium text-sm text-success">{deal.capRate}%</p>
+                <span className="text-sm text-muted-foreground block mb-1">Cap Rate</span>
+                <p className="font-semibold text-success">{deal.capRate}%</p>
               </div>
               <div>
-                <span className="text-xs text-muted-foreground block">Upside</span>
-                <p className="font-medium text-sm text-gold">{deal.upside}</p>
+                <span className="text-sm text-muted-foreground block mb-1">Upside</span>
+                <p className="font-semibold text-gold">{deal.upside}</p>
               </div>
               <div>
-                <span className="text-xs text-muted-foreground block">Type</span>
-                <Badge variant="outline" className="text-xs">{deal.strategy}</Badge>
+                <span className="text-sm text-muted-foreground block mb-1">Est. Rent</span>
+                <p className="font-semibold text-ice">{deal.rentEstimate}</p>
               </div>
             </div>
             
-            <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center justify-between mb-4">
+              <Badge variant="outline" className="text-sm px-3 py-1">
+                {deal.strategy}
+              </Badge>
               <span className={`text-sm font-medium ${getPredictionColor(deal.prediction)}`}>
                 {deal.prediction}
               </span>
-              <span className="text-xs text-muted-foreground">
-                Est. Rent: {deal.rentEstimate}
-              </span>
             </div>
             
-            <p className="text-sm text-muted-foreground mb-3 break-words leading-relaxed">
+            <p className="text-sm text-muted-foreground mb-4 break-words leading-relaxed">
               {deal.aiSummary}
             </p>
             
-            <div className="flex justify-end gap-2">
-              <Button size="sm" variant="ghost" className="h-8 px-3">
-                <Eye className="w-4 h-4 mr-1" />
-                View
+            <div className="flex justify-end gap-3">
+              <Button size="sm" variant="outline" className="px-4">
+                <Eye className="w-4 h-4 mr-2" />
+                View Details
               </Button>
-              <Button size="sm" variant="ghost" className="h-8 px-3">
-                <Star className="w-4 h-4 mr-1" />
-                Save
+              <Button size="sm" variant="default" className="px-4">
+                <Star className="w-4 h-4 mr-2" />
+                Save Deal
               </Button>
             </div>
           </div>
