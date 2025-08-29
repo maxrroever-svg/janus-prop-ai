@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Brain } from "lucide-react";
+
 
 export const ClosingSection = () => {
   return (
@@ -76,7 +76,7 @@ export const ClosingSection = () => {
               viewport={{ once: true }}
               className="w-20 h-20 bg-primary rounded-xl flex items-center justify-center relative z-10"
             >
-              <Brain className="w-10 h-10 text-primary-foreground" />
+              <span className="font-display text-lg text-primary-foreground font-bold">JA</span>
             </motion.div>
           </div>
         </motion.div>

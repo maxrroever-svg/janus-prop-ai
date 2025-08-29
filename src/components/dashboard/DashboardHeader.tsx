@@ -1,4 +1,4 @@
-import { Brain, Settings, User } from "lucide-react";
+import { Settings, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -21,9 +21,8 @@ export function DashboardHeader() {
         <SidebarTrigger />
         <button 
           onClick={() => navigate('/')} 
-          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+          className="hover:opacity-80 transition-opacity"
         >
-          <Brain className="w-6 h-6 text-success" />
           <span className="font-display text-xl text-foreground">Janus AI</span>
         </button>
       </div>

@@ -9,7 +9,7 @@ import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { 
-  Brain, 
+   
   TrendingUp, 
   AlertTriangle, 
   DollarSign, 
@@ -64,7 +64,6 @@ export function SmartFilters() {
             className="w-full justify-between p-0 h-auto hover:bg-transparent"
           >
             <div className="flex items-center gap-2">
-              <Brain className="w-4 h-4 text-ice" />
               <span className="font-medium text-foreground">Janus AI Recommendations</span>
             </div>
             <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${expandedSections.ai ? 'rotate-180' : ''}`} />

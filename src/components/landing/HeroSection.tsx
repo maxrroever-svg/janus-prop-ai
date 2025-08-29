@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Brain, TrendingUp, Target } from "lucide-react";
+import { TrendingUp, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
@@ -43,8 +43,7 @@ export const HeroSection = () => {
             transition={{ duration: 0.4, delay: 0.2 }}
             className="mb-12"
           >
-            <div className="inline-flex items-center gap-3 mb-8">
-              <Brain className="w-8 h-8 text-success" />
+            <div className="inline-flex items-center justify-center mb-8">
               <span className="font-display text-2xl text-foreground">Janus AI</span>
             </div>
           </motion.div>
