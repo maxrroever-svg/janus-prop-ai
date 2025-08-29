@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DealMap } from "./DealMap";
 import { ExplainPanel } from "./ExplainPanel";
 import { CommandBar } from "./CommandBar";
-import { SimplifiedDealTable } from "./SimplifiedDealTable";
+import { DealWorkflow } from "./DealWorkflow";
 
 export function DealCanvas() {
   const [selectedDeal, setSelectedDeal] = useState<any>(null);
@@ -40,7 +40,7 @@ export function DealCanvas() {
                     : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                 }`}
               >
-                Deal Table
+                Deal Workflow
               </button>
               <button 
                 onClick={() => setView('map')} 
@@ -57,13 +57,13 @@ export function DealCanvas() {
           
           {/* Content Area */}
           <div className="flex-1 overflow-auto">
-            <div className="p-6">
-              {view === 'deals' ? (
-                <SimplifiedDealTable onPropertySelect={handlePropertySelect} />
-              ) : (
+            {view === 'deals' ? (
+              <DealWorkflow onPropertySelect={handlePropertySelect} />
+            ) : (
+              <div className="p-6">
                 <DealMap onDealSelect={setSelectedDeal} />
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
         
