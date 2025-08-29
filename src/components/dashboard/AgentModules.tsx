@@ -14,79 +14,114 @@ import {
   Play,
   Pause,
   FileText,
-  Clock
+  Clock,
+  DollarSign,
+  MessageSquare
 } from "lucide-react";
 
 const agents = [
   {
-    name: "Data Sourcing Agent",
-    description: "Monitors multiple listing services and county records",
+    name: "Nexus (Data Ingestion)",
+    description: "Multi-source data aggregation & processing",
     status: "running",
     lastUpdate: "2m ago",
     stats: "4,231 properties scanned",
     icon: Database,
     details: [
-      "Connected to 12 MLS systems",
-      "Real-time courthouse monitoring",
-      "Property tax lien detection",
+      "MLS integration and monitoring",
+      "ATTOM data synchronization", 
+      "County records processing",
+      "Real-time data validation"
     ]
   },
   {
-    name: "Enrichment Agent", 
-    description: "Augments property data with market intelligence",
+    name: "Orion (Market Scout)", 
+    description: "Foreclosure & distress monitoring, market scanning",
     status: "running",
     lastUpdate: "5m ago",
-    stats: "156 properties enriched",
+    stats: "156 opportunities identified",
     icon: Sparkles,
     details: [
-      "Rental comps analysis",
-      "Neighborhood scoring",
-      "Investment potential assessment",
+      "Foreclosure tracking alerts",
+      "Tax lien monitoring",
+      "Market distress signals",
+      "Opportunity prioritization"
     ]
   },
   {
-    name: "Underwriting Agent",
-    description: "Performs financial analysis and risk assessment",
+    name: "Osiris (Underwriter)",
+    description: "Financial analysis, comps, ARV, rehab estimates",
     status: "idle",
     lastUpdate: "15m ago", 
     stats: "89 deals analyzed",
     icon: Calculator,
     details: [
-      "Cap rate calculations",
-      "Cash flow projections",
-      "Risk factor analysis",
+      "Comp analysis and validation",
+      "ARV calculations", 
+      "Rehab cost estimates",
+      "Cash flow projections"
     ]
   },
   {
-    name: "Strategy Agent",
-    description: "Identifies optimal investment strategies",
+    name: "Eden (AI Coordinator)",
+    description: "Multi-agent orchestration & decision coordination",
     status: "running",
     lastUpdate: "1m ago",
-    stats: "23 strategies matched",
+    stats: "23 coordinated decisions",
     icon: Target,
     details: [
-      "Buy-and-hold analysis",
-      "BRRRR opportunities",
-      "Flip potential scoring",
+      "Agent coordination protocols",
+      "Strategy optimization",
+      "Risk assessment synthesis",
+      "Priority ranking algorithms"
     ]
   },
   {
-    name: "Portfolio Agent",
-    description: "Manages portfolio optimization and diversification",
+    name: "Atelius (Legal)",
+    description: "Title research, liens, zoning, legal compliance",
     status: "idle",
     lastUpdate: "32m ago",
-    stats: "12 portfolios tracked",
+    stats: "12 legal reviews completed",
     icon: Briefcase,
     details: [
-      "Geographic diversification",
-      "Asset class balance",  
-      "Risk-return optimization",
+      "Title verification processes",
+      "Lien analysis and detection",  
+      "Zoning compliance checks",
+      "Legal risk assessment"
     ]
   },
+  {
+    name: "Celestia (Capital)",
+    description: "DSCR analysis, lender matching, rate optimization",
+    status: "idle",
+    lastUpdate: "45m ago",
+    stats: "8 financing scenarios analyzed",
+    icon: DollarSign,
+    details: [
+      "DSCR calculations",
+      "Lender matching algorithms",
+      "Rate analysis and optimization",
+      "Financing structure recommendations"
+    ]
+  },
+  {
+    name: "Valyria (Outreach)",
+    description: "Owner contact, outreach automation, deal coordination",
+    status: "running",
+    lastUpdate: "8m ago",
+    stats: "14 active conversations",
+    icon: MessageSquare,
+    details: [
+      "Owner identification research",
+      "Contact information sourcing",
+      "Outreach template generation",
+      "Communication tracking"
+    ]
+  }
 ];
 
 export function AgentModules() {
-  const [expandedAgents, setExpandedAgents] = useState<string[]>(["Data Sourcing Agent"]);
+  const [expandedAgents, setExpandedAgents] = useState<string[]>(["Nexus (Data Ingestion)"]);
 
   const toggleAgent = (agentName: string) => {
     setExpandedAgents(prev => 

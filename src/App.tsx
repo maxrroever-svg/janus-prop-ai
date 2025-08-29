@@ -6,6 +6,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Deals from "./pages/dashboard/Deals";
+import Portfolio from "./pages/dashboard/Portfolio";
+import Outreach from "./pages/dashboard/Outreach";
+import ICMemos from "./pages/dashboard/ICMemos";
+import Agents from "./pages/dashboard/Agents";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +24,10 @@ const App = () => (
             <Route path="/" element={<Landing />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/deals" element={<Deals />} />
+            <Route path="/dashboard/portfolio" element={<Portfolio />} />
+            <Route path="/dashboard/outreach" element={<Outreach />} />
+            <Route path="/dashboard/memos" element={<ICMemos />} />
+            <Route path="/dashboard/agents" element={<Agents />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
