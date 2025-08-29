@@ -111,69 +111,70 @@ export function SimplifiedDealTable({ onPropertySelect }: SimplifiedDealTablePro
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+      <div className="space-y-4">
         {filteredDeals.map((deal) => (
-          <Card key={deal.id} className="institutional-card cursor-pointer hover:border-primary/30 transition-colors"
-                onClick={() => onPropertySelect(deal)}>
-            <CardHeader className="pb-3">
-              <div className="flex items-start justify-between">
-                <div className="flex-1 min-w-0">
-                  <CardTitle className="text-base font-medium mb-1 truncate">
-                    {deal.address}
-                  </CardTitle>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <MapPin className="w-3 h-3" />
-                    <span>{deal.city}</span>
-                  </div>
-                </div>
-                <Badge className={getScoreColor(deal.lienScore)}>
-                  {deal.lienScore}
-                </Badge>
-              </div>
-            </CardHeader>
+          <div key={deal.id} 
+               className="institutional-card p-4 cursor-pointer hover:border-primary/30 transition-colors"
+               onClick={() => onPropertySelect(deal)}>
             
-            <CardContent className="space-y-3">
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-muted-foreground">Price</span>
-                  <p className="font-medium">{deal.price}</p>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Cap Rate</span>
-                  <p className="font-medium text-success">{deal.capRate}%</p>
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <Badge variant="outline" className="text-xs">{deal.strategy}</Badge>
-                  <span className={`text-sm ${getPredictionColor(deal.prediction)}`}>
-                    {deal.prediction}
-                  </span>
-                </div>
-                
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {deal.aiSummary}
-                </p>
-              </div>
-              
-              <div className="flex items-center justify-between pt-2">
-                <div>
-                  <span className="text-xs text-muted-foreground">Upside</span>
-                  <p className="font-semibold text-gold">{deal.upside}</p>
-                </div>
-                
-                <div className="flex gap-1">
-                  <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
-                    <Eye className="w-4 h-4" />
-                  </Button>
-                  <Button size="sm" variant="ghost" className="h-8 w-8 p-0">
-                    <Star className="w-4 h-4" />
-                  </Button>
+            <div className="flex items-start justify-between mb-3">
+              <div className="flex-1 min-w-0 mr-4">
+                <h3 className="font-medium text-foreground mb-1 break-words">
+                  {deal.address}
+                </h3>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <MapPin className="w-3 h-3 shrink-0" />
+                  <span>{deal.city}</span>
                 </div>
               </div>
-            </CardContent>
-          </Card>
+              <Badge className={getScoreColor(deal.lienScore)}>
+                {deal.lienScore}
+              </Badge>
+            </div>
+
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-3">
+              <div>
+                <span className="text-xs text-muted-foreground block">Price</span>
+                <p className="font-medium text-sm">{deal.price}</p>
+              </div>
+              <div>
+                <span className="text-xs text-muted-foreground block">Cap Rate</span>
+                <p className="font-medium text-sm text-success">{deal.capRate}%</p>
+              </div>
+              <div>
+                <span className="text-xs text-muted-foreground block">Upside</span>
+                <p className="font-medium text-sm text-gold">{deal.upside}</p>
+              </div>
+              <div>
+                <span className="text-xs text-muted-foreground block">Type</span>
+                <Badge variant="outline" className="text-xs">{deal.strategy}</Badge>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-between mb-3">
+              <span className={`text-sm font-medium ${getPredictionColor(deal.prediction)}`}>
+                {deal.prediction}
+              </span>
+              <span className="text-xs text-muted-foreground">
+                Est. Rent: {deal.rentEstimate}
+              </span>
+            </div>
+            
+            <p className="text-sm text-muted-foreground mb-3 break-words leading-relaxed">
+              {deal.aiSummary}
+            </p>
+            
+            <div className="flex justify-end gap-2">
+              <Button size="sm" variant="ghost" className="h-8 px-3">
+                <Eye className="w-4 h-4 mr-1" />
+                View
+              </Button>
+              <Button size="sm" variant="ghost" className="h-8 px-3">
+                <Star className="w-4 h-4 mr-1" />
+                Save
+              </Button>
+            </div>
+          </div>
         ))}
       </div>
     </div>
