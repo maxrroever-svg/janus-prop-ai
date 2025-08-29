@@ -33,14 +33,6 @@ export function Header() {
           Add New Property
         </Button>
         
-        <Button 
-          variant="outline" 
-          size="sm"
-          className="border-primary/30 text-primary hover:bg-primary/10"
-        >
-          <MessageSquare className="w-4 h-4 mr-2" />
-          Ask Janus
-        </Button>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

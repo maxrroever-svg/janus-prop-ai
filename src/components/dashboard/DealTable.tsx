@@ -179,7 +179,7 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="font-display text-2xl font-normal">Live Deal Pipeline</h2>
+          <h2 className="font-display text-2xl font-normal">Deal Pipeline</h2>
           <p className="text-muted-foreground mt-1">
             {filteredDeals.length} opportunities • Updated 3 minutes ago
           </p>
@@ -203,137 +203,126 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
         </div>
       </div>
 
-      <Card className="data-card">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <TrendingUp className="w-5 h-5 text-primary" />
-            Investment Opportunities
-          </CardTitle>
-        </CardHeader>
+      {/* Quick Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <Card className="institutional-card">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <TrendingUp className="w-5 h-5 text-success" />
+              <div>
+                <p className="text-sm text-muted-foreground">Strong Buys</p>
+                <p className="text-xl font-semibold text-foreground">3</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
         
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <Table>
-              <TableHeader>
-                <TableRow className="border-b border-border/30">
-                  <TableHead className="w-[280px] min-w-[280px]">Property</TableHead>
-                  <TableHead className="w-[100px] text-center">Janus Score</TableHead>
-                  <TableHead className="w-[100px] text-center">Cap Rate</TableHead>
-                  <TableHead className="w-[120px] text-center">Prediction</TableHead>
-                  <TableHead className="w-[100px] text-center">Upside</TableHead>
-                  <TableHead className="w-[300px] min-w-[300px]">AI Agent Analysis</TableHead>
-                  <TableHead className="w-[120px] text-center">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              
-              <TableBody>
-                {filteredDeals.map((deal) => (
-                  <TableRow 
-                    key={deal.id} 
-                    className="deal-row cursor-pointer"
-                    onClick={() => onPropertySelect(deal)}
+        <Card className="institutional-card">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <DollarSign className="w-5 h-5 text-gold" />
+              <div>
+                <p className="text-sm text-muted-foreground">Avg Cap Rate</p>
+                <p className="text-xl font-semibold text-foreground">15.2%</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="institutional-card">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <MapPin className="w-5 h-5 text-ice" />
+              <div>
+                <p className="text-sm text-muted-foreground">Markets</p>
+                <p className="text-xl font-semibold text-foreground">3</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card className="institutional-card">
+          <CardContent className="p-4">
+            <div className="flex items-center gap-3">
+              <TrendingUp className="w-5 h-5 text-primary" />
+              <div>
+                <p className="text-sm text-muted-foreground">Total Upside</p>
+                <p className="text-xl font-semibold text-foreground">$810K</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Simplified Deal Cards */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
+        {filteredDeals.map((deal) => (
+          <Card key={deal.id} className="institutional-card cursor-pointer hover:border-primary/30 transition-colors"
+                onClick={() => onPropertySelect(deal)}>
+            <CardContent className="p-4">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-medium text-foreground mb-1 truncate">{deal.address}</h3>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <DollarSign className="w-3 h-3" />
+                    <span>{deal.price}</span>
+                  </div>
+                </div>
+                <Badge className={`${getScoreColor(deal.lienScore)} text-xs`}>
+                  {deal.lienScore}
+                </Badge>
+              </div>
+
+              <div className="space-y-2 mb-3">
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Cap Rate</span>
+                  <span className="font-medium text-success">{deal.capRate}%</span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Upside</span>
+                  <span className="font-medium text-gold">{deal.upside}</span>
+                </div>
+              </div>
+
+              <div className="space-y-2 mb-3">
+                <Badge variant="outline" className="text-xs">{deal.strategy}</Badge>
+                <p className="text-sm text-muted-foreground line-clamp-2">
+                  {deal.aiSummary}
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className={`text-sm font-medium ${getPredictionColor(deal.prediction)}`}>
+                  {deal.prediction}
+                </div>
+                
+                <div className="flex gap-1">
+                  <Button 
+                    size="sm" 
+                    variant="ghost"
+                    className="h-8 w-8 p-0"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onPropertySelect(deal);
+                    }}
                   >
-                    <TableCell className="w-[280px] min-w-[280px]">
-                      <div className="space-y-1">
-                        <div className="font-medium text-sm leading-tight break-words">
-                          {deal.address}
-                        </div>
-                        <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                          <span className="flex items-center gap-1 whitespace-nowrap">
-                            <DollarSign className="w-3 h-3 flex-shrink-0" />
-                            {deal.price}
-                          </span>
-                          <span className="flex items-center gap-1 whitespace-nowrap">
-                            <MapPin className="w-3 h-3 flex-shrink-0" />
-                            {deal.rentEstimate}
-                          </span>
-                        </div>
-                      </div>
-                    </TableCell>
-                    
-                    <TableCell className="w-[100px] text-center">
-                      <Badge className={`${getScoreColor(deal.lienScore)} font-mono text-xs`}>
-                        {deal.lienScore}
-                      </Badge>
-                    </TableCell>
-                    
-                    <TableCell className="w-[100px] text-center">
-                      <span className="font-mono text-success font-medium text-sm">
-                        {deal.capRate}%
-                      </span>
-                    </TableCell>
-                    
-                    <TableCell className="w-[120px] text-center">
-                      <div className={`text-sm ${getPredictionColor(deal.prediction)}`}>
-                        {deal.prediction}
-                      </div>
-                    </TableCell>
-                    
-                    <TableCell className="w-[100px] text-center">
-                      <div className="text-center">
-                        <div className="font-semibold text-gold text-sm">
-                          {deal.upside}
-                        </div>
-                        <div className="text-xs text-muted-foreground">
-                          {deal.upsidePercent}%
-                        </div>
-                      </div>
-                    </TableCell>
-                    
-                    <TableCell className="w-[300px] min-w-[300px]">
-                      <div className="space-y-1">
-                        <Badge 
-                          variant="outline" 
-                          className="bg-primary/10 text-primary border-primary/30 text-xs"
-                        >
-                          {deal.strategy}
-                        </Badge>
-                        <div className="text-sm text-muted-foreground leading-relaxed break-words">
-                          {deal.aiSummary}
-                        </div>
-                      </div>
-                    </TableCell>
-                    
-                    <TableCell className="w-[120px]">
-                      <div className="flex items-center justify-center gap-1">
-                        <Button 
-                          size="sm" 
-                          variant="ghost"
-                          className="h-8 w-8 p-0"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onPropertySelect(deal);
-                          }}
-                        >
-                          <Eye className="w-4 h-4" />
-                        </Button>
-                        
-                        <Button 
-                          size="sm" 
-                          variant="ghost"
-                          className="h-8 w-8 p-0"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Star className="w-4 h-4" />
-                        </Button>
-                        
-                        <Button 
-                          size="sm" 
-                          variant="ghost"
-                          className="h-8 w-8 p-0"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Archive className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </CardContent>
-      </Card>
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                  
+                  <Button 
+                    size="sm" 
+                    variant="ghost"
+                    className="h-8 w-8 p-0"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <Star className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { MapListView } from "./MapListView";
 import { PropertyPreview } from "./PropertyPreview";
 import { PropertyDetailView } from "./PropertyDetailView";
 import { DecisionHistory } from "./DecisionHistory";
-import { AIAgentChat } from "./AIAgentChat";
+
 import { AgentModules } from "./AgentModules";
 
 export function MainDashboard() {
@@ -50,8 +50,6 @@ export function MainDashboard() {
           </div>
         </div>
 
-        {/* AI Agent Chat Interface */}
-        <AIAgentChat />
 
         {/* Property Detail Modal */}
         <PropertyDetailView
