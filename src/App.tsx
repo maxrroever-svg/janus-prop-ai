@@ -10,6 +10,8 @@ import Portfolio from "./pages/dashboard/Portfolio";
 import Outreach from "./pages/dashboard/Outreach";
 import ICMemos from "./pages/dashboard/ICMemos";
 import Agents from "./pages/dashboard/Agents";
+import Settings from "./pages/dashboard/Settings";
+import AuditLog from "./pages/dashboard/AuditLog";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +30,8 @@ const App = () => (
             <Route path="/dashboard/outreach" element={<Outreach />} />
             <Route path="/dashboard/memos" element={<ICMemos />} />
             <Route path="/dashboard/agents" element={<Agents />} />
+            <Route path="/dashboard/settings" element={<Settings />} />
+            <Route path="/dashboard/audit" element={<AuditLog />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
