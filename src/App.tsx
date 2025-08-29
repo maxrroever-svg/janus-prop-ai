@@ -9,7 +9,6 @@ import Deals from "./pages/dashboard/Deals";
 import Portfolio from "./pages/dashboard/Portfolio";
 import Outreach from "./pages/dashboard/Outreach";
 import ICMemos from "./pages/dashboard/ICMemos";
-import Agents from "./pages/dashboard/Agents";
 import Settings from "./pages/dashboard/Settings";
 import AuditLog from "./pages/dashboard/AuditLog";
 import Assistant from "./pages/dashboard/Assistant";
