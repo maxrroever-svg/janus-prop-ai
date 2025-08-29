@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { AIAssistantSection } from "@/components/dashboard/AIAssistantSection";
+
 import { 
   Building, 
   Star, 
@@ -294,19 +294,6 @@ const Portfolio = () => {
                 </TabsContent>
               </Tabs>
 
-              {/* AI Assistant Section */}
-              <div className="mt-12">
-                <div className="mb-6">
-                  <h2 className="font-display text-2xl text-foreground mb-2">AI Assistant</h2>
-                  <p className="text-muted-foreground">
-                    Get AI-powered insights and analysis for your real estate portfolio
-                  </p>
-                </div>
-                
-                <div className="max-w-4xl">
-                  <AIAssistantSection />
-                </div>
-              </div>
             </div>
           </main>
         </div>

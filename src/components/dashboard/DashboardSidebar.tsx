@@ -28,6 +28,7 @@ const navigation = [
   { name: "IC Memos", href: "/dashboard/memos", icon: FileText },
   { name: "Outreach", href: "/dashboard/outreach", icon: MessageSquare },
   { name: "Portfolio", href: "/dashboard/portfolio", icon: BarChart3 },
+  { name: "AI Assistant", href: "/dashboard/assistant", icon: MessageSquare },
 ];
 
 const bottomNavigation = [
