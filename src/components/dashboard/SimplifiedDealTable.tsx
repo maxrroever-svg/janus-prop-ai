@@ -1,10 +1,6 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import { 
-  Search, 
-  Filter, 
   Eye, 
   Star, 
   MapPin
@@ -57,7 +53,6 @@ interface SimplifiedDealTableProps {
 }
 
 export function SimplifiedDealTable({ onPropertySelect }: SimplifiedDealTableProps) {
-  const [searchTerm, setSearchTerm] = useState("");
 
   const getScoreColor = (score: number) => {
     if (score >= 85) return "bg-success/10 text-success border-success/20";
@@ -75,38 +70,16 @@ export function SimplifiedDealTable({ onPropertySelect }: SimplifiedDealTablePro
     }
   };
 
-  const filteredDeals = mockDeals.filter(deal =>
-    deal.address.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    deal.strategy.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredDeals = mockDeals;
 
   return (
     <div className="w-full">
-      {/* Header - Fixed Width */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-        <div className="min-w-0">
-          <h2 className="font-display text-xl font-normal text-foreground">Active Opportunities</h2>
-          <p className="text-muted-foreground text-sm">
-            {filteredDeals.length} high-priority deals • Updated 3 min ago
-          </p>
-        </div>
-        
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-            <Input 
-              placeholder="Search..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 w-48 bg-secondary/20 border-border/50"
-            />
-          </div>
-          
-          <Button variant="outline" size="sm" className="shrink-0">
-            <Filter className="w-4 h-4 mr-2" />
-            Filter
-          </Button>
-        </div>
+      {/* Header */}
+      <div className="mb-6">
+        <h2 className="font-display text-xl font-normal text-foreground">Active Opportunities</h2>
+        <p className="text-muted-foreground text-sm">
+          {filteredDeals.length} high-priority deals • Updated 3 min ago
+        </p>
       </div>
 
       {/* Deals List - Full Width, No Horizontal Scroll */}

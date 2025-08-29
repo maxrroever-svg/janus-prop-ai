@@ -4,16 +4,12 @@ import { Header } from "@/components/layout/Header";
 import { SimplifiedDealTable } from "@/components/dashboard/SimplifiedDealTable";
 import { DealMap } from "@/components/dashboard/DealMap";
 import { ExplainPanel } from "@/components/dashboard/ExplainPanel";
-import { CommandBar } from "@/components/dashboard/CommandBar";
+import { AgentInsights } from "@/components/dashboard/AgentInsights";
 import { useState } from "react";
 
 const Deals = () => {
   const [selectedDeal, setSelectedDeal] = useState<any>(null);
   const [view, setView] = useState<'deals' | 'map'>('deals');
-
-  const handleCommand = async (command: string) => {
-    console.log('Processing command:', command);
-  };
 
   const handlePropertySelect = (property: any) => {
     setSelectedDeal(property);
@@ -28,9 +24,9 @@ const Deals = () => {
           <main className="flex-1 flex overflow-hidden">
             {/* Left Panel - Main Content */}
             <div className="flex-1 flex flex-col overflow-hidden">
-              {/* Command Bar */}
-              <div className="shrink-0 border-b border-border">
-                <CommandBar onCommand={handleCommand} />
+              {/* Agent Insights Section */}
+              <div className="shrink-0 p-6 border-b border-border bg-secondary/20">
+                <AgentInsights />
               </div>
               
               {/* View Toggle */}
