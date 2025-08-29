@@ -10,16 +10,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { useNavigate } from "react-router-dom";
 
 export function DashboardHeader() {
+  const navigate = useNavigate();
+
   return (
     <header className="h-16 border-b border-border bg-background flex items-center justify-between px-6">
       <div className="flex items-center gap-4">
         <SidebarTrigger />
-        <div className="flex items-center gap-3">
+        <button 
+          onClick={() => navigate('/')} 
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+        >
           <Brain className="w-6 h-6 text-success" />
           <span className="font-display text-xl text-foreground">Janus AI</span>
-        </div>
+        </button>
       </div>
 
       <div className="flex items-center gap-4">
