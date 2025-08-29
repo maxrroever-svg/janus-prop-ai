@@ -25,59 +25,116 @@ import {
 const mockDeals = [
   {
     id: 1,
-    address: "1247 Oak Street, Austin, TX",
-    lienScore: 94,
-    capRate: 12.4,
-    strategy: "Buy-to-Hold",
-    aiSummary: "Prime location with strong rental demand. Tax lien provides 35% discount to market value.",
+    address: "1247 Atlantic Avenue, Brooklyn NY",
+    lienScore: 87,
+    capRate: 14.2,
+    strategy: "Multi-Family",
+    aiSummary: "Eden: High-confidence opportunity identified by Orion. Osiris projects 35% upside post-rehab.",
+    prediction: "Strong Buy",
+    upside: "$200k",
+    upsidePercent: 31,
     risk: "low",
-    price: "$185,000",
-    rentEstimate: "$2,100/mo"
+    price: "$650,000",
+    rentEstimate: "$6,500/mo"
   },
   {
     id: 2,
-    address: "892 Pine Avenue, Houston, TX", 
-    lienScore: 87,
-    capRate: 10.8,
-    strategy: "BRRRR",
-    aiSummary: "Distressed property in gentrifying neighborhood. High renovation potential.",
+    address: "156 MacDonough Street, Brooklyn NY", 
+    lienScore: 82,
+    capRate: 12.8,
+    strategy: "Single Family",
+    aiSummary: "Atelius flagged title issue. Valyria suggests 15% price reduction negotiation strategy.",
+    prediction: "Buy w/ Conditions",
+    upside: "$160k",
+    upsidePercent: 38,
     risk: "medium",
-    price: "$145,000",
-    rentEstimate: "$1,800/mo"
+    price: "$420,000",
+    rentEstimate: "$4,300/mo"
   },
   {
     id: 3,
-    address: "3456 Elm Drive, Dallas, TX",
-    lienScore: 76,
-    capRate: 8.9,
-    strategy: "Cap Rate Arbitrage",
-    aiSummary: "Stable cash flow opportunity in established residential area.",
+    address: "91-15 Corona Avenue, Queens NY",
+    lienScore: 79,
+    capRate: 13.5,
+    strategy: "Multi-Family",
+    aiSummary: "Orion detected foreclosure filing. Osiris confirms 22% below-market pricing opportunity.",
+    prediction: "Urgent Buy",
+    upside: "$140k",
+    upsidePercent: 24,
     risk: "low", 
-    price: "$225,000",
-    rentEstimate: "$2,400/mo"
+    price: "$580,000",
+    rentEstimate: "$5,600/mo"
   },
   {
     id: 4,
-    address: "789 Maple Court, San Antonio, TX",
-    lienScore: 91,
-    capRate: 11.2,
-    strategy: "Buy-to-Hold",
-    aiSummary: "Recently renovated duplex with dual income streams. Owner motivated.",
+    address: "1455 Webster Avenue, Bronx NY",
+    lienScore: 75,
+    capRate: 15.1,
+    strategy: "Multi-Family",
+    aiSummary: "Eden coordinated analysis shows strong cash flow. Celestia confirms favorable financing terms.",
+    prediction: "Buy",
+    upside: "$135k",
+    upsidePercent: 35,
     risk: "low",
-    price: "$165,000", 
-    rentEstimate: "$1,950/mo"
+    price: "$385,000", 
+    rentEstimate: "$4,000/mo"
   },
   {
     id: 5,
-    address: "555 Cedar Lane, Fort Worth, TX",
-    lienScore: 68,
-    capRate: 7.3,
-    strategy: "Long-term Hold",
-    aiSummary: "Growing suburban market with planned infrastructure improvements.",
-    risk: "medium",
-    price: "$198,000",
-    rentEstimate: "$1,750/mo"
+    address: "1567 Calle San Sebastián, San Juan PR",
+    lienScore: 89,
+    capRate: 18.7,
+    strategy: "Single Family",
+    aiSummary: "Exceptional ROI in emerging market. Valyria identified motivated seller with timeline pressure.",
+    prediction: "Strong Buy",
+    upside: "$100k",
+    upsidePercent: 54,
+    risk: "low",
+    price: "$185,000",
+    rentEstimate: "$2,700/mo"
   },
+  {
+    id: 6,
+    address: "234 Avenida Ashford, San Juan PR",
+    lienScore: 84,
+    capRate: 16.9,
+    strategy: "Multi-Family",
+    aiSummary: "Osiris projects strong appreciation in luxury corridor. Below-market rent upside identified.",
+    prediction: "Buy",
+    upside: "$105k",
+    upsidePercent: 33,
+    risk: "medium",
+    price: "$320,000",
+    rentEstimate: "$4,500/mo"
+  },
+  {
+    id: 7,
+    address: "789 Calle Principal, Carolina PR",
+    lienScore: 77,
+    capRate: 17.2,
+    strategy: "Single Family",
+    aiSummary: "Orion found building permit opportunity. Eden suggests minor rehab for maximum value creation.",
+    prediction: "Buy",
+    upside: "$70k",
+    upsidePercent: 42,
+    risk: "low",
+    price: "$165,000",
+    rentEstimate: "$2,300/mo"
+  },
+  {
+    id: 8,
+    address: "456 Calle Degetau, Bayamón PR",
+    lienScore: 81,
+    capRate: 19.4,
+    strategy: "Multi-Family",
+    aiSummary: "Highest ROI in portfolio. Celestia confirms 95% LTV available. Valyria drafted initial offer.",
+    prediction: "Strong Buy",
+    upside: "$80k",
+    upsidePercent: 41,
+    risk: "low",
+    price: "$195,000",
+    rentEstimate: "$3,100/mo"
+  }
 ];
 
 interface DealTableProps {
@@ -101,6 +158,16 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
       high: "bg-destructive/20 text-destructive border-destructive/30"
     };
     return variants[risk as keyof typeof variants] || variants.medium;
+  };
+
+  const getPredictionColor = (prediction: string) => {
+    switch (prediction) {
+      case "Strong Buy": return "text-success font-semibold";
+      case "Buy": return "text-ice font-medium";
+      case "Buy w/ Conditions": return "text-warning font-medium";
+      case "Urgent Buy": return "text-gold font-semibold";
+      default: return "text-muted-foreground";
+    }
   };
 
   const filteredDeals = mockDeals.filter(deal =>
@@ -150,10 +217,11 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
               <TableHeader>
                 <TableRow className="border-b border-border/30">
                   <TableHead className="w-[280px] min-w-[280px]">Property</TableHead>
-                  <TableHead className="w-[100px] text-center">Lien Score</TableHead>
+                  <TableHead className="w-[100px] text-center">Janus Score</TableHead>
                   <TableHead className="w-[100px] text-center">Cap Rate</TableHead>
-                  <TableHead className="w-[140px]">Strategy</TableHead>
-                  <TableHead className="w-[300px] min-w-[300px]">AI Summary</TableHead>
+                  <TableHead className="w-[120px] text-center">Prediction</TableHead>
+                  <TableHead className="w-[100px] text-center">Upside</TableHead>
+                  <TableHead className="w-[300px] min-w-[300px]">AI Agent Analysis</TableHead>
                   <TableHead className="w-[120px] text-center">Actions</TableHead>
                 </TableRow>
               </TableHeader>
@@ -195,18 +263,34 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
                       </span>
                     </TableCell>
                     
-                    <TableCell className="w-[140px]">
-                      <Badge 
-                        variant="outline" 
-                        className="bg-primary/10 text-primary border-primary/30 text-xs whitespace-nowrap"
-                      >
-                        {deal.strategy}
-                      </Badge>
+                    <TableCell className="w-[120px] text-center">
+                      <div className={`text-sm ${getPredictionColor(deal.prediction)}`}>
+                        {deal.prediction}
+                      </div>
+                    </TableCell>
+                    
+                    <TableCell className="w-[100px] text-center">
+                      <div className="text-center">
+                        <div className="font-semibold text-gold text-sm">
+                          {deal.upside}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {deal.upsidePercent}%
+                        </div>
+                      </div>
                     </TableCell>
                     
                     <TableCell className="w-[300px] min-w-[300px]">
-                      <div className="text-sm text-muted-foreground leading-relaxed break-words">
-                        {deal.aiSummary}
+                      <div className="space-y-1">
+                        <Badge 
+                          variant="outline" 
+                          className="bg-primary/10 text-primary border-primary/30 text-xs"
+                        >
+                          {deal.strategy}
+                        </Badge>
+                        <div className="text-sm text-muted-foreground leading-relaxed break-words">
+                          {deal.aiSummary}
+                        </div>
                       </div>
                     </TableCell>
                     

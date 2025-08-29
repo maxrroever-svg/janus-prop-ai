@@ -3,8 +3,9 @@ import { SmartFilters } from "./SmartFilters";
 import { MapListView } from "./MapListView";
 import { PropertyPreview } from "./PropertyPreview";
 import { PropertyDetailView } from "./PropertyDetailView";
-import { AgentActivityConsole } from "./AgentActivityConsole";
+import { DecisionHistory } from "./DecisionHistory";
 import { AIAgentChat } from "./AIAgentChat";
+import { AgentModules } from "./AgentModules";
 
 export function MainDashboard() {
   const [selectedProperty, setSelectedProperty] = useState<any>(null);
@@ -23,8 +24,15 @@ export function MainDashboard() {
   return (
     <section className="bg-background">
       <div className="h-screen flex">
-        {/* Left Panel - Smart Filters */}
-        <SmartFilters />
+        {/* Left Panel - Smart Filters & Agent Modules */}
+        <div className="w-80 flex flex-col">
+          <div className="flex-1">
+            <SmartFilters />
+          </div>
+          <div className="h-80 border-t border-border">
+            <AgentModules />
+          </div>
+        </div>
         
         {/* Center Panel - Map & List Toggle */}
         <MapListView 
@@ -32,11 +40,15 @@ export function MainDashboard() {
           onPropertyDetail={handlePropertyDetail}
         />
         
-        {/* Right Panel - Property Preview & AI Insight */}
-        <PropertyPreview property={selectedProperty} />
-        
-        {/* Floating Agent Activity Console */}
-        <AgentActivityConsole />
+        {/* Right Panel - Property Preview & Decision History */}
+        <div className="w-96 flex flex-col">
+          <div className="flex-1">
+            <PropertyPreview property={selectedProperty} />
+          </div>
+          <div className="h-80 border-t border-border">
+            <DecisionHistory />
+          </div>
+        </div>
 
         {/* AI Agent Chat Interface */}
         <AIAgentChat />
