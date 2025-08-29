@@ -132,8 +132,8 @@ export function DecisionHistory() {
                     </div>
                     
                     <div className="flex-1 min-w-0 space-y-2">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2 flex-wrap">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-2 flex-wrap min-w-0">
                           <Badge variant="outline" className="text-xs shrink-0">
                             {decision.actor}
                           </Badge>
@@ -146,26 +146,26 @@ export function DecisionHistory() {
                         </Badge>
                       </div>
                       
-                      <div>
-                        <p className="font-medium text-sm text-foreground mb-1 break-words">
+                      <div className="min-w-0">
+                        <p className="font-medium text-sm text-foreground mb-1 break-words line-clamp-2">
                           {decision.deal}
                         </p>
-                        <p className="text-sm text-muted-foreground leading-relaxed break-words overflow-hidden">
+                        <p className="text-sm text-muted-foreground leading-relaxed break-words line-clamp-3 overflow-hidden">
                           {decision.reasoning}
                         </p>
                       </div>
                       
-                      <div className="flex items-center justify-between gap-4">
-                        <div className="flex items-center gap-3 shrink-0">
-                          <span className="text-xs text-muted-foreground">
+                      <div className="flex items-center justify-between gap-2 min-w-0">
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-xs text-muted-foreground whitespace-nowrap">
                             Confidence:
                           </span>
-                          <span className={`text-xs font-medium ${getConfidenceColor(decision.confidence)}`}>
+                          <span className={`text-xs font-medium whitespace-nowrap ${getConfidenceColor(decision.confidence)}`}>
                             {decision.confidence}%
                           </span>
                         </div>
                         {decision.impact && (
-                          <span className="text-xs font-medium text-ice truncate">
+                          <span className="text-xs font-medium text-ice truncate max-w-[120px]">
                             {decision.impact}
                           </span>
                         )}

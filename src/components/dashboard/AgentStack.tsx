@@ -128,14 +128,14 @@ export function AgentStack({ runs }: AgentStackProps) {
                   <div className="mt-1">
                     <Icon className="w-5 h-5 text-primary" />
                   </div>
-                  <div className="flex-1 min-w-0">
+                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
-                      <h3 className="font-medium text-foreground">{agent.name}</h3>
-                      <Badge className={statusColors[agent.status as keyof typeof statusColors]}>
+                      <h3 className="font-medium text-foreground truncate pr-2">{agent.name}</h3>
+                      <Badge className={`${statusColors[agent.status as keyof typeof statusColors]} shrink-0`}>
                         {agent.status}
                       </Badge>
                     </div>
-                    <p className="text-xs text-muted-foreground mb-2">{agent.description}</p>
+                    <p className="text-xs text-muted-foreground mb-2 break-words line-clamp-2">{agent.description}</p>
                     
                     {agent.status === 'running' && (
                       <div className="space-y-1">
@@ -151,13 +151,13 @@ export function AgentStack({ runs }: AgentStackProps) {
                       <div className="space-y-2 mt-2">
                         <p className="text-xs font-medium text-foreground">Data Sources</p>
                         <div className="grid grid-cols-3 gap-1">
-                          <Badge className={`${dataStatusColors[agent.dataStatus.mls]} text-xs justify-center`}>
+                          <Badge className={`${dataStatusColors[agent.dataStatus.mls]} text-xs justify-center px-1 py-0.5 truncate`}>
                             MLS
                           </Badge>
-                          <Badge className={`${dataStatusColors[agent.dataStatus.attom]} text-xs justify-center`}>
+                          <Badge className={`${dataStatusColors[agent.dataStatus.attom]} text-xs justify-center px-1 py-0.5 truncate`}>
                             ATTOM
                           </Badge>
-                          <Badge className={`${dataStatusColors[agent.dataStatus.county]} text-xs justify-center`}>
+                          <Badge className={`${dataStatusColors[agent.dataStatus.county]} text-xs justify-center px-1 py-0.5 truncate`}>
                             County
                           </Badge>
                         </div>
@@ -173,7 +173,8 @@ export function AgentStack({ runs }: AgentStackProps) {
                       {agent.features.map((feature, idx) => (
                         <span 
                           key={idx}
-                          className="text-xs px-2 py-0.5 bg-secondary rounded border text-muted-foreground"
+                          className="text-xs px-2 py-0.5 bg-secondary rounded border text-muted-foreground break-words line-clamp-1"
+                          title={feature}
                         >
                           {feature}
                         </span>
