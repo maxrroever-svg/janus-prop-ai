@@ -129,13 +129,13 @@ export function AgentStack({ runs }: AgentStackProps) {
                     <Icon className="w-5 h-5 text-primary" />
                   </div>
                    <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-1">
-                      <h3 className="font-medium text-foreground truncate pr-2">{agent.name}</h3>
-                      <Badge className={`${statusColors[agent.status as keyof typeof statusColors]} shrink-0`}>
-                        {agent.status}
-                      </Badge>
-                    </div>
-                    <p className="text-xs text-muted-foreground mb-2 break-words line-clamp-2">{agent.description}</p>
+                     <div className="flex items-center justify-between mb-1">
+                       <h3 className="font-medium text-foreground break-words pr-2">{agent.name}</h3>
+                       <Badge className={`${statusColors[agent.status as keyof typeof statusColors]} shrink-0`}>
+                         {agent.status}
+                       </Badge>
+                     </div>
+                     <p className="text-xs text-muted-foreground mb-2 break-words leading-relaxed">{agent.description}</p>
                     
                     {agent.status === 'running' && (
                       <div className="space-y-1">
@@ -169,25 +169,25 @@ export function AgentStack({ runs }: AgentStackProps) {
                 {agent.features && (
                   <div className="space-y-1">
                     <p className="text-xs font-medium text-foreground">Capabilities</p>
-                    <div className="flex flex-wrap gap-1">
+                    <div className="grid grid-cols-2 gap-1">
                       {agent.features.map((feature, idx) => (
                         <span 
                           key={idx}
-                          className="text-xs px-2 py-0.5 bg-secondary rounded border text-muted-foreground break-words line-clamp-1"
+                          className="text-xs px-1.5 py-0.5 bg-secondary rounded border text-muted-foreground break-words text-center"
                           title={feature}
                         >
-                          {feature}
+                          {feature.length > 12 ? feature.slice(0, 12) + '...' : feature}
                         </span>
                       ))}
                     </div>
                   </div>
                 )}
                 
-                <div className="flex gap-2">
-                  <Button size="sm" variant="outline" className="text-xs h-7 flex-1 truncate">
-                    Configure
+                <div className="grid grid-cols-2 gap-2">
+                  <Button size="sm" variant="outline" className="text-xs h-7 min-w-0">
+                    Config
                   </Button>
-                  <Button size="sm" variant="ghost" className="text-xs h-7 flex-1 truncate">
+                  <Button size="sm" variant="ghost" className="text-xs h-7 min-w-0">
                     Logs
                   </Button>
                 </div>

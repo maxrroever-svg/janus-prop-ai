@@ -119,7 +119,7 @@ export function DecisionHistory() {
       </CardHeader>
       
       <CardContent className="p-0 pb-6">
-        <ScrollArea className="h-[600px] px-6">
+        <ScrollArea className="h-[calc(100vh-280px)] px-6">
           <div className="space-y-4">
             {decisions.map((decision, index) => {
               const Icon = getDecisionIcon(decision.type);
@@ -147,10 +147,10 @@ export function DecisionHistory() {
                       </div>
                       
                       <div className="min-w-0">
-                        <p className="font-medium text-sm text-foreground mb-1 truncate">
+                        <p className="font-medium text-sm text-foreground mb-1 break-words">
                           {decision.deal}
                         </p>
-                        <p className="text-sm text-muted-foreground leading-relaxed break-words line-clamp-2">
+                        <p className="text-sm text-muted-foreground leading-relaxed break-words whitespace-normal hyphens-auto">
                           {decision.reasoning}
                         </p>
                       </div>
@@ -165,7 +165,7 @@ export function DecisionHistory() {
                           </span>
                         </div>
                         {decision.impact && (
-                          <span className="text-xs font-medium text-ice truncate">
+                          <span className="text-xs font-medium text-ice break-words">
                             {decision.impact}
                           </span>
                         )}
