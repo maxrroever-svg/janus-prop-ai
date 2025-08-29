@@ -127,36 +127,36 @@ export function DecisionHistory() {
               return (
                 <div key={decision.id} className="space-y-3">
                   <div className="flex items-start gap-3">
-                    <div className="mt-1">
+                    <div className="mt-1 shrink-0">
                       <Icon className="w-4 h-4 text-primary" />
                     </div>
                     
                     <div className="flex-1 min-w-0 space-y-2">
                       <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <Badge variant="outline" className="text-xs">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <Badge variant="outline" className="text-xs shrink-0">
                             {decision.actor}
                           </Badge>
-                          <span className="text-xs text-muted-foreground">
+                          <span className="text-xs text-muted-foreground whitespace-nowrap">
                             {decision.timestamp}
                           </span>
                         </div>
-                        <Badge className={getOutcomeColor(decision.outcome)}>
+                        <Badge className={`${getOutcomeColor(decision.outcome)} shrink-0`}>
                           {decision.outcome}
                         </Badge>
                       </div>
                       
                       <div>
-                        <p className="font-medium text-sm text-foreground mb-1">
+                        <p className="font-medium text-sm text-foreground mb-1 break-words">
                           {decision.deal}
                         </p>
-                        <p className="text-sm text-muted-foreground leading-relaxed">
+                        <p className="text-sm text-muted-foreground leading-relaxed break-words overflow-hidden">
                           {decision.reasoning}
                         </p>
                       </div>
                       
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-between gap-4">
+                        <div className="flex items-center gap-3 shrink-0">
                           <span className="text-xs text-muted-foreground">
                             Confidence:
                           </span>
@@ -165,7 +165,7 @@ export function DecisionHistory() {
                           </span>
                         </div>
                         {decision.impact && (
-                          <span className="text-xs font-medium text-ice">
+                          <span className="text-xs font-medium text-ice truncate">
                             {decision.impact}
                           </span>
                         )}
