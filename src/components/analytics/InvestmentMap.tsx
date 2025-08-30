@@ -137,15 +137,15 @@ export function InvestmentMap() {
           <div className="absolute bottom-4 left-4 bg-card/90 backdrop-blur-sm p-3 rounded-lg border">
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-success rounded-full"></div>
                 <span>Active ({investments.filter(i => i.status === 'active').length})</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-warning rounded-full"></div>
                 <span>Pending ({investments.filter(i => i.status === 'pending').length})</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                <div className="w-3 h-3 bg-accent rounded-full"></div>
                 <span>Completed ({investments.filter(i => i.status === 'completed').length})</span>
               </div>
             </div>
