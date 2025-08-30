@@ -1,19 +1,18 @@
 import { useState } from "react";
-import { Upload, Search, FileText, MapPin, TrendingUp, Brain, Plus, File } from "lucide-react";
+import { Upload, Search, FileText, MapPin, TrendingUp, Brain, Plus, File, BarChart3, FileSpreadsheet, Database, CheckCircle, AlertCircle, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Progress } from "@/components/ui/progress";
 
-interface DealWorkflowProps {
-  onPropertySelect: (property: any) => void;
-}
-
-export function DealWorkflow({ onPropertySelect }: DealWorkflowProps) {
+export function DealWorkflow() {
   const [searchQuery, setSearchQuery] = useState("");
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [processingStatus, setProcessingStatus] = useState<'idle' | 'processing' | 'complete'>('idle');
+  const [analysisResults, setAnalysisResults] = useState<any[]>([]);
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -59,26 +58,52 @@ export function DealWorkflow({ onPropertySelect }: DealWorkflowProps) {
       predictedUpside: "$125,000",
       aiInsights: "Strong potential for value-add renovation. Market comps suggest 15% upside."
     };
-    onPropertySelect(analysisData);
+    setAnalysisResults(prev => [...prev, analysisData]);
+  };
+
+  const handleProcessFiles = () => {
+    setProcessingStatus('processing');
+    // Mock processing delay
+    setTimeout(() => {
+      setProcessingStatus('complete');
+      const mockParsedDeals = uploadedFiles.map((file, index) => ({
+        id: index + 1,
+        fileName: file.name,
+        type: "Investment Property",
+        address: `${123 + index} Mock St`,
+        price: `$${(Math.random() * 1000000 + 500000).toFixed(0)}`,
+        janusScore: Math.floor(Math.random() * 100) + 1,
+        status: "Parsed Successfully"
+      }));
+      setAnalysisResults(mockParsedDeals);
+    }, 3000);
   };
 
   return (
     <div className="h-full flex flex-col">
       <div className="p-6 border-b border-border">
-        <h2 className="font-display text-xl text-foreground mb-2">Deal Analysis Workflow</h2>
-        <p className="text-muted-foreground text-sm">Upload your deals or search properties to run Janus AI analysis</p>
+        <h1 className="font-display text-2xl text-foreground mb-2">Professional Deal Management</h1>
+        <p className="text-muted-foreground">Upload, parse, analyze, and manage your real estate deals with AI-powered insights</p>
       </div>
 
       <div className="flex-1 p-6">
         <Tabs defaultValue="upload" className="h-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6">
+          <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="upload" className="flex items-center gap-2">
               <Upload className="w-4 h-4" />
-              Upload Deals
+              Upload & Parse
             </TabsTrigger>
             <TabsTrigger value="search" className="flex items-center gap-2">
               <Search className="w-4 h-4" />
-              Search Properties
+              Property Search
+            </TabsTrigger>
+            <TabsTrigger value="analysis" className="flex items-center gap-2">
+              <BarChart3 className="w-4 h-4" />
+              Deal Analysis
+            </TabsTrigger>
+            <TabsTrigger value="database" className="flex items-center gap-2">
+              <Database className="w-4 h-4" />
+              Deal Database
             </TabsTrigger>
           </TabsList>
 
@@ -145,12 +170,57 @@ export function DealWorkflow({ onPropertySelect }: DealWorkflowProps) {
                     <p className="text-sm font-medium text-foreground">Janus AI Analysis</p>
                     <p className="text-xs text-muted-foreground">Extract key metrics, identify opportunities, generate insights</p>
                   </div>
-                  <Button size="sm" className="ml-auto" disabled={uploadedFiles.length === 0}>
-                    Process Files
+                  <Button 
+                    size="sm" 
+                    className="ml-auto" 
+                    disabled={uploadedFiles.length === 0 || processingStatus === 'processing'}
+                    onClick={handleProcessFiles}
+                  >
+                    {processingStatus === 'processing' ? (
+                      <>
+                        <Clock className="w-4 h-4 mr-2 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      <>
+                        <Brain className="w-4 h-4 mr-2" />
+                        Process Files
+                      </>
+                    )}
                   </Button>
                 </div>
               </CardContent>
             </Card>
+
+            {/* Processing Status */}
+            {processingStatus !== 'idle' && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-bold">3</div>
+                    Processing Status
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <Progress value={processingStatus === 'processing' ? 60 : 100} className="w-full" />
+                    <div className="flex items-center gap-3">
+                      {processingStatus === 'processing' ? (
+                        <>
+                          <Clock className="w-5 h-5 text-primary animate-spin" />
+                          <span className="text-sm text-foreground">Extracting data from documents...</span>
+                        </>
+                      ) : (
+                        <>
+                          <CheckCircle className="w-5 h-5 text-green-500" />
+                          <span className="text-sm text-foreground">Processing complete! {uploadedFiles.length} deals parsed successfully.</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </TabsContent>
 
           <TabsContent value="search" className="space-y-6">
@@ -211,6 +281,127 @@ export function DealWorkflow({ onPropertySelect }: DealWorkflowProps) {
                     ))}
                   </div>
                 )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="analysis" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <BarChart3 className="w-5 h-5" />
+                  Deal Analysis Results
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                {analysisResults.length > 0 ? (
+                  <div className="space-y-4">
+                    {analysisResults.map((deal, index) => (
+                      <div key={index} className="border border-border rounded-lg p-4">
+                        <div className="flex justify-between items-start mb-3">
+                          <div>
+                            <h4 className="font-medium text-foreground">{deal.address || deal.fileName}</h4>
+                            <p className="text-sm text-muted-foreground">{deal.type || "Document Analysis"}</p>
+                          </div>
+                          <div className="text-right">
+                            <Badge variant={deal.janusScore > 70 ? "default" : deal.janusScore > 40 ? "secondary" : "destructive"}>
+                              Janus Score: {deal.janusScore}
+                            </Badge>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                          <div>
+                            <span className="text-muted-foreground">Price: </span>
+                            <span className="font-medium text-foreground">{deal.price}</span>
+                          </div>
+                          <div>
+                            <span className="text-muted-foreground">Cap Rate: </span>
+                            <span className="font-medium text-foreground">{deal.capRate || "TBD"}</span>
+                          </div>
+                          <div>
+                            <span className="text-muted-foreground">Status: </span>
+                            <span className="font-medium text-green-600">{deal.status || "Analyzed"}</span>
+                          </div>
+                          <div>
+                            <span className="text-muted-foreground">Upside: </span>
+                            <span className="font-medium text-foreground">{deal.predictedUpside || "TBD"}</span>
+                          </div>
+                        </div>
+                        {deal.aiInsights && (
+                          <div className="mt-3 p-3 bg-secondary/30 rounded">
+                            <p className="text-sm text-foreground">{deal.aiInsights}</p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <BarChart3 className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                    <p className="text-muted-foreground">No deals analyzed yet. Upload documents or search properties to get started.</p>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="database" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Database className="w-5 h-5" />
+                  Deal Database Management
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <Card>
+                      <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                          <FileSpreadsheet className="w-8 h-8 text-primary" />
+                          <div>
+                            <p className="font-medium text-foreground">{analysisResults.length}</p>
+                            <p className="text-sm text-muted-foreground">Total Deals</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                          <CheckCircle className="w-8 h-8 text-green-500" />
+                          <div>
+                            <p className="font-medium text-foreground">{analysisResults.filter(d => d.janusScore > 70).length}</p>
+                            <p className="text-sm text-muted-foreground">High Scoring</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                    <Card>
+                      <CardContent className="p-4">
+                        <div className="flex items-center gap-3">
+                          <AlertCircle className="w-8 h-8 text-yellow-500" />
+                          <div>
+                            <p className="font-medium text-foreground">{analysisResults.filter(d => d.janusScore <= 40).length}</p>
+                            <p className="text-sm text-muted-foreground">Needs Review</p>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                  
+                  <div className="flex gap-2">
+                    <Button variant="outline" className="flex items-center gap-2">
+                      <Upload className="w-4 h-4" />
+                      Export Deals
+                    </Button>
+                    <Button variant="outline" className="flex items-center gap-2">
+                      <FileSpreadsheet className="w-4 h-4" />
+                      Generate Report
+                    </Button>
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>
