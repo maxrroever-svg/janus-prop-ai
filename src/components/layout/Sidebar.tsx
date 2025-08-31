@@ -23,16 +23,16 @@ import {
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Agents", href: "/agents", icon: Bot },
-  { name: "Properties", href: "/properties", icon: Building2 },
-  { name: "Portfolios", href: "/portfolios", icon: Briefcase },
-  { name: "Deal Room", href: "/deals", icon: Handshake },
+  { name: "Deal Canvas", href: "/dashboard", icon: Bot },
+  { name: "Active Deals", href: "/dashboard/deals", icon: Building2 },
+  { name: "Intelligence", href: "/dashboard/intelligence", icon: Briefcase },
+  { name: "Portfolio", href: "/dashboard/portfolio", icon: Handshake },
 ];
 
 const tools = [
-  { name: "Analytics", href: "/analytics", icon: Activity },
-  { name: "Automations", href: "/automations", icon: Zap },
-  { name: "Settings", href: "/settings", icon: Settings },
+  { name: "IC Memos", href: "/dashboard/memos", icon: Activity },
+  { name: "AI Assistant", href: "/dashboard/assistant", icon: Zap },
+  { name: "Settings", href: "/dashboard/settings", icon: Settings },
 ];
 
 export function Sidebar() {

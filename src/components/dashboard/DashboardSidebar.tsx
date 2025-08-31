@@ -23,6 +23,7 @@ import {
 
 const navigation = [
   { name: "Deal Canvas", href: "/dashboard", icon: Home },
+  { name: "AI Agents", href: "/dashboard/agents", icon: Users },
   { name: "Active Deals", href: "/dashboard/deals", icon: Target },
   { name: "Intelligence", href: "/dashboard/intelligence", icon: BarChart3 },
   { name: "IC Memos", href: "/dashboard/memos", icon: FileText },
