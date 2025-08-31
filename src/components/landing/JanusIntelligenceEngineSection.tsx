@@ -103,7 +103,7 @@ export const JanusIntelligenceEngineSection = () => {
                 <Card className="institutional-card h-full">
                   <CardContent className="p-6">
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-white font-bold text-lg">
+                      <div className="w-12 h-12 rounded-full bg-accent flex items-center justify-center text-accent-foreground font-bold text-lg">
                         {step.step}
                       </div>
                       <h4 className="font-display font-bold text-xl text-foreground">

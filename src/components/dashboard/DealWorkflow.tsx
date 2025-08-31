@@ -145,8 +145,9 @@ export function DealWorkflow() {
         <p className="text-muted-foreground">Upload, parse, analyze, and manage your real estate deals with AI-powered insights</p>
       </div>
 
-      <div className="flex-1 p-6">
-        <Tabs defaultValue="upload" className="h-full">
+      <div className="flex-1 overflow-hidden">
+        <div className="h-full overflow-y-auto p-6">
+          <Tabs defaultValue="upload" className="h-full">
           <TabsList className="grid w-full grid-cols-4 mb-6">
             <TabsTrigger value="upload" className="flex items-center gap-2">
               <Upload className="w-4 h-4" />
@@ -508,6 +509,7 @@ export function DealWorkflow() {
             </Card>
           </TabsContent>
         </Tabs>
+        </div>
       </div>
     </div>
   );
