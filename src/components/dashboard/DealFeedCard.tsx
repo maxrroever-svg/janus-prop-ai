@@ -37,9 +37,10 @@ interface DealFeedCardProps {
   onPrevious: () => void;
   isFirst: boolean;
   isLast: boolean;
+  rank: number;
 }
 
-export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast }: DealFeedCardProps) => {
+export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }: DealFeedCardProps) => {
   const [isSaved, setIsSaved] = useState(false);
   const [showMetrics, setShowMetrics] = useState(true);
 
@@ -96,10 +97,22 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast }: Deal
 
       {/* Content Overlay */}
       <div className="absolute inset-0 flex flex-col justify-between p-6 z-30">
-        {/* Top Section - Property Info */}
+        {/* Top Section - Rank Badge & Property Info */}
         <div className="space-y-4">
           <div className="flex items-start justify-between">
             <div className="space-y-2">
+              {/* Rank Badge */}
+              <motion.div
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                className="inline-flex"
+              >
+                <Badge className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 border-yellow-500/50 text-sm font-bold">
+                  #{rank} Best Deal Today
+                </Badge>
+              </motion.div>
+              
               <h1 className="text-2xl font-bold text-white leading-tight">
                 {deal.address}
               </h1>
@@ -112,7 +125,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast }: Deal
               </Badge>
             </div>
             
-            <Badge className={`${getRiskColor(deal.riskRating)} border`}>
+            <Badge className={`${getRiskColor(deal.riskRating)} border animate-pulse`}>
               {deal.riskRating.toUpperCase()} RISK
             </Badge>
           </div>
@@ -235,13 +248,15 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast }: Deal
         </motion.div>
       </div>
 
-      {/* Scroll Hint */}
+      {/* Scroll Hint - More Engaging */}
       <motion.div 
-        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-white/60 text-xs"
-        animate={{ y: [0, 5, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
+        className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-white/80 text-sm flex items-center space-x-2"
+        animate={{ y: [0, 8, 0] }}
+        transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
       >
-        Swipe up for next deal
+        <ChevronDown className="h-4 w-4" />
+        <span>Scroll for next deal</span>
+        <ChevronDown className="h-4 w-4" />
       </motion.div>
     </div>
   );

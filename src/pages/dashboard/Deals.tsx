@@ -71,10 +71,12 @@ const Deals = () => {
               </div>
             </div>
             
-            {/* Right Panel - Property Details ONLY */}
-            <div className="w-96 shrink-0 border-l border-border bg-secondary/30 overflow-hidden">
-              <ExplainPanel deal={selectedDeal} />
-            </div>
+            {/* Right Panel - Property Details ONLY WHEN SELECTED */}
+            {selectedDeal && (
+              <div className="w-96 shrink-0 border-l border-border bg-secondary/30 overflow-hidden">
+                <ExplainPanel deal={selectedDeal} />
+              </div>
+            )}
           </main>
         </div>
       </div>
