@@ -8,6 +8,7 @@ import {
   BarChart3,
   Settings,
   Shield,
+  Zap,
 } from "lucide-react";
 import {
   Sidebar,
@@ -23,6 +24,7 @@ import {
 
 const navigation = [
   { name: "Deal Canvas", href: "/dashboard", icon: Home },
+  { name: "Janus Deal Feed", href: "/dashboard/feed", icon: Zap },
   { name: "AI Agents", href: "/dashboard/agents", icon: Users },
   { name: "Active Deals", href: "/dashboard/deals", icon: Target },
   { name: "Intelligence", href: "/dashboard/intelligence", icon: BarChart3 },

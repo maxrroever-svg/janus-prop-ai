@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Agents from "./pages/dashboard/Agents";
+import DealFeed from "./pages/dashboard/DealFeed";
 import Deals from "./pages/dashboard/Deals";
 import Portfolio from "./pages/dashboard/Portfolio";
 import Outreach from "./pages/dashboard/Outreach";
@@ -32,6 +33,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Landing />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/feed" element={<DealFeed />} />
             <Route path="/dashboard/agents" element={<Agents />} />
             <Route path="/dashboard/deals" element={<Deals />} />
             <Route path="/dashboard/portfolio" element={<Portfolio />} />
