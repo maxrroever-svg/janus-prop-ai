@@ -74,7 +74,7 @@ const Deals = () => {
             {/* Right Panel - Property Details ONLY WHEN SELECTED */}
             {selectedDeal && (
               <div className="w-96 shrink-0 border-l border-border bg-secondary/30 overflow-hidden">
-                <ExplainPanel deal={selectedDeal} />
+                <ExplainPanel deal={selectedDeal} onClose={() => setSelectedDeal(null)} />
               </div>
             )}
           </main>

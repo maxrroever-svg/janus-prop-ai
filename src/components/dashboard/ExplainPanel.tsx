@@ -1,13 +1,14 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { FileText, MessageSquare, Eye } from "lucide-react";
+import { FileText, MessageSquare, Eye, X } from "lucide-react";
 
 interface ExplainPanelProps {
   deal: any;
+  onClose?: () => void;
 }
 
-export function ExplainPanel({ deal }: ExplainPanelProps) {
+export function ExplainPanel({ deal, onClose }: ExplainPanelProps) {
   if (!deal) {
     return (
       <div className="p-6 h-full">
@@ -28,9 +29,21 @@ export function ExplainPanel({ deal }: ExplainPanelProps) {
 
   return (
     <div className="p-6 h-full overflow-y-auto">
-      <div className="mb-6">
-        <h2 className="font-display text-lg text-foreground">Explain</h2>
-        <p className="text-sm text-muted-foreground">Why this surfaced</p>
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h2 className="font-display text-lg text-foreground">Explain</h2>
+          <p className="text-sm text-muted-foreground">Why this surfaced</p>
+        </div>
+        {onClose && (
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={onClose}
+            className="hover:bg-destructive/10 hover:text-destructive"
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        )}
       </div>
       
       <Card className="institutional-card p-4 mb-6">

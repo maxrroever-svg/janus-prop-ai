@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { DealFeedCard } from "@/components/dashboard/DealFeedCard";
 import { DealFeedControls } from "@/components/dashboard/DealFeedControls";
 import { mockDeals } from "@/lib/seedData";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { Badge } from "@/components/ui/badge";
-import { Trophy, Zap, TrendingUp } from "lucide-react";
+import { Brain, TrendingUp } from "lucide-react";
 
 export type DealFeedMode = "feed" | "search" | "upload";
 
@@ -158,24 +157,22 @@ const DealFeed = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen w-full bg-black flex">
+      <div className="min-h-screen w-full bg-background flex">
         <DashboardSidebar />
-        <div className="flex-1 flex flex-col">
-          {/* Header with Best Deals Badge */}
-          <div className="shrink-0 p-4 bg-black/50 backdrop-blur-sm border-b border-white/10">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <Trophy className="h-6 w-6 text-yellow-400" />
-                <div>
-                  <h1 className="text-xl font-bold text-white">Today's Best Deals</h1>
-                  <p className="text-sm text-gray-400">Curated by Janus AI • Updated every hour</p>
-                </div>
+        <div className="flex-1 flex flex-col bg-black">
+          {/* Header */}
+          <div className="shrink-0 p-4 bg-black border-b border-white/20 flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <SidebarTrigger className="text-white hover:bg-white/10" />
+              <Brain className="h-5 w-5 text-accent" />
+              <div>
+                <h1 className="text-lg font-medium text-white">Deal Feed</h1>
+                <p className="text-xs text-gray-400">AI-curated opportunities</p>
               </div>
-              <Badge className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 border-yellow-500/30">
-                <Zap className="h-3 w-3 mr-1" />
-                Live Feed
-              </Badge>
             </div>
+            <Badge className="bg-primary/20 text-primary border-primary/30 text-xs">
+              Live
+            </Badge>
           </div>
 
           {/* Main Feed */}
@@ -196,52 +193,23 @@ const DealFeed = () => {
                   onTouchStart={handleTouchStart}
                   onTouchEnd={handleTouchEnd}
                 >
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={currentIndex}
-                      initial={{ y: "100%", opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      exit={{ y: "-100%", opacity: 0 }}
-                      transition={{ 
-                        type: "spring", 
-                        damping: 30, 
-                        stiffness: 300,
-                        duration: 0.4 
-                      }}
-                      className="absolute inset-0"
-                    >
-                      <DealFeedCard 
-                        deal={deals[currentIndex]} 
-                        onNext={handleNext}
-                        onPrevious={handlePrevious}
-                        isFirst={currentIndex === 0}
-                        isLast={currentIndex === deals.length - 1}
-                        rank={currentIndex + 1}
-                      />
-                    </motion.div>
-                  </AnimatePresence>
-                </div>
-
-                {/* Progress Indicator */}
-                <div className="absolute top-20 left-1/2 transform -translate-x-1/2 z-50">
-                  <div className="flex space-x-1">
-                    {Array.from({ length: Math.min(5, deals.length) }).map((_, i) => (
-                      <div
-                        key={i}
-                        className={`h-1 w-8 rounded-full transition-all duration-300 ${
-                          i <= (currentIndex % 5) ? "bg-yellow-400" : "bg-white/30"
-                        }`}
-                      />
-                    ))}
+                  <div className="absolute inset-0">
+                    <DealFeedCard 
+                      deal={deals[currentIndex]} 
+                      onNext={handleNext}
+                      onPrevious={handlePrevious}
+                      isFirst={currentIndex === 0}
+                      isLast={currentIndex === deals.length - 1}
+                      rank={currentIndex + 1}
+                    />
                   </div>
                 </div>
 
                 {/* Deal Counter */}
                 <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-50">
-                  <div className="bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-                    <div className="text-white text-sm flex items-center space-x-2">
-                      <TrendingUp className="h-4 w-4 text-yellow-400" />
-                      <span>Deal #{currentIndex + 1} of {deals.length}</span>
+                  <div className="bg-black/60 backdrop-blur-sm rounded px-3 py-1 border border-white/20">
+                    <div className="text-white text-xs flex items-center space-x-2">
+                      <span>#{currentIndex + 1} of {deals.length}</span>
                     </div>
                   </div>
                 </div>

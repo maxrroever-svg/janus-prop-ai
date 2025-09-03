@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import Agents from "./pages/dashboard/Agents";
 import DealFeed from "./pages/dashboard/DealFeed";
 import Deals from "./pages/dashboard/Deals";
+import Plans from "./pages/dashboard/Plans";
 import Portfolio from "./pages/dashboard/Portfolio";
 import Outreach from "./pages/dashboard/Outreach";
 import ICMemos from "./pages/dashboard/ICMemos";
@@ -36,6 +37,7 @@ const App = () => (
             <Route path="/dashboard/feed" element={<DealFeed />} />
             <Route path="/dashboard/agents" element={<Agents />} />
             <Route path="/dashboard/deals" element={<Deals />} />
+            <Route path="/dashboard/plans" element={<Plans />} />
             <Route path="/dashboard/portfolio" element={<Portfolio />} />
             <Route path="/dashboard/outreach" element={<Outreach />} />
             <Route path="/dashboard/memos" element={<ICMemos />} />
