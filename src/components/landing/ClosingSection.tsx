@@ -109,25 +109,70 @@ export const ClosingSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
           viewport={{ once: true }}
-          className="space-y-6"
+          className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
         >
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button 
-            size="lg" 
-            className="btn-professional text-base px-8 py-3"
+          {/* Consumer Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            viewport={{ once: true }}
+            className="institutional-card p-8 rounded-lg hover:border-accent/50 transition-all duration-300"
           >
-            Apply for Access
-          </Button>
-          <Button 
-            size="lg" 
-            className="btn-institutional text-base px-8 py-3"
+            <div className="flex flex-col items-center space-y-4">
+              <div className="p-4 bg-accent/10 rounded-full">
+                <svg className="h-12 w-12 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 className="font-display text-2xl font-semibold text-foreground">
+                Consumer
+              </h3>
+              <p className="text-muted-foreground text-center">
+                AI-powered homebuying assistant for individual buyers
+              </p>
+              <Button className="btn-professional w-full" asChild>
+                <a href="/consumer">Get Started</a>
+              </Button>
+            </div>
+          </motion.div>
+
+          {/* Investor Section */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            viewport={{ once: true }}
+            className="institutional-card p-8 rounded-lg hover:border-primary/50 transition-all duration-300"
           >
-            Request Demo
-          </Button>
-          </div>
-          
+            <div className="flex flex-col items-center space-y-4">
+              <div className="p-4 bg-primary/10 rounded-full">
+                <svg className="h-12 w-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                </svg>
+              </div>
+              <h3 className="font-display text-2xl font-semibold text-foreground">
+                Investor
+              </h3>
+              <p className="text-muted-foreground text-center">
+                Professional deal sourcing and intelligence platform
+              </p>
+              <Button variant="outline" className="btn-institutional w-full" asChild>
+                <a href="/dashboard">Access Dashboard</a>
+              </Button>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.1 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center"
+        >
           <p className="text-sm text-muted-foreground">
-            Limited access. Institutional investors only.
+            Investor platform: Limited access. Institutional investors only.
             <br />
             Minimum portfolio requirement: $1M+
           </p>

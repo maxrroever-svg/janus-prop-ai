@@ -3,9 +3,13 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import FrontPage from "./pages/FrontPage";
-import Consumer from "./pages/Consumer";
 import Landing from "./pages/Landing";
+import Consumer from "./pages/Consumer";
+import ConsumerAssistant from "./pages/consumer/Assistant";
+import ConsumerUnderwriting from "./pages/consumer/Underwriting";
+import ConsumerFinancing from "./pages/consumer/Financing";
+import ConsumerClosing from "./pages/consumer/Closing";
+import ConsumerOwnership from "./pages/consumer/Ownership";
 import Dashboard from "./pages/Dashboard";
 import Agents from "./pages/dashboard/Agents";
 import DealFeed from "./pages/dashboard/DealFeed";
@@ -34,9 +38,13 @@ const App = () => (
           }}
         >
           <Routes>
-            <Route path="/" element={<FrontPage />} />
+            <Route path="/" element={<Landing />} />
             <Route path="/consumer" element={<Consumer />} />
-            <Route path="/investor" element={<Landing />} />
+            <Route path="/consumer/assistant" element={<ConsumerAssistant />} />
+            <Route path="/consumer/underwriting" element={<ConsumerUnderwriting />} />
+            <Route path="/consumer/financing" element={<ConsumerFinancing />} />
+            <Route path="/consumer/closing" element={<ConsumerClosing />} />
+            <Route path="/consumer/ownership" element={<ConsumerOwnership />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/feed" element={<DealFeed />} />
             <Route path="/dashboard/agents" element={<Agents />} />

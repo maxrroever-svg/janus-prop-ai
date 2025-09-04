@@ -1,8 +1,8 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ConsumerSidebar } from "@/components/consumer/ConsumerSidebar";
-import { SmartSearch } from "@/components/consumer/SmartSearch";
+import { FinancingHub } from "@/components/consumer/FinancingHub";
 
-const Consumer = () => {
+const ConsumerFinancing = () => {
   return (
     <SidebarProvider>
       <div className="min-h-screen w-full bg-background flex">
@@ -11,11 +11,11 @@ const Consumer = () => {
           <header className="h-16 border-b border-border bg-card flex items-center px-6">
             <SidebarTrigger />
             <h1 className="ml-4 font-display text-xl font-semibold text-foreground">
-              Janus Consumer — Your AI Homebuying Assistant
+              Financing Hub
             </h1>
           </header>
           <main className="flex-1 p-6">
-            <SmartSearch />
+            <FinancingHub />
           </main>
         </div>
       </div>
@@ -23,4 +23,4 @@ const Consumer = () => {
   );
 };
 
-export default Consumer;
+export default ConsumerFinancing;
