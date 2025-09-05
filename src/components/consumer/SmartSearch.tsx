@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapPin, Search, Heart, DollarSign, TrendingUp } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { MapPin, Search, Heart, DollarSign, TrendingUp, Filter } from "lucide-react";
+import { useState } from "react";
 
 const mockProperties = [
   {
@@ -33,27 +36,78 @@ const mockProperties = [
 ];
 
 export const SmartSearch = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedArea, setSelectedArea] = useState("");
+  
   return (
     <section className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="font-display text-3xl font-semibold text-foreground">
-          Smart Search + Deal Feed
+      <div className="text-center mb-8">
+        <h2 className="font-display text-3xl font-semibold text-foreground mb-4">
+          Find Your Perfect Home
         </h2>
-        <div className="flex space-x-3">
-          <Button className="btn-professional">
-            <MapPin className="h-4 w-4 mr-2" />
-            Show Me Homes Near Me
-          </Button>
-          <Button variant="outline" className="btn-institutional">
-            <Search className="h-4 w-4 mr-2" />
-            Find a Specific Location
-          </Button>
-        </div>
+        <p className="text-lg text-muted-foreground">
+          AI-powered search that understands what you're really looking for
+        </p>
       </div>
-      
-      <p className="text-muted-foreground">
-        AI-powered personalized feed of homes curated specifically for you
-      </p>
+
+      {/* Smart Search Controls */}
+      <Card>
+        <CardContent className="p-6">
+          <div className="space-y-4">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Input
+                placeholder="Describe your ideal home... (e.g., 'two bedroom house in Detroit near good schools with a terrace')"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 text-base py-6"
+              />
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Select value={selectedArea} onValueChange={setSelectedArea}>
+                <SelectTrigger className="flex-1">
+                  <SelectValue placeholder="Choose an area or let AI search everywhere" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="manhattan">Manhattan, NY</SelectItem>
+                  <SelectItem value="brooklyn">Brooklyn, NY</SelectItem>
+                  <SelectItem value="queens">Queens, NY</SelectItem>
+                  <SelectItem value="detroit">Detroit, MI</SelectItem>
+                  <SelectItem value="chicago">Chicago, IL</SelectItem>
+                  <SelectItem value="miami">Miami, FL</SelectItem>
+                  <SelectItem value="anywhere">Search Everywhere</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              <Button size="lg" className="btn-professional px-8">
+                <Search className="w-4 h-4 mr-2" />
+                AI Search
+              </Button>
+            </div>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Button size="lg" variant="outline">
+                <MapPin className="w-4 h-4 mr-2" />
+                Show Me Homes Near Me
+              </Button>
+              <Button size="lg" variant="outline">
+                <Filter className="w-4 h-4 mr-2" />
+                Advanced Filters
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="text-center">
+        <h3 className="font-display text-xl font-semibold text-foreground mb-4">
+          Personalized Home Feed
+        </h3>
+        <p className="text-muted-foreground mb-6">
+          AI-curated properties based on your preferences and behavior
+        </p>
+      </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {mockProperties.map((property) => (

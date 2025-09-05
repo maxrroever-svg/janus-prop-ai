@@ -29,7 +29,6 @@ const navigation = [
   { name: "Janus Deal Feed", href: "/dashboard/feed", icon: Zap },
   { name: "Active Deals", href: "/dashboard/deals", icon: TrendingUp },
   { name: "Plans", href: "/dashboard/plans", icon: CheckSquare },
-  { name: "AI Agents", href: "/dashboard/agents", icon: Users },
   { name: "Intelligence", href: "/dashboard/intelligence", icon: BarChart3 },
   { name: "IC Memos", href: "/dashboard/memos", icon: FileText },
   { name: "Outreach", href: "/dashboard/outreach", icon: MessageSquare },

@@ -6,10 +6,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Consumer from "./pages/Consumer";
 import ConsumerAssistant from "./pages/consumer/Assistant";
+import ConsumerAnalysis from "./pages/consumer/Analysis";
 import ConsumerUnderwriting from "./pages/consumer/Underwriting";
 import ConsumerFinancing from "./pages/consumer/Financing";
 import ConsumerClosing from "./pages/consumer/Closing";
 import ConsumerOwnership from "./pages/consumer/Ownership";
+import ConsumerSettings from "./pages/consumer/Settings";
+import ConsumerAuditLog from "./pages/consumer/AuditLog";
 import Dashboard from "./pages/Dashboard";
 import Agents from "./pages/dashboard/Agents";
 import DealFeed from "./pages/dashboard/DealFeed";
@@ -41,10 +44,13 @@ const App = () => (
             <Route path="/" element={<Landing />} />
             <Route path="/consumer" element={<Consumer />} />
             <Route path="/consumer/assistant" element={<ConsumerAssistant />} />
+            <Route path="/consumer/analysis" element={<ConsumerAnalysis />} />
             <Route path="/consumer/underwriting" element={<ConsumerUnderwriting />} />
             <Route path="/consumer/financing" element={<ConsumerFinancing />} />
             <Route path="/consumer/closing" element={<ConsumerClosing />} />
             <Route path="/consumer/ownership" element={<ConsumerOwnership />} />
+            <Route path="/consumer/settings" element={<ConsumerSettings />} />
+            <Route path="/consumer/audit" element={<ConsumerAuditLog />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/feed" element={<DealFeed />} />
             <Route path="/dashboard/agents" element={<Agents />} />

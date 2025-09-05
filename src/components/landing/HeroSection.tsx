@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Target } from "lucide-react";
+import { TrendingUp, Target, Home } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
@@ -66,20 +66,50 @@ export const HeroSection = () => {
           Transform property data into intelligent investment decisions.
         </motion.p>
 
+        {/* Consumer and Investor Dashboards */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
+          className="mb-12"
+        >
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
+            <Link to="/consumer" className="group">
+              <div className="p-8 border border-border/30 bg-background hover:border-primary/30 transition-all duration-300 text-center">
+                <div className="w-16 h-16 bg-primary/10 flex items-center justify-center mb-4 mx-auto">
+                  <Home className="w-8 h-8 text-primary" />
+                </div>
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                  Janus Consumer
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  AI-powered homebuying assistant with smart search, financing, and closing tools
+                </p>
+              </div>
+            </Link>
+            
+            <Link to="/dashboard" className="group">
+              <div className="p-8 border border-border/30 bg-background hover:border-primary/30 transition-all duration-300 text-center">
+                <div className="w-16 h-16 bg-success/10 flex items-center justify-center mb-4 mx-auto">
+                  <TrendingUp className="w-8 h-8 text-success" />
+                </div>
+                <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+                  Janus Investor
+                </h3>
+                <p className="text-muted-foreground text-sm">
+                  Professional real estate intelligence platform for investors and institutions
+                </p>
+              </div>
+            </Link>
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.4, delay: 0.8, ease: "easeOut" }}
           className="flex flex-col sm:flex-row gap-4 justify-center"
         >
-          <Link to="/dashboard">
-            <Button 
-              size="lg" 
-              className="btn-professional text-base px-8 py-3 font-medium"
-            >
-              Enter Dashboard
-            </Button>
-          </Link>
           <Button 
             size="lg" 
             className="btn-institutional text-base px-8 py-3 font-medium"
@@ -91,7 +121,7 @@ export const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.8 }}
+          transition={{ duration: 0.4, delay: 1.0 }}
           className="mt-16"
         >
           <div className="inline-flex items-center gap-2 text-sm text-muted-foreground">

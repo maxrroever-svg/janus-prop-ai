@@ -22,15 +22,17 @@ import {
 
 const navigation = [
   { name: "Smart Search", href: "/consumer", icon: Search },
-  { name: "AI Assistant", href: "/consumer/assistant", icon: MessageSquare },
+  { name: "Property Analysis", href: "/consumer/analysis", icon: FileText },
   { name: "Underwriting", href: "/consumer/underwriting", icon: FileText },
   { name: "Financing", href: "/consumer/financing", icon: CreditCard },
   { name: "Closing Room", href: "/consumer/closing", icon: Home },
   { name: "Ownership", href: "/consumer/ownership", icon: Shield },
+  { name: "AI Assistant", href: "/consumer/assistant", icon: MessageSquare },
 ];
 
 const bottomNavigation = [
   { name: "Settings", href: "/consumer/settings", icon: Settings },
+  { name: "Audit Log", href: "/consumer/audit", icon: Shield },
 ];
 
 export function ConsumerSidebar() {

@@ -19,12 +19,17 @@ export function DashboardHeader() {
     <header className="h-16 border-b border-border bg-background flex items-center justify-between px-6">
       <div className="flex items-center gap-4">
         <SidebarTrigger />
-        <button 
-          onClick={() => navigate('/')} 
-          className="hover:opacity-80 transition-opacity"
-        >
-          <span className="font-display text-xl text-foreground">Janus AI</span>
-        </button>
+        <div className="flex items-center gap-4">
+          <span className="font-display text-lg font-semibold text-foreground">
+            Janus Investor
+          </span>
+          <button 
+            onClick={() => navigate('/')} 
+            className="hover:opacity-80 transition-opacity"
+          >
+            <span className="font-display text-xl text-foreground">Janus AI</span>
+          </button>
+        </div>
       </div>
 
       <div className="flex items-center gap-4">

@@ -15,9 +15,6 @@ const Landing = () => {
       <div id="hero">
         <HeroSection />
       </div>
-      <div id="lien-intelligence">
-        <LienIntelligenceSection />
-      </div>
       <div id="intelligence-engine">
         <JanusIntelligenceEngineSection />
       </div>
@@ -32,6 +29,9 @@ const Landing = () => {
       </div>
       <div id="architecture">
         <DealIntelligenceSection />
+      </div>
+      <div id="lien-intelligence">
+        <LienIntelligenceSection />
       </div>
       <div id="demo">
         <ClosingSection />
