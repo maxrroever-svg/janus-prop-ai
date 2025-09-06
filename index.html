@@ -52,8 +52,9 @@ p{margin:0 0 16px;line-height:1.66}
 .bitem{display:inline-flex;align-items:baseline;gap:.55rem;line-height:1.2}
 .bitem .label{letter-spacing:.02em;opacity:.92;font-size:.78rem;text-transform:uppercase}
 .bitem .value{font-weight:700;color:var(--primary)}
-.bitem .delta{font-family:"IBM Plex Mono";font-size:.9rem}
-.bitem .up{color:var(--up)} .bitem .down{color:var(--down)}
+.bitem .delta{font-family:"IBM Plex Mono";font-size:.9rem;color:var(--white)}
+.bitem .delta.up{color:var(--up)!important} 
+.bitem .delta.down{color:var(--down)!important}
 
 /* vision features */
 .features{display:grid;gap:16px;margin-top:28px}
@@ -70,30 +71,31 @@ p{margin:0 0 16px;line-height:1.66}
 /* consumer + investor area */
 .twins{position:relative;z-index:1;isolation:isolate}
 
-/* *** STATIC EVENT-HORIZON GLOW (no rings, no motion, no images) *** */
+/* —— STATIC, HAZY, GLOSSY EVENT-HORIZON — no rings, no motion, no images —— */
 .horizon{
   position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
-  /* Warm core + soft orange torus + faint cool halo, all blurred into a single glow */
+  /* Bigger core; warm torus; hazy glossy veils; subtle cool halo */
   background:
-    radial-gradient(22% 18% at 50% 62%, rgba(0,0,0,.96) 0%, rgba(0,0,0,.88) 55%, rgba(0,0,0,0) 62%),
-    radial-gradient(28% 22% at 50% 62%, rgba(255,190,120,.26) 0%, rgba(255,160,70,.20) 32%, rgba(255,120,40,.10) 48%, rgba(255,120,40,0) 70%),
-    radial-gradient(36% 28% at 50% 62%, rgba(240,110,40,.18) 0%, rgba(240,110,40,0) 70%),
-    radial-gradient(50% 40% at 50% 62%, rgba(120,170,255,.08) 0%, rgba(120,170,255,0) 70%);
-  filter: blur(6px) saturate(135%) contrast(105%) brightness(104%);
+    /* subtle glossy veil across the band */
+    linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.04) 100%),
+    /* soft vignette to keep text readable */
+    radial-gradient(120% 85% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 64%, rgba(0,0,0,.22) 100%),
+    /* broad hazy halo, cool tint */
+    radial-gradient(72% 62% at 50% 58%, rgba(120,170,255,.10) 0%, rgba(120,170,255,0) 70%),
+    /* warm torus glow */
+    radial-gradient(48% 40% at 50% 58%, rgba(255,170,90,.28) 0%, rgba(255,140,60,.22) 32%, rgba(255,120,40,.12) 54%, rgba(255,120,40,0) 72%),
+    /* hot inner glow */
+    radial-gradient(34% 28% at 50% 58%, rgba(255,210,140,.32) 0%, rgba(255,190,120,.20) 48%, rgba(255,190,120,0) 72%),
+    /* dark core */
+    radial-gradient(30% 24% at 50% 58%, rgba(0,0,0,.96) 0%, rgba(0,0,0,.88) 60%, rgba(0,0,0,0) 78%);
+  filter: blur(14px) saturate(140%) contrast(106%) brightness(104%);
 }
 
-/* readability vignette */
-.twins::after{
-  content:""; position:absolute; inset:0; z-index:4; pointer-events:none;
-  background: radial-gradient(120% 85% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 64%, rgba(0,0,0,.22) 100%);
-}
-
-.band{width:100%;min-height:420px;padding:clamp(96px,14vh,180px) 16px;background:rgba(255,255,255,.02);overflow:hidden;position:relative}
+/* band + dust */
+.band{width:100%;min-height:460px;padding:clamp(96px,16vh,200px) 16px;background:rgba(255,255,255,.02);overflow:hidden;position:relative}
 .band .inner{max-width:1120px;margin:0 auto;text-align:center;position:relative;z-index:3}
 .band h2{margin-bottom:12px}
 .band .actions{display:flex;gap:1rem;justify-content:center;margin-top:18px}
-
-/* dust */
 .twins-canvas{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.55;mix-blend-mode:screen}
 
 /* ctas */
@@ -220,7 +222,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
     </div>
   </section>
 
-  <!-- STATIC glow + dust -->
+  <!-- Big hazy glow + dust -->
   <section class="twins">
     <div class="horizon" aria-hidden="true"></div>
     <canvas class="twins-canvas" aria-hidden="true"></canvas>
@@ -241,7 +243,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
           <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta num">+1%</span></span>
           <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta num">+0.3%</span></span>
           <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta num">+0.6%</span></span>
-          <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta num">+0.02</span></span>
+          <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta num">-0.02</span></span>
         </div>
         <div class="actions" style="margin-top:14px"><a class="cta glass" href="/investor">Enter Dashboard</a></div>
       </div>
@@ -296,11 +298,22 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
 /* nav highlight */
 (()=>{const L=[...document.querySelectorAll('.nav a')],S=L.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if(!S.length)return;const I=new IntersectionObserver(e=>{e.forEach(x=>{const id='#'+x.target.id;if(x.isIntersecting){L.forEach(l=>l.classList.remove('active'));L.filter(l=>l.getAttribute('href')===id).forEach(l=>l.classList.add('active'));}})},{rootMargin:'-35% 0px -60% 0px',threshold:0.01});S.forEach(s=>I.observe(s));})();
 
-/* bloomberg red/green */
-(()=>{const paint=el=>{const t=(el.textContent||'').trim();el.classList.remove('up','down');if(/^[-−–—]/.test(t))el.classList.add('down');else if(/^\+/.test(t)||t==='✓')el.classList.add('up');};document.querySelectorAll('.delta').forEach(paint);const mo=new MutationObserver(m=>{m.forEach(mu=>{const el=mu.target.nodeType===3?mu.target.parentElement:mu.target;if(el&&el.classList&&el.classList.contains('delta'))paint(el);});});document.querySelectorAll('.delta').forEach(el=>mo.observe(el,{characterData:true,subtree:true,childList:true}));})();
+/* robust red/green coloring for deltas */
+(()=>{function signOf(txt){
+  const t=(txt||'').trim().replace(/[,$\s]/g,'');
+  if (/^[-−–—]/.test(t)) return -1;
+  if (/^\+/.test(t)) return 1;
+  // If it ends with % or k and has a minus anywhere, treat as down
+  return t.includes('-') ? -1 : 1;
+}
+function paint(el){const s=signOf(el.textContent);el.classList.remove('up','down');el.classList.add(s<0?'down':'up');}
+document.querySelectorAll('.delta').forEach(paint);
+const mo=new MutationObserver(muts=>muts.forEach(m=>{const el=m.target.nodeType===3?m.target.parentElement:m.target;if(el?.classList?.contains('delta')) paint(el);}));
+document.querySelectorAll('.delta').forEach(el=>mo.observe(el,{characterData:true,subtree:true,childList:true}));
+})();
 
 /* dust (gentle; set STATIC=true for zero motion) */
-(()=>{const STATIC=false;const twins=document.querySelector('.twins');if(!twins)return;const c=document.querySelector('.twins-canvas');const ctx=c.getContext('2d',{alpha:true});const DPR=Math.min(window.devicePixelRatio||1,2);let w=0,h=0,P=[];function size(){const r=twins.getBoundingClientRect();w=Math.max(1,Math.floor(r.width));h=Math.max(1,Math.floor(r.height));c.width=w*DPR;c.height=h*DPR;c.style.width=w+'px';c.style.height=h+'px';ctx.setTransform(DPR,0,0,DPR,0,0);const n=Math.max(180,Math.floor((w*h)/8000));P=new Array(n).fill(0).map(()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.6,a:Math.random()*.40+.25,vx:(Math.random()*.16-.08),vy:(Math.random()*.16-.08)}));draw();}
+(()=>{const STATIC=false;const twins=document.querySelector('.twins');if(!twins)return;const c=document.querySelector('.twins-canvas');const ctx=c.getContext('2d',{alpha:true});const DPR=Math.min(window.devicePixelRatio||1,2);let w=0,h=0,P=[];function size(){const r=twins.getBoundingClientRect();w=Math.max(1,Math.floor(r.width));h=Math.max(1,Math.floor(r.height));c.width=w*DPR;c.height=h*DPR;c.style.width=w+'px';c.style.height=h+'px';ctx.setTransform(DPR,0,0,DPR,0,0);const n=Math.max(220,Math.floor((w*h)/6500));P=new Array(n).fill(0).map(()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.6,a:Math.random()*.40+.25,vx:(Math.random()*.14-.07),vy:(Math.random()*.14-.07)}));draw();}
 function draw(){ctx.clearRect(0,0,w,h);for(const p of P){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${p.a})`;ctx.fill();}}
 function step(){if(STATIC){draw();return;}ctx.clearRect(0,0,w,h);for(const p of P){p.x+=p.vx;p.y+=p.vy;if(p.x<-12)p.x=w+12;if(p.x>w+12)p.x=-12;if(p.y<-12)p.y=h+12;if(p.y>h+12)p.y=-12;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${p.a})`;ctx.fill();}requestAnimationFrame(step);}
 size();STATIC?draw():step();addEventListener('resize',size,{passive:true});if('ResizeObserver'in window)new ResizeObserver(size).observe(twins);})();
