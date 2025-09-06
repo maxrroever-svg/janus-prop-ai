@@ -15,7 +15,7 @@
   color-scheme: dark;
   --bg:#000; --white:#fff; --hair:rgba(255,255,255,.12);
   --up:#00DC96; --down:#FF6969; --primary:#CFE2FF;
-  --fog:.06; --rh:14px; --maxw:1120px; --prose:980px;
+  --rh:14px; --maxw:1120px; --prose:980px;
 }
 
 /* ===================== Base ===================== */
@@ -28,12 +28,12 @@ body{
   overflow-x:hidden; padding-top:58px; /* header offset */
 }
 ::selection{background:rgba(255,255,255,.18); color:#000}
+a{text-decoration:none}
 
 /* force text white */
 h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,a,button,label,div,section,footer,header,svg text{
   color:var(--white) !important; -webkit-text-fill-color:var(--white);
 }
-a{text-decoration:none}
 
 /* ===================== Type & Rhythm ===================== */
 h1{
@@ -55,17 +55,6 @@ p,li,small,span,button,input,textarea,select,nav,a{font-family:"IBM Plex Sans",s
 p{margin:0 0 calc(var(--rh)*1.15); line-height:1.66}
 .num{font-family:"IBM Plex Mono",monospace}
 .prose{max-width:var(--prose)}
-
-/* ===================== Subtle steady top fog ===================== */
-#fog{
-  position:fixed; left:0; right:0; top:0; height:16vh; z-index:0; pointer-events:none;
-  background:
-    radial-gradient(140% 200% at 50% -30%, rgba(255,255,255,calc(.18*var(--fog))), rgba(255,255,255,0) 58%),
-    radial-gradient(110% 160% at 40% -20%, rgba(210,210,210,calc(.10*var(--fog))), rgba(210,210,210,0) 62%);
-  filter:blur(24px) saturate(103%);
-  -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,0) 100%);
-          mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,0) 100%);
-}
 
 /* ===================== Header (brand L, nav R; fixed; no bar) ===================== */
 .header{
@@ -119,8 +108,38 @@ p{margin:0 0 calc(var(--rh)*1.15); line-height:1.66}
   filter: drop-shadow(0 0 4px rgba(255,255,255,.18));
 }
 
-/* ===================== Consumer + Investor: Black-hole Event Horizon ===================== */
+/* ===================== Consumer + Investor (STATIC, NO IMAGE) ===================== */
 .twins{ position:relative; z-index:1; isolation:isolate; }
+
+/* Event-horizon look built from gradients only (no animation) */
+.horizon{
+  position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
+  /* Accretion colors + dark core + faint lensing */
+  background:
+    /* faint lensing veil */
+    radial-gradient(60% 40% at 50% 62%, rgba(255,255,255,.14), rgba(255,255,255,.06) 32%, rgba(255,255,255,0) 60%),
+    /* hot inner ring (warm) */
+    radial-gradient(26% 18% at 50% 62%, rgba(255,170,110,.22), rgba(255,170,110,.08) 55%, rgba(255,170,110,0) 72%),
+    /* cool inner ring */
+    radial-gradient(30% 22% at 50% 62%, rgba(120,190,255,.22), rgba(120,190,255,.07) 58%, rgba(120,190,255,0) 76%),
+    /* broad accretion disk sweep */
+    conic-gradient(from 12deg at 50% 62%,
+      rgba(255,140,80,.18), rgba(232,110,255,.18), rgba(100,180,255,.18),
+      rgba(80,230,210,.16), rgba(255,140,80,.18)),
+    /* dark core */
+    radial-gradient(22% 16% at 50% 62%, rgba(0,0,0,.94), rgba(0,0,0,.86) 60%, rgba(0,0,0,0) 80%);
+  filter: saturate(140%) contrast(105%) brightness(104%) blur(2px);
+}
+
+/* Vignette so text remains readable */
+.twins::after{
+  content:""; position:absolute; inset:0; z-index:4; pointer-events:none;
+  background: radial-gradient(120% 85% at 50% 50%,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.10) 64%,
+    rgba(0,0,0,.22) 100%);
+}
+
 .band{
   width:100%; min-height:420px; padding:clamp(96px,14vh,180px) 16px;
   background:rgba(255,255,255,.02); overflow:hidden; position:relative;
@@ -129,18 +148,9 @@ p{margin:0 0 calc(var(--rh)*1.15); line-height:1.66}
 .band h2{ margin-bottom:12px }
 .band .actions{ display:flex; gap:1rem; justify-content:center; margin-top:18px }
 
-/* unified dust */
+/* Dust canvas on top of horizon */
 .twins-canvas{
-  position:absolute; inset:0; z-index:2; pointer-events:none; opacity:.60; mix-blend-mode:screen;
-}
-/* event horizon canvas under dust, above bg */
-.horizon-canvas{
-  position:absolute; inset:0; z-index:1; pointer-events:none; display:block;
-}
-/* slight vignette for legibility */
-.twins::after{
-  content:""; position:absolute; inset:0; z-index:4; pointer-events:none;
-  background:radial-gradient(120% 85% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,.12) 70%, rgba(0,0,0,.25) 100%);
+  position:absolute; inset:0; z-index:3; pointer-events:none; opacity:.55; mix-blend-mode:screen;
 }
 
 /* ===================== CTAs ===================== */
@@ -170,7 +180,6 @@ p{margin:0 0 calc(var(--rh)*1.15); line-height:1.66}
   align-items:start; justify-items:stretch;
 }
 @media(min-width:900px){ .ic-grid{ grid-template-columns:1fr 1fr; column-gap:24px; } }
-.ic-item{ padding:0; background:transparent; border:none }
 .ic-item h3{ font:600 1rem "IBM Plex Sans"; margin:0 0 6px }
 .ic-item p{ opacity:.94 }
 
@@ -190,14 +199,11 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
 #nebula{
   position:absolute; left:0; right:0; bottom:0; height:160vh; pointer-events:none; z-index:1;
   background:
-    /* deep base */
     radial-gradient(58% 116% at 50% 126%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
     radial-gradient(60% 120% at 50% 138%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
     radial-gradient(62% 124% at 50% 148%, rgba(22,98,230,.82) 0%, rgba(0,0,0,0) 74%),
-    /* cyan/green rim (subtle) */
     radial-gradient(66% 130% at 50% 160%, rgba(0,235,255,.50) 0%, rgba(0,0,0,0) 82%),
     radial-gradient(70% 136% at 50% 172%, rgba(64,255,198,.40) 0%, rgba(0,0,0,0) 86%),
-    /* warm flare + magenta veil */
     radial-gradient(76% 144% at 50% 184%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%),
     radial-gradient(80% 152% at 50% 196%, rgba(212,96,255,.34) 0%, rgba(0,0,0,0) 92%);
   filter: blur(110px) saturate(165%);
@@ -206,21 +212,11 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
 }
 .copyright{position:relative; z-index:2; text-align:center; margin-top:.6rem}
 
-/* ===================== Reveal ===================== */
-.reveal{opacity:0; transform:translateY(12px)}
-.reveal.visible{animation:fadeUp .42s ease forwards}
-@keyframes fadeUp{to{opacity:1; transform:translateY(0)}}
-
-/* Bloomberg delta colors */
-.delta{ font-family:"IBM Plex Mono",monospace }
-.delta.up{ color:#00DC96 !important }
-.delta.down{ color:#FF6969 !important }
+/* ===================== Reveal (off) ===================== */
+.reveal{ opacity:1; transform:none; }
 </style>
 </head>
 <body>
-
-<!-- subtle fog -->
-<div id="fog" aria-hidden="true"></div>
 
 <!-- Header -->
 <header class="header" id="siteHeader">
@@ -279,7 +275,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
   <!-- AGENTS -->
   <section id="agents" class="section">
     <div class="container diagram">
-      <div class="right-shift reveal" style="margin-bottom:24px">
+      <div class="right-shift" style="margin-bottom:24px">
         <h2>Agent Strategy</h2>
         <p>Sourcing → Comps → Underwrite → Risk → Portfolio Fit → Critic → Memo</p>
       </div>
@@ -323,9 +319,9 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- CONSUMER + INVESTOR with Event Horizon + Dust -->
+  <!-- CONSUMER + INVESTOR (static horizon + dust) -->
   <section class="twins">
-    <canvas class="horizon-canvas" aria-hidden="true"></canvas>
+    <div class="horizon" aria-hidden="true"></div>
     <canvas class="twins-canvas" aria-hidden="true"></canvas>
 
     <section id="consumer" class="band" aria-labelledby="consumerTitle">
@@ -344,7 +340,6 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
           <h2 id="investorTitle">Investors</h2>
           <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span class="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
 
-          <!-- Bloomberg echo (centered) -->
           <div style="margin-top:10px; display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:center">
             <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta num">+1%</span></span>
             <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta num">+0.3%</span></span>
@@ -361,7 +356,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
   <!-- PRICING -->
   <section id="pricing" class="section">
     <div class="container">
-      <div class="right-shift reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <div class="right-shift" style="margin-left:auto;margin-right:auto;text-align:center">
         <h2>Pricing</h2>
         <p>Templates only — final pricing TBD.</p>
         <div class="actions" style="margin-top:1.2rem; justify-content:center">
@@ -375,7 +370,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
   <!-- Integrations & Compliance (text-only, symmetric) -->
   <section class="section ic-slab">
     <div class="container">
-      <div class="ic-grid reveal">
+      <div class="ic-grid">
         <div class="ic-item">
           <h3>Integrations</h3>
           <p>MLS/assessor proxies, rental datasets, permit/title sources, FEMA flood, and alerts to email/SMS.</p>
@@ -391,7 +386,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
   <!-- CONTACT -->
   <section id="contact" class="section" aria-labelledby="ctitle">
     <div class="container">
-      <div class="right-shift reveal" style="margin-left:auto;margin-right:auto;text-align:center">
+      <div class="right-shift" style="margin-left:auto;margin-right:auto;text-align:center">
         <h2 id="ctitle">Contact</h2>
         <p>Partnerships, pilots, or access:</p>
         <p style="font-size:1.12rem"><a href="mailto:contact@janus.ai">contact@janus.ai</a></p>
@@ -421,7 +416,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
 </footer>
 
 <script>
-/* scrollspy + reveals */
+/* Sticky nav highlight */
 (function(){
   const links=[...document.querySelectorAll('.nav a')];
   const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
@@ -437,11 +432,9 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     },{rootMargin:'-35% 0px -60% 0px',threshold:0.01});
     sections.forEach(s=>spy.observe(s));
   }
-  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{rootMargin:'-10% 0px -10% 0px',threshold:0.02});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
-/* Bloomberg deltas: robust red/green based on sign; reacts to later updates */
+/* Bloomberg deltas: red/green based on sign */
 (function(){
   const paint = el => {
     const t = (el.textContent || '').trim();
@@ -459,141 +452,12 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
   document.querySelectorAll('.delta').forEach(el=>mo.observe(el,{characterData:true,subtree:true,childList:true}));
 })();
 
-/* ===== Event Horizon Renderer for Consumer+Investor ===== */
+/* Dust across the twins band
+   To make dust fully static, set STATIC=true. */
 (function(){
-  const wrap = document.querySelector('.twins');
-  const horizon = wrap && wrap.querySelector('.horizon-canvas');
-  if(!wrap || !horizon) return;
-
-  const ctx = horizon.getContext('2d', { alpha:true });
-  const DPR = Math.min(window.devicePixelRatio||1, 2);
-
-  let w=0,h=0,cx=0,cy=0, t=0;
-
-  function resize(){
-    const r = wrap.getBoundingClientRect();
-    w = Math.max(1, Math.floor(r.width));
-    h = Math.max(1, Math.floor(r.height));
-    horizon.width = w * DPR; horizon.height = h * DPR;
-    horizon.style.width = w + 'px'; horizon.style.height = h + 'px';
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-    cx = w/2; cy = h*0.62; // ring slightly below center
-  }
-
-  function radialGradient(x,y,r,stops){
-    const g = ctx.createRadialGradient(x,y,0,x,y,r);
-    stops.forEach(s=>g.addColorStop(s[0], s[1]));
-    return g;
-  }
-
-  function lensArcs(time){
-    ctx.save();
-    ctx.globalCompositeOperation = 'lighter';
-    ctx.translate(cx, cy);
-    ctx.rotate(0.05*Math.sin(time*0.0007));
-    const arcCount = 5;
-    for(let i=0;i<arcCount;i++){
-      const ang = i * (Math.PI*2/arcCount) + time*0.00035 * (i%2?1:-1);
-      ctx.save();
-      ctx.rotate(ang);
-      ctx.beginPath();
-      ctx.moveTo(140, -2);
-      ctx.quadraticCurveTo(240, -8, 340, 0);
-      ctx.quadraticCurveTo(240,  8, 140, 2);
-      ctx.closePath();
-      ctx.fillStyle = 'rgba(200,220,255,0.08)';
-      ctx.filter = 'blur(2px)';
-      ctx.fill();
-      ctx.restore();
-    }
-    ctx.restore();
-  }
-
-  function ring(time){
-    // ring colors sweeping red -> magenta -> blue
-    const sweep = (Math.sin(time*0.0006)+1)/2; // 0..1
-    const hueA = 10 + 40*sweep;   // warm
-    const hueB = 210 - 60*sweep;  // cool
-    const warm = `hsla(${hueA}, 100%, 62%, .16)`;
-    const cool = `hsla(${hueB}, 100%, 62%, .16)`;
-
-    // core shadow
-    const coreR = Math.min(w,h)*0.28;
-    ctx.fillStyle = radialGradient(cx,cy, coreR*1.18, [
-      [0, 'rgba(0,0,0,0.80)'],
-      [0.82, 'rgba(0,0,0,0.54)'],
-      [1, 'rgba(0,0,0,0.00)']
-    ]);
-    ctx.beginPath(); ctx.arc(cx,cy, coreR*1.18, 0, Math.PI*2); ctx.fill();
-
-    // luminous ring (double pass for depth)
-    const ringR = coreR*1.38;
-    for(let pass=0; pass<2; pass++){
-      ctx.save();
-      ctx.globalCompositeOperation = 'screen';
-      ctx.translate(cx,cy);
-      ctx.rotate(time*0.00035 * (pass?1:-1));
-      ctx.beginPath();
-      ctx.ellipse(0, 0, ringR*1.15, ringR*0.64, 0, 0, Math.PI*2);
-      const lg = ctx.createLinearGradient(-ringR,0, ringR,0);
-      lg.addColorStop(0.0, cool);
-      lg.addColorStop(0.5, 'rgba(255,255,255,0.12)');
-      lg.addColorStop(1.0, warm);
-      ctx.strokeStyle = lg;
-      ctx.lineWidth = 3.2 + pass*1.1;
-      ctx.shadowColor = 'rgba(255,255,255,0.12)';
-      ctx.shadowBlur = 18 + pass*10;
-      ctx.stroke();
-      ctx.restore();
-    }
-  }
-
-  function plasma(time){
-    // faint swirling plasma field around the ring
-    ctx.save();
-    ctx.globalCompositeOperation = 'screen';
-    ctx.translate(cx, cy);
-    ctx.rotate(time*0.00018);
-    const maxR = Math.min(w,h)*0.65;
-    for(let i=0;i<7;i++){
-      const rr = maxR*(0.25 + i*0.08);
-      ctx.beginPath();
-      ctx.ellipse(0,0, rr*1.05, rr*0.58, i*0.45, 0, Math.PI*2);
-      ctx.strokeStyle = `rgba(${180-i*10}, ${210-i*8}, 255, ${0.028 - i*0.0025})`;
-      ctx.lineWidth = 1.2;
-      ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-  function frame(now){
-    t = now;
-    ctx.clearRect(0,0,w,h);
-
-    // subtle deep-space base
-    const baseR = Math.min(w,h)*0.9;
-    ctx.fillStyle = radialGradient(cx,cy, baseR, [
-      [0, 'rgba(10,16,30,0.28)'],
-      [1, 'rgba(0,0,0,0)']
-    ]);
-    ctx.fillRect(0,0,w,h);
-
-    ring(t);
-    lensArcs(t);
-    plasma(t);
-
-    requestAnimationFrame(frame);
-  }
-
-  resize(); requestAnimationFrame(frame);
-  addEventListener('resize', resize, {passive:true});
-  if('ResizeObserver' in window) new ResizeObserver(resize).observe(wrap);
-})();
-
-/* Dense, even dust across the entire twins band */
-(function(){
+  const STATIC=false; // <-- set true if you want zero motion
   const twins=document.querySelector('.twins'); if(!twins) return;
-  const canvas=twins.querySelector('.twins-canvas'); const ctx=canvas.getContext('2d',{alpha:true});
+  const canvas=document.querySelector('.twins-canvas'); const ctx=canvas.getContext('2d',{alpha:true});
   const DPR=Math.min(window.devicePixelRatio||1,2);
   let w=0,h=0,particles=[];
   function size(){
@@ -601,14 +465,23 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     w=Math.max(1,Math.floor(r.width)); h=Math.max(1,Math.floor(r.height));
     canvas.width=w*DPR; canvas.height=h*DPR; canvas.style.width=w+'px'; canvas.style.height=h+'px';
     ctx.setTransform(DPR,0,0,DPR,0,0);
-    const count=Math.max(180,Math.floor((w*h)/8000));  // denser
+    const count=Math.max(180,Math.floor((w*h)/8000));
     particles=new Array(count).fill(0).map(()=>({
       x:Math.random()*w, y:Math.random()*h,
-      r:Math.random()*1.6+.6, a:Math.random()*.45+.25,
-      vx:(Math.random()*.22-.11), vy:(Math.random()*.22-.11)
+      r:Math.random()*1.4+.6, a:Math.random()*.40+.25,
+      vx:(Math.random()*.16-.08), vy:(Math.random()*.16-.08)
     }));
+    draw();
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(const p of particles){
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${p.a})`; ctx.fill();
+    }
   }
   function step(){
+    if(STATIC){ draw(); return; }
     ctx.clearRect(0,0,w,h);
     for(const p of particles){
       p.x+=p.vx; p.y+=p.vy;
@@ -619,9 +492,10 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     }
     requestAnimationFrame(step);
   }
-  size(); step();
+  size();
+  STATIC ? draw() : step();
   addEventListener('resize',size,{passive:true});
-  if('ResizeObserver'in window){ new ResizeObserver(size).observe(twins); }
+  if('ResizeObserver'in window) new ResizeObserver(size).observe(twins);
 })();
 </script>
 </body>
