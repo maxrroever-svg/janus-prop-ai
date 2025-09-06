@@ -10,22 +10,21 @@
 <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 
 <style>
-/* ===================== Root / Tokens ===================== */
+/* ===================== Tokens ===================== */
 :root{
   color-scheme: dark;
   --bg:#000;
   --white:#fff;
   --hair:rgba(255,255,255,.12);
-  --veil:rgba(0,0,0,.38);
   --up:#00DC96;
   --down:#FF6969;
   --primary:#8EC5FF;
   --accent:#C68CFF;
   --sun:#FF9E7A;
-  --fog:.10;
-  --rhythm: 14px;            /* vertical rhythm unit */
-  --maxw: 1120px;
-  --prose: 920px;
+  --fog:.08;
+  --rh:14px;              /* rhythm */
+  --maxw:1120px;
+  --prose:900px;
 }
 
 /* ===================== Base ===================== */
@@ -38,50 +37,57 @@ body{
 }
 ::selection{background:rgba(255,255,255,.18); color:#000}
 
-/* Force all text white (keeps your look) */
+/* force text white */
 h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,a,button,label,div,section,footer,header,svg text{
   color:var(--white) !important; -webkit-text-fill-color:var(--white);
 }
-a{text-decoration:none} a:hover{text-decoration:none}
+a{text-decoration:none}
 
-/* ===================== Type / Spacing (like your example) ===================== */
+/* ===================== Type & spacing (match screenshots) ===================== */
 body{font-size:16px}
 h1{
-  font-family:"GFS Didot",serif; letter-spacing:.0045em; line-height:1.06;
-  font-size:clamp(2.2rem,4.8vw,3.8rem);
-  margin:0 0 calc(var(--rhythm)*1.5);
+  font-family:"GFS Didot",serif;
+  font-weight:400;                 /* unbold */
+  letter-spacing:.004em;
+  line-height:1.04;
+  font-size:clamp(2.6rem,5.4vw,4.2rem);
+  margin:0 0 calc(var(--rh)*1.6);
+  text-align:center;
 }
 h2{
-  font-family:"GFS Didot",serif; letter-spacing:.0045em; line-height:1.12;
-  font-size:clamp(1.6rem,2.6vw,2.2rem);
-  margin:0 0 calc(var(--rhythm)*1.1);
+  font-family:"GFS Didot",serif; font-weight:400;
+  letter-spacing:.004em; line-height:1.12;
+  font-size:clamp(1.8rem,3vw,2.4rem);
+  margin:0 0 calc(var(--rh)*1.1);
+  text-align:center;
 }
 h3{
-  font-family:"GFS Didot",serif; font-size:clamp(1.12rem,1.5vw,1.35rem);
-  margin:0 0 calc(var(--rhythm)*.9);
+  font-family:"GFS Didot",serif; font-weight:400;
+  font-size:clamp(1.15rem,1.6vw,1.35rem);
+  margin:0 0 calc(var(--rh)*.9);
 }
 p,li,small,span,button,input,textarea,select,nav,a{font-family:"IBM Plex Sans",system-ui,sans-serif}
-p{margin:0 0 calc(var(--rhythm)*1.2); line-height:1.65}
+p{margin:0 0 calc(var(--rh)*1.15); line-height:1.66}
 .num{font-family:"IBM Plex Mono",monospace}
-.prose{max-width:var(--prose)}
+.prose{max-width:var(--prose); margin:0 auto; text-align:center}
 
-/* ===================== Fog (subtle, steady) ===================== */
+/* ===================== Fog (very subtle, steady) ===================== */
 #fog{
-  position:fixed; inset:0 auto auto 0; right:0; top:0; height:22vh; z-index:0; pointer-events:none;
+  position:fixed; left:0; right:0; top:0; height:18vh; z-index:0; pointer-events:none;
   background:
     radial-gradient(140% 200% at 50% -30%, rgba(255,255,255,calc(.22*var(--fog))), rgba(255,255,255,0) 58%),
     radial-gradient(110% 160% at 40% -20%, rgba(210,210,210,calc(.14*var(--fog))), rgba(210,210,210,0) 62%),
     radial-gradient(120% 180% at 60% -18%, rgba(200,200,200,calc(.12*var(--fog))), rgba(200,200,200,0) 64%);
-  filter:blur(28px) saturate(103%);
+  filter:blur(26px) saturate(103%);
   -webkit-mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,0) 100%);
           mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,0) 100%);
 }
 
-/* ===================== Header (follows on scroll) ===================== */
+/* ===================== Header (sticky, scrolled style) ===================== */
 .header{
   position:sticky; top:0; z-index:20;
   display:flex; align-items:center; justify-content:space-between;
-  padding:calc(var(--rhythm)*.9) calc(var(--rhythm)*1.1);
+  padding:calc(var(--rh)*.9) calc(var(--rh)*1.1);
   background:transparent; transition:background .25s, border-color .25s, backdrop-filter .25s;
 }
 .header.scrolled{
@@ -90,8 +96,12 @@ p{margin:0 0 calc(var(--rhythm)*1.2); line-height:1.65}
   -webkit-backdrop-filter:saturate(120%) blur(8px);
   border-bottom:1px solid var(--hair);
 }
+/* enforce logo right, nav left */
+.header .nav{order:1}
+.header .brand{order:2}
+
 .brand{ font-family:"GFS Didot",serif; font-size:1.2rem; letter-spacing:.02em; }
-.nav{ display:flex; gap:1.1rem; align-items:center; margin-left:auto }
+.nav{ display:flex; gap:1.1rem; align-items:center; margin-left:0 }
 .nav a{ font-weight:600; letter-spacing:.01em; font-size:.98rem; position:relative; padding-bottom:6px; }
 .nav a::after{
   content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
@@ -100,8 +110,8 @@ p{margin:0 0 calc(var(--rhythm)*1.2); line-height:1.65}
 }
 .nav a:hover::after,.nav a.active::after{ right:0 }
 
-/* ===================== Sections / Containers ===================== */
-.section{ padding:clamp(60px,8vw,96px) calc(var(--rhythm)*1.1); position:relative; z-index:1 }
+/* ===================== Sections ===================== */
+.section{ padding:clamp(60px,8vw,96px) calc(var(--rh)*1.1); position:relative; z-index:1 }
 .container{ max-width:var(--maxw); margin:0 auto }
 
 /* ===================== CTA ===================== */
@@ -119,7 +129,7 @@ p{margin:0 0 calc(var(--rhythm)*1.2); line-height:1.65}
 }
 .cta:hover{ background:rgba(255,255,255,.10) }
 
-/* ===================== Ticker (Bloomberg chips, half-color) ===================== */
+/* ===================== Ticker (Bloomberg) ===================== */
 .ticker{
   padding:.85rem 0; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
   overflow-x:auto; white-space:nowrap; scrollbar-width:none; position:relative; z-index:1;
@@ -137,47 +147,51 @@ p{margin:0 0 calc(var(--rhythm)*1.2); line-height:1.65}
 .tick .delta{font-family:"IBM Plex Mono"; font-size:.82rem}
 .delta.up{color:var(--up)} .delta.down{color:var(--down)}
 
-/* ===================== Agent Diagram (minimal line + nodes) ===================== */
+/* ===================== Vision bullets grid (centered) ===================== */
+.features{
+  display:grid; gap:1.0rem; margin-top:calc(var(--rh)*2);
+}
+@media(min-width:900px){ .features{grid-template-columns:repeat(4,1fr)} }
+.feature .kicker{font:700 1.0rem "IBM Plex Sans"}
+
+/* ===================== Agent Diagram (as in screenshot) ===================== */
 .diagram svg{max-width:100%; height:auto; display:block}
 .diagram .lane{stroke:rgba(255,255,255,.16); stroke-width:1}
 .diagram .node{fill:#fff}
 .diagram text{font:600 13px "IBM Plex Sans"; fill:#fff}
-.diagram .flow{stroke:rgba(120,200,255,.9); stroke-width:1.8; marker-end:url(#arrow)}
+.diagram .flow{stroke:rgba(120,200,255,.9); stroke-width:1.6; marker-end:url(#arrow)}
+.diagram .cap{fill:rgba(255,255,255,.06); stroke:rgba(255,255,255,.12)}
 
-/* ===================== Bands (dust + glows) ===================== */
+/* ===================== Bands (center fix + dust) ===================== */
 .band{
-  width:100%; min-height:360px; padding:clamp(92px,12vh,164px) calc(var(--rhythm)*1.1);
+  width:100%; min-height:360px; padding:clamp(92px,12vh,164px) calc(var(--rh)*1.1);
   position:relative; overflow:hidden; background:rgba(255,255,255,.025); z-index:1;
 }
-.band .container{position:relative; z-index:4}
-.band h2{text-align:center}
-.band p{max-width:var(--prose); margin-left:auto; margin-right:auto; text-align:center}
-.band .actions{display:flex; gap:1rem; justify-content:center; margin-top:calc(var(--rhythm)*1.1)}
+.band .container{position:relative; z-index:4; max-width:var(--maxw); margin:0 auto; text-align:center}
+.band h2{margin-bottom:calc(var(--rh)*.8)}
+.band .actions{display:flex; gap:1rem; justify-content:center; margin-top:calc(var(--rh)*1.1)}
 .dust-canvas{
-  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.54; mix-blend-mode:screen;
+  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.52; mix-blend-mode:screen;
 }
 .glowfield{
   position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
-    radial-gradient(280px 240px at 3% 6%,   rgba(140,200,255,.14), rgba(0,0,0,0) 72%),
-    radial-gradient(300px 260px at 98% 12%, rgba(255,170,96,.12),  rgba(0,0,0,0) 74%),
-    radial-gradient(260px 240px at 6% 96%,  rgba(200,140,255,.12), rgba(0,0,0,0) 70%),
-    radial-gradient(280px 240px at 96% 92%, rgba(120,255,220,.10), rgba(0,0,0,0) 70%);
+    radial-gradient(260px 220px at 4% 12%,   rgba(140,200,255,.14), rgba(0,0,0,0) 72%),
+    radial-gradient(280px 240px at 96% 14%,  rgba(255,170,96,.12),  rgba(0,0,0,0) 74%),
+    radial-gradient(240px 220px at 8% 88%,   rgba(200,140,255,.12), rgba(0,0,0,0) 70%),
+    radial-gradient(260px 220px at 92% 90%,  rgba(120,255,220,.10), rgba(0,0,0,0) 70%);
   filter:blur(10px);
 }
 
-/* ===================== Micro Integrations & Compliance (under Pricing) ===================== */
-.micro-ic{ padding-top:0; padding-bottom:40px }
-.micro-list{
-  display:grid; gap:.6rem; grid-template-columns:repeat(2,minmax(0,1fr));
-  max-width:900px; margin:0 auto;
-}
-@media(min-width:780px){ .micro-list{ grid-template-columns:repeat(4,minmax(0,1fr)) } }
-.micro-item{ font-size:.92rem; opacity:.92; text-align:center }
-.badge{border:1px solid var(--hair); border-radius:999px; padding:.35rem .7rem; background:rgba(255,255,255,.06)}
+/* ===================== Integrations & Compliance (two columns, clean) ===================== */
+.ic-slab{border-top:1px solid var(--hair); padding-top:calc(var(--rh)*2)}
+.ic-grid{display:grid; gap:1.2rem}
+@media(min-width:900px){ .ic-grid{grid-template-columns:1fr 1fr} }
+.ic-item h3{font:600 1rem "IBM Plex Sans"; margin:0 0 .4rem; text-align:left}
+.ic-item p{text-align:left; opacity:.92}
 
-/* ===================== Footer + Wider/Taller Nebula ===================== */
-footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhythm)*1.1) 2.4rem; position:relative; z-index:1; }
+/* ===================== Footer + smaller nebula ===================== */
+footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1.1) 2.4rem; position:relative; z-index:1; }
 .footer-wrap{
   position:relative; z-index:2; max-width:var(--maxw); margin:0 auto 1.2rem;
   display:grid; gap:1.2rem; grid-template-columns:repeat(2,1fr);
@@ -189,16 +203,16 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
 .access-badges{display:flex; gap:.5rem; flex-wrap:wrap}
 
 #nebula{
-  position:absolute; left:0; right:0; bottom:0; height:220vh; pointer-events:none; z-index:1;
+  position:absolute; left:0; right:0; bottom:0; height:120vh; pointer-events:none; z-index:1;
   background:
-    radial-gradient(80% 140% at 50% 130%, rgba(32,12,64,.96) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(90% 150% at 50% 145%, rgba(8,26,96,.94) 0%, rgba(0,0,0,0) 70%),
-    radial-gradient(95% 160% at 50% 160%, rgba(18,88,220,.84) 0%, rgba(0,0,0,0) 76%),
-    radial-gradient(105% 170% at 50% 175%, rgba(0,235,255,.52) 0%, rgba(0,0,0,0) 82%),
-    radial-gradient(120% 185% at 50% 190%, rgba(255,178,84,.56) 0%, rgba(0,0,0,0) 88%);
-  filter: blur(100px) saturate(152%);
-  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 62%);
-          mask-image:linear-gradient(to top, rgba(0,0,0,1) 10%, rgba(0,0,0,0) 62%);
+    radial-gradient(70% 130% at 50% 122%, rgba(32,12,64,.92) 0%, rgba(0,0,0,0) 58%),
+    radial-gradient(75% 135% at 50% 134%, rgba(8,26,96,.88) 0%, rgba(0,0,0,0) 68%),
+    radial-gradient(80% 145% at 50% 146%, rgba(18,88,220,.72) 0%, rgba(0,0,0,0) 76%),
+    radial-gradient(90% 155% at 50% 158%, rgba(0,235,255,.46) 0%, rgba(0,0,0,0) 84%),
+    radial-gradient(100% 170% at 50% 170%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%);
+  filter: blur(88px) saturate(140%);
+  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 60%);
+          mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 60%);
 }
 .copyright{position:relative; z-index:2; text-align:center; margin-top:.6rem}
 
@@ -213,7 +227,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
 <!-- subtle fog -->
 <div id="fog" aria-hidden="true"></div>
 
-<!-- Header (nav left, brand right) -->
+<!-- Header (nav left, brand right — enforced) -->
 <header class="header" id="siteHeader">
   <nav class="nav">
     <a href="#home">Home</a>
@@ -230,47 +244,49 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
 <main>
   <!-- HERO -->
   <section id="home" class="section">
-    <div class="container prose">
-      <h1>AI for Real Estate, Without the Noise.</h1>
-      <p>Janus runs every opportunity through an <b>agentic investment committee</b> — sourcing, comps, underwriting, risk, fit, and a final memo — so you act with confidence.</p>
+    <div class="container">
+      <div class="prose">
+        <h1>AI for Real Estate, Without<br/>the Noise.</h1>
+        <p>Janus runs every opportunity through an <b>agentic investment committee</b> — sourcing, comps, underwriting, risk, fit, and a final memo — so you act with confidence.</p>
+      </div>
     </div>
   </section>
 
-  <!-- TICKER (Bloomberg half-color + mono numbers) -->
+  <!-- TICKER -->
   <section class="ticker">
-    <div class="container" style="max-width:none">
-      <span class="tick"><span class="label">Deal Score</span><span class="value num">91</span><span class="delta up num">+2.1</span></span>
+    <div class="container" style="max-width:none; text-align:center">
+      <span class="tick"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta up num">+2.1</span></span>
       <span class="tick violet"><span class="label">DSCR</span><span class="value num">1.28</span><span class="delta up num">+0.03</span></span>
-      <span class="tick warm"><span class="label">Cap Rate</span><span class="value num">6.8%</span><span class="delta down num">-0.2%</span></span>
-      <span class="tick"><span class="label">Rent Band</span><span class="value num">$1,780</span><span class="delta up num">+15</span></span>
-      <span class="tick violet"><span class="label">Risk Flags</span><span class="value num">Low</span><span class="delta up num">✓</span></span>
-      <span class="tick warm"><span class="label">Spread</span><span class="value num">$13.5k</span><span class="delta up num">+$900</span></span>
+      <span class="tick warm"><span class="label">CAP RATE</span><span class="value num">6.8%</span><span class="delta down num">-0.2%</span></span>
+      <span class="tick"><span class="label">RENT BAND</span><span class="value num">$1,780</span><span class="delta up num">+15</span></span>
+      <span class="tick violet"><span class="label">RISK FLAGS</span><span class="value num">Low</span><span class="delta up num">✓</span></span>
+      <span class="tick warm"><span class="label">SPREAD</span><span class="value num">$13.5k</span><span class="delta up num">+$900</span></span>
     </div>
   </section>
 
   <!-- VISION -->
   <section id="vision" class="section">
     <div class="container">
-      <div class="reveal prose">
+      <div class="prose reveal">
         <h2>Vision</h2>
         <p>Build the <b>agent-first</b> platform for real estate. Specialist agents — <em>Sourcing</em>, <em>Comps</em>, <em>Underwriter</em>, <em>Risk</em>, <em>Portfolio Fit</em>, <em>Critic</em> — produce evidence, challenge each other, and deliver a clean memo with a verdict: <span class="num">YES / REVISE / NO</span>. Every conclusion is cited and auditable.</p>
       </div>
-      <div style="border-top:1px solid var(--hair); margin:calc(var(--rhythm)*2) 0"></div>
-      <div class="reveal" style="display:grid; grid-template-columns:1fr; gap:1rem; max-width:var(--maxw)">
-        <div class="prose"><h3 style="font:700 1.05rem 'IBM Plex Sans'">Explainable by Default</h3><p>Every number is traceable to comps, assumptions, and sources. No black boxes.</p></div>
-        <div class="prose"><h3 style="font:700 1.05rem 'IBM Plex Sans'">Risk-Aware</h3><p>Flood, crime, HOA, title, permits — surfaced as gates with severity thresholds.</p></div>
-        <div class="prose"><h3 style="font:700 1.05rem 'IBM Plex Sans'">Portfolio Fit</h3><p>Your “box” enforced: metros, leverage, min DSCR/CoC, hold, and concentration.</p></div>
-        <div class="prose"><h3 style="font:700 1.05rem 'IBM Plex Sans'">One-Tap Memo</h3><p>Final IC memo with dissent, sensitivities, and conditions to close.</p></div>
+      <div style="border-top:1px solid var(--hair); margin:calc(var(--rh)*2) 0"></div>
+      <div class="features reveal">
+        <div class="feature prose"><div class="kicker">Explainable by Default</div><p>Every number is traceable to comps, assumptions, and sources. No black boxes.</p></div>
+        <div class="feature prose"><div class="kicker">Risk-Aware</div><p>Flood, crime, HOA, title, permits — surfaced as gates with severity thresholds.</p></div>
+        <div class="feature prose"><div class="kicker">Portfolio Fit</div><p>Your “box” enforced: metros, leverage, min DSCR/CoC, hold, and concentration.</p></div>
+        <div class="feature prose"><div class="kicker">One-Tap Memo</div><p>Final IC memo with dissent, sensitivities, and conditions to close.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- AGENTS (minimal line + nodes + arrows like your link) -->
+  <!-- AGENTS (clean line + nodes, centered spacing) -->
   <section id="agents" class="section">
     <div class="container diagram">
-      <div class="reveal" style="text-align:center; margin-bottom:calc(var(--rhythm)*1.2)">
+      <div class="prose reveal" style="margin-bottom:calc(var(--rh)*1.6)">
         <h2>Agent Strategy</h2>
-        <p style="opacity:.95; margin-top:.4rem">Sourcing → Comps → Underwrite → Risk → Portfolio Fit → Critic → Memo</p>
+        <p>Sourcing → Comps → Underwrite → Risk → Portfolio Fit → Critic → Memo</p>
       </div>
 
       <svg viewBox="0 0 1000 260" role="img" aria-label="Agent Pipeline Diagram">
@@ -280,42 +296,44 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
           </marker>
         </defs>
 
-        <!-- baseline -->
-        <line class="lane" x1="60" y1="130" x2="940" y2="130"/>
+        <!-- top caption & line -->
+        <text x="500" y="78" text-anchor="middle">Rent / ARV Band</text>
+        <line class="lane" x1="80" y1="90" x2="920" y2="90"/>
 
-        <!-- nodes -->
+        <!-- baseline & labels -->
+        <line class="lane" x1="80" y1="150" x2="920" y2="150"/>
         <g>
-          <circle class="node" cx="120" cy="130" r="3"/><text x="120" y="110" text-anchor="middle">Sourcing</text>
-          <circle class="node" cx="260" cy="130" r="3"/><text x="260" y="110" text-anchor="middle">Comps</text>
-          <circle class="node" cx="420" cy="130" r="3"/><text x="420" y="110" text-anchor="middle">Underwrite</text>
-          <circle class="node" cx="560" cy="130" r="3"/><text x="560" y="110" text-anchor="middle">Risk</text>
-          <circle class="node" cx="700" cy="130" r="3"/><text x="700" y="110" text-anchor="middle">Portfolio Fit</text>
-          <circle class="node" cx="820" cy="130" r="3"/><text x="820" y="110" text-anchor="middle">Critic</text>
-          <circle class="node" cx="920" cy="130" r="3"/><text x="920" y="110" text-anchor="middle">Memo</text>
+          <circle class="node" cx="140" cy="150" r="2.8"/><text x="140" y="130" text-anchor="middle">Sourcing</text>
+          <circle class="node" cx="260" cy="150" r="2.8"/><text x="260" y="130" text-anchor="middle">Comps</text>
+          <circle class="node" cx="420" cy="150" r="2.8"/><text x="420" y="130" text-anchor="middle">Underwrite</text>
+          <circle class="node" cx="560" cy="150" r="2.8"/><text x="560" y="130" text-anchor="middle">Risk</text>
+          <circle class="node" cx="700" cy="150" r="2.8"/><text x="700" y="130" text-anchor="middle">Portfolio Fit</text>
+          <circle class="node" cx="820" cy="150" r="2.8"/><text x="820" y="130" text-anchor="middle">Critic</text>
+          <circle class="node" cx="900" cy="150" r="2.8"/><text x="900" y="130" text-anchor="middle">Memo</text>
         </g>
 
         <!-- flows -->
-        <path class="flow" d="M120 130 L260 130" marker-end="url(#arrow)"/>
-        <path class="flow" d="M260 130 L420 130" marker-end="url(#arrow)"/>
-        <path class="flow" d="M420 130 L560 130" marker-end="url(#arrow)"/>
-        <path class="flow" d="M560 130 L700 130" marker-end="url(#arrow)"/>
-        <path class="flow" d="M700 130 L820 130" marker-end="url(#arrow)"/>
-        <path class="flow" d="M820 130 L920 130" marker-end="url(#arrow)"/>
+        <path class="flow" d="M140 150 L260 150" marker-end="url(#arrow)"/>
+        <path class="flow" d="M260 150 L420 150" marker-end="url(#arrow)"/>
+        <path class="flow" d="M420 150 L560 150" marker-end="url(#arrow)"/>
+        <path class="flow" d="M560 150 L700 150" marker-end="url(#arrow)"/>
+        <path class="flow" d="M700 150 L820 150" marker-end="url(#arrow)"/>
+        <path class="flow" d="M820 150 L900 150" marker-end="url(#arrow)"/>
 
-        <!-- captions -->
-        <text x="340" y="92" text-anchor="middle">Rent / ARV Band</text>
-        <text x="680" y="188" text-anchor="middle">Gates &amp; Conditions</text>
-        <text x="520" y="168" text-anchor="middle">Cap • CoC • DSCR • IRR • Sensitivities</text>
+        <!-- bottom caption & line -->
+        <text x="500" y="178" text-anchor="middle">Cap • CoC • DSCR • IRR • Sensitivities</text>
+        <line class="lane" x1="80" y1="210" x2="920" y2="210"/>
+        <text x="500" y="232" text-anchor="middle">Gates &amp; Conditions</text>
       </svg>
     </div>
   </section>
 
-  <!-- CONSUMER (dust across whole band) -->
+  <!-- CONSUMER -->
   <section id="consumer" class="band" aria-labelledby="consumerTitle">
     <canvas class="dust-canvas" aria-hidden="true"></canvas>
     <div class="glowfield" aria-hidden="true"></div>
     <div class="container">
-      <div class="reveal prose" style="text-align:center">
+      <div class="reveal">
         <h2 id="consumerTitle">Consumer</h2>
         <p>Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes. Build a watchlist, set thresholds (<span class="num">DSCR≥1.25</span>, <span class="num">Cap≥6%</span>), and share a one-page memo from your phone.</p>
         <div class="actions"><a class="cta glass" href="/consumer">Enter Dashboard</a></div>
@@ -323,12 +341,12 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
     </div>
   </section>
 
-  <!-- INVESTORS (dust across whole band) -->
+  <!-- INVESTORS -->
   <section id="investor" class="band" aria-labelledby="investorTitle">
     <canvas class="dust-canvas" aria-hidden="true"></canvas>
     <div class="glowfield" aria-hidden="true"></div>
     <div class="container">
-      <div class="reveal prose" style="text-align:center">
+      <div class="reveal">
         <h2 id="investorTitle">Investors</h2>
         <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span class="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
 
@@ -349,11 +367,11 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
 
   <!-- PRICING -->
   <section id="pricing" class="section">
-    <div class="container" style="text-align:center">
-      <div class="reveal prose" style="margin:0 auto">
+    <div class="container">
+      <div class="prose reveal">
         <h2>Pricing</h2>
         <p>Templates only — final pricing TBD.</p>
-        <div class="actions" style="margin-top:1.2rem">
+        <div class="actions" style="margin-top:1.2rem; justify-content:center">
           <a class="cta glass" href="#contact">Consumer — Learn More</a>
           <a class="cta glass" href="#contact">Investors — Learn More</a>
         </div>
@@ -361,21 +379,17 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
     </div>
   </section>
 
-  <!-- MICRO Integrations & Compliance (small and exactly under Pricing) -->
-  <section id="micro-ic" class="section micro-ic">
+  <!-- Integrations & Compliance (two-column slab like screenshot) -->
+  <section class="section ic-slab">
     <div class="container">
-      <div class="reveal" style="text-align:center">
-        <div class="micro-list">
-          <div class="micro-item"><span class="badge">Okta SSO</span><small>Single Sign-On</small></div>
-          <div class="micro-item"><span class="badge">Slack</span><small>Alerts</small></div>
-          <div class="micro-item"><span class="badge">Snowflake</span><small>Warehouse</small></div>
-          <div class="micro-item"><span class="badge">Zapier</span><small>Automations</small></div>
+      <div class="ic-grid reveal prose" style="text-align:left">
+        <div class="ic-item">
+          <h3>Integrations</h3>
+          <p>MLS/assessor proxies, rental datasets, permit/title sources, FEMA flood, and alerts to email/SMS.</p>
         </div>
-        <div class="micro-list" style="margin-top:.5rem">
-          <div class="micro-item"><span class="badge">SOC&nbsp;2</span><small>Type II</small></div>
-          <div class="micro-item"><span class="badge">GDPR</span><small>Compliant</small></div>
-          <div class="micro-item"><span class="badge">CCPA</span><small>Compliant</small></div>
-          <div class="micro-item"><span class="badge">Audit</span><small>Trails</small></div>
+        <div class="ic-item">
+          <h3>Compliance</h3>
+          <p>Evidence objects stored with citations; guardrails on DSCR/CoC/risk. Exportable audit trail.</p>
         </div>
       </div>
     </div>
@@ -384,7 +398,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
   <!-- CONTACT -->
   <section id="contact" class="section" aria-labelledby="ctitle">
     <div class="container">
-      <div class="reveal" style="text-align:center">
+      <div class="prose reveal">
         <h2 id="ctitle">Contact</h2>
         <p>Partnerships, pilots, or access:</p>
         <p style="font-size:1.05rem"><a href="mailto:contact@janus.ai">contact@janus.ai</a></p>
@@ -393,7 +407,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
   </section>
 </main>
 
-<!-- FOOTER + wider/taller nebula -->
+<!-- FOOTER + smaller nebula -->
 <footer>
   <div class="footer-wrap">
     <div class="footer-col"><h4>Resources</h4>
@@ -414,14 +428,14 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
 </footer>
 
 <script>
-/* ===== Header follows on scroll ===== */
+/* sticky header state */
 (function(){
   const h=document.getElementById('siteHeader');
   const onScroll=()=>{ if(window.scrollY>8) h.classList.add('scrolled'); else h.classList.remove('scrolled'); };
   onScroll(); addEventListener('scroll', onScroll, {passive:true});
 })();
 
-/* ===== Scrollspy + reveals ===== */
+/* scrollspy + reveals */
 (function(){
   const links=[...document.querySelectorAll('.nav a')];
   const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
@@ -441,7 +455,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rhyth
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
-/* ===== Dust — fill entire band area ===== */
+/* dust fill bands */
 (function(){
   document.querySelectorAll('.band').forEach(band=>{
     const canvas=band.querySelector('.dust-canvas'); if(!canvas) return;
