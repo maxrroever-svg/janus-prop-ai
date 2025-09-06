@@ -18,13 +18,11 @@
   --hair:rgba(255,255,255,.12);
   --up:#00DC96;
   --down:#FF6969;
-  --primary:#8EC5FF;
-  --accent:#C68CFF;
-  --sun:#FF9E7A;
-  --fog:.10;
+  --primary:#BFD9FF;
+  --fog:.08;
   --rh:14px;
   --maxw:1120px;
-  --prose:920px;
+  --prose:980px;
 }
 
 /* ===================== Base ===================== */
@@ -46,123 +44,115 @@ a{text-decoration:none}
 /* ===================== Type & Rhythm ===================== */
 body{font-size:16px}
 h1{
-  font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.004em;
-  line-height:1.04; font-size:clamp(2.6rem,5.4vw,4.2rem);
-  margin:0 0 calc(var(--rh)*1.6);
+  font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.0025em;
+  line-height:1.02; font-size:clamp(3.0rem,6.2vw,4.8rem);
+  margin:0 0 18px;
 }
 h2{
-  font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.004em;
-  line-height:1.12; font-size:clamp(1.8rem,3vw,2.4rem);
-  margin:0 0 calc(var(--rh)*1.1);
+  font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.003em;
+  line-height:1.08; font-size:clamp(2.2rem,3.6vw,3.0rem);
+  margin:0 0 12px;
 }
 h3{
   font-family:"GFS Didot",serif; font-weight:400;
   font-size:clamp(1.15rem,1.6vw,1.35rem);
-  margin:0 0 calc(var(--rh)*.9);
+  margin:0 0 12px;
 }
 p,li,small,span,button,input,textarea,select,nav,a{font-family:"IBM Plex Sans",system-ui,sans-serif}
 p{margin:0 0 calc(var(--rh)*1.15); line-height:1.66}
 .num{font-family:"IBM Plex Mono",monospace}
 .prose{max-width:var(--prose)}
 
-/* ===================== Steady Fog (top) ===================== */
+/* ===================== Steady Fog (very subtle) ===================== */
 #fog{
   position:fixed; left:0; right:0; top:0; height:18vh; z-index:0; pointer-events:none;
   background:
     radial-gradient(140% 200% at 50% -30%, rgba(255,255,255,calc(.20*var(--fog))), rgba(255,255,255,0) 58%),
     radial-gradient(110% 160% at 40% -20%, rgba(210,210,210,calc(.12*var(--fog))), rgba(210,210,210,0) 62%);
   filter:blur(26px) saturate(103%);
-  -webkit-mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,0) 100%);
-          mask-image:linear-gradient(to bottom, #000 0%, rgba(0,0,0,.5) 55%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,0) 100%);
+          mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,0) 100%);
 }
 
-/* ===================== Header (brand left, nav right, sticky) ===================== */
+/* ===================== Header (brand left, nav right, fixed, no bar) ===================== */
 .header{
-  position:sticky; top:0; z-index:20;
+  position:fixed; top:0; left:0; right:0; z-index:40;
   display:flex; align-items:center; justify-content:space-between;
-  padding:calc(var(--rh)*.9) calc(var(--rh)*1.1);
-  background:transparent; transition:background .25s, border-color .25s, backdrop-filter .25s;
+  padding:14px 16px; background:transparent !important; border:none !important; box-shadow:none !important;
 }
-.header.scrolled{
-  background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.20));
-  backdrop-filter:saturate(120%) blur(8px);
-  -webkit-backdrop-filter:saturate(120%) blur(8px);
-  border-bottom:1px solid var(--hair);
-}
+body{ padding-top:58px; } /* content offset */
 .brand{ font-family:"GFS Didot",serif; font-size:1.2rem; letter-spacing:.02em; }
 .nav{ display:flex; gap:1.1rem; align-items:center; margin-left:auto }
 .nav a{ font-weight:600; letter-spacing:.01em; font-size:.98rem; position:relative; padding-bottom:6px; }
 .nav a::after{
   content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
-  background:linear-gradient(90deg, var(--primary), var(--accent), var(--sun));
-  transition:right .25s ease;
+  background:linear-gradient(90deg,#8EC5FF,#C68CFF,#FF9E7A); transition:right .25s ease;
 }
 .nav a:hover::after,.nav a.active::after{ right:0 }
 
 /* ===================== Sections ===================== */
-.section{ padding:clamp(60px,8vw,96px) calc(var(--rh)*1.1); position:relative; z-index:1 }
+.section{ padding:clamp(60px,8vw,96px) 16px; position:relative; z-index:1 }
 .container{ max-width:var(--maxw); margin:0 auto }
 
-/* Right-shifted blocks (like doc alignment) */
+/* Right-shifted blocks */
 .right-shift{ max-width:var(--prose); margin-left:auto; margin-right:0; text-align:left }
 
-/* ===================== Bloomberg Ticker ===================== */
-.ticker{
-  padding:.85rem 0; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
-  overflow-x:auto; white-space:nowrap; scrollbar-width:none; position:relative; z-index:1;
+/* ===================== Bloomberg strip (text only, no pills) ===================== */
+.bstrip{
+  border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
+  padding:10px 0; overflow-x:auto; white-space:nowrap; scrollbar-width:none;
 }
-.ticker::-webkit-scrollbar{display:none}
-.tick{
-  display:inline-flex; align-items:center; gap:.6rem; margin-right:.5rem;
-  padding:.42rem .9rem; border-radius:999px; border:1px solid var(--hair);
-  background:linear-gradient(90deg, rgba(142,197,255,.18) 0 55%, rgba(255,255,255,.06) 55% 100%);
+.bstrip::-webkit-scrollbar{display:none}
+.bitem{
+  display:inline-flex; align-items:baseline; gap:.55rem;
+  margin-right:1.25rem; line-height:1.2;
 }
-.tick.violet{ background:linear-gradient(90deg, rgba(198,140,255,.18) 0 55%, rgba(255,255,255,.06) 55% 100%); }
-.tick.warm  { background:linear-gradient(90deg, rgba(255,158,122,.18) 0 55%, rgba(255,255,255,.06) 55% 100%); }
-.tick .label{opacity:.92; font-size:.78rem; letter-spacing:.02em; text-transform:uppercase}
-.tick .value{font-weight:700; color:var(--primary)}
-.tick .delta{font-family:"IBM Plex Mono"; font-size:.82rem}
-.delta.up{color:var(--up)} .delta.down{color:var(--down)}
+.bitem .label{ letter-spacing:.02em; opacity:.92; font-size:.78rem; text-transform:uppercase }
+.bitem .value{ font-weight:700; color:var(--primary) }
+.bitem .delta{ font-family:"IBM Plex Mono"; font-size:.88rem }
+.bitem .up{ color:var(--up) } .bitem .down{ color:var(--down) }
+.sep{ opacity:.28; margin:0 .6rem }
 
-/* ===================== Vision feature grid ===================== */
-.features{ display:grid; gap:1.0rem; margin-top:calc(var(--rh)*2) }
+/* ===================== Vision features ===================== */
+.features{ display:grid; gap:16px; margin-top:28px }
 @media(min-width:900px){ .features{grid-template-columns:repeat(4,1fr)} }
 .feature .kicker{font:700 1.0rem "IBM Plex Sans"}
 
-/* ===================== Agent Diagram (lighter, glossy) ===================== */
-.diagram svg{max-width:100%; height:auto; display:block; filter:drop-shadow(0 0 6px rgba(255,255,255,.06))}
-.diagram .lane{stroke:rgba(255,255,255,.14); stroke-width:1}
-.diagram .node{fill:rgba(255,255,255,.85)}
-.diagram text{font:600 13px "IBM Plex Sans"; fill:rgba(255,255,255,.92)}
+/* ===================== Agent Diagram (glossy) ===================== */
+.diagram svg{max-width:100%; height:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,255,255,.08))}
+.diagram .lane{stroke:rgba(255,255,255,.16); stroke-width:1}
+.diagram .node{fill:rgba(255,255,255,.95)}
+.diagram text{font:600 13px "IBM Plex Sans"; fill:rgba(255,255,255,.96)}
 .diagram .flow{
-  stroke:rgba(200,220,255,.75); stroke-width:1.6; marker-end:url(#arrow);
-  opacity:.95
+  stroke:rgba(235,242,255,.9); stroke-width:1.7; marker-end:url(#arrow);
+  /* sheen */
+  filter: drop-shadow(0 0 4px rgba(255,255,255,.14));
 }
 
-/* ===================== Consumer & Investor (continuous dust/glow) ===================== */
+/* ===================== Consumer + Investor (continuous dust & event horizon) ===================== */
 .twins{ position:relative; z-index:1 }
-.twins .band{
-  width:100%; min-height:360px; padding:clamp(92px,12vh,164px) calc(var(--rh)*1.1);
-  position:relative; overflow:hidden; background:rgba(255,255,255,.025);
+.band{
+  width:100%; min-height:360px; padding:clamp(92px,12vh,164px) 16px;
+  background:rgba(255,255,255,.025); overflow:hidden; position:relative;
 }
 .band .inner{ max-width:var(--maxw); margin:0 auto; text-align:center; position:relative; z-index:3 }
-.band h2{ margin-bottom:calc(var(--rh)*.8) }
-.band .actions{ display:flex; gap:1rem; justify-content:center; margin-top:calc(var(--rh)*1.1) }
+.band h2{ margin-bottom:12px }
+.band .actions{ display:flex; gap:1rem; justify-content:center; margin-top:18px }
 
-/* shared dust + glow spanning both bands */
 .twins-canvas{
-  position:absolute; left:0; right:0; top:0; bottom:0; z-index:1; pointer-events:none; opacity:.52; mix-blend-mode:screen;
+  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.6; mix-blend-mode:screen;
 }
 .twins-glow{
   position:absolute; inset:0; z-index:2; pointer-events:none;
+  /* subtle, continuous event horizon */
   background:
-    radial-gradient(900px 420px at 20% 30%, rgba(140,200,255,.10), rgba(0,0,0,0) 70%),
-    radial-gradient(1000px 480px at 80% 20%, rgba(255,170,96,.08), rgba(0,0,0,0) 74%),
-    radial-gradient(1100px 520px at 50% 95%, rgba(230,200,255,.08), rgba(0,0,0,0) 72%);
+    radial-gradient(1200px 520px at 18% 22%, rgba(140,200,255,.13), rgba(0,0,0,0) 70%),
+    radial-gradient(1400px 560px at 82% 18%, rgba(255,170,96,.12), rgba(0,0,0,0) 72%),
+    radial-gradient(1600px 620px at 50% 92%, rgba(180,255,230,.10), rgba(0,0,0,0) 74%),
+    radial-gradient(1200px 300px at 50% 84%, rgba(0,0,0,.55), rgba(0,0,0,0) 80%);
   filter:blur(12px);
-  /* faint event-horizon sweep */
-  -webkit-mask-image: radial-gradient(120% 80% at 50% 80%, rgba(0,0,0,1) 40%, rgba(0,0,0,.8) 70%, rgba(0,0,0,0) 100%);
-          mask-image: radial-gradient(120% 80% at 50% 80%, rgba(0,0,0,1) 40%, rgba(0,0,0,.8) 70%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: radial-gradient(130% 85% at 50% 82%, rgba(0,0,0,1) 42%, rgba(0,0,0,.85) 70%, rgba(0,0,0,0) 100%);
+          mask-image: radial-gradient(130% 85% at 50% 82%, rgba(0,0,0,1) 42%, rgba(0,0,0,.85) 70%, rgba(0,0,0,0) 100%);
 }
 
 /* ===================== CTA ===================== */
@@ -175,17 +165,24 @@ p{margin:0 0 calc(var(--rh)*1.15); line-height:1.66}
 }
 .cta{
   display:inline-flex; align-items:center; justify-content:center;
-  padding:.8rem 1.2rem; border:1px solid var(--hair);
+  padding:.82rem 1.25rem; border:1px solid var(--hair);
   border-radius:999px; background:rgba(255,255,255,.06);
 }
 .cta:hover{ background:rgba(255,255,255,.10) }
 
-/* ===================== Pricing & Contact (bigger) ===================== */
-#pricing h2, #contact h2{ font-size:clamp(2.0rem,3.4vw,2.8rem) }
-#pricing p, #contact p{ font-size:clamp(1.02rem,1.2vw,1.12rem) }
+/* ===================== Pricing, Integrations, Contact ===================== */
+#pricing .right-shift, #contact .right-shift{ margin-left:auto; margin-right:auto; text-align:center }
+#pricing h2, #contact h2{ font-size:clamp(2.2rem,3.8vw,3.1rem) }
+#pricing p, #contact p{ font-size:clamp(1.06rem,1.3vw,1.18rem) }
 
-/* ===================== Footer nebula (small) ===================== */
-footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1.1) 2.4rem; position:relative; z-index:1; }
+.ic-slab{ border-top:1px solid var(--hair); padding-top:28px }
+.ic-grid{ display:grid; gap:18px; grid-template-columns:1fr; max-width:980px; margin:0 auto }
+@media(min-width:900px){ .ic-grid{ grid-template-columns:1fr 1fr } }
+.ic-item h3{ font:600 1rem "IBM Plex Sans"; margin:0 0 6px }
+.ic-item p{ opacity:.94 }
+
+/* ===================== Footer nebula (vibrant multi-color) ===================== */
+footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; position:relative; z-index:1 }
 .footer-wrap{
   position:relative; z-index:2; max-width:var(--maxw); margin:0 auto 1.2rem;
   display:grid; gap:1.2rem; grid-template-columns:repeat(2,1fr);
@@ -197,12 +194,15 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
 .access-badges{display:flex; gap:.5rem; flex-wrap:wrap}
 
 #nebula{
-  position:absolute; left:0; right:0; bottom:0; height:110vh; pointer-events:none; z-index:1;
+  position:absolute; left:0; right:0; bottom:0; height:135vh; pointer-events:none; z-index:1;
   background:
-    radial-gradient(70% 130% at 50% 122%, rgba(32,12,64,.92) 0%, rgba(0,0,0,0) 58%),
-    radial-gradient(75% 135% at 50% 134%, rgba(8,26,96,.88) 0%, rgba(0,0,0,0) 68%),
-    radial-gradient(80% 145% at 50% 146%, rgba(18,88,220,.72) 0%, rgba(0,0,0,0) 76%);
-  filter: blur(80px) saturate(140%);
+    radial-gradient(60% 120% at 50% 122%, rgba(48,18,92,.95) 0%, rgba(0,0,0,0) 60%),   /* deep purple */
+    radial-gradient(62% 122% at 50% 134%, rgba(10,34,128,.90) 0%, rgba(0,0,0,0) 68%),  /* deep blue   */
+    radial-gradient(64% 126% at 50% 146%, rgba(22,98,230,.78) 0%, rgba(0,0,0,0) 76%),  /* blue        */
+    radial-gradient(68% 132% at 50% 158%, rgba(0,235,255,.50) 0%, rgba(0,0,0,0) 84%),  /* cyan glow   */
+    radial-gradient(72% 138% at 50% 170%, rgba(64,255,198,.40) 0%, rgba(0,0,0,0) 88%), /* green tint  */
+    radial-gradient(80% 150% at 50% 182%, rgba(255,178,84,.46) 0%, rgba(0,0,0,0) 90%); /* warm rim    */
+  filter: blur(95px) saturate(150%);
   -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 60%);
           mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 60%);
 }
@@ -216,10 +216,10 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
 </head>
 <body>
 
-<!-- steady fog -->
+<!-- subtle fog -->
 <div id="fog" aria-hidden="true"></div>
 
-<!-- Header (brand left, nav right, sticky) -->
+<!-- Header (brand left, nav right, fixed) -->
 <header class="header" id="siteHeader">
   <a class="brand" href="#home">Janus</a>
   <nav class="nav">
@@ -234,7 +234,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
 </header>
 
 <main>
-  <!-- HERO (right-shifted block) -->
+  <!-- HERO (right-shifted) -->
   <section id="home" class="section">
     <div class="container">
       <div class="right-shift">
@@ -244,26 +244,26 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
     </div>
   </section>
 
-  <!-- Bloomberg Ticker -->
-  <section class="ticker">
-    <div class="container" style="max-width:none; text-align:center">
-      <span class="tick"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta up num">+2.1</span></span>
-      <span class="tick violet"><span class="label">DSCR</span><span class="value num">1.28</span><span class="delta up num">+0.03</span></span>
-      <span class="tick warm"><span class="label">CAP RATE</span><span class="value num">6.8%</span><span class="delta down num">-0.2%</span></span>
-      <span class="tick"><span class="label">RENT BAND</span><span class="value num">$1,780</span><span class="delta up num">+15</span></span>
-      <span class="tick violet"><span class="label">RISK FLAGS</span><span class="value num">Low</span><span class="delta up num">✓</span></span>
-      <span class="tick warm"><span class="label">SPREAD</span><span class="value num">$13.5k</span><span class="delta up num">+$900</span></span>
+  <!-- Bloomberg text strip -->
+  <section class="bstrip">
+    <div class="container" style="max-width:none">
+      <span class="bitem"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta up num">+2.1</span></span>
+      <span class="bitem"><span class="label">DSCR</span><span class="value num">1.28</span><span class="delta up num">+0.03</span></span>
+      <span class="bitem"><span class="label">CAP RATE</span><span class="value num">6.8%</span><span class="delta down num">-0.2%</span></span>
+      <span class="bitem"><span class="label">RENT BAND</span><span class="value num">$1,780</span><span class="delta up num">+15</span></span>
+      <span class="bitem"><span class="label">RISK FLAGS</span><span class="value num">Low</span><span class="delta up num">✓</span></span>
+      <span class="bitem"><span class="label">SPREAD</span><span class="value num">$13.5k</span><span class="delta up num">+$900</span></span>
     </div>
   </section>
 
-  <!-- VISION (right-shifted block) -->
+  <!-- VISION (right-shifted) -->
   <section id="vision" class="section">
     <div class="container">
       <div class="right-shift reveal">
         <h2>Vision</h2>
         <p>Build the <b>agent-first</b> platform for real estate. Specialist agents — <em>Sourcing</em>, <em>Comps</em>, <em>Underwriter</em>, <em>Risk</em>, <em>Portfolio Fit</em>, <em>Critic</em> — produce evidence, challenge each other, and deliver a clean memo with a verdict: <span class="num">YES / REVISE / NO</span>. Every conclusion is cited and auditable.</p>
       </div>
-      <div style="border-top:1px solid var(--hair); margin:calc(var(--rh)*2) 0"></div>
+      <div style="border-top:1px solid var(--hair); margin:28px 0"></div>
       <div class="features reveal">
         <div class="feature"><div class="kicker">Explainable by Default</div><p>Every number is traceable to comps, assumptions, and sources. No black boxes.</p></div>
         <div class="feature"><div class="kicker">Risk-Aware</div><p>Flood, crime, HOA, title, permits — surfaced as gates with severity thresholds.</p></div>
@@ -273,10 +273,10 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
     </div>
   </section>
 
-  <!-- AGENTS (lighter/glossy diagram) -->
+  <!-- AGENTS (glossy diagram) -->
   <section id="agents" class="section">
     <div class="container diagram">
-      <div class="right-shift reveal" style="margin-bottom:calc(var(--rh)*1.6)">
+      <div class="right-shift reveal" style="margin-bottom:24px">
         <h2>Agent Strategy</h2>
         <p>Sourcing → Comps → Underwrite → Risk → Portfolio Fit → Critic → Memo</p>
       </div>
@@ -284,7 +284,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
       <svg viewBox="0 0 1000 260" role="img" aria-label="Agent Pipeline Diagram">
         <defs>
           <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,.85)"></path>
+            <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,.95)"></path>
           </marker>
         </defs>
 
@@ -320,9 +320,8 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
     </div>
   </section>
 
-  <!-- CONSUMER + INVESTOR (continuous dust & glow) -->
+  <!-- CONSUMER + INVESTOR (continuous dust & event horizon) -->
   <section class="twins">
-    <!-- shared dust / event horizon spanning both bands -->
     <canvas class="twins-canvas" aria-hidden="true"></canvas>
     <div class="twins-glow" aria-hidden="true"></div>
 
@@ -342,14 +341,12 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
           <h2 id="investorTitle">Investors</h2>
           <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span class="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
 
-          <!-- Bloomberg chip echo -->
-          <div style="margin-top:12px; display:flex; gap:.6rem; flex-wrap:wrap; justify-content:center">
-            <span class="tick"><span class="label">LTV</span><span class="value num">64%</span><span class="delta up num">+1%</span></span>
-            <span class="tick violet"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta up num">+0.3%</span></span>
-            <span class="tick warm"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta up num">+0.6%</span></span>
-            <span class="tick"><span class="label">DSCR</span><span class="value num">1.32</span>
-              <svg width="64" height="16" viewBox="0 0 64 16" aria-hidden="true"><path d="M0 13 L12 12 L24 10 L36 9 L48 8 L64 7" fill="none" stroke="#00DC96" stroke-width="2"/></svg>
-            </span>
+          <!-- Bloomberg echo: text format -->
+          <div style="margin-top:10px; display:flex; gap:1.1rem; flex-wrap:wrap; justify-content:center">
+            <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta up num">+1%</span></span>
+            <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta up num">+0.3%</span></span>
+            <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta up num">+0.6%</span></span>
+            <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta up num">+0.02</span></span>
           </div>
 
           <div class="actions" style="margin-top:14px"><a class="cta glass" href="/investor">Enter Dashboard</a></div>
@@ -358,13 +355,13 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
     </section>
   </section>
 
-  <!-- PRICING (bigger) -->
+  <!-- PRICING -->
   <section id="pricing" class="section">
     <div class="container">
-      <div class="right-shift reveal">
+      <div class="right-shift reveal" style="margin-left:auto;margin-right:auto;text-align:center">
         <h2>Pricing</h2>
         <p>Templates only — final pricing TBD.</p>
-        <div class="actions" style="margin-top:1.2rem; justify-content:flex-start">
+        <div class="actions" style="margin-top:1.2rem; justify-content:center">
           <a class="cta glass" href="#contact">Consumer — Learn More</a>
           <a class="cta glass" href="#contact">Investors — Learn More</a>
         </div>
@@ -372,37 +369,35 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
     </div>
   </section>
 
-  <!-- Integrations & Compliance -->
-  <section class="section" style="padding-top:24px">
+  <!-- Integrations & Compliance (between Pricing and Contact) -->
+  <section class="section ic-slab">
     <div class="container">
-      <div class="reveal" style="display:grid; gap:1.2rem; grid-template-columns:1fr; max-width:var(--maxw); margin:0 auto">
-        <div style="display:grid; gap:1.2rem" class="right-shift">
-          <div>
-            <h3 style="font:600 1rem 'IBM Plex Sans'">Integrations</h3>
-            <p>MLS/assessor proxies, rental datasets, permit/title sources, FEMA flood, and alerts to email/SMS.</p>
-          </div>
-          <div>
-            <h3 style="font:600 1rem 'IBM Plex Sans'">Compliance</h3>
-            <p>Evidence objects stored with citations; guardrails on DSCR/CoC/risk. Exportable audit trail.</p>
-          </div>
+      <div class="ic-grid reveal">
+        <div class="ic-item">
+          <h3>Integrations</h3>
+          <p>MLS/assessor proxies, rental datasets, permit/title sources, FEMA flood, and alerts to email/SMS.</p>
+        </div>
+        <div class="ic-item">
+          <h3>Compliance</h3>
+          <p>Evidence objects stored with citations; guardrails on DSCR/CoC/risk. Exportable audit trail.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT (bigger) -->
+  <!-- CONTACT -->
   <section id="contact" class="section" aria-labelledby="ctitle">
     <div class="container">
-      <div class="right-shift reveal">
+      <div class="right-shift reveal" style="margin-left:auto;margin-right:auto;text-align:center">
         <h2 id="ctitle">Contact</h2>
         <p>Partnerships, pilots, or access:</p>
-        <p style="font-size:1.1rem"><a href="mailto:contact@janus.ai">contact@janus.ai</a></p>
+        <p style="font-size:1.12rem"><a href="mailto:contact@janus.ai">contact@janus.ai</a></p>
       </div>
     </div>
   </section>
 </main>
 
-<!-- FOOTER (small nebula) -->
+<!-- FOOTER (vibrant multicolor nebula) -->
 <footer>
   <div class="footer-wrap">
     <div class="footer-col"><h4>Resources</h4>
@@ -423,10 +418,10 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
 </footer>
 
 <script>
-/* sticky header state */
+/* sticky header active state on scroll (no plate) */
 (function(){
   const h=document.getElementById('siteHeader');
-  const onScroll=()=>{ if(window.scrollY>8) h.classList.add('scrolled'); else h.classList.remove('scrolled'); };
+  const onScroll=()=>{ /* keep borderless; just manage active links below */ };
   onScroll(); addEventListener('scroll', onScroll, {passive:true});
 })();
 
@@ -461,7 +456,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem calc(var(--rh)*1
     w=Math.max(1,Math.floor(r.width)); h=Math.max(1,Math.floor(r.height));
     canvas.width=w*DPR; canvas.height=h*DPR; canvas.style.width=w+'px'; canvas.style.height=h+'px';
     ctx.setTransform(DPR,0,0,DPR,0,0);
-    const count=Math.max(90,Math.floor((w*h)/12000));  /* denser than before */
+    const count=Math.max(120,Math.floor((w*h)/10000));  // denser, but still subtle
     particles=new Array(count).fill(0).map(()=>({
       x:Math.random()*w, y:Math.random()*h,
       r:Math.random()*1.6+.6, a:Math.random()*.45+.25,
