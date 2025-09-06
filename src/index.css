@@ -2,56 +2,68 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Janus AI Design System - Cold Professional Intelligence Platform */
-/* All colors in HSL format for semantic design tokens */
+/* Janus AI Design System - Futuristic Intelligence Platform */
+/* X.ai inspired cosmic aesthetic with dark gradients and glowing elements */
 
 @layer base {
   :root {
-    /* Janus Prop AI - Bloomberg Terminal Inspired Design System */
-    --background: 220 14% 6%; /* Dark navy #0F1419 */
-    --foreground: 0 0% 100%; /* Pure white #FFFFFF */
-    --card: 220 12% 9%; /* Card background #151922 */
-    --card-foreground: 0 0% 100%; /* Pure white */
-    --popover: 220 12% 9%;
-    --popover-foreground: 0 0% 100%;
-    --primary: 220 43% 19%; /* Navy Blue #1C2A4C */
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 10% 12%; /* Section background #1E2329 */
-    --secondary-foreground: 0 0% 75%; /* Cool grey #C0C0C0 */
-    --muted: 220 8% 15%; /* Muted backgrounds #252B33 */
+    /* Core cosmic background system */
+    --background: 222 84% 3%; /* Deep space black #040815 */
+    --foreground: 0 0% 98%; /* Near white #FAFAFA */
+    --card: 222 84% 4%; /* Card space #060A18 */
+    --card-foreground: 0 0% 98%;
+    --popover: 222 84% 4%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Primary cosmic blue */
+    --primary: 220 70% 50%; /* Cosmic blue #1E40AF to #3B82F6 */
+    --primary-foreground: 222 84% 3%;
+    
+    /* Secondary cosmic layers */
+    --secondary: 222 84% 5%; /* Deeper card #080C1C */
+    --secondary-foreground: 0 0% 85%; /* Soft white #D9D9D9 */
+    --muted: 222 84% 6%; /* Muted cosmic #0A0E20 */
     --muted-foreground: 0 0% 65%; /* Muted text #A6A6A6 */
-    --accent: 195 100% 50%; /* Icy blue accent #00BFFF */
-    --accent-foreground: 220 14% 6%;
-    --destructive: 0 84% 60%; /* Alert red */
-    --destructive-foreground: 0 0% 100%;
-    --border: 220 8% 18%; /* Dark borders #2A313A */
-    --input: 220 10% 12%;
-    --ring: 195 100% 50%;
-    --radius: 16px; /* 2xl rounded corners for luxury feel */
     
-    /* Janus AI Brand Colors */
-    --gold: 51 100% 60%; /* Gold highlights #FFD700 */
-    --gold-foreground: 220 14% 6%;
-    --ice: 195 100% 50%; /* Icy blue #00BFFF */
-    --ice-foreground: 220 14% 6%;
-    --success: 146 100% 40%; /* Professional green #00CC80 */
-    --success-foreground: 220 14% 6%;
-    --warning: 48 96% 53%; /* Warning yellow */
-    --warning-foreground: 220 14% 6%;
+    /* Accent cosmic elements */
+    --accent: 260 100% 70%; /* Cosmic purple #8B5CF6 */
+    --accent-foreground: 222 84% 3%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
     
-    /* Professional Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(220, 43%, 19%), hsl(220, 43%, 25%));
-    --gradient-gold: linear-gradient(135deg, hsl(51, 100%, 60%), hsl(45, 100%, 65%));
-    --gradient-ice: linear-gradient(135deg, hsl(195, 100%, 50%), hsl(195, 100%, 60%));
-    --gradient-surface: linear-gradient(180deg, hsl(220, 12%, 9%), hsl(220, 10%, 12%));
+    /* Borders and inputs */
+    --border: 222 84% 8%; /* Subtle cosmic border #0E1429 */
+    --input: 222 84% 5%;
+    --ring: 220 70% 50%;
+    --radius: 16px;
     
-    /* Professional Shadows */
-    --shadow-professional: 0 10px 30px -10px hsl(220 14% 6% / 0.3);
-    --shadow-gold: 0 0 40px hsl(51 100% 60% / 0.2);
-    --shadow-ice: 0 0 40px hsl(195 100% 50% / 0.2);
+    /* Enhanced brand colors with cosmic feel */
+    --gold: 45 100% 60%; /* Cosmic gold #FFCC00 */
+    --gold-foreground: 222 84% 3%;
+    --ice: 195 100% 60%; /* Bright cosmic cyan #00CCFF */
+    --ice-foreground: 222 84% 3%;
+    --success: 142 76% 60%; /* Cosmic green #22C55E */
+    --success-foreground: 222 84% 3%;
+    --warning: 48 96% 60%; /* Bright cosmic yellow */
+    --warning-foreground: 222 84% 3%;
     
-    /* Smooth transitions */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Cosmic gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(220, 70%, 50%), hsl(260, 100%, 70%));
+    --gradient-cosmic: linear-gradient(135deg, hsl(222, 84%, 3%), hsl(260, 100%, 10%), hsl(220, 70%, 15%));
+    --gradient-surface: linear-gradient(135deg, hsl(222, 84%, 4%) 0%, hsl(222, 84%, 6%) 50%, hsl(222, 84%, 4%) 100%);
+    --gradient-glow: linear-gradient(135deg, hsl(220, 70%, 50%), hsl(195, 100%, 60%), hsl(260, 100%, 70%));
+    --gradient-nebula: radial-gradient(ellipse at center, hsl(260, 100%, 15%) 0%, hsl(222, 84%, 3%) 70%);
+    
+    /* Cosmic glowing shadows */
+    --shadow-cosmic: 0 0 50px hsl(220 70% 50% / 0.3), 0 0 100px hsl(260 100% 70% / 0.2);
+    --shadow-glow: 0 0 30px hsl(220 70% 50% / 0.4);
+    --shadow-ice: 0 0 40px hsl(195 100% 60% / 0.3);
+    --shadow-gold: 0 0 40px hsl(45 100% 60% / 0.3);
+    --shadow-glass: 0 8px 32px hsl(222 84% 3% / 0.3);
+    
+    /* Enhanced transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
@@ -78,49 +90,59 @@
 }
 
 @layer components {
-  /* Clean institutional UI components */
+  /* Cosmic glassmorphic UI components */
   .institutional-card {
-    @apply bg-card text-foreground border border-border;
-    box-shadow: none;
-    transition: all 0.2s ease-out;
+    @apply bg-card/80 text-foreground border border-border/50 backdrop-blur-sm;
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--card)/80%) 100%);
+    box-shadow: var(--shadow-glass), inset 0 1px 0 hsl(var(--border)/20%);
+    transition: var(--transition-glow);
   }
   
   .institutional-card:hover {
-    @apply border-primary/50;
+    @apply border-primary/60;
+    box-shadow: var(--shadow-glow), var(--shadow-glass);
+    transform: translateY(-2px);
   }
 
   .institutional-panel {
-    @apply bg-secondary text-foreground border border-border;
-    box-shadow: none;
+    @apply bg-secondary/90 text-foreground border border-border/50 backdrop-blur-sm;
+    background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--secondary)/90%) 100%);
+    box-shadow: var(--shadow-glass);
   }
 
   .ai-status-active {
-    @apply text-success bg-success/10 border border-success/20;
+    @apply text-success bg-success/20 border border-success/40;
+    box-shadow: 0 0 20px hsl(var(--success) / 0.2);
   }
 
-  /* Professional button styles - flat design */
+  /* Cosmic button styles with glow */
   .btn-professional {
-    @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-200 font-medium;
-    box-shadow: none;
-    border: 1px solid hsl(var(--primary));
+    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground hover:opacity-90 transition-all duration-300 font-medium rounded-full;
+    box-shadow: var(--shadow-glow);
+    border: 1px solid hsl(var(--primary)/50%);
   }
 
   .btn-professional:hover {
-    @apply border-primary/70;
+    box-shadow: var(--shadow-cosmic);
+    transform: translateY(-1px);
   }
 
   .btn-institutional {
-    @apply bg-transparent text-primary border border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 font-medium;
+    @apply bg-transparent text-primary border border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300 font-medium rounded-full backdrop-blur-sm;
+  }
+
+  .btn-institutional:hover {
+    box-shadow: var(--shadow-glow);
   }
 
   .btn-ai-active {
-    @apply bg-success text-background hover:bg-success/90 transition-all duration-200 font-medium;
-    box-shadow: none;
+    @apply bg-gradient-to-r from-success to-ice text-background hover:opacity-90 transition-all duration-300 font-medium rounded-full;
+    box-shadow: 0 0 20px hsl(var(--success) / 0.3);
   }
 
-  /* Navigation styles */
+  /* Enhanced navigation with glow effects */
   .nav-link {
-    @apply text-foreground hover:text-primary transition-colors duration-200 relative;
+    @apply text-foreground hover:text-primary transition-all duration-300 relative;
   }
 
   .nav-link:hover::after,
@@ -131,19 +153,64 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: hsl(var(--primary));
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
   }
 
   .nav-link.active {
     @apply text-primary;
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5);
   }
 
-  /* Professional spacing */
+  /* Cosmic sections with nebula backgrounds */
   .professional-section {
-    @apply py-20 px-6;
+    @apply py-20 px-6 relative;
+    background: var(--gradient-nebula);
   }
 
   .professional-container {
-    @apply max-w-6xl mx-auto;
+    @apply max-w-6xl mx-auto relative z-10;
+  }
+
+  /* Star field animation */
+  .star-field {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+      radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+      radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.3), transparent);
+    background-repeat: repeat;
+    background-size: 200px 100px;
+    animation: sparkle 20s linear infinite;
+  }
+
+  @keyframes sparkle {
+    from { transform: translateX(0); }
+    to { transform: translateX(200px); }
+  }
+
+  /* Glowing text effects */
+  .glow-text {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+  }
+
+  .glow-text-accent {
+    text-shadow: 0 0 20px hsl(var(--accent) / 0.5);
+  }
+
+  /* Cosmic input styling */
+  .cosmic-input {
+    @apply bg-card/50 border-border/50 backdrop-blur-sm;
+    box-shadow: inset 0 2px 4px hsl(var(--background) / 0.3);
+  }
+
+  .cosmic-input:focus {
+    @apply border-primary/70;
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1), var(--shadow-glow);
   }
 }

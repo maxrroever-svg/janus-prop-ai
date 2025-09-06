@@ -1,28 +1,30 @@
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
-import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { DealMapContainer } from "@/components/dashboard/DealMapContainer";
+import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen w-full bg-background flex">
+      <div className="min-h-screen w-full bg-gradient-cosmic flex">
+        <div className="star-field"></div>
         <DashboardSidebar />
-        <div className="flex-1 flex flex-col">
-          <div className="p-4 border-b border-border">
-            <div className="flex items-center justify-between">
+        <div className="flex-1 flex flex-col relative z-10">
+          <header className="h-16 border-b border-border/50 bg-card/20 backdrop-blur-sm flex items-center justify-between px-6">
+            <div className="flex items-center gap-4">
+              <SidebarTrigger />
               <span className="font-display text-lg font-semibold text-foreground">
                 Janus Investor
               </span>
-              <button 
-                onClick={() => window.location.href = '/'} 
-                className="hover:opacity-80 transition-opacity"
-              >
-                <span className="font-display text-xl text-foreground">Janus AI</span>
-              </button>
             </div>
-          </div>
-          <DashboardHeader />
+            <Button 
+              variant="ghost" 
+              onClick={() => window.location.href = '/'}
+              className="font-display text-lg font-semibold text-foreground hover:text-primary glow-text"
+            >
+              Janus AI
+            </Button>
+          </header>
           <main className="flex-1 p-6">
             <div className="h-full">
               <DealMapContainer onDealSelect={(deal) => console.log('Selected deal:', deal)} />

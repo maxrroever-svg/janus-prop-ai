@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button";
 
 const sections = [
   { id: "hero", label: "Home" },
-  { id: "intelligence-engine", label: "Intelligence Engine" },
-  { id: "agents", label: "AI Agents" },
-  { id: "market-intelligence", label: "Market Intelligence" },
-  { id: "pipeline", label: "Live Opportunities" },
-  { id: "architecture", label: "The System" },
+  { id: "vision", label: "Vision" },
+  { id: "consumer", label: "Consumer" },
+  { id: "investor", label: "Investor" },
   { id: "lien-intelligence", label: "Lien Intelligence" },
   { id: "demo", label: "Contact" },
 ];
