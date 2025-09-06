@@ -28,6 +28,7 @@ import Intelligence from "./pages/dashboard/Intelligence";
 import DataLake from "./pages/dashboard/DataLake";
 import ConsumerOutreach from "./pages/consumer/Outreach";
 import ConsumerDataLake from "./pages/consumer/DataLake";
+import ConsumerMapView from "./pages/consumer/MapView";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -56,6 +57,7 @@ const App = () => (
             <Route path="/consumer/settings" element={<ConsumerSettings />} />
             <Route path="/consumer/audit" element={<ConsumerAuditLog />} />
             <Route path="/consumer/data-lake" element={<ConsumerDataLake />} />
+            <Route path="/consumer/map" element={<ConsumerMapView />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/feed" element={<DealFeed />} />
             <Route path="/dashboard/agents" element={<Agents />} />
