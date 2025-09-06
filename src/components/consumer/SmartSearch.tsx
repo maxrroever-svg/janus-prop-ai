@@ -57,7 +57,7 @@ export const SmartSearch = () => {
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
               <Input
-                placeholder="Describe your ideal home... (e.g., 'two bedroom house in Detroit near good schools with a terrace')"
+                placeholder="I want a white house with blue shutters and a room overlooking the river so I can paint."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10 text-base py-6"

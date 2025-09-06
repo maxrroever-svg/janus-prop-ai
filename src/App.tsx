@@ -25,6 +25,9 @@ import Settings from "./pages/dashboard/Settings";
 import AuditLog from "./pages/dashboard/AuditLog";
 import Assistant from "./pages/dashboard/Assistant";
 import Intelligence from "./pages/dashboard/Intelligence";
+import DataLake from "./pages/dashboard/DataLake";
+import ConsumerOutreach from "./pages/consumer/Outreach";
+import ConsumerDataLake from "./pages/consumer/DataLake";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -49,8 +52,10 @@ const App = () => (
             <Route path="/consumer/financing" element={<ConsumerFinancing />} />
             <Route path="/consumer/closing" element={<ConsumerClosing />} />
             <Route path="/consumer/ownership" element={<ConsumerOwnership />} />
+            <Route path="/consumer/outreach" element={<ConsumerOutreach />} />
             <Route path="/consumer/settings" element={<ConsumerSettings />} />
             <Route path="/consumer/audit" element={<ConsumerAuditLog />} />
+            <Route path="/consumer/data-lake" element={<ConsumerDataLake />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/feed" element={<DealFeed />} />
             <Route path="/dashboard/agents" element={<Agents />} />
@@ -63,6 +68,7 @@ const App = () => (
             <Route path="/dashboard/assistant" element={<Assistant />} />
             <Route path="/dashboard/settings" element={<Settings />} />
             <Route path="/dashboard/audit" element={<AuditLog />} />
+            <Route path="/dashboard/data-lake" element={<DataLake />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

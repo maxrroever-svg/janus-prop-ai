@@ -7,6 +7,7 @@ import {
   Home,
   Shield,
   Settings,
+  Database,
 } from "lucide-react";
 import {
   Sidebar,
@@ -26,7 +27,9 @@ const navigation = [
   { name: "Underwriting", href: "/consumer/underwriting", icon: FileText },
   { name: "Financing", href: "/consumer/financing", icon: CreditCard },
   { name: "Closing Room", href: "/consumer/closing", icon: Home },
+  { name: "Outreach", href: "/consumer/outreach", icon: MessageSquare },
   { name: "Ownership", href: "/consumer/ownership", icon: Shield },
+  { name: "Data Lake", href: "/consumer/data-lake", icon: Database },
   { name: "AI Assistant", href: "/consumer/assistant", icon: MessageSquare },
 ];
 

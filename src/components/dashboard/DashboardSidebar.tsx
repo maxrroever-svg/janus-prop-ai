@@ -11,6 +11,7 @@ import {
   Zap,
   TrendingUp,
   CheckSquare,
+  Database,
 } from "lucide-react";
 import {
   Sidebar,
@@ -33,6 +34,7 @@ const navigation = [
   { name: "IC Memos", href: "/dashboard/memos", icon: FileText },
   { name: "Outreach", href: "/dashboard/outreach", icon: MessageSquare },
   { name: "Portfolio", href: "/dashboard/portfolio", icon: Target },
+  { name: "Data Lake", href: "/dashboard/data-lake", icon: Database },
   { name: "AI Assistant", href: "/dashboard/assistant", icon: MessageSquare },
 ];
 

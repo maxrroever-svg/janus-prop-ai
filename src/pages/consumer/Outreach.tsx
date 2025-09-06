@@ -1,131 +1,129 @@
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
-import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { ConsumerSidebar } from "@/components/consumer/ConsumerSidebar";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { 
   MessageSquare, 
   Mail, 
   Phone, 
   Clock, 
   CheckCircle, 
-  AlertCircle,
+  AlertTriangle,
   User,
   Calendar,
   Send,
   Reply,
   Archive,
-  TrendingUp
+  TrendingUp,
+  DollarSign
 } from "lucide-react";
 
-const progressConversations = [
+const consumerConversations = [
   {
     id: 1,
-    property: "1247 Atlantic Avenue",
-    contact: "Maria Rodriguez",
-    lastMessage: "Interested in discussing. Can we schedule a call?",
-    timestamp: "2 hours ago",
+    property: "456 Oak Street",
+    contact: "Sarah Thompson (Listing Agent)",
+    lastMessage: "The seller is very motivated. Can we schedule a showing?",
+    timestamp: "1 hour ago",
     status: "active",
-    messages: 4,
+    messages: 6,
     type: "email",
-    aiRanking: "High motivation - Property vacant 6 months, owner relocated",
+    aiRanking: "High likelihood - Seller motivated, price reduced twice",
     motivation: "high"
   },
   {
     id: 2,
-    property: "156 MacDonough Street",
-    contact: "James Chen",
-    lastMessage: "Need to review with partner first",
-    timestamp: "1 day ago", 
-    status: "pending",
-    messages: 2,
+    property: "123 Maple Drive",
+    contact: "Robert Johnson (Owner)",
+    lastMessage: "I'd prefer cash offers, what can you do?",
+    timestamp: "3 hours ago", 
+    status: "negotiating",
+    messages: 4,
     type: "phone",
-    aiRanking: "Medium likelihood - No urgency signals, reviewing options",
+    aiRanking: "Medium likelihood - Owner prefers cash, timing flexible",
     motivation: "medium"
   },
   {
     id: 3,
-    property: "91-15 Corona Avenue",
-    contact: "Sandra Williams",
-    lastMessage: "What's your best offer?",
-    timestamp: "3 days ago",
-    status: "negotiating",
-    messages: 8,
+    property: "789 Pine Avenue",
+    contact: "Lisa Martinez (Seller)",
+    lastMessage: "Need to close quickly due to job relocation",
+    timestamp: "1 day ago",
+    status: "urgent",
+    messages: 3,
     type: "email",
-    aiRanking: "High profitability - Owner of 123 Main St has high motivation, 3 missed mortgage payments, likely to respond",
+    aiRanking: "High likelihood - Urgent relocation, price negotiable",
     motivation: "high"
   }
 ];
 
-const nextSteps = [
+const consumerNextSteps = [
   {
     id: 1,
-    property: "1247 Atlantic Avenue",
-    contact: "Maria Rodriguez",
-    action: "Schedule call for property walkthrough",
+    property: "456 Oak Street",
+    contact: "Sarah Thompson",
+    action: "Schedule home inspection with preferred inspector",
     priority: "high",
-    dueDate: "Today, 3:00 PM",
-    agent: "Valyria"
+    dueDate: "Today, 2:00 PM",
+    agent: "AI Assistant"
   },
   {
     id: 2,
-    property: "156 MacDonough Street", 
-    contact: "James Chen",
-    action: "Send comparable sales analysis",
+    property: "123 Maple Drive", 
+    contact: "Robert Johnson",
+    action: "Submit pre-approval letter and proof of funds",
     priority: "medium",
-    dueDate: "Tomorrow",
-    agent: "Osiris"
+    dueDate: "Tomorrow, 10:00 AM",
+    agent: "Financing Agent"
   },
   {
     id: 3,
-    property: "91-15 Corona Avenue",
-    contact: "Sandra Williams",
-    action: "Follow up on negotiation terms",
+    property: "789 Pine Avenue",
+    contact: "Lisa Martinez",
+    action: "Prepare competitive offer with quick close timeline",
     priority: "high",
-    dueDate: "Jan 17, 10:00 AM",
-    agent: "Valyria"
+    dueDate: "Today, 4:00 PM",
+    agent: "AI Assistant"
   }
 ];
 
-const emails = [
+const consumerEmails = [
   {
     id: 1,
-    from: "maria.rodriguez@email.com",
-    subject: "Re: Atlantic Avenue Property Inquiry",
-    preview: "Thank you for reaching out about the property. I'm definitely interested...",
-    timestamp: "2 hours ago",
+    from: "sarah.thompson@realty.com",
+    subject: "Re: Oak Street Property - Showing Request",
+    preview: "The seller is very flexible on timing. We can arrange a showing...",
+    timestamp: "1 hour ago",
     status: "unread",
-    property: "1247 Atlantic Avenue"
+    property: "456 Oak Street"
   },
   {
     id: 2,
-    from: "james.chen@email.com",
-    subject: "MacDonough Street - Questions",
-    preview: "I have a few questions about the property condition and timeline...",
-    timestamp: "1 day ago",
+    from: "robert.johnson@email.com",
+    subject: "Maple Drive - Cash Offer Discussion",
+    preview: "Thanks for your interest. I'm looking for serious buyers...",
+    timestamp: "3 hours ago",
     status: "read",
-    property: "156 MacDonough Street"
+    property: "123 Maple Drive"
   },
   {
     id: 3,
-    from: "sandra.w@email.com",
-    subject: "Corona Avenue - Counter Offer",
-    preview: "I've reviewed your offer and would like to propose a counter...",
-    timestamp: "3 days ago",
+    from: "lisa.martinez@email.com",
+    subject: "Pine Avenue - Quick Sale Needed",
+    preview: "Due to my job relocation, I need to sell quickly. Open to...",
+    timestamp: "1 day ago",
     status: "replied",
-    property: "91-15 Corona Avenue"
+    property: "789 Pine Avenue"
   }
 ];
 
-const Outreach = () => {
+const ConsumerOutreach = () => {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "active": return "bg-success/10 text-success border-success/20";
-      case "pending": return "bg-warning/10 text-warning border-warning/20";
+      case "urgent": return "bg-destructive/10 text-destructive border-destructive/20";
       case "negotiating": return "bg-ice/10 text-ice border-ice/20";
       case "unread": return "bg-warning/10 text-warning border-warning/20";
       case "read": return "bg-muted text-muted-foreground";
@@ -143,18 +141,31 @@ const Outreach = () => {
     }
   };
 
+  const getMotivationIcon = (motivation: string) => {
+    switch (motivation) {
+      case "high": return <TrendingUp className="w-4 h-4 text-success" />;
+      case "medium": return <DollarSign className="w-4 h-4 text-warning" />;
+      default: return <AlertTriangle className="w-4 h-4 text-muted-foreground" />;
+    }
+  };
+
   return (
     <SidebarProvider>
       <div className="min-h-screen w-full bg-background flex">
-        <DashboardSidebar />
+        <ConsumerSidebar />
         <div className="flex-1 flex flex-col">
-          <DashboardHeader />
+          <header className="h-16 border-b border-border bg-card flex items-center px-6">
+            <SidebarTrigger />
+            <h1 className="ml-4 font-display text-xl font-semibold text-foreground">
+              Outreach
+            </h1>
+          </header>
           <main className="flex-1 p-6">
             <div className="max-w-7xl mx-auto">
               <div className="mb-6">
-                <h1 className="font-display text-2xl text-foreground mb-2">Outreach</h1>
+                <h1 className="font-display text-2xl text-foreground mb-2">Property Communications</h1>
                 <p className="text-muted-foreground">
-                  Manage conversations, track progress, and coordinate next steps with property owners
+                  Track conversations with sellers, agents, and other stakeholders in your homebuying journey
                 </p>
               </div>
 
@@ -168,14 +179,14 @@ const Outreach = () => {
                     <div>
                       <h3 className="font-medium text-foreground">AI-Powered Contact Ranking</h3>
                       <p className="text-sm text-muted-foreground">
-                        AI ranks contacts by deal likelihood, motivation, or profitability. Example: "Owner of 123 Main St has high motivation, 3 missed mortgage payments, likely to respond."
+                        Our AI analyzes seller motivation, urgency, and deal likelihood to help you prioritize outreach
                       </p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Outreach Stats */}
+              {/* Consumer Outreach Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <Card className="institutional-card">
                   <CardContent className="p-4">
@@ -185,7 +196,7 @@ const Outreach = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Active Conversations</p>
-                        <p className="text-2xl font-semibold text-foreground">{progressConversations.filter(c => c.status === 'active').length}</p>
+                        <p className="text-2xl font-semibold text-foreground">{consumerConversations.filter(c => c.status === 'active').length}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -199,7 +210,7 @@ const Outreach = () => {
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Pending Actions</p>
-                        <p className="text-2xl font-semibold text-foreground">{nextSteps.length}</p>
+                        <p className="text-2xl font-semibold text-foreground">{consumerNextSteps.length}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -212,8 +223,8 @@ const Outreach = () => {
                         <Mail className="w-5 h-5 text-ice" />
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Unread Emails</p>
-                        <p className="text-2xl font-semibold text-foreground">{emails.filter(e => e.status === 'unread').length}</p>
+                        <p className="text-sm text-muted-foreground">Unread Messages</p>
+                        <p className="text-2xl font-semibold text-foreground">{consumerEmails.filter(e => e.status === 'unread').length}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -226,8 +237,8 @@ const Outreach = () => {
                         <CheckCircle className="w-5 h-5 text-gold" />
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground">Response Rate</p>
-                        <p className="text-2xl font-semibold text-foreground">67%</p>
+                        <p className="text-sm text-muted-foreground">High Priority Leads</p>
+                        <p className="text-2xl font-semibold text-foreground">{consumerConversations.filter(c => c.motivation === 'high').length}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -236,22 +247,22 @@ const Outreach = () => {
 
               <Tabs defaultValue="conversations" className="space-y-6">
                 <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="conversations">Progress Conversations</TabsTrigger>
+                  <TabsTrigger value="conversations">Conversations</TabsTrigger>
                   <TabsTrigger value="next-steps">Next Steps</TabsTrigger>
-                  <TabsTrigger value="emails">Email Inbox</TabsTrigger>
+                  <TabsTrigger value="emails">Messages</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="conversations" className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-display text-lg text-foreground">Active Conversations</h2>
+                    <h2 className="font-display text-lg text-foreground">Property Conversations</h2>
                     <Button size="sm" variant="outline">
                       <Send className="w-4 h-4 mr-2" />
-                      New Outreach
+                      Contact Agent
                     </Button>
                   </div>
                   
                   <div className="space-y-4">
-                    {progressConversations.map((conversation) => (
+                    {consumerConversations.map((conversation) => (
                       <Card key={conversation.id} className="institutional-card">
                         <CardContent className="p-4">
                           <div className="flex items-start justify-between mb-3">
@@ -261,6 +272,7 @@ const Outreach = () => {
                                 <Badge className={getStatusColor(conversation.status)}>
                                   {conversation.status}
                                 </Badge>
+                                {getMotivationIcon(conversation.motivation)}
                               </div>
                               <p className="text-sm text-muted-foreground mb-2">{conversation.property}</p>
                               <p className="text-sm text-foreground break-words mb-2">{conversation.lastMessage}</p>
@@ -299,15 +311,15 @@ const Outreach = () => {
 
                 <TabsContent value="next-steps" className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-display text-lg text-foreground">Next Steps</h2>
+                    <h2 className="font-display text-lg text-foreground">Upcoming Actions</h2>
                     <Button size="sm" variant="outline">
                       <Calendar className="w-4 h-4 mr-2" />
-                      Schedule Action
+                      Add Task
                     </Button>
                   </div>
                   
                   <div className="space-y-4">
-                    {nextSteps.map((step) => (
+                    {consumerNextSteps.map((step) => (
                       <Card key={step.id} className="institutional-card">
                         <CardContent className="p-4">
                           <div className="flex items-start justify-between mb-3">
@@ -343,7 +355,7 @@ const Outreach = () => {
 
                 <TabsContent value="emails" className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-display text-lg text-foreground">Email Communications</h2>
+                    <h2 className="font-display text-lg text-foreground">Message Center</h2>
                     <div className="flex gap-2">
                       <Button size="sm" variant="outline">
                         <Archive className="w-4 h-4 mr-2" />
@@ -357,7 +369,7 @@ const Outreach = () => {
                   </div>
                   
                   <div className="space-y-4">
-                    {emails.map((email) => (
+                    {consumerEmails.map((email) => (
                       <Card key={email.id} className="institutional-card">
                         <CardContent className="p-4">
                           <div className="flex items-start justify-between mb-3">
@@ -400,4 +412,4 @@ const Outreach = () => {
   );
 };
 
-export default Outreach;
+export default ConsumerOutreach;
