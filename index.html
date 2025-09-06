@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Janus — XAI × Bloomberg</title>
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 
 <style>
@@ -37,7 +38,7 @@ p{margin:0 0 16px;line-height:1.66}
 .brand{font-family:"GFS Didot",serif;font-size:1.2rem;letter-spacing:.02em}
 .nav{display:flex;gap:1.1rem;align-items:center;margin-left:auto}
 .nav a{font-weight:600;letter-spacing:.01em;font-size:.98rem;position:relative;padding-bottom:6px}
-.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:linear-gradient(90deg,#8EC5FF,#C68CFF,#FF9E7A);transition:right .25s ease}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:linear-gradient(90deg,#8EC5FF,#C68CFF,#FF9E7A);transition:right .22s ease}
 .nav a:hover::after,.nav a.active::after{right:0}
 
 /* layout */
@@ -52,8 +53,9 @@ p{margin:0 0 16px;line-height:1.66}
 .bitem{display:inline-flex;align-items:baseline;gap:.55rem;line-height:1.2}
 .bitem .label{letter-spacing:.02em;opacity:.92;font-size:.78rem;text-transform:uppercase}
 .bitem .value{font-weight:700;color:var(--primary)}
-.bitem .delta{font-family:"IBM Plex Mono";font-size:.9rem;color:var(--white)}
-.bitem .delta.up{color:var(--up)!important} 
+/* HARD Bloomberg colors */
+.bitem .delta{font-family:"IBM Plex Mono";font-size:.9rem}
+.bitem .delta.up{color:var(--up)!important}
 .bitem .delta.down{color:var(--down)!important}
 
 /* vision features */
@@ -61,34 +63,29 @@ p{margin:0 0 16px;line-height:1.66}
 @media(min-width:900px){.features{grid-template-columns:repeat(4,1fr)}}
 .feature .kicker{font:700 1rem "IBM Plex Sans"}
 
-/* agent diagram */
-.diagram svg{max-width:100%;height:auto;display:block;filter:drop-shadow(0 0 10px rgba(255,255,255,.10))}
+/* agent diagram (glossier) */
+.diagram svg{max-width:100%;height:auto;display:block;filter:drop-shadow(0 0 12px rgba(255,255,255,.10))}
 .diagram .lane{stroke:rgba(255,255,255,.16);stroke-width:1}
 .diagram .node{fill:rgba(255,255,255,.98)}
 .diagram text{font:600 13px "IBM Plex Sans";fill:rgba(255,255,255,.98)}
-.diagram .flow{stroke:rgba(240,245,255,.92);stroke-width:1.8;marker-end:url(#arrow);filter:drop-shadow(0 0 4px rgba(255,255,255,.18))}
+.diagram .flow{stroke:rgba(245,248,255,.96);stroke-width:1.9;marker-end:url(#arrow);filter:drop-shadow(0 0 6px rgba(255,255,255,.22))}
 
 /* consumer + investor area */
 .twins{position:relative;z-index:1;isolation:isolate}
 
-/* —— STATIC, HAZY, GLOSSY EVENT-HORIZON — no rings, no motion, no images —— */
+/* —— STATIC HAZY ORANGE/CHARCOAL GLOW LIKE YOUR SCREENSHOT —— */
 .horizon{
   position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
-  /* Bigger core; warm torus; hazy glossy veils; subtle cool halo */
   background:
-    /* subtle glossy veil across the band */
-    linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.04) 100%),
-    /* soft vignette to keep text readable */
-    radial-gradient(120% 85% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 64%, rgba(0,0,0,.22) 100%),
-    /* broad hazy halo, cool tint */
-    radial-gradient(72% 62% at 50% 58%, rgba(120,170,255,.10) 0%, rgba(120,170,255,0) 70%),
-    /* warm torus glow */
-    radial-gradient(48% 40% at 50% 58%, rgba(255,170,90,.28) 0%, rgba(255,140,60,.22) 32%, rgba(255,120,40,.12) 54%, rgba(255,120,40,0) 72%),
-    /* hot inner glow */
-    radial-gradient(34% 28% at 50% 58%, rgba(255,210,140,.32) 0%, rgba(255,190,120,.20) 48%, rgba(255,190,120,0) 72%),
-    /* dark core */
-    radial-gradient(30% 24% at 50% 58%, rgba(0,0,0,.96) 0%, rgba(0,0,0,.88) 60%, rgba(0,0,0,0) 78%);
-  filter: blur(14px) saturate(140%) contrast(106%) brightness(104%);
+    /* subtle top charcoal haze */
+    radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 60%),
+    /* center veil for glossy feel */
+    linear-gradient(180deg, rgba(255,255,255,.045) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.04) 100%),
+    /* orange sunset glow rising from bottom */
+    radial-gradient(120% 120% at 50% 120%, rgba(255,136,60,.45) 0%, rgba(255,120,40,.30) 22%, rgba(180,80,30,.16) 46%, rgba(0,0,0,0) 72%),
+    /* faint cool counter-halo for depth */
+    radial-gradient(80% 70% at 50% 70%, rgba(120,170,255,.08) 0%, rgba(120,170,255,0) 70%);
+  filter: blur(18px) saturate(140%) contrast(106%) brightness(103%);
 }
 
 /* band + dust */
@@ -113,7 +110,7 @@ p{margin:0 0 16px;line-height:1.66}
 .ic-item h3{font:600 1rem "IBM Plex Sans";margin:0 0 6px}
 .ic-item p{opacity:.94}
 
-/* footer nebula */
+/* footer nebula (unchanged) */
 footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;position:relative;z-index:1}
 .footer-wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto 1.2rem;display:grid;gap:1.2rem;grid-template-columns:repeat(2,1fr)}
 @media(min-width:900px){.footer-wrap{grid-template-columns:repeat(4,1fr)}}
@@ -142,9 +139,10 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
 </head>
 <body>
 
+<!-- Header -->
 <header class="header" id="siteHeader">
   <a class="brand" href="#home">Janus</a>
-  <nav class="nav">
+  <nav class="nav" id="siteNav">
     <a href="#home">Home</a><a href="#vision">Vision</a><a href="#agents">Agents</a>
     <a href="#consumer">Consumer</a><a href="#investor">Investors</a>
     <a href="#pricing">Pricing</a><a href="#contact">Contact</a>
@@ -152,6 +150,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
 </header>
 
 <main>
+  <!-- HERO -->
   <section id="home" class="section">
     <div class="container">
       <div class="right-shift">
@@ -161,17 +160,19 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
     </div>
   </section>
 
+  <!-- Bloomberg strip (template values have fixed colors) -->
   <section class="bstrip">
     <div class="container">
-      <span class="bitem"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta num">+2.1</span></span>
-      <span class="bitem"><span class="label">DSCR</span><span class="value num">1.28</span><span class="delta num">+0.03</span></span>
-      <span class="bitem"><span class="label">CAP RATE</span><span class="value num">6.8%</span><span class="delta num">-0.2%</span></span>
-      <span class="bitem"><span class="label">RENT BAND</span><span class="value num">$1,780</span><span class="delta num">+15</span></span>
-      <span class="bitem"><span class="label">RISK FLAGS</span><span class="value num">Low</span><span class="delta num">+</span></span>
-      <span class="bitem"><span class="label">SPREAD</span><span class="value num">$13.5k</span><span class="delta num">+$900</span></span>
+      <span class="bitem"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta up num">+2.1</span></span>
+      <span class="bitem"><span class="label">DSCR</span><span class="value num">1.28</span><span class="delta up num">+0.03</span></span>
+      <span class="bitem"><span class="label">CAP RATE</span><span class="value num">6.8%</span><span class="delta down num">-0.2%</span></span>
+      <span class="bitem"><span class="label">RENT BAND</span><span class="value num">$1,780</span><span class="delta up num">+15</span></span>
+      <span class="bitem"><span class="label">RISK FLAGS</span><span class="value num">Low</span><span class="delta up num">+</span></span>
+      <span class="bitem"><span class="label">SPREAD</span><span class="value num">$13.5k</span><span class="delta up num">+$900</span></span>
     </div>
   </section>
 
+  <!-- VISION -->
   <section id="vision" class="section">
     <div class="container">
       <div class="right-shift reveal">
@@ -188,6 +189,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
     </div>
   </section>
 
+  <!-- AGENTS -->
   <section id="agents" class="section">
     <div class="container diagram">
       <div class="right-shift" style="margin-bottom:24px">
@@ -222,7 +224,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
     </div>
   </section>
 
-  <!-- Big hazy glow + dust -->
+  <!-- Band with glossy orange glow + dust -->
   <section class="twins">
     <div class="horizon" aria-hidden="true"></div>
     <canvas class="twins-canvas" aria-hidden="true"></canvas>
@@ -240,16 +242,18 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
         <h2>Investors</h2>
         <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span class="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
         <div style="margin-top:10px;display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:center">
-          <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta num">+1%</span></span>
-          <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta num">+0.3%</span></span>
-          <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta num">+0.6%</span></span>
-          <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta num">-0.02</span></span>
+          <!-- HARD colors here too -->
+          <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta up num">+1%</span></span>
+          <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta up num">+0.3%</span></span>
+          <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta up num">+0.6%</span></span>
+          <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta down num">-0.02</span></span>
         </div>
         <div class="actions" style="margin-top:14px"><a class="cta glass" href="/investor">Enter Dashboard</a></div>
       </div>
     </section>
   </section>
 
+  <!-- PRICING -->
   <section id="pricing" class="section">
     <div class="container">
       <div class="right-shift" style="margin-left:auto;margin-right:auto;text-align:center">
@@ -263,6 +267,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
     </div>
   </section>
 
+  <!-- Integrations & Compliance -->
   <section class="section ic-slab">
     <div class="container">
       <div class="ic-grid">
@@ -272,6 +277,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
     </div>
   </section>
 
+  <!-- CONTACT -->
   <section id="contact" class="section">
     <div class="container">
       <div class="right-shift" style="margin-left:auto;margin-right:auto;text-align:center">
@@ -283,6 +289,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
   </section>
 </main>
 
+<!-- Footer + Nebula -->
 <footer>
   <div class="footer-wrap">
     <div class="footer-col"><h4>Resources</h4><a href="#safety">Safety</a><a href="#legal">Legal</a><a href="#security">Security</a><a href="#docs">Docs</a></div>
@@ -295,28 +302,64 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
 </footer>
 
 <script>
-/* nav highlight */
-(()=>{const L=[...document.querySelectorAll('.nav a')],S=L.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if(!S.length)return;const I=new IntersectionObserver(e=>{e.forEach(x=>{const id='#'+x.target.id;if(x.isIntersecting){L.forEach(l=>l.classList.remove('active'));L.filter(l=>l.getAttribute('href')===id).forEach(l=>l.classList.add('active'));}})},{rootMargin:'-35% 0px -60% 0px',threshold:0.01});S.forEach(s=>I.observe(s));})();
-
-/* robust red/green coloring for deltas */
-(()=>{function signOf(txt){
-  const t=(txt||'').trim().replace(/[,$\s]/g,'');
-  if (/^[-−–—]/.test(t)) return -1;
-  if (/^\+/.test(t)) return 1;
-  // If it ends with % or k and has a minus anywhere, treat as down
-  return t.includes('-') ? -1 : 1;
-}
-function paint(el){const s=signOf(el.textContent);el.classList.remove('up','down');el.classList.add(s<0?'down':'up');}
-document.querySelectorAll('.delta').forEach(paint);
-const mo=new MutationObserver(muts=>muts.forEach(m=>{const el=m.target.nodeType===3?m.target.parentElement:m.target;if(el?.classList?.contains('delta')) paint(el);}));
-document.querySelectorAll('.delta').forEach(el=>mo.observe(el,{characterData:true,subtree:true,childList:true}));
+/* Scrollspy — pixel-accurate so underline stays in sync */
+(()=>{
+  const links=[...document.querySelectorAll('.nav a')];
+  const targets=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  const header=document.getElementById('siteHeader');
+  function setActive(){
+    const top=window.scrollY + header.offsetHeight + 8;
+    let active=targets[0];
+    for(const sec of targets){
+      const r=sec.getBoundingClientRect();
+      const sTop=window.scrollY + r.top;
+      if(sTop<=top) active=sec;
+      else break;
+    }
+    const id='#'+active.id;
+    links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')===id));
+  }
+  setActive();
+  window.addEventListener('scroll', setActive, {passive:true});
+  window.addEventListener('resize', setActive);
 })();
 
-/* dust (gentle; set STATIC=true for zero motion) */
-(()=>{const STATIC=false;const twins=document.querySelector('.twins');if(!twins)return;const c=document.querySelector('.twins-canvas');const ctx=c.getContext('2d',{alpha:true});const DPR=Math.min(window.devicePixelRatio||1,2);let w=0,h=0,P=[];function size(){const r=twins.getBoundingClientRect();w=Math.max(1,Math.floor(r.width));h=Math.max(1,Math.floor(r.height));c.width=w*DPR;c.height=h*DPR;c.style.width=w+'px';c.style.height=h+'px';ctx.setTransform(DPR,0,0,DPR,0,0);const n=Math.max(220,Math.floor((w*h)/6500));P=new Array(n).fill(0).map(()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.6,a:Math.random()*.40+.25,vx:(Math.random()*.14-.07),vy:(Math.random()*.14-.07)}));draw();}
-function draw(){ctx.clearRect(0,0,w,h);for(const p of P){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${p.a})`;ctx.fill();}}
-function step(){if(STATIC){draw();return;}ctx.clearRect(0,0,w,h);for(const p of P){p.x+=p.vx;p.y+=p.vy;if(p.x<-12)p.x=w+12;if(p.x>w+12)p.x=-12;if(p.y<-12)p.y=h+12;if(p.y>h+12)p.y=-12;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${p.a})`;ctx.fill();}requestAnimationFrame(step);}
-size();STATIC?draw():step();addEventListener('resize',size,{passive:true});if('ResizeObserver'in window)new ResizeObserver(size).observe(twins);})();
+/* Dust — gentle motion; set STATIC=true for none */
+(()=>{
+  const STATIC=false;
+  const twins=document.querySelector('.twins'); if(!twins) return;
+  const c=document.querySelector('.twins-canvas');
+  const ctx=c.getContext('2d',{alpha:true});
+  const DPR=Math.min(window.devicePixelRatio||1,2); let w=0,h=0,P=[];
+  function size(){
+    const r=twins.getBoundingClientRect();
+    w=Math.max(1,Math.floor(r.width)); h=Math.max(1,Math.floor(r.height));
+    c.width=w*DPR; c.height=h*DPR; c.style.width=w+'px'; c.style.height=h+'px';
+    ctx.setTransform(DPR,0,0,DPR,0,0);
+    const n=Math.max(220,Math.floor((w*h)/6500));
+    P=new Array(n).fill(0).map(()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.6,a:Math.random()*.40+.25,vx:(Math.random()*.14-.07),vy:(Math.random()*.14-.07)}));
+    draw();
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    for(const p of P){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${p.a})`;ctx.fill();}
+  }
+  function step(){
+    if(STATIC){draw();return;}
+    ctx.clearRect(0,0,w,h);
+    for(const p of P){
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<-12)p.x=w+12; if(p.x>w+12)p.x=-12;
+      if(p.y<-12)p.y=h+12; if(p.y>h+12)p.y=-12;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(255,255,255,${p.a})`; ctx.fill();
+    }
+    requestAnimationFrame(step);
+  }
+  size(); STATIC?draw():step();
+  addEventListener('resize', size, {passive:true});
+  if('ResizeObserver' in window) new ResizeObserver(size).observe(twins);
+})();
 </script>
 </body>
 </html>
