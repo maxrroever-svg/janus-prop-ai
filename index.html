@@ -18,7 +18,7 @@
   --hair:rgba(255,255,255,.12);
   --up:#00DC96;
   --down:#FF6969;
-  --primary:#BFD9FF;
+  --primary:#CFE2FF;
   --fog:.08;
   --rh:14px;
   --maxw:1120px;
@@ -97,21 +97,23 @@ body{ padding-top:58px; } /* content offset */
 /* Right-shifted blocks */
 .right-shift{ max-width:var(--prose); margin-left:auto; margin-right:0; text-align:left }
 
-/* ===================== Bloomberg strip (text only, no pills) ===================== */
+/* Larger, clearer body beneath hero & vision */
+#home .right-shift p{ font-size:clamp(1.08rem,1.3vw,1.22rem); opacity:.98 }
+#vision .right-shift p{ font-size:clamp(1.08rem,1.3vw,1.22rem); }
+
+/* ===================== Bloomberg strip (centered, text only) ===================== */
 .bstrip{
   border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
-  padding:10px 0; overflow-x:auto; white-space:nowrap; scrollbar-width:none;
+  padding:12px 0;
 }
-.bstrip::-webkit-scrollbar{display:none}
-.bitem{
-  display:inline-flex; align-items:baseline; gap:.55rem;
-  margin-right:1.25rem; line-height:1.2;
+.bstrip .container{
+  display:flex; align-items:center; justify-content:center; gap:1.25rem; max-width:none;
 }
+.bitem{ display:inline-flex; align-items:baseline; gap:.55rem; line-height:1.2 }
 .bitem .label{ letter-spacing:.02em; opacity:.92; font-size:.78rem; text-transform:uppercase }
 .bitem .value{ font-weight:700; color:var(--primary) }
-.bitem .delta{ font-family:"IBM Plex Mono"; font-size:.88rem }
+.bitem .delta{ font-family:"IBM Plex Mono"; font-size:.9rem }
 .bitem .up{ color:var(--up) } .bitem .down{ color:var(--down) }
-.sep{ opacity:.28; margin:0 .6rem }
 
 /* ===================== Vision features ===================== */
 .features{ display:grid; gap:16px; margin-top:28px }
@@ -119,14 +121,13 @@ body{ padding-top:58px; } /* content offset */
 .feature .kicker{font:700 1.0rem "IBM Plex Sans"}
 
 /* ===================== Agent Diagram (glossy) ===================== */
-.diagram svg{max-width:100%; height:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,255,255,.08))}
+.diagram svg{max-width:100%; height:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,255,255,.10))}
 .diagram .lane{stroke:rgba(255,255,255,.16); stroke-width:1}
-.diagram .node{fill:rgba(255,255,255,.95)}
-.diagram text{font:600 13px "IBM Plex Sans"; fill:rgba(255,255,255,.96)}
+.diagram .node{fill:rgba(255,255,255,.97)}
+.diagram text{font:600 13px "IBM Plex Sans"; fill:rgba(255,255,255,.97)}
 .diagram .flow{
-  stroke:rgba(235,242,255,.9); stroke-width:1.7; marker-end:url(#arrow);
-  /* sheen */
-  filter: drop-shadow(0 0 4px rgba(255,255,255,.14));
+  stroke:rgba(240,245,255,.92); stroke-width:1.8; marker-end:url(#arrow);
+  filter: drop-shadow(0 0 4px rgba(255,255,255,.18));
 }
 
 /* ===================== Consumer + Investor (continuous dust & event horizon) ===================== */
@@ -139,20 +140,20 @@ body{ padding-top:58px; } /* content offset */
 .band h2{ margin-bottom:12px }
 .band .actions{ display:flex; gap:1rem; justify-content:center; margin-top:18px }
 
+/* Shared dust + stronger event horizon */
 .twins-canvas{
-  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.6; mix-blend-mode:screen;
+  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.62; mix-blend-mode:screen;
 }
 .twins-glow{
   position:absolute; inset:0; z-index:2; pointer-events:none;
-  /* subtle, continuous event horizon */
   background:
-    radial-gradient(1200px 520px at 18% 22%, rgba(140,200,255,.13), rgba(0,0,0,0) 70%),
-    radial-gradient(1400px 560px at 82% 18%, rgba(255,170,96,.12), rgba(0,0,0,0) 72%),
-    radial-gradient(1600px 620px at 50% 92%, rgba(180,255,230,.10), rgba(0,0,0,0) 74%),
-    radial-gradient(1200px 300px at 50% 84%, rgba(0,0,0,.55), rgba(0,0,0,0) 80%);
-  filter:blur(12px);
-  -webkit-mask-image: radial-gradient(130% 85% at 50% 82%, rgba(0,0,0,1) 42%, rgba(0,0,0,.85) 70%, rgba(0,0,0,0) 100%);
-          mask-image: radial-gradient(130% 85% at 50% 82%, rgba(0,0,0,1) 42%, rgba(0,0,0,.85) 70%, rgba(0,0,0,0) 100%);
+    radial-gradient(1200px 520px at 18% 22%, rgba(140,200,255,.16), rgba(0,0,0,0) 70%),
+    radial-gradient(1400px 560px at 82% 18%, rgba(255,170,96,.14), rgba(0,0,0,0) 72%),
+    radial-gradient(1600px 660px at 50% 96%, rgba(120,255,215,.12), rgba(0,0,0,0) 76%),
+    radial-gradient(1300px 320px at 50% 86%, rgba(0,0,0,.58), rgba(0,0,0,0) 82%);
+  filter:blur(13px);
+  -webkit-mask-image: radial-gradient(135% 90% at 50% 84%, rgba(0,0,0,1) 42%, rgba(0,0,0,.86) 70%, rgba(0,0,0,0) 100%);
+          mask-image: radial-gradient(135% 90% at 50% 84%, rgba(0,0,0,1) 42%, rgba(0,0,0,.86) 70%, rgba(0,0,0,0) 100%);
 }
 
 /* ===================== CTA ===================== */
@@ -172,12 +173,24 @@ body{ padding-top:58px; } /* content offset */
 
 /* ===================== Pricing, Integrations, Contact ===================== */
 #pricing .right-shift, #contact .right-shift{ margin-left:auto; margin-right:auto; text-align:center }
-#pricing h2, #contact h2{ font-size:clamp(2.2rem,3.8vw,3.1rem) }
-#pricing p, #contact p{ font-size:clamp(1.06rem,1.3vw,1.18rem) }
+#pricing h2, #contact h2{ font-size:clamp(2.3rem,3.9vw,3.2rem) }
+#pricing p, #contact p{ font-size:clamp(1.08rem,1.35vw,1.22rem) }
 
-.ic-slab{ border-top:1px solid var(--hair); padding-top:28px }
-.ic-grid{ display:grid; gap:18px; grid-template-columns:1fr; max-width:980px; margin:0 auto }
-@media(min-width:900px){ .ic-grid{ grid-template-columns:1fr 1fr } }
+/* Symmetric I&C */
+.ic-slab{ border-top:1px solid var(--hair); padding-top:32px }
+.ic-grid{
+  display:grid; grid-template-columns:1fr; gap:22px; max-width:980px; margin:0 auto;
+  align-items:start; justify-items:stretch;
+}
+@media(min-width:900px){
+  .ic-grid{ grid-template-columns:1fr 1fr; }
+}
+.ic-item{
+  border:1px solid var(--hair);
+  border-radius:12px;
+  padding:16px 18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
+}
 .ic-item h3{ font:600 1rem "IBM Plex Sans"; margin:0 0 6px }
 .ic-item p{ opacity:.94 }
 
@@ -194,17 +207,22 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
 .access-badges{display:flex; gap:.5rem; flex-wrap:wrap}
 
 #nebula{
-  position:absolute; left:0; right:0; bottom:0; height:135vh; pointer-events:none; z-index:1;
+  position:absolute; left:0; right:0; bottom:0; height:150vh; pointer-events:none; z-index:1;
   background:
-    radial-gradient(60% 120% at 50% 122%, rgba(48,18,92,.95) 0%, rgba(0,0,0,0) 60%),   /* deep purple */
-    radial-gradient(62% 122% at 50% 134%, rgba(10,34,128,.90) 0%, rgba(0,0,0,0) 68%),  /* deep blue   */
-    radial-gradient(64% 126% at 50% 146%, rgba(22,98,230,.78) 0%, rgba(0,0,0,0) 76%),  /* blue        */
-    radial-gradient(68% 132% at 50% 158%, rgba(0,235,255,.50) 0%, rgba(0,0,0,0) 84%),  /* cyan glow   */
-    radial-gradient(72% 138% at 50% 170%, rgba(64,255,198,.40) 0%, rgba(0,0,0,0) 88%), /* green tint  */
-    radial-gradient(80% 150% at 50% 182%, rgba(255,178,84,.46) 0%, rgba(0,0,0,0) 90%); /* warm rim    */
-  filter: blur(95px) saturate(150%);
-  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 60%);
-          mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 60%);
+    /* deep purple/blue base layers */
+    radial-gradient(58% 116% at 50% 124%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
+    radial-gradient(60% 120% at 50% 136%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
+    radial-gradient(62% 124% at 50% 146%, rgba(22,98,230,.82) 0%, rgba(0,0,0,0) 74%),
+    /* cyan/green rims */
+    radial-gradient(66% 130% at 50% 158%, rgba(0,235,255,.55) 0%, rgba(0,0,0,0) 82%),
+    radial-gradient(70% 136% at 50% 170%, rgba(64,255,198,.44) 0%, rgba(0,0,0,0) 86%),
+    /* warm inner flare */
+    radial-gradient(76% 144% at 50% 182%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%),
+    /* faint magenta veil */
+    radial-gradient(80% 152% at 50% 194%, rgba(212,96,255,.36) 0%, rgba(0,0,0,0) 92%);
+  filter: blur(105px) saturate(160%);
+  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
+          mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
 }
 .copyright{position:relative; z-index:2; text-align:center; margin-top:.6rem}
 
@@ -244,9 +262,9 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- Bloomberg text strip -->
+  <!-- Bloomberg text strip (centered) -->
   <section class="bstrip">
-    <div class="container" style="max-width:none">
+    <div class="container">
       <span class="bitem"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta up num">+2.1</span></span>
       <span class="bitem"><span class="label">DSCR</span><span class="value num">1.28</span><span class="delta up num">+0.03</span></span>
       <span class="bitem"><span class="label">CAP RATE</span><span class="value num">6.8%</span><span class="delta down num">-0.2%</span></span>
@@ -284,7 +302,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
       <svg viewBox="0 0 1000 260" role="img" aria-label="Agent Pipeline Diagram">
         <defs>
           <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,.95)"></path>
+            <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,.98)"></path>
           </marker>
         </defs>
 
@@ -341,8 +359,8 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
           <h2 id="investorTitle">Investors</h2>
           <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span class="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
 
-          <!-- Bloomberg echo: text format -->
-          <div style="margin-top:10px; display:flex; gap:1.1rem; flex-wrap:wrap; justify-content:center">
+          <!-- Bloomberg echo: text format (centered) -->
+          <div style="margin-top:10px; display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:center">
             <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta up num">+1%</span></span>
             <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta up num">+0.3%</span></span>
             <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta up num">+0.6%</span></span>
@@ -369,7 +387,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- Integrations & Compliance (between Pricing and Contact) -->
+  <!-- Integrations & Compliance (symmetric) -->
   <section class="section ic-slab">
     <div class="container">
       <div class="ic-grid reveal">
@@ -418,13 +436,6 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
 </footer>
 
 <script>
-/* sticky header active state on scroll (no plate) */
-(function(){
-  const h=document.getElementById('siteHeader');
-  const onScroll=()=>{ /* keep borderless; just manage active links below */ };
-  onScroll(); addEventListener('scroll', onScroll, {passive:true});
-})();
-
 /* scrollspy + reveals */
 (function(){
   const links=[...document.querySelectorAll('.nav a')];
@@ -456,7 +467,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     w=Math.max(1,Math.floor(r.width)); h=Math.max(1,Math.floor(r.height));
     canvas.width=w*DPR; canvas.height=h*DPR; canvas.style.width=w+'px'; canvas.style.height=h+'px';
     ctx.setTransform(DPR,0,0,DPR,0,0);
-    const count=Math.max(120,Math.floor((w*h)/10000));  // denser, but still subtle
+    const count=Math.max(130,Math.floor((w*h)/9500));  // denser, full band
     particles=new Array(count).fill(0).map(()=>({
       x:Math.random()*w, y:Math.random()*h,
       r:Math.random()*1.6+.6, a:Math.random()*.45+.25,
