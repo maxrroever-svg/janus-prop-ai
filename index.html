@@ -76,13 +76,9 @@ p{margin:0 0 16px;line-height:1.66}
 .horizon{
   position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
   background:
-    /* faint top charcoal haze */
     radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 60%),
-    /* subtle gloss veil */
     linear-gradient(180deg, rgba(255,255,255,.045) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.04) 100%),
-    /* primary orange glow entering from RIGHT side */
     radial-gradient(120% 120% at 112% 50%, rgba(255,136,60,.46) 0%, rgba(255,120,40,.32) 22%, rgba(180,80,30,.18) 48%, rgba(0,0,0,0) 72%),
-    /* counter cool halo for depth */
     radial-gradient(80% 70% at 96% 50%, rgba(120,170,255,.10) 0%, rgba(120,170,255,0) 70%);
   filter: blur(18px) saturate(140%) contrast(106%) brightness(103%);
 }
@@ -142,8 +138,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
   <a class="brand" href="#home">Janus</a>
   <nav class="nav" id="siteNav">
     <a href="#home">Home</a><a href="#vision">Vision</a><a href="#agents">Agents</a>
-    <!-- changed these two to link to dashboards -->
-    <a href="/consumer">Consumer</a><a href="/investor">Investors</a>
+    <a href="#consumer">Consumer</a><a href="#investor">Investors</a>
     <a href="#pricing">Pricing</a><a href="#contact">Contact</a>
   </nav>
 </header>
@@ -232,7 +227,8 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
       <div class="inner">
         <h2>Consumer</h2>
         <p>Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes. Build a watchlist, set thresholds (<span class="num">DSCR≥1.25</span>, <span class="num">Cap≥6%</span>), and share a one-page memo from your phone.</p>
-        <div class="actions"><a class="cta glass" href="/consumer">Enter Dashboard</a></div>
+        <!-- UPDATED LINK -->
+        <div class="actions"><a class="cta glass" href="/consumer/consumer">Enter Dashboard</a></div>
       </div>
     </section>
 
@@ -246,7 +242,8 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
           <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta up num">+0.6%</span></span>
           <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta down num">-0.02</span></span>
         </div>
-        <div class="actions" style="margin-top:14px"><a class="cta glass" href="/investor">Enter Dashboard</a></div>
+        <!-- UPDATED LINK -->
+        <div class="actions" style="margin-top:14px"><a class="cta glass" href="/investor/investor">Enter Dashboard</a></div>
       </div>
     </section>
   </section>
@@ -291,7 +288,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
   <div class="footer-wrap">
     <div class="footer-col"><h4>Resources</h4><a href="#safety">Safety</a><a href="#legal">Legal</a><a href="#security">Security</a><a href="#docs">Docs</a></div>
     <div class="footer-col"><h4>Company</h4><a href="#about">About</a><a href="#careers">Careers</a><a href="#news">News</a></div>
-    <div class="footer-col"><h4>Products</h4><a href="#agents">Agents</a><a href="/consumer">Consumer</a><a href="/investor">Investors</a></div>
+    <div class="footer-col"><h4>Products</h4><a href="#agents">Agents</a><a href="/consumer/consumer">Consumer</a><a href="/investor/investor">Investors</a></div>
     <div class="footer-col"><h4>Access</h4><div class="access-badges"><span class="badge">Web</span><span class="badge">iOS</span><span class="badge">Android</span></div></div>
   </div>
   <div class="copyright">© 2025 Janus • All rights reserved</div>
@@ -302,14 +299,8 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
 /* Scrollspy — pixel-accurate so underline stays in sync */
 (()=>{
   const links=[...document.querySelectorAll('.nav a')];
-  const targets=links
-    .map(a=>a.getAttribute('href'))
-    .filter(href => href && href.startsWith('#'))
-    .map(href => document.querySelector(href))
-    .filter(Boolean);
-
+  const targets=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
   const header=document.getElementById('siteHeader');
-
   function setActive(){
     const top=window.scrollY + header.offsetHeight + 8;
     let active=targets[0];
@@ -318,18 +309,12 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
       const sTop=window.scrollY + r.top;
       if(sTop<=top) active=sec; else break;
     }
-    if(!active) return;
     const id='#'+active.id;
-    [...document.querySelectorAll('.nav a')].forEach(l=>{
-      const href=l.getAttribute('href');
-      l.classList.toggle('active', href===id);
-    });
+    links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')===id));
   }
-  if(targets.length) {
-    setActive();
-    window.addEventListener('scroll', setActive, {passive:true});
-    window.addEventListener('resize', setActive);
-  }
+  setActive();
+  window.addEventListener('scroll', setActive, {passive:true});
+  window.addEventListener('resize', setActive);
 })();
 
 /* Dust — gentle motion; set STATIC=true for none */
