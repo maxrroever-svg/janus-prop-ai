@@ -1,0 +1,113 @@
+/* =========================================
+   JANUS THEME — Global Dashboard Styling
+   Applies to Consumer + Investor, content unchanged
+   ========================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=GFS+Didot&family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap");
+
+/* Scope styles to .janus wrapper so other pages remain unaffected */
+.janus {
+  --bg: #000;
+  --white: #fff;
+  --hair: rgba(255,255,255,.12);
+  --up: #00DC96;
+  --down: #FF6969;
+  --gloss-1: rgba(255,255,255,.06);
+  --gloss-2: rgba(255,255,255,.03);
+
+  color-scheme: dark;
+  background: var(--bg);
+  color: var(--white);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Keep all existing content; just ensure white text and fonts */
+.janus h1, .janus h2, .janus h3 { 
+  font-family: "GFS Didot", serif; 
+  color: var(--white) !important; 
+  letter-spacing: .0045em; 
+}
+.janus, .janus p, .janus li, .janus small, .janus span,
+.janus button, .janus input, .janus textarea, .janus select,
+.janus nav, .janus a {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  color: var(--white) !important;
+}
+.janus .num { font-family: "IBM Plex Mono", monospace }
+
+/* Transparent header (no bars/lines), content unchanged */
+.janus .janus-header {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Subtle glass for any cards/CTAs — add class="glass" to existing nodes if desired */
+.janus .glass {
+  background: linear-gradient(180deg, var(--gloss-1), var(--gloss-2));
+  border: 1px solid var(--hair);
+  backdrop-filter: blur(6px) saturate(120%);
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  border-radius: 14px;
+}
+
+/* Bloomberg-like chips (optional, just add .tick to existing small stat pills) */
+.janus .tick {
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.35rem .7rem; border-radius:999px;
+  background:rgba(255,255,255,.06); border:1px solid var(--hair);
+  white-space: nowrap;
+}
+.janus .tick .label { font-size:.75rem; text-transform:uppercase; opacity:.9 }
+.janus .tick .value { font-weight:600 }
+.janus .tick .delta.up { color: var(--up) }
+.janus .tick .delta.down { color: var(--down) }
+
+/* Optional "band" section to add dust/glow without altering content */
+.janus .band {
+  width:100%; padding:80px 1rem; position:relative; overflow:hidden;
+  background: rgba(255,255,255,.02);
+  border: none !important;
+}
+.janus .band .band-content { position:relative; z-index:3 } /* content stays on top */
+.janus .band h2 { font-size:2rem; text-align:center }
+.janus .band p  { max-width:880px; margin:.8rem auto; font-size:1.05rem; line-height:1.7; text-align:center }
+.janus .band .actions { margin-top:1.2rem; display:flex; justify-content:center; gap:1rem }
+.janus .band .cta {
+  display:inline-block; padding:.7rem 1.1rem;
+  border:1px solid var(--hair); border-radius:999px;
+  background:rgba(255,255,255,.06);
+}
+
+/* Dust canvas + corner glow (purely visual) */
+.janus .dust-canvas {
+  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.42;
+  mix-blend-mode:screen;
+}
+.janus .glowfield {
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:
+    radial-gradient(240px 200px at 3% 6%,   rgba(140,200,255,.12), transparent 72%),
+    radial-gradient(260px 220px at 98% 12%, rgba(255,170,96,.10),  transparent 74%),
+    radial-gradient(220px 200px at 6% 96%,  rgba(200,140,255,.10), transparent 70%),
+    radial-gradient(240px 200px at 96% 92%, rgba(120,255,220,.08), transparent 70%);
+  filter: blur(8px);
+}
+
+/* Nebula glow at very bottom of viewport */
+.janus #nebula {
+  position:fixed; left:0; right:0; bottom:0; height:90vh; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(60% 120% at 50% 122%, rgba(32,12,64,.92) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(62% 122% at 50% 134%, rgba(8,26,96,.85) 0%, rgba(0,0,0,0) 70%),
+    radial-gradient(64% 126% at 50% 146%, rgba(18,88,220,.72) 0%, rgba(0,0,0,0) 76%),
+    radial-gradient(70% 136% at 50% 158%, rgba(0,235,255,.38) 0%, rgba(0,0,0,0) 82%),
+    radial-gradient(78% 150% at 50% 170%, rgba(255,178,84,.42) 0%, rgba(0,0,0,0) 88%);
+  filter: blur(60px) saturate(132%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 55%);
+          mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 55%);
+}
+
+/* Hairline utility */
+.janus .hr-hair { border:0; border-top:1px solid var(--hair); margin:1.25rem 0; opacity:.9 }
