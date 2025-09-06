@@ -1,113 +1,118 @@
-/* =========================================
-   JANUS THEME — Global Dashboard Styling
-   Applies to Consumer + Investor, content unchanged
-   ========================================= */
+/* =========================================================
+   JANUS THEME (Scoped) — XAI × Bloomberg
+   Apply by wrapping pages in <div class="janus"> … </div>
+   ========================================================= */
 
 @import url("https://fonts.googleapis.com/css2?family=GFS+Didot&family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap");
 
-/* Scope styles to .janus wrapper so other pages remain unaffected */
 .janus {
-  --bg: #000;
-  --white: #fff;
-  --hair: rgba(255,255,255,.12);
-  --up: #00DC96;
-  --down: #FF6969;
-  --gloss-1: rgba(255,255,255,.06);
-  --gloss-2: rgba(255,255,255,.03);
+  /* Tokens */
+  --bg:#000;
+  --white:#fff;
+  --hair:rgba(255,255,255,.12);
+  --gloss-1:rgba(255,255,255,.06);
+  --gloss-2:rgba(255,255,255,.03);
 
-  color-scheme: dark;
-  background: var(--bg);
-  color: var(--white);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  color-scheme:dark;
+  background:var(--bg);
+  color:var(--white);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
 }
 
-/* Keep all existing content; just ensure white text and fonts */
-.janus h1, .janus h2, .janus h3 { 
-  font-family: "GFS Didot", serif; 
-  color: var(--white) !important; 
-  letter-spacing: .0045em; 
+/* Global typography & force-white */
+.janus :where(h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,a,button,label,div,section,footer,header,th,td){
+  color:var(--white) !important; -webkit-text-fill-color:var(--white);
 }
-.janus, .janus p, .janus li, .janus small, .janus span,
+.janus svg text{ fill:#fff !important }
+
+.janus h1,.janus h2,.janus h3{
+  font-family:"GFS Didot",serif; letter-spacing:.0045em; line-height:1.12; margin:0 0 .6rem;
+}
+.janus p, .janus li, .janus small, .janus span,
 .janus button, .janus input, .janus textarea, .janus select,
-.janus nav, .janus a {
-  font-family: "IBM Plex Sans", system-ui, sans-serif;
-  color: var(--white) !important;
+.janus nav, .janus a{
+  font-family:"IBM Plex Sans",system-ui,sans-serif;
 }
-.janus .num { font-family: "IBM Plex Mono", monospace }
+.janus .num{ font-family:"IBM Plex Mono",monospace }
 
-/* Transparent header (no bars/lines), content unchanged */
-.janus .janus-header {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+/* Header (transparent, no lines) */
+.janus .janus-header{
+  background:transparent !important; border:0 !important; box-shadow:none !important;
+  position:sticky; top:0; z-index:10;
 }
 
-/* Subtle glass for any cards/CTAs — add class="glass" to existing nodes if desired */
-.janus .glass {
-  background: linear-gradient(180deg, var(--gloss-1), var(--gloss-2));
-  border: 1px solid var(--hair);
-  backdrop-filter: blur(6px) saturate(120%);
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
-  border-radius: 14px;
+/* Containers/sections */
+.janus .section{ padding:clamp(56px,8vw,96px) 18px; position:relative; z-index:1 }
+.janus .container{ max-width:1120px; margin:0 auto }
+
+/* Glass */
+.janus .glass{
+  background:linear-gradient(180deg,var(--gloss-1),var(--gloss-2));
+  border:1px solid var(--hair);
+  border-radius:14px;
+  backdrop-filter:blur(6px) saturate(120%);
+  -webkit-backdrop-filter:blur(6px) saturate(120%);
 }
 
-/* Bloomberg-like chips (optional, just add .tick to existing small stat pills) */
-.janus .tick {
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:.35rem .7rem; border-radius:999px;
-  background:rgba(255,255,255,.06); border:1px solid var(--hair);
-  white-space: nowrap;
-}
-.janus .tick .label { font-size:.75rem; text-transform:uppercase; opacity:.9 }
-.janus .tick .value { font-weight:600 }
-.janus .tick .delta.up { color: var(--up) }
-.janus .tick .delta.down { color: var(--down) }
+/* Bloomberg-style chips/ticker */
+.janus .tick{ display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .7rem; border-radius:999px;
+  background:rgba(255,255,255,.06); border:1px solid var(--hair); white-space:nowrap }
+.janus .tick .label{ font-size:.75rem; text-transform:uppercase; opacity:.9 }
+.janus .tick .value{ font-weight:600 }
 
-/* Optional "band" section to add dust/glow without altering content */
-.janus .band {
-  width:100%; padding:80px 1rem; position:relative; overflow:hidden;
-  background: rgba(255,255,255,.02);
-  border: none !important;
+/* Band strips (for Consumer/Investor sections and dashboard hero strips) */
+.janus .band{
+  width:100%; padding:clamp(80px,12vh,160px) 18px; position:relative; overflow:hidden;
+  background:rgba(255,255,255,.02); border:none !important;
 }
-.janus .band .band-content { position:relative; z-index:3 } /* content stays on top */
-.janus .band h2 { font-size:2rem; text-align:center }
-.janus .band p  { max-width:880px; margin:.8rem auto; font-size:1.05rem; line-height:1.7; text-align:center }
-.janus .band .actions { margin-top:1.2rem; display:flex; justify-content:center; gap:1rem }
-.janus .band .cta {
-  display:inline-block; padding:.7rem 1.1rem;
-  border:1px solid var(--hair); border-radius:999px;
-  background:rgba(255,255,255,.06);
-}
+.janus .band .band-content{ position:relative; z-index:3; text-align:center }
+.janus .band h2{ font-size:2rem }
+.janus .band p{ font-size:1.06rem; line-height:1.7; max-width:920px; margin:.8rem auto 0 }
+.janus .band .actions{ display:flex; justify-content:center; gap:1rem; margin-top:1.2rem }
+.janus .band .cta{ display:inline-block; padding:.7rem 1.1rem; border:1px solid var(--hair); border-radius:999px; background:rgba(255,255,255,.06) }
 
-/* Dust canvas + corner glow (purely visual) */
-.janus .dust-canvas {
-  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.42;
-  mix-blend-mode:screen;
+/* Visual fields — dust + corner glow */
+.janus .dust-canvas{
+  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.42; mix-blend-mode:screen;
 }
-.janus .glowfield {
+.janus .glowfield{
   position:absolute; inset:0; z-index:2; pointer-events:none;
   background:
     radial-gradient(240px 200px at 3% 6%,   rgba(140,200,255,.12), transparent 72%),
     radial-gradient(260px 220px at 98% 12%, rgba(255,170,96,.10),  transparent 74%),
     radial-gradient(220px 200px at 6% 96%,  rgba(200,140,255,.10), transparent 70%),
     radial-gradient(240px 200px at 96% 92%, rgba(120,255,220,.08), transparent 70%);
-  filter: blur(8px);
+  filter:blur(8px);
 }
 
-/* Nebula glow at very bottom of viewport */
-.janus #nebula {
-  position:fixed; left:0; right:0; bottom:0; height:90vh; pointer-events:none; z-index:0;
+/* BIG Nebula (front page only; do not mount in dashboards) */
+.janus #nebula{
+  position:fixed; left:0; right:0; bottom:0; height:140vh; pointer-events:none; z-index:0;
   background:
-    radial-gradient(60% 120% at 50% 122%, rgba(32,12,64,.92) 0%, rgba(0,0,0,0) 60%),
-    radial-gradient(62% 122% at 50% 134%, rgba(8,26,96,.85) 0%, rgba(0,0,0,0) 70%),
-    radial-gradient(64% 126% at 50% 146%, rgba(18,88,220,.72) 0%, rgba(0,0,0,0) 76%),
-    radial-gradient(70% 136% at 50% 158%, rgba(0,235,255,.38) 0%, rgba(0,0,0,0) 82%),
-    radial-gradient(78% 150% at 50% 170%, rgba(255,178,84,.42) 0%, rgba(0,0,0,0) 88%);
-  filter: blur(60px) saturate(132%);
-  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 55%);
-          mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 55%);
+    radial-gradient(60% 120% at 50% 122%, rgba(32,12,64,.95) 0%, rgba(0,0,0,0) 60%),
+    radial-gradient(62% 122% at 50% 134%, rgba(8,26,96,.92) 0%, rgba(0,0,0,0) 70%),
+    radial-gradient(64% 126% at 50% 146%, rgba(18,88,220,.78) 0%, rgba(0,0,0,0) 76%),
+    radial-gradient(70% 136% at 50% 158%, rgba(0,235,255,.44) 0%, rgba(0,0,0,0) 82%),
+    radial-gradient(78% 150% at 50% 170%, rgba(255,178,84,.48) 0%, rgba(0,0,0,0) 88%);
+  filter:blur(80px) saturate(140%);
+  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 55%);
+          mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 55%);
 }
 
-/* Hairline utility */
-.janus .hr-hair { border:0; border-top:1px solid var(--hair); margin:1.25rem 0; opacity:.9 }
+/* Steady fog (front page; dashboards can omit) */
+.janus #fog{
+  position:fixed; left:0; right:0; top:0; height:22vh; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(140% 200% at 50% -30%, rgba(255,255,255,.18), rgba(255,255,255,0) 58%),
+    radial-gradient(110% 160% at 40% -20%, rgba(210,210,210,.12), rgba(210,210,210,0) 62%),
+    radial-gradient(120% 180% at 60% -18%, rgba(200,200,200,.10), rgba(200,200,200,0) 64%);
+  filter:blur(28px) saturate(103%);
+  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5) 55%, rgba(0,0,0,0));
+          mask-image:linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5) 55%, rgba(0,0,0,0));
+}
+
+/* Minimal reveals */
+.janus .reveal{ opacity:0; transform:translateY(12px) }
+.janus .reveal.visible{ animation:janus-fade-up .42s ease forwards }
+@keyframes janus-fade-up{ to{ opacity:1; transform:translateY(0) } }

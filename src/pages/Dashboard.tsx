@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
   return (
-    <div className="janus janus-investor">
+    <div className="janus janus-dashboard">
       <SidebarProvider>
         <div className="min-h-screen w-full bg-gradient-cosmic flex">
           <div className="star-field"></div>
@@ -32,9 +32,8 @@ const Dashboard = () => {
           </div>
         </div>
       </SidebarProvider>
-      <div id="nebula" aria-hidden="true"></div>
       <link rel="stylesheet" href="/css/janus-theme.css" />
-      <script src="/js/janus-dust.js"></script>
+      <script src="/js/janus-effects.js"></script>
     </div>
   );
 };
