@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CreditCard, Percent, CheckCircle, Building } from "lucide-react";
+import { Separator } from "@/components/ui/separator";
+import { CreditCard, Percent, CheckCircle, Building, Calculator, TrendingUp, Shield } from "lucide-react";
 
 const mockLenders = [
   {
@@ -99,6 +100,144 @@ export const FinancingHub = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Loan Calculator */}
+      <Card className="institutional-card">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <Calculator className="h-5 w-5 text-accent" />
+            <span>Advanced Loan Calculator</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-medium text-foreground">Loan Amount</label>
+                <input 
+                  type="text" 
+                  defaultValue="$400,000"
+                  className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-background text-foreground"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-foreground">Interest Rate (%)</label>
+                <input 
+                  type="text" 
+                  defaultValue="6.75"
+                  className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-background text-foreground"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-foreground">Loan Term (years)</label>
+                <input 
+                  type="text" 
+                  defaultValue="30"
+                  className="w-full mt-1 px-3 py-2 border border-border rounded-md bg-background text-foreground"
+                />
+              </div>
+              <Button className="btn-professional w-full">Calculate Payment</Button>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="p-4 bg-card border border-border rounded-lg">
+                <h4 className="font-medium text-foreground mb-3">Payment Breakdown</h4>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Principal & Interest:</span>
+                    <span className="font-medium text-foreground">$2,594</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Property Tax:</span>
+                    <span className="font-medium text-foreground">$420</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Insurance:</span>
+                    <span className="font-medium text-foreground">$150</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">PMI:</span>
+                    <span className="font-medium text-foreground">$167</span>
+                  </div>
+                  <Separator />
+                  <div className="flex justify-between font-medium">
+                    <span className="text-foreground">Total Monthly Payment:</span>
+                    <span className="text-foreground">$3,331</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Loan Programs */}
+      <Card className="institutional-card">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <TrendingUp className="h-5 w-5 text-accent" />
+            <span>Loan Programs</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 border border-border rounded-lg">
+              <h4 className="font-medium text-foreground mb-2">Conventional</h4>
+              <p className="text-sm text-muted-foreground mb-3">
+                Traditional loans with competitive rates for qualified borrowers.
+              </p>
+              <div className="text-sm space-y-1">
+                <div>Down Payment: 3-20%</div>
+                <div>Credit Score: 620+</div>
+                <div>Rate: 6.75% - 7.25%</div>
+              </div>
+            </div>
+            
+            <div className="p-4 border border-border rounded-lg">
+              <h4 className="font-medium text-foreground mb-2">FHA</h4>
+              <p className="text-sm text-muted-foreground mb-3">
+                Government-backed loans with lower down payment requirements.
+              </p>
+              <div className="text-sm space-y-1">
+                <div>Down Payment: 3.5%</div>
+                <div>Credit Score: 580+</div>
+                <div>Rate: 6.50% - 7.00%</div>
+              </div>
+            </div>
+            
+            <div className="p-4 border border-border rounded-lg">
+              <h4 className="font-medium text-foreground mb-2">VA</h4>
+              <p className="text-sm text-muted-foreground mb-3">
+                Exclusive benefits for eligible veterans and service members.
+              </p>
+              <div className="text-sm space-y-1">
+                <div>Down Payment: 0%</div>
+                <div>Credit Score: 580+</div>
+                <div>Rate: 6.25% - 6.75%</div>
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Pre-qualification */}
+      <Card className="institutional-card border-accent/30 bg-accent/5">
+        <CardHeader>
+          <CardTitle className="flex items-center space-x-2">
+            <Shield className="h-5 w-5 text-accent" />
+            <span>Get Pre-Qualified Today</span>
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-muted-foreground mb-4">
+            Get a competitive edge with a pre-qualification letter. Takes 5 minutes and won't affect your credit score.
+          </p>
+          <div className="flex space-x-2">
+            <Button className="btn-professional">Start Pre-Qualification</Button>
+            <Button variant="outline">Learn More</Button>
           </div>
         </CardContent>
       </Card>

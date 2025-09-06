@@ -20,7 +20,8 @@ import {
   AlertTriangle,
   CheckCircle,
   Home,
-  DollarSign
+  DollarSign,
+  Building
 } from "lucide-react";
 
 const Analysis = () => {
@@ -29,20 +30,29 @@ const Analysis = () => {
       <div className="min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
         <div className="flex-1 flex flex-col">
+          <div className="p-4 border-b border-border">
+            <div className="flex items-center justify-between">
+              <span className="font-display text-lg font-semibold text-foreground">
+                Janus Consumer
+              </span>
+              <button 
+                onClick={() => window.location.href = '/'} 
+                className="hover:opacity-80 transition-opacity"
+              >
+                <span className="font-display text-xl text-foreground">Janus AI</span>
+              </button>
+            </div>
+          </div>
           <header className="h-16 border-b border-border bg-background flex items-center justify-between px-6">
             <div className="flex items-center gap-4">
               <SidebarTrigger />
-              <div className="flex items-center gap-4">
-                <span className="font-display text-lg font-semibold text-foreground">
-                  Janus Consumer
-                </span>
-                <button 
-                  onClick={() => window.location.href = '/'} 
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <span className="font-display text-xl text-foreground">Janus AI</span>
-                </button>
-              </div>
+              <Button 
+                variant="ghost" 
+                onClick={() => window.location.href = '/'}
+                className="font-display text-lg font-semibold text-foreground hover:text-primary"
+              >
+                Janus AI
+              </Button>
             </div>
           </header>
           <main className="flex-1 p-6">
@@ -154,6 +164,93 @@ const Analysis = () => {
                             neighborhood trends. Strong rental potential if needed.
                           </p>
                         </div>
+
+                        {/* Building Amenities */}
+                        <Card className="institutional-card">
+                          <CardHeader>
+                            <CardTitle className="flex items-center space-x-2">
+                              <Building className="h-5 w-5 text-accent" />
+                              <span>Building Amenities & Features</span>
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                              <div>
+                                <h4 className="font-medium text-foreground mb-3">Building Features</h4>
+                                <div className="space-y-2">
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">24/7 Doorman</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Fitness Center</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Rooftop Pool</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Beautiful Lobby</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Concierge Service</span>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div>
+                                <h4 className="font-medium text-foreground mb-3">Property Highlights</h4>
+                                <div className="space-y-2">
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">River Views</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Hardwood Floors</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Modern Kitchen</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">High Ceilings</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">In-Unit Laundry</span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div>
+                                <h4 className="font-medium text-foreground mb-3">Parking & Storage</h4>
+                                <div className="space-y-2">
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Garage Parking</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Storage Unit</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Bike Storage</span>
+                                  </div>
+                                  <div className="flex items-center space-x-2">
+                                    <CheckCircle className="h-4 w-4 text-success" />
+                                    <span className="text-sm text-foreground">Package Room</span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </CardContent>
+                        </Card>
                       </TabsContent>
 
                       <TabsContent value="neighborhood" className="space-y-4 mt-4">

@@ -1,7 +1,7 @@
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
-import { DealCanvas } from "@/components/dashboard/DealCanvas";
+import { DealMapContainer } from "@/components/dashboard/DealMapContainer";
 
 const Dashboard = () => {
   return (
@@ -23,8 +23,10 @@ const Dashboard = () => {
             </div>
           </div>
           <DashboardHeader />
-          <main className="flex-1">
-            <DealCanvas />
+          <main className="flex-1 p-6">
+            <div className="h-full">
+              <DealMapContainer onDealSelect={(deal) => console.log('Selected deal:', deal)} />
+            </div>
           </main>
         </div>
       </div>

@@ -1,8 +1,11 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileText, TrendingUp, AlertTriangle, DollarSign } from "lucide-react";
+import { UnderwritingModal } from "./UnderwritingModal";
 
 export const OneClickUnderwriting = () => {
+  const [showModal, setShowModal] = useState(false);
   return (
     <section className="space-y-6">
       <h2 className="font-display text-3xl font-semibold text-foreground">
@@ -42,12 +45,20 @@ export const OneClickUnderwriting = () => {
           </div>
           
           <div className="flex justify-center">
-            <Button className="btn-professional px-8">
+            <Button 
+              className="btn-professional px-8"
+              onClick={() => setShowModal(true)}
+            >
               Generate Underwriting Memo
             </Button>
           </div>
         </CardContent>
       </Card>
+
+      <UnderwritingModal 
+        isOpen={showModal} 
+        onClose={() => setShowModal(false)} 
+      />
     </section>
   );
 };

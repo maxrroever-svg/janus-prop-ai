@@ -46,7 +46,7 @@ const mockPlaybooks: Playbook[] = [
   {
     id: "brrrr",
     name: "BRRRR Strategy",
-    description: "Buy, Rehab, Rent, Refinance, Repeat",
+    description: "Buy, Rehab, Rent, Refinance, Repeat - Comprehensive value-add strategy with AI-powered sourcing and analysis",
     objectives: {
       yield: "12-15% IRR",
       dscr: "1.25+",
@@ -69,8 +69,8 @@ const mockPlaybooks: Playbook[] = [
   },
   {
     id: "preforeclosure",
-    name: "Pre-Foreclosure Flip",
-    description: "Distressed property acquisition and flip",
+    name: "Pre-Foreclosure Acquisition",
+    description: "AI-driven distressed property sourcing with automated outreach and rapid analysis for quick acquisition",
     objectives: {
       yield: "20-25% ROI",
       dscr: "N/A",
@@ -93,8 +93,8 @@ const mockPlaybooks: Playbook[] = [
   },
   {
     id: "smallmulti",
-    name: "Small Multi Repositioning",
-    description: "Value-add small multifamily properties",
+    name: "Multifamily Value-Add",
+    description: "Intelligent multifamily repositioning with AI-powered market analysis, tenant optimization, and value-add execution",
     objectives: {
       yield: "15-18% IRR",
       dscr: "1.35+",

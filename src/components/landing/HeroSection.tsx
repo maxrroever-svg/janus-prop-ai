@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, Target, Home } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { TrendingUp, Target, Home, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
@@ -29,111 +30,90 @@ export const HeroSection = () => {
         ))}
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 text-center relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="mb-8"
+          transition={{ duration: 0.8 }}
+          className="text-center space-y-12"
         >
-          {/* Clean logo */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="mb-12"
-          >
-            <div className="inline-flex items-center justify-center mb-8">
-              <span className="font-display text-2xl text-foreground">Janus AI</span>
-            </div>
-          </motion.div>
-          
-          <h1 className="font-display text-5xl md:text-7xl font-normal mb-6 text-foreground leading-tight">
-            The Real Estate
-            <br />
-            <span className="text-primary">Intelligence Engine</span>
-          </h1>
-        </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.4, ease: "easeOut" }}
-          className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed"
-        >
-          AI-powered insights for investors, homeowners, and institutions.
-          <br />
-          Transform property data into intelligent investment decisions.
-        </motion.p>
-
-        {/* Primary CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.6, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-16"
-        >
-          <Button 
-            size="lg" 
-            className="btn-institutional text-base px-8 py-3 font-medium"
-          >
-            Schedule Demo
-          </Button>
-        </motion.div>
-
-        {/* Consumer and Investor Dashboards */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.8, ease: "easeOut" }}
-          className="mb-12"
-        >
-          <div className="text-center mb-8">
-            <h2 className="font-display text-2xl font-semibold text-foreground mb-4">
-              Choose Your Platform
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Whether you're buying your first home or managing a real estate portfolio, 
-              Janus provides the AI-powered tools you need to make smarter decisions.
+          <div className="space-y-8">
+            <h1 className="text-6xl md:text-8xl font-bold font-display text-foreground leading-tight tracking-tight">
+              Janus AI
+              <br />
+              <span className="text-gradient bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                Real Estate Intelligence
+              </span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-muted-foreground/80 max-w-4xl mx-auto leading-relaxed font-light">
+              Autonomous AI agents that revolutionize real estate investment and home buying with 
+              superhuman precision, instant analysis, and seamless execution.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            <Link to="/consumer" className="group">
-              <div className="p-8 border border-border/30 bg-background hover:border-primary/30 transition-all duration-300 text-center group-hover:bg-background/80">
-                <div className="w-20 h-20 bg-primary/10 flex items-center justify-center mb-6 mx-auto rounded-xl group-hover:bg-primary/20 transition-colors">
-                  <Home className="w-10 h-10 text-primary" />
+
+          {/* Dual Platform Launch */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="group"
+            >
+              <Card className="institutional-card p-8 cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10">
+                <div className="space-y-6">
+                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto">
+                    <TrendingUp className="h-8 w-8 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold font-display text-foreground mb-3">Janus Investor</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Institutional-grade investment platform with AI agents for deal sourcing, 
+                      analysis, and portfolio management.
+                    </p>
+                  </div>
+                  <Button 
+                    size="lg" 
+                    className="w-full btn-gradient group-hover:scale-105 transition-transform"
+                    onClick={() => window.location.href = '/dashboard'}
+                  >
+                    Launch Platform
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Button>
                 </div>
-                <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
-                  Janus Consumer
-                </h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  Your AI homebuying assistant with smart search, property analysis, 
-                  one-click underwriting, financing tools, and closing management.
-                </p>
-                <div className="text-primary font-medium group-hover:underline">
-                  Start Your Home Search →
-                </div>
-              </div>
-            </Link>
+              </Card>
+            </motion.div>
             
-            <Link to="/dashboard" className="group">
-              <div className="p-8 border border-border/30 bg-background hover:border-success/30 transition-all duration-300 text-center group-hover:bg-background/80">
-                <div className="w-20 h-20 bg-success/10 flex items-center justify-center mb-6 mx-auto rounded-xl group-hover:bg-success/20 transition-colors">
-                  <TrendingUp className="w-10 h-10 text-success" />
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="group"
+            >
+              <Card className="institutional-card p-8 cursor-pointer transition-all duration-300 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10">
+                <div className="space-y-6">
+                  <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto">
+                    <Home className="h-8 w-8 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold font-display text-foreground mb-3">Janus Consumer</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Intelligent home buying assistant with AI-powered search, analysis, 
+                      and closing support for individual buyers.
+                    </p>
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="lg"
+                    className="w-full border-2 group-hover:scale-105 transition-transform hover:border-accent hover:text-accent"
+                    onClick={() => window.location.href = '/consumer'}
+                  >
+                    Start Searching
+                    <Home className="ml-2 h-5 w-5" />
+                  </Button>
                 </div>
-                <h3 className="font-display text-2xl font-semibold text-foreground mb-3">
-                  Janus Investor
-                </h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  Professional real estate intelligence platform with deal analytics, 
-                  market intelligence, portfolio management, and institutional tools.
-                </p>
-                <div className="text-success font-medium group-hover:underline">
-                  Access Investment Platform →
-                </div>
-              </div>
-            </Link>
+              </Card>
+            </motion.div>
           </div>
         </motion.div>
 

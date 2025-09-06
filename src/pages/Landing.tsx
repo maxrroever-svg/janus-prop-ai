@@ -10,7 +10,7 @@ import { ScrollNavigation } from "@/components/landing/ScrollNavigation";
 
 const Landing = () => {
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-background overflow-x-hidden">
       <ScrollNavigation />
       <div id="hero">
         <HeroSection />

@@ -1,6 +1,7 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ConsumerSidebar } from "@/components/consumer/ConsumerSidebar";
-import { SmartSearch } from "@/components/consumer/SmartSearch";
+import { DealMapContainer } from "@/components/dashboard/DealMapContainer";
+import { Button } from "@/components/ui/button";
 
 const Consumer = () => {
   return (
@@ -21,11 +22,22 @@ const Consumer = () => {
               </button>
             </div>
           </div>
-          <header className="h-16 border-b border-border bg-background flex items-center px-6">
-            <SidebarTrigger />
+          <header className="h-16 border-b border-border bg-background flex items-center justify-between px-6">
+            <div className="flex items-center gap-4">
+              <SidebarTrigger />
+              <Button 
+                variant="ghost" 
+                onClick={() => window.location.href = '/'}
+                className="font-display text-lg font-semibold text-foreground hover:text-primary"
+              >
+                Janus AI
+              </Button>
+            </div>
           </header>
           <main className="flex-1 p-6">
-            <SmartSearch />
+            <div className="h-full">
+              <DealMapContainer onDealSelect={(deal) => console.log('Selected property:', deal)} />
+            </div>
           </main>
         </div>
       </div>
