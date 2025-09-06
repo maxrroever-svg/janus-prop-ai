@@ -1,7 +1,13 @@
+import { useState } from "react";
 import { CommandBar } from "./CommandBar";
 import { DealWorkflow } from "./DealWorkflow";
+import { DealUploader } from "./DealUploader";
+import { Button } from "@/components/ui/button";
+import { Upload } from "lucide-react";
 
 export function DealCanvas() {
+  const [showUploader, setShowUploader] = useState(false);
+
   const handleCommand = async (command: string) => {
     // Orchestrator logic for AI command processing
     console.log('Processing AI command:', command);
@@ -15,10 +21,31 @@ export function DealCanvas() {
         <CommandBar onCommand={handleCommand} />
       </div>
       
+      {/* Deal Upload Actions */}
+      <div className="shrink-0 p-4 border-b border-border bg-card/20">
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-lg font-semibold text-foreground">
+            Deal Canvas
+          </h3>
+          <Button 
+            className="btn-professional"
+            onClick={() => setShowUploader(true)}
+          >
+            <Upload className="h-4 w-4 mr-2" />
+            Upload Deal
+          </Button>
+        </div>
+      </div>
+      
       {/* Main Content Area - Full Width */}
       <div className="flex-1 overflow-hidden">
         <DealWorkflow />
       </div>
+
+      {/* Deal Uploader Modal */}
+      {showUploader && (
+        <DealUploader onClose={() => setShowUploader(false)} />
+      )}
     </div>
   );
 }

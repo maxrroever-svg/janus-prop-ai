@@ -1,16 +1,17 @@
+import { LandingNavbar } from "@/components/landing/LandingNavbar";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { JanusVisionSection } from "@/components/landing/JanusVisionSection";
 import { JanusConsumerSection } from "@/components/landing/JanusConsumerSection";
 import { JanusInvestorSection } from "@/components/landing/JanusInvestorSection";
-import { LienIntelligenceSection } from "@/components/landing/LienIntelligenceSection";
+import { PricingSection } from "@/components/landing/PricingSection";
+import { ContactSection } from "@/components/landing/ContactSection";
 import { ClosingSection } from "@/components/landing/ClosingSection";
-import { ScrollNavigation } from "@/components/landing/ScrollNavigation";
 
 const Landing = () => {
   return (
-    <div className="min-h-screen bg-gradient-cosmic overflow-x-hidden relative">
+    <div className="min-h-screen overflow-x-hidden relative">
       <div className="star-field"></div>
-      <ScrollNavigation />
+      <LandingNavbar />
       <div id="hero">
         <HeroSection />
       </div>
@@ -23,12 +24,13 @@ const Landing = () => {
       <div id="investor">
         <JanusInvestorSection />
       </div>
-      <div id="lien-intelligence">
-        <LienIntelligenceSection />
+      <div id="pricing">
+        <PricingSection />
       </div>
-      <div id="demo">
-        <ClosingSection />
+      <div id="contact">
+        <ContactSection />
       </div>
+      <ClosingSection />
     </div>
   );
 };

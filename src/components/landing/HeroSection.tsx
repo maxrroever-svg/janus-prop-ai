@@ -38,10 +38,10 @@ export const HeroSection = () => {
           className="text-center space-y-12"
         >
           <div className="space-y-8">
-            <h1 className="text-6xl md:text-8xl font-bold font-display text-foreground leading-tight tracking-tight">
+            <h1 className="text-6xl md:text-8xl font-bold font-display text-foreground leading-tight tracking-tight glow-text">
               Janus AI
               <br />
-              <span className="text-gradient bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              <span className="text-foreground">
                 Real Estate Intelligence
               </span>
             </h1>
@@ -60,10 +60,10 @@ export const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="group"
             >
-              <Card className="institutional-card p-8 cursor-pointer transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/10">
+              <Card className="institutional-card p-8 cursor-pointer transition-all duration-300">
                 <div className="space-y-6">
-                  <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto">
-                    <TrendingUp className="h-8 w-8 text-primary" />
+                  <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto">
+                    <TrendingUp className="h-8 w-8 text-white" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold font-display text-foreground mb-3">Janus Investor</h3>
@@ -74,7 +74,7 @@ export const HeroSection = () => {
                   </div>
                   <Button 
                     size="lg" 
-                    className="w-full btn-gradient group-hover:scale-105 transition-transform"
+                    className="w-full btn-professional group-hover:scale-105 transition-transform"
                     onClick={() => window.location.href = '/dashboard'}
                   >
                     Launch Platform
@@ -90,10 +90,10 @@ export const HeroSection = () => {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="group"
             >
-              <Card className="institutional-card p-8 cursor-pointer transition-all duration-300 hover:border-accent/50 hover:shadow-xl hover:shadow-accent/10">
+              <Card className="institutional-card p-8 cursor-pointer transition-all duration-300">
                 <div className="space-y-6">
-                  <div className="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mx-auto">
-                    <Home className="h-8 w-8 text-accent" />
+                  <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mx-auto">
+                    <Home className="h-8 w-8 text-white" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold font-display text-foreground mb-3">Janus Consumer</h3>
@@ -103,9 +103,8 @@ export const HeroSection = () => {
                     </p>
                   </div>
                   <Button 
-                    variant="outline" 
                     size="lg"
-                    className="w-full border-2 group-hover:scale-105 transition-transform hover:border-accent hover:text-accent"
+                    className="w-full btn-professional group-hover:scale-105 transition-transform"
                     onClick={() => window.location.href = '/consumer'}
                   >
                     Start Searching

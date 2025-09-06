@@ -164,19 +164,6 @@ export const ClosingSection = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.1 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center"
-        >
-          <p className="text-sm text-muted-foreground">
-            Investor platform: Limited access. Institutional investors only.
-            <br />
-            Minimum portfolio requirement: $1M+
-          </p>
-        </motion.div>
 
         {/* Stats */}
         <motion.div
