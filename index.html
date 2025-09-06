@@ -6,7 +6,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Janus — XAI × Bloomberg</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 
 <style>
@@ -53,7 +52,7 @@ p{margin:0 0 16px;line-height:1.66}
 .bitem{display:inline-flex;align-items:baseline;gap:.55rem;line-height:1.2}
 .bitem .label{letter-spacing:.02em;opacity:.92;font-size:.78rem;text-transform:uppercase}
 .bitem .value{font-weight:700;color:var(--primary)}
-/* HARD Bloomberg colors */
+/* HARD Bloomberg colors (manual) */
 .bitem .delta{font-family:"IBM Plex Mono";font-size:.9rem}
 .bitem .delta.up{color:var(--up)!important}
 .bitem .delta.down{color:var(--down)!important}
@@ -73,18 +72,18 @@ p{margin:0 0 16px;line-height:1.66}
 /* consumer + investor area */
 .twins{position:relative;z-index:1;isolation:isolate}
 
-/* —— STATIC HAZY ORANGE/CHARCOAL GLOW LIKE YOUR SCREENSHOT —— */
+/* —— EVENT-HORIZON GLOW FROM THE RIGHT EDGE (static, hazy, glossy) —— */
 .horizon{
   position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
   background:
-    /* subtle top charcoal haze */
+    /* faint top charcoal haze */
     radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.06) 0%, rgba(255,255,255,0) 60%),
-    /* center veil for glossy feel */
+    /* subtle gloss veil */
     linear-gradient(180deg, rgba(255,255,255,.045) 0%, rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.04) 100%),
-    /* orange sunset glow rising from bottom */
-    radial-gradient(120% 120% at 50% 120%, rgba(255,136,60,.45) 0%, rgba(255,120,40,.30) 22%, rgba(180,80,30,.16) 46%, rgba(0,0,0,0) 72%),
-    /* faint cool counter-halo for depth */
-    radial-gradient(80% 70% at 50% 70%, rgba(120,170,255,.08) 0%, rgba(120,170,255,0) 70%);
+    /* primary orange glow entering from RIGHT side */
+    radial-gradient(120% 120% at 112% 50%, rgba(255,136,60,.46) 0%, rgba(255,120,40,.32) 22%, rgba(180,80,30,.18) 48%, rgba(0,0,0,0) 72%),
+    /* counter cool halo for depth */
+    radial-gradient(80% 70% at 96% 50%, rgba(120,170,255,.10) 0%, rgba(120,170,255,0) 70%);
   filter: blur(18px) saturate(140%) contrast(106%) brightness(103%);
 }
 
@@ -110,7 +109,7 @@ p{margin:0 0 16px;line-height:1.66}
 .ic-item h3{font:600 1rem "IBM Plex Sans";margin:0 0 6px}
 .ic-item p{opacity:.94}
 
-/* footer nebula (unchanged) */
+/* footer nebula */
 footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;position:relative;z-index:1}
 .footer-wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto 1.2rem;display:grid;gap:1.2rem;grid-template-columns:repeat(2,1fr)}
 @media(min-width:900px){.footer-wrap{grid-template-columns:repeat(4,1fr)}}
@@ -139,7 +138,6 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
 </head>
 <body>
 
-<!-- Header -->
 <header class="header" id="siteHeader">
   <a class="brand" href="#home">Janus</a>
   <nav class="nav" id="siteNav">
@@ -160,7 +158,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
     </div>
   </section>
 
-  <!-- Bloomberg strip (template values have fixed colors) -->
+  <!-- Bloomberg strip (manual colors via classes) -->
   <section class="bstrip">
     <div class="container">
       <span class="bitem"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta up num">+2.1</span></span>
@@ -224,7 +222,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
     </div>
   </section>
 
-  <!-- Band with glossy orange glow + dust -->
+  <!-- Band with RIGHT-SIDE glow + dust -->
   <section class="twins">
     <div class="horizon" aria-hidden="true"></div>
     <canvas class="twins-canvas" aria-hidden="true"></canvas>
@@ -242,7 +240,6 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
         <h2>Investors</h2>
         <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span class="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
         <div style="margin-top:10px;display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:center">
-          <!-- HARD colors here too -->
           <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta up num">+1%</span></span>
           <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta up num">+0.3%</span></span>
           <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta up num">+0.6%</span></span>
@@ -289,7 +286,6 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
   </section>
 </main>
 
-<!-- Footer + Nebula -->
 <footer>
   <div class="footer-wrap">
     <div class="footer-col"><h4>Resources</h4><a href="#safety">Safety</a><a href="#legal">Legal</a><a href="#security">Security</a><a href="#docs">Docs</a></div>
@@ -313,8 +309,7 @@ footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;positio
     for(const sec of targets){
       const r=sec.getBoundingClientRect();
       const sTop=window.scrollY + r.top;
-      if(sTop<=top) active=sec;
-      else break;
+      if(sTop<=top) active=sec; else break;
     }
     const id='#'+active.id;
     links.forEach(l=>l.classList.toggle('active', l.getAttribute('href')===id));
