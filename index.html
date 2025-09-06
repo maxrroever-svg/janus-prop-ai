@@ -6,198 +6,122 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Janus — XAI × Bloomberg</title>
 
-<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet"/>
 
 <style>
-/* ===================== Tokens ===================== */
 :root{
   color-scheme: dark;
   --bg:#000; --white:#fff; --hair:rgba(255,255,255,.12);
   --up:#00DC96; --down:#FF6969; --primary:#CFE2FF;
-  --rh:14px; --maxw:1120px; --prose:980px;
+  --maxw:1120px; --prose:980px;
 }
 
-/* ===================== Base ===================== */
-*{box-sizing:border-box}
-html,body{height:100%}
-html{scroll-behavior:smooth}
-body{
-  margin:0; background:var(--bg); color:var(--white);
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
-  overflow-x:hidden; padding-top:58px; /* header offset */
-}
-::selection{background:rgba(255,255,255,.18); color:#000}
+/* base */
+*{box-sizing:border-box} html,body{height:100%} html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--white);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden;padding-top:58px}
+::selection{background:rgba(255,255,255,.18);color:#000}
+h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,a,button,label,div,section,footer,header,svg text{color:var(--white)!important;-webkit-text-fill-color:var(--white)}
 a{text-decoration:none}
 
-/* force text white */
-h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,a,button,label,div,section,footer,header,svg text{
-  color:var(--white) !important; -webkit-text-fill-color:var(--white);
-}
-
-/* ===================== Type & Rhythm ===================== */
-h1{
-  font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.0025em;
-  line-height:1.02; font-size:clamp(3.0rem,6.2vw,4.8rem);
-  margin:0 0 18px;
-}
-h2{
-  font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.003em;
-  line-height:1.08; font-size:clamp(2.3rem,3.9vw,3.2rem);
-  margin:0 0 12px;
-}
-h3{
-  font-family:"GFS Didot",serif; font-weight:400;
-  font-size:clamp(1.15rem,1.6vw,1.35rem);
-  margin:0 0 12px;
-}
+/* type */
+h1{font-family:"GFS Didot",serif;font-weight:400;letter-spacing:.0025em;line-height:1.02;font-size:clamp(3.0rem,6.2vw,4.8rem);margin:0 0 18px}
+h2{font-family:"GFS Didot",serif;font-weight:400;letter-spacing:.003em;line-height:1.08;font-size:clamp(2.3rem,3.9vw,3.2rem);margin:0 0 12px}
+h3{font-family:"GFS Didot",serif;font-weight:400;font-size:clamp(1.15rem,1.6vw,1.35rem);margin:0 0 12px}
 p,li,small,span,button,input,textarea,select,nav,a{font-family:"IBM Plex Sans",system-ui,sans-serif}
-p{margin:0 0 calc(var(--rh)*1.15); line-height:1.66}
+p{margin:0 0 16px;line-height:1.66}
 .num{font-family:"IBM Plex Mono",monospace}
 .prose{max-width:var(--prose)}
 
-/* ===================== Header (brand L, nav R; fixed; no bar) ===================== */
-.header{
-  position:fixed; top:0; left:0; right:0; z-index:40;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:14px 16px; background:transparent; border:none; box-shadow:none;
-}
-.brand{ font-family:"GFS Didot",serif; font-size:1.2rem; letter-spacing:.02em; }
-.nav{ display:flex; gap:1.1rem; align-items:center; margin-left:auto }
-.nav a{ font-weight:600; letter-spacing:.01em; font-size:.98rem; position:relative; padding-bottom:6px; }
-.nav a::after{
-  content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
-  background:linear-gradient(90deg,#8EC5FF,#C68CFF,#FF9E7A); transition:right .25s ease;
-}
-.nav a:hover::after,.nav a.active::after{ right:0 }
+/* header */
+.header{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:transparent;border:none;box-shadow:none}
+.brand{font-family:"GFS Didot",serif;font-size:1.2rem;letter-spacing:.02em}
+.nav{display:flex;gap:1.1rem;align-items:center;margin-left:auto}
+.nav a{font-weight:600;letter-spacing:.01em;font-size:.98rem;position:relative;padding-bottom:6px}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:linear-gradient(90deg,#8EC5FF,#C68CFF,#FF9E7A);transition:right .25s ease}
+.nav a:hover::after,.nav a.active::after{right:0}
 
-/* ===================== Sections ===================== */
-.section{ padding:clamp(60px,8vw,96px) 16px; position:relative; z-index:1 }
-.container{ max-width:var(--maxw); margin:0 auto }
+/* layout */
+.section{padding:clamp(60px,8vw,96px) 16px;position:relative;z-index:1}
+.container{max-width:var(--maxw);margin:0 auto}
+.right-shift{max-width:var(--prose);margin-left:auto;margin-right:0;text-align:left}
+#home .right-shift p,#vision .right-shift p{font-size:clamp(1.10rem,1.4vw,1.28rem);opacity:.98}
 
-/* Right-shifted blocks (hero/vision) */
-.right-shift{ max-width:var(--prose); margin-left:auto; margin-right:0; text-align:left }
-#home .right-shift p, #vision .right-shift p{ font-size:clamp(1.10rem,1.4vw,1.28rem); opacity:.98 }
+/* bloomberg strip */
+.bstrip{border-top:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:12px 0}
+.bstrip .container{display:flex;align-items:center;justify-content:center;gap:1.25rem;max-width:none}
+.bitem{display:inline-flex;align-items:baseline;gap:.55rem;line-height:1.2}
+.bitem .label{letter-spacing:.02em;opacity:.92;font-size:.78rem;text-transform:uppercase}
+.bitem .value{font-weight:700;color:var(--primary)}
+.bitem .delta{font-family:"IBM Plex Mono";font-size:.9rem}
+.bitem .up{color:var(--up)} .bitem .down{color:var(--down)}
 
-/* ===================== Bloomberg strip (centered; auto red/green) ===================== */
-.bstrip{
-  border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
-  padding:12px 0;
-}
-.bstrip .container{
-  display:flex; align-items:center; justify-content:center; gap:1.25rem; max-width:none;
-}
-.bitem{ display:inline-flex; align-items:baseline; gap:.55rem; line-height:1.2 }
-.bitem .label{ letter-spacing:.02em; opacity:.92; font-size:.78rem; text-transform:uppercase }
-.bitem .value{ font-weight:700; color:var(--primary) }
-.bitem .delta{ font-family:"IBM Plex Mono"; font-size:.9rem }
-.bitem .up{ color:var(--up) } .bitem .down{ color:var(--down) }
+/* vision features */
+.features{display:grid;gap:16px;margin-top:28px}
+@media(min-width:900px){.features{grid-template-columns:repeat(4,1fr)}}
+.feature .kicker{font:700 1rem "IBM Plex Sans"}
 
-/* ===================== Vision features ===================== */
-.features{ display:grid; gap:16px; margin-top:28px }
-@media(min-width:900px){ .features{grid-template-columns:repeat(4,1fr)} }
-.feature .kicker{font:700 1.0rem "IBM Plex Sans"}
-
-/* ===================== Agent Diagram (glossy) ===================== */
-.diagram svg{max-width:100%; height:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,255,255,.10))}
-.diagram .lane{stroke:rgba(255,255,255,.16); stroke-width:1}
+/* agent diagram */
+.diagram svg{max-width:100%;height:auto;display:block;filter:drop-shadow(0 0 10px rgba(255,255,255,.10))}
+.diagram .lane{stroke:rgba(255,255,255,.16);stroke-width:1}
 .diagram .node{fill:rgba(255,255,255,.98)}
-.diagram text{font:600 13px "IBM Plex Sans"; fill:rgba(255,255,255,.98)}
-.diagram .flow{
-  stroke:rgba(240,245,255,.92); stroke-width:1.8; marker-end:url(#arrow);
-  filter: drop-shadow(0 0 4px rgba(255,255,255,.18));
-}
+.diagram text{font:600 13px "IBM Plex Sans";fill:rgba(255,255,255,.98)}
+.diagram .flow{stroke:rgba(240,245,255,.92);stroke-width:1.8;marker-end:url(#arrow);filter:drop-shadow(0 0 4px rgba(255,255,255,.18))}
 
-/* ===================== Consumer + Investor (STATIC, NO IMAGE) ===================== */
-.twins{ position:relative; z-index:1; isolation:isolate; }
+/* consumer + investor area */
+.twins{position:relative;z-index:1;isolation:isolate}
 
-/* Event-horizon look built from gradients only (no animation) */
+/* *** STATIC EVENT-HORIZON GLOW (no rings, no motion, no images) *** */
 .horizon{
   position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
-  /* Accretion colors + dark core + faint lensing */
+  /* Warm core + soft orange torus + faint cool halo, all blurred into a single glow */
   background:
-    /* faint lensing veil */
-    radial-gradient(60% 40% at 50% 62%, rgba(255,255,255,.14), rgba(255,255,255,.06) 32%, rgba(255,255,255,0) 60%),
-    /* hot inner ring (warm) */
-    radial-gradient(26% 18% at 50% 62%, rgba(255,170,110,.22), rgba(255,170,110,.08) 55%, rgba(255,170,110,0) 72%),
-    /* cool inner ring */
-    radial-gradient(30% 22% at 50% 62%, rgba(120,190,255,.22), rgba(120,190,255,.07) 58%, rgba(120,190,255,0) 76%),
-    /* broad accretion disk sweep */
-    conic-gradient(from 12deg at 50% 62%,
-      rgba(255,140,80,.18), rgba(232,110,255,.18), rgba(100,180,255,.18),
-      rgba(80,230,210,.16), rgba(255,140,80,.18)),
-    /* dark core */
-    radial-gradient(22% 16% at 50% 62%, rgba(0,0,0,.94), rgba(0,0,0,.86) 60%, rgba(0,0,0,0) 80%);
-  filter: saturate(140%) contrast(105%) brightness(104%) blur(2px);
+    radial-gradient(22% 18% at 50% 62%, rgba(0,0,0,.96) 0%, rgba(0,0,0,.88) 55%, rgba(0,0,0,0) 62%),
+    radial-gradient(28% 22% at 50% 62%, rgba(255,190,120,.26) 0%, rgba(255,160,70,.20) 32%, rgba(255,120,40,.10) 48%, rgba(255,120,40,0) 70%),
+    radial-gradient(36% 28% at 50% 62%, rgba(240,110,40,.18) 0%, rgba(240,110,40,0) 70%),
+    radial-gradient(50% 40% at 50% 62%, rgba(120,170,255,.08) 0%, rgba(120,170,255,0) 70%);
+  filter: blur(6px) saturate(135%) contrast(105%) brightness(104%);
 }
 
-/* Vignette so text remains readable */
+/* readability vignette */
 .twins::after{
   content:""; position:absolute; inset:0; z-index:4; pointer-events:none;
-  background: radial-gradient(120% 85% at 50% 50%,
-    rgba(0,0,0,0) 0%,
-    rgba(0,0,0,.10) 64%,
-    rgba(0,0,0,.22) 100%);
+  background: radial-gradient(120% 85% at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,0,0,.10) 64%, rgba(0,0,0,.22) 100%);
 }
 
-.band{
-  width:100%; min-height:420px; padding:clamp(96px,14vh,180px) 16px;
-  background:rgba(255,255,255,.02); overflow:hidden; position:relative;
-}
-.band .inner{ max-width:1120px; margin:0 auto; text-align:center; position:relative; z-index:3 }
-.band h2{ margin-bottom:12px }
-.band .actions{ display:flex; gap:1rem; justify-content:center; margin-top:18px }
+.band{width:100%;min-height:420px;padding:clamp(96px,14vh,180px) 16px;background:rgba(255,255,255,.02);overflow:hidden;position:relative}
+.band .inner{max-width:1120px;margin:0 auto;text-align:center;position:relative;z-index:3}
+.band h2{margin-bottom:12px}
+.band .actions{display:flex;gap:1rem;justify-content:center;margin-top:18px}
 
-/* Dust canvas on top of horizon */
-.twins-canvas{
-  position:absolute; inset:0; z-index:3; pointer-events:none; opacity:.55; mix-blend-mode:screen;
-}
+/* dust */
+.twins-canvas{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.55;mix-blend-mode:screen}
 
-/* ===================== CTAs ===================== */
-.glass{
-  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-  border:1px solid var(--hair);
-  backdrop-filter:saturate(115%) blur(4px);
-  -webkit-backdrop-filter:saturate(115%) blur(4px);
-  border-radius:14px;
-}
-.cta{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:.82rem 1.25rem; border:1px solid var(--hair);
-  border-radius:999px; background:rgba(255,255,255,.06);
-}
-.cta:hover{ background:rgba(255,255,255,.10) }
+/* ctas */
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));border:1px solid var(--hair);backdrop-filter:saturate(115%) blur(4px);-webkit-backdrop-filter:saturate(115%) blur(4px);border-radius:14px}
+.cta{display:inline-flex;align-items:center;justify-content:center;padding:.82rem 1.25rem;border:1px solid var(--hair);border-radius:999px;background:rgba(255,255,255,.06)}
+.cta:hover{background:rgba(255,255,255,.10)}
 
-/* ===================== Pricing, I&C, Contact ===================== */
-#pricing .right-shift, #contact .right-shift{ margin-left:auto; margin-right:auto; text-align:center }
-#pricing h2, #contact h2{ font-size:clamp(2.3rem,3.9vw,3.2rem) }
-#pricing p, #contact p{ font-size:clamp(1.10rem,1.4vw,1.28rem) }
+/* pricing, I&C, contact */
+#pricing .right-shift,#contact .right-shift{margin-left:auto;margin-right:auto;text-align:center}
+#pricing h2,#contact h2{font-size:clamp(2.3rem,3.9vw,3.2rem)}
+#pricing p,#contact p{font-size:clamp(1.10rem,1.4vw,1.28rem)}
+.ic-slab{border-top:1px solid var(--hair);padding-top:32px}
+.ic-grid{display:grid;grid-template-columns:1fr;gap:8px;max-width:980px;margin:0 auto;align-items:start}
+@media(min-width:900px){.ic-grid{grid-template-columns:1fr 1fr;column-gap:24px}}
+.ic-item h3{font:600 1rem "IBM Plex Sans";margin:0 0 6px}
+.ic-item p{opacity:.94}
 
-/* I&C — text only, symmetric columns */
-.ic-slab{ border-top:1px solid var(--hair); padding-top:32px }
-.ic-grid{
-  display:grid; grid-template-columns:1fr; gap:8px; max-width:980px; margin:0 auto;
-  align-items:start; justify-items:stretch;
-}
-@media(min-width:900px){ .ic-grid{ grid-template-columns:1fr 1fr; column-gap:24px; } }
-.ic-item h3{ font:600 1rem "IBM Plex Sans"; margin:0 0 6px }
-.ic-item p{ opacity:.94 }
-
-/* ===================== Footer nebula (vibrant multi-color) ===================== */
-footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; position:relative; z-index:1 }
-.footer-wrap{
-  position:relative; z-index:2; max-width:var(--maxw); margin:0 auto 1.2rem;
-  display:grid; gap:1.2rem; grid-template-columns:repeat(2,1fr);
-}
-@media(min-width:900px){ .footer-wrap{grid-template-columns:repeat(4,1fr)} }
-.footer-col h4{font:600 .95rem "IBM Plex Sans"; margin:0 0 .6rem}
-.footer-col a{display:block; margin:.28rem 0}
+/* footer nebula */
+footer{background:transparent;border-top:none;padding:3.2rem 16px 2.4rem;position:relative;z-index:1}
+.footer-wrap{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto 1.2rem;display:grid;gap:1.2rem;grid-template-columns:repeat(2,1fr)}
+@media(min-width:900px){.footer-wrap{grid-template-columns:repeat(4,1fr)}}
+.footer-col h4{font:600 .95rem "IBM Plex Sans";margin:0 0 .6rem}
+.footer-col a{display:block;margin:.28rem 0}
 .footer-col a:hover{text-decoration:underline}
-.access-badges{display:flex; gap:.5rem; flex-wrap:wrap}
-.badge{border:1px solid var(--hair); border-radius:999px; padding:.35rem .7rem; background:rgba(255,255,255,.06)}
-
+.access-badges{display:flex;gap:.5rem;flex-wrap:wrap}
+.badge{border:1px solid var(--hair);border-radius:999px;padding:.35rem .7rem;background:rgba(255,255,255,.06)}
 #nebula{
-  position:absolute; left:0; right:0; bottom:0; height:160vh; pointer-events:none; z-index:1;
+  position:absolute;left:0;right:0;bottom:0;height:160vh;pointer-events:none;z-index:1;
   background:
     radial-gradient(58% 116% at 50% 126%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
     radial-gradient(60% 120% at 50% 138%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
@@ -206,34 +130,26 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     radial-gradient(70% 136% at 50% 172%, rgba(64,255,198,.40) 0%, rgba(0,0,0,0) 86%),
     radial-gradient(76% 144% at 50% 184%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%),
     radial-gradient(80% 152% at 50% 196%, rgba(212,96,255,.34) 0%, rgba(0,0,0,0) 92%);
-  filter: blur(110px) saturate(165%);
-  -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
-          mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
+  filter:blur(110px) saturate(165%);-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,1) 12%,rgba(0,0,0,0) 62%);mask-image:linear-gradient(to top,rgba(0,0,0,1) 12%,rgba(0,0,0,0) 62%);
 }
-.copyright{position:relative; z-index:2; text-align:center; margin-top:.6rem}
+.copyright{position:relative;z-index:2;text-align:center;margin-top:.6rem}
 
-/* ===================== Reveal (off) ===================== */
-.reveal{ opacity:1; transform:none; }
+/* reveal disabled */
+.reveal{opacity:1;transform:none}
 </style>
 </head>
 <body>
 
-<!-- Header -->
 <header class="header" id="siteHeader">
   <a class="brand" href="#home">Janus</a>
   <nav class="nav">
-    <a href="#home">Home</a>
-    <a href="#vision">Vision</a>
-    <a href="#agents">Agents</a>
-    <a href="#consumer">Consumer</a>
-    <a href="#investor">Investors</a>
-    <a href="#pricing">Pricing</a>
-    <a href="#contact">Contact</a>
+    <a href="#home">Home</a><a href="#vision">Vision</a><a href="#agents">Agents</a>
+    <a href="#consumer">Consumer</a><a href="#investor">Investors</a>
+    <a href="#pricing">Pricing</a><a href="#contact">Contact</a>
   </nav>
 </header>
 
 <main>
-  <!-- HERO -->
   <section id="home" class="section">
     <div class="container">
       <div class="right-shift">
@@ -243,7 +159,6 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- Bloomberg strip -->
   <section class="bstrip">
     <div class="container">
       <span class="bitem"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta num">+2.1</span></span>
@@ -255,14 +170,13 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- VISION -->
   <section id="vision" class="section">
     <div class="container">
       <div class="right-shift reveal">
         <h2>Vision</h2>
         <p>Build the <b>agent-first</b> platform for real estate. Specialist agents — <em>Sourcing</em>, <em>Comps</em>, <em>Underwriter</em>, <em>Risk</em>, <em>Portfolio Fit</em>, <em>Critic</em> — produce evidence, challenge each other, and deliver a clean memo with a verdict: <span class="num">YES / REVISE / NO</span>. Every conclusion is cited and auditable.</p>
       </div>
-      <div style="border-top:1px solid var(--hair); margin:28px 0"></div>
+      <div style="border-top:1px solid var(--hair);margin:28px 0"></div>
       <div class="features reveal">
         <div class="feature"><div class="kicker">Explainable by Default</div><p>Every number is traceable to comps, assumptions, and sources. No black boxes.</p></div>
         <div class="feature"><div class="kicker">Risk-Aware</div><p>Flood, crime, HOA, title, permits — surfaced as gates with severity thresholds.</p></div>
@@ -272,26 +186,17 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- AGENTS -->
   <section id="agents" class="section">
     <div class="container diagram">
       <div class="right-shift" style="margin-bottom:24px">
         <h2>Agent Strategy</h2>
         <p>Sourcing → Comps → Underwrite → Risk → Portfolio Fit → Critic → Memo</p>
       </div>
-
       <svg viewBox="0 0 1000 260" role="img" aria-label="Agent Pipeline Diagram">
-        <defs>
-          <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
-            <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,.98)"></path>
-          </marker>
-        </defs>
-
-        <!-- top caption & line -->
+        <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,.98)"></path></marker></defs>
         <text x="500" y="78" text-anchor="middle">Rent / ARV Band</text>
         <line class="lane" x1="80" y1="90" x2="920" y2="90"/>
-
-        <!-- baseline & labels -->
         <line class="lane" x1="80" y1="150" x2="920" y2="150"/>
         <g>
           <circle class="node" cx="140" cy="150" r="2.6"/><text x="140" y="130" text-anchor="middle">Sourcing</text>
@@ -302,16 +207,12 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
           <circle class="node" cx="820" cy="150" r="2.6"/><text x="820" y="130" text-anchor="middle">Critic</text>
           <circle class="node" cx="900" cy="150" r="2.6"/><text x="900" y="130" text-anchor="middle">Memo</text>
         </g>
-
-        <!-- flows -->
         <path class="flow" d="M140 150 L260 150" marker-end="url(#arrow)"/>
         <path class="flow" d="M260 150 L420 150" marker-end="url(#arrow)"/>
         <path class="flow" d="M420 150 L560 150" marker-end="url(#arrow)"/>
         <path class="flow" d="M560 150 L700 150" marker-end="url(#arrow)"/>
         <path class="flow" d="M700 150 L820 150" marker-end="url(#arrow)"/>
         <path class="flow" d="M820 150 L900 150" marker-end="url(#arrow)"/>
-
-        <!-- bottom caption & line -->
         <text x="500" y="178" text-anchor="middle">Cap • CoC • DSCR • IRR • Sensitivities</text>
         <line class="lane" x1="80" y1="210" x2="920" y2="210"/>
         <text x="500" y="232" text-anchor="middle">Gates &amp; Conditions</text>
@@ -319,47 +220,40 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- CONSUMER + INVESTOR (static horizon + dust) -->
+  <!-- STATIC glow + dust -->
   <section class="twins">
     <div class="horizon" aria-hidden="true"></div>
     <canvas class="twins-canvas" aria-hidden="true"></canvas>
 
-    <section id="consumer" class="band" aria-labelledby="consumerTitle">
+    <section id="consumer" class="band">
       <div class="inner">
-        <div class="reveal">
-          <h2 id="consumerTitle">Consumer</h2>
-          <p>Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes. Build a watchlist, set thresholds (<span class="num">DSCR≥1.25</span>, <span class="num">Cap≥6%</span>), and share a one-page memo from your phone.</p>
-          <div class="actions"><a class="cta glass" href="/consumer">Enter Dashboard</a></div>
-        </div>
+        <h2>Consumer</h2>
+        <p>Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes. Build a watchlist, set thresholds (<span class="num">DSCR≥1.25</span>, <span class="num">Cap≥6%</span>), and share a one-page memo from your phone.</p>
+        <div class="actions"><a class="cta glass" href="/consumer">Enter Dashboard</a></div>
       </div>
     </section>
 
-    <section id="investor" class="band" aria-labelledby="investorTitle">
+    <section id="investor" class="band">
       <div class="inner">
-        <div class="reveal">
-          <h2 id="investorTitle">Investors</h2>
-          <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span class="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
-
-          <div style="margin-top:10px; display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:center">
-            <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta num">+1%</span></span>
-            <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta num">+0.3%</span></span>
-            <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta num">+0.6%</span></span>
-            <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta num">+0.02</span></span>
-          </div>
-
-          <div class="actions" style="margin-top:14px"><a class="cta glass" href="/investor">Enter Dashboard</a></div>
+        <h2>Investors</h2>
+        <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span class="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
+        <div style="margin-top:10px;display:flex;gap:1.25rem;flex-wrap:wrap;justify-content:center">
+          <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta num">+1%</span></span>
+          <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta num">+0.3%</span></span>
+          <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta num">+0.6%</span></span>
+          <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta num">+0.02</span></span>
         </div>
+        <div class="actions" style="margin-top:14px"><a class="cta glass" href="/investor">Enter Dashboard</a></div>
       </div>
     </section>
   </section>
 
-  <!-- PRICING -->
   <section id="pricing" class="section">
     <div class="container">
       <div class="right-shift" style="margin-left:auto;margin-right:auto;text-align:center">
         <h2>Pricing</h2>
         <p>Templates only — final pricing TBD.</p>
-        <div class="actions" style="margin-top:1.2rem; justify-content:center">
+        <div class="actions" style="margin-top:1.2rem;justify-content:center">
           <a class="cta glass" href="#contact">Consumer — Learn More</a>
           <a class="cta glass" href="#contact">Investors — Learn More</a>
         </div>
@@ -367,27 +261,19 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- Integrations & Compliance (text-only, symmetric) -->
   <section class="section ic-slab">
     <div class="container">
       <div class="ic-grid">
-        <div class="ic-item">
-          <h3>Integrations</h3>
-          <p>MLS/assessor proxies, rental datasets, permit/title sources, FEMA flood, and alerts to email/SMS.</p>
-        </div>
-        <div class="ic-item">
-          <h3>Compliance</h3>
-          <p>Evidence objects stored with citations; guardrails on DSCR/CoC/risk. Exportable audit trail.</p>
-        </div>
+        <div class="ic-item"><h3>Integrations</h3><p>MLS/assessor proxies, rental datasets, permit/title sources, FEMA flood, and alerts to email/SMS.</p></div>
+        <div class="ic-item"><h3>Compliance</h3><p>Evidence objects stored with citations; guardrails on DSCR/CoC/risk. Exportable audit trail.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="section" aria-labelledby="ctitle">
+  <section id="contact" class="section">
     <div class="container">
       <div class="right-shift" style="margin-left:auto;margin-right:auto;text-align:center">
-        <h2 id="ctitle">Contact</h2>
+        <h2>Contact</h2>
         <p>Partnerships, pilots, or access:</p>
         <p style="font-size:1.12rem"><a href="mailto:contact@janus.ai">contact@janus.ai</a></p>
       </div>
@@ -395,108 +281,29 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
   </section>
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-wrap">
-    <div class="footer-col"><h4>Resources</h4>
-      <a href="#safety">Safety</a><a href="#legal">Legal</a><a href="#security">Security</a><a href="#docs">Docs</a>
-    </div>
-    <div class="footer-col"><h4>Company</h4>
-      <a href="#about">About</a><a href="#careers">Careers</a><a href="#news">News</a>
-    </div>
-    <div class="footer-col"><h4>Products</h4>
-      <a href="#agents">Agents</a><a href="/consumer">Consumer</a><a href="/investor">Investors</a>
-    </div>
-    <div class="footer-col"><h4>Access</h4>
-      <div class="access-badges"><span class="badge">Web</span><span class="badge">iOS</span><span class="badge">Android</span></div>
-    </div>
+    <div class="footer-col"><h4>Resources</h4><a href="#safety">Safety</a><a href="#legal">Legal</a><a href="#security">Security</a><a href="#docs">Docs</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="#about">About</a><a href="#careers">Careers</a><a href="#news">News</a></div>
+    <div class="footer-col"><h4>Products</h4><a href="#agents">Agents</a><a href="/consumer">Consumer</a><a href="/investor">Investors</a></div>
+    <div class="footer-col"><h4>Access</h4><div class="access-badges"><span class="badge">Web</span><span class="badge">iOS</span><span class="badge">Android</span></div></div>
   </div>
   <div class="copyright">© 2025 Janus • All rights reserved</div>
   <div id="nebula" aria-hidden="true"></div>
 </footer>
 
 <script>
-/* Sticky nav highlight */
-(function(){
-  const links=[...document.querySelectorAll('.nav a')];
-  const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
-  if(sections.length){
-    const spy=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        const id='#'+e.target.id;
-        if(e.isIntersecting){
-          links.forEach(l=>l.classList.remove('active'));
-          links.filter(l=>l.getAttribute('href')===id).forEach(l=>l.classList.add('active'));
-        }
-      });
-    },{rootMargin:'-35% 0px -60% 0px',threshold:0.01});
-    sections.forEach(s=>spy.observe(s));
-  }
-})();
+/* nav highlight */
+(()=>{const L=[...document.querySelectorAll('.nav a')],S=L.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if(!S.length)return;const I=new IntersectionObserver(e=>{e.forEach(x=>{const id='#'+x.target.id;if(x.isIntersecting){L.forEach(l=>l.classList.remove('active'));L.filter(l=>l.getAttribute('href')===id).forEach(l=>l.classList.add('active'));}})},{rootMargin:'-35% 0px -60% 0px',threshold:0.01});S.forEach(s=>I.observe(s));})();
 
-/* Bloomberg deltas: red/green based on sign */
-(function(){
-  const paint = el => {
-    const t = (el.textContent || '').trim();
-    el.classList.remove('up','down');
-    if (/^[-−–—]/.test(t)) el.classList.add('down');
-    else if (/^\+/.test(t) || t === '✓') el.classList.add('up');
-  };
-  document.querySelectorAll('.delta').forEach(paint);
-  const mo = new MutationObserver(muts=>{
-    muts.forEach(m=>{
-      const el = m.target.nodeType===3 ? m.target.parentElement : m.target;
-      if (el && el.classList && el.classList.contains('delta')) paint(el);
-    });
-  });
-  document.querySelectorAll('.delta').forEach(el=>mo.observe(el,{characterData:true,subtree:true,childList:true}));
-})();
+/* bloomberg red/green */
+(()=>{const paint=el=>{const t=(el.textContent||'').trim();el.classList.remove('up','down');if(/^[-−–—]/.test(t))el.classList.add('down');else if(/^\+/.test(t)||t==='✓')el.classList.add('up');};document.querySelectorAll('.delta').forEach(paint);const mo=new MutationObserver(m=>{m.forEach(mu=>{const el=mu.target.nodeType===3?mu.target.parentElement:mu.target;if(el&&el.classList&&el.classList.contains('delta'))paint(el);});});document.querySelectorAll('.delta').forEach(el=>mo.observe(el,{characterData:true,subtree:true,childList:true}));})();
 
-/* Dust across the twins band
-   To make dust fully static, set STATIC=true. */
-(function(){
-  const STATIC=false; // <-- set true if you want zero motion
-  const twins=document.querySelector('.twins'); if(!twins) return;
-  const canvas=document.querySelector('.twins-canvas'); const ctx=canvas.getContext('2d',{alpha:true});
-  const DPR=Math.min(window.devicePixelRatio||1,2);
-  let w=0,h=0,particles=[];
-  function size(){
-    const r=twins.getBoundingClientRect();
-    w=Math.max(1,Math.floor(r.width)); h=Math.max(1,Math.floor(r.height));
-    canvas.width=w*DPR; canvas.height=h*DPR; canvas.style.width=w+'px'; canvas.style.height=h+'px';
-    ctx.setTransform(DPR,0,0,DPR,0,0);
-    const count=Math.max(180,Math.floor((w*h)/8000));
-    particles=new Array(count).fill(0).map(()=>({
-      x:Math.random()*w, y:Math.random()*h,
-      r:Math.random()*1.4+.6, a:Math.random()*.40+.25,
-      vx:(Math.random()*.16-.08), vy:(Math.random()*.16-.08)
-    }));
-    draw();
-  }
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    for(const p of particles){
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,255,255,${p.a})`; ctx.fill();
-    }
-  }
-  function step(){
-    if(STATIC){ draw(); return; }
-    ctx.clearRect(0,0,w,h);
-    for(const p of particles){
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<-12)p.x=w+12; if(p.x>w+12)p.x=-12;
-      if(p.y<-12)p.y=h+12; if(p.y>h+12)p.y=-12;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(255,255,255,${p.a})`; ctx.fill();
-    }
-    requestAnimationFrame(step);
-  }
-  size();
-  STATIC ? draw() : step();
-  addEventListener('resize',size,{passive:true});
-  if('ResizeObserver'in window) new ResizeObserver(size).observe(twins);
-})();
+/* dust (gentle; set STATIC=true for zero motion) */
+(()=>{const STATIC=false;const twins=document.querySelector('.twins');if(!twins)return;const c=document.querySelector('.twins-canvas');const ctx=c.getContext('2d',{alpha:true});const DPR=Math.min(window.devicePixelRatio||1,2);let w=0,h=0,P=[];function size(){const r=twins.getBoundingClientRect();w=Math.max(1,Math.floor(r.width));h=Math.max(1,Math.floor(r.height));c.width=w*DPR;c.height=h*DPR;c.style.width=w+'px';c.style.height=h+'px';ctx.setTransform(DPR,0,0,DPR,0,0);const n=Math.max(180,Math.floor((w*h)/8000));P=new Array(n).fill(0).map(()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.6,a:Math.random()*.40+.25,vx:(Math.random()*.16-.08),vy:(Math.random()*.16-.08)}));draw();}
+function draw(){ctx.clearRect(0,0,w,h);for(const p of P){ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${p.a})`;ctx.fill();}}
+function step(){if(STATIC){draw();return;}ctx.clearRect(0,0,w,h);for(const p of P){p.x+=p.vx;p.y+=p.vy;if(p.x<-12)p.x=w+12;if(p.x>w+12)p.x=-12;if(p.y<-12)p.y=h+12;if(p.y>h+12)p.y=-12;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(255,255,255,${p.a})`;ctx.fill();}requestAnimationFrame(step);}
+size();STATIC?draw():step();addEventListener('resize',size,{passive:true});if('ResizeObserver'in window)new ResizeObserver(size).observe(twins);})();
 </script>
 </body>
 </html>
