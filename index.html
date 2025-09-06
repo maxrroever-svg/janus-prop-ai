@@ -101,7 +101,7 @@ body{ padding-top:58px; } /* content offset */
 #home .right-shift p{ font-size:clamp(1.08rem,1.3vw,1.22rem); opacity:.98 }
 #vision .right-shift p{ font-size:clamp(1.08rem,1.3vw,1.22rem); }
 
-/* ===================== Bloomberg strip (centered, text only) ===================== */
+/* ===================== Bloomberg strip (centered, text only + auto red/green) ===================== */
 .bstrip{
   border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
   padding:12px 0;
@@ -112,7 +112,7 @@ body{ padding-top:58px; } /* content offset */
 .bitem{ display:inline-flex; align-items:baseline; gap:.55rem; line-height:1.2 }
 .bitem .label{ letter-spacing:.02em; opacity:.92; font-size:.78rem; text-transform:uppercase }
 .bitem .value{ font-weight:700; color:var(--primary) }
-.bitem .delta{ font-family:"IBM Plex Mono"; font-size:.9rem }
+.bitem .delta{ font-family:"IBM Plex Mono"; font-size:.9rem } /* color set by .up/.down */
 .bitem .up{ color:var(--up) } .bitem .down{ color:var(--down) }
 
 /* ===================== Vision features ===================== */
@@ -140,20 +140,26 @@ body{ padding-top:58px; } /* content offset */
 .band h2{ margin-bottom:12px }
 .band .actions{ display:flex; gap:1rem; justify-content:center; margin-top:18px }
 
-/* Shared dust + stronger event horizon */
+/* Shared dust + stronger astrophysical event horizon look */
 .twins-canvas{
   position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.62; mix-blend-mode:screen;
 }
 .twins-glow{
   position:absolute; inset:0; z-index:2; pointer-events:none;
+  /* dark core + luminous ring + weak lensing arcs; fewer greens, more neutral/blue/cyan/warm */
   background:
-    radial-gradient(1200px 520px at 18% 22%, rgba(140,200,255,.16), rgba(0,0,0,0) 70%),
-    radial-gradient(1400px 560px at 82% 18%, rgba(255,170,96,.14), rgba(0,0,0,0) 72%),
-    radial-gradient(1600px 660px at 50% 96%, rgba(120,255,215,.12), rgba(0,0,0,0) 76%),
-    radial-gradient(1300px 320px at 50% 86%, rgba(0,0,0,.58), rgba(0,0,0,0) 82%);
-  filter:blur(13px);
-  -webkit-mask-image: radial-gradient(135% 90% at 50% 84%, rgba(0,0,0,1) 42%, rgba(0,0,0,.86) 70%, rgba(0,0,0,0) 100%);
-          mask-image: radial-gradient(135% 90% at 50% 84%, rgba(0,0,0,1) 42%, rgba(0,0,0,.86) 70%, rgba(0,0,0,0) 100%);
+    /* subtle lensing arcs near top corners */
+    conic-gradient(from 200deg at 10% 8%, rgba(180,210,255,.12), rgba(0,0,0,0) 30%),
+    conic-gradient(from -20deg at 90% 10%, rgba(255,190,140,.10), rgba(0,0,0,0) 28%),
+    /* luminous ring */
+    radial-gradient(480px 220px at 50% 82%, rgba(210,230,255,.16), rgba(0,0,0,0) 62%),
+    radial-gradient(520px 240px at 50% 84%, rgba(140,190,255,.14), rgba(0,0,0,0) 66%),
+    radial-gradient(560px 260px at 50% 86%, rgba(255,188,120,.12), rgba(0,0,0,0) 70%),
+    /* dark core */
+    radial-gradient(540px 240px at 50% 86%, rgba(0,0,0,.70), rgba(0,0,0,0) 72%);
+  filter: blur(16px) saturate(120%);
+  -webkit-mask-image: radial-gradient(140% 92% at 50% 84%, rgba(0,0,0,1) 44%, rgba(0,0,0,.86) 72%, rgba(0,0,0,0) 100%);
+          mask-image: radial-gradient(140% 92% at 50% 84%, rgba(0,0,0,1) 44%, rgba(0,0,0,.86) 72%, rgba(0,0,0,0) 100%);
 }
 
 /* ===================== CTA ===================== */
@@ -176,21 +182,16 @@ body{ padding-top:58px; } /* content offset */
 #pricing h2, #contact h2{ font-size:clamp(2.3rem,3.9vw,3.2rem) }
 #pricing p, #contact p{ font-size:clamp(1.08rem,1.35vw,1.22rem) }
 
-/* Symmetric I&C */
+/* I&C — text only, perfectly symmetric columns */
 .ic-slab{ border-top:1px solid var(--hair); padding-top:32px }
 .ic-grid{
-  display:grid; grid-template-columns:1fr; gap:22px; max-width:980px; margin:0 auto;
+  display:grid; grid-template-columns:1fr; gap:8px; max-width:980px; margin:0 auto;
   align-items:start; justify-items:stretch;
 }
 @media(min-width:900px){
-  .ic-grid{ grid-template-columns:1fr 1fr; }
+  .ic-grid{ grid-template-columns:1fr 1fr; column-gap:24px; }
 }
-.ic-item{
-  border:1px solid var(--hair);
-  border-radius:12px;
-  padding:16px 18px;
-  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.02));
-}
+.ic-item{ padding:0; background:transparent; border:none } /* remove boxes */
 .ic-item h3{ font:600 1rem "IBM Plex Sans"; margin:0 0 6px }
 .ic-item p{ opacity:.94 }
 
@@ -213,12 +214,12 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     radial-gradient(58% 116% at 50% 124%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
     radial-gradient(60% 120% at 50% 136%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
     radial-gradient(62% 124% at 50% 146%, rgba(22,98,230,.82) 0%, rgba(0,0,0,0) 74%),
-    /* cyan/green rims */
+    /* cyan/green rims (subtle) */
     radial-gradient(66% 130% at 50% 158%, rgba(0,235,255,.55) 0%, rgba(0,0,0,0) 82%),
     radial-gradient(70% 136% at 50% 170%, rgba(64,255,198,.44) 0%, rgba(0,0,0,0) 86%),
     /* warm inner flare */
     radial-gradient(76% 144% at 50% 182%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%),
-    /* faint magenta veil */
+    /* magenta veil */
     radial-gradient(80% 152% at 50% 194%, rgba(212,96,255,.36) 0%, rgba(0,0,0,0) 92%);
   filter: blur(105px) saturate(160%);
   -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
@@ -262,15 +263,15 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- Bloomberg text strip (centered) -->
+  <!-- Bloomberg text strip (centered; deltas auto-colored) -->
   <section class="bstrip">
     <div class="container">
-      <span class="bitem"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta up num">+2.1</span></span>
-      <span class="bitem"><span class="label">DSCR</span><span class="value num">1.28</span><span class="delta up num">+0.03</span></span>
-      <span class="bitem"><span class="label">CAP RATE</span><span class="value num">6.8%</span><span class="delta down num">-0.2%</span></span>
-      <span class="bitem"><span class="label">RENT BAND</span><span class="value num">$1,780</span><span class="delta up num">+15</span></span>
-      <span class="bitem"><span class="label">RISK FLAGS</span><span class="value num">Low</span><span class="delta up num">✓</span></span>
-      <span class="bitem"><span class="label">SPREAD</span><span class="value num">$13.5k</span><span class="delta up num">+$900</span></span>
+      <span class="bitem"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta num">+2.1</span></span>
+      <span class="bitem"><span class="label">DSCR</span><span class="value num">1.28</span><span class="delta num">+0.03</span></span>
+      <span class="bitem"><span class="label">CAP RATE</span><span class="value num">6.8%</span><span class="delta num">-0.2%</span></span>
+      <span class="bitem"><span class="label">RENT BAND</span><span class="value num">$1,780</span><span class="delta num">+15</span></span>
+      <span class="bitem"><span class="label">RISK FLAGS</span><span class="value num">Low</span><span class="delta num">+</span></span>
+      <span class="bitem"><span class="label">SPREAD</span><span class="value num">$13.5k</span><span class="delta num">+$900</span></span>
     </div>
   </section>
 
@@ -361,10 +362,10 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
 
           <!-- Bloomberg echo: text format (centered) -->
           <div style="margin-top:10px; display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:center">
-            <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta up num">+1%</span></span>
-            <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta up num">+0.3%</span></span>
-            <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta up num">+0.6%</span></span>
-            <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta up num">+0.02</span></span>
+            <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta num">+1%</span></span>
+            <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta num">+0.3%</span></span>
+            <span class="bitem"><span class="label">IRR(5y)</span><span class="value num">17.2%</span><span class="delta num">+0.6%</span></span>
+            <span class="bitem"><span class="label">DSCR</span><span class="value num">1.32</span><span class="delta num">+0.02</span></span>
           </div>
 
           <div class="actions" style="margin-top:14px"><a class="cta glass" href="/investor">Enter Dashboard</a></div>
@@ -387,7 +388,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- Integrations & Compliance (symmetric) -->
+  <!-- Integrations & Compliance (symmetric, text-only) -->
   <section class="section ic-slab">
     <div class="container">
       <div class="ic-grid reveal">
@@ -456,6 +457,15 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
+/* ===== Bloomberg deltas: auto-apply up/down classes based on sign ===== */
+(function(){
+  document.querySelectorAll('.bitem .delta').forEach(el=>{
+    const t=(el.textContent||'').trim();
+    if(/^[-–—]/.test(t) || t.includes('-')) { el.classList.add('down'); el.classList.remove('up'); }
+    else if(/^\+/.test(t) || t.includes('+') || t==='✓') { el.classList.add('up'); el.classList.remove('down'); }
+  });
+})();
+
 /* ===== Continuous dust for twins (Consumer + Investor) ===== */
 (function(){
   const twins=document.querySelector('.twins'); if(!twins) return;
@@ -467,7 +477,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     w=Math.max(1,Math.floor(r.width)); h=Math.max(1,Math.floor(r.height));
     canvas.width=w*DPR; canvas.height=h*DPR; canvas.style.width=w+'px'; canvas.style.height=h+'px';
     ctx.setTransform(DPR,0,0,DPR,0,0);
-    const count=Math.max(130,Math.floor((w*h)/9500));  // denser, full band
+    const count=Math.max(130,Math.floor((w*h)/9500));  // dense, full band
     particles=new Array(count).fill(0).map(()=>({
       x:Math.random()*w, y:Math.random()*h,
       r:Math.random()*1.6+.6, a:Math.random()*.45+.25,
