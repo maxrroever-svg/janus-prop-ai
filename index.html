@@ -13,16 +13,9 @@
 /* ===================== Tokens ===================== */
 :root{
   color-scheme: dark;
-  --bg:#000;
-  --white:#fff;
-  --hair:rgba(255,255,255,.12);
-  --up:#00DC96;
-  --down:#FF6969;
-  --primary:#CFE2FF;
-  --fog:.08;
-  --rh:14px;
-  --maxw:1120px;
-  --prose:980px;
+  --bg:#000; --white:#fff; --hair:rgba(255,255,255,.12);
+  --up:#00DC96; --down:#FF6969; --primary:#CFE2FF;
+  --fog:.06; --rh:14px; --maxw:1120px; --prose:980px;
 }
 
 /* ===================== Base ===================== */
@@ -31,7 +24,8 @@ html,body{height:100%}
 html{scroll-behavior:smooth}
 body{
   margin:0; background:var(--bg); color:var(--white);
-  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden; padding-top:58px; /* header offset */
 }
 ::selection{background:rgba(255,255,255,.18); color:#000}
 
@@ -42,7 +36,6 @@ h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,a,button,label,div,section,foote
 a{text-decoration:none}
 
 /* ===================== Type & Rhythm ===================== */
-body{font-size:16px}
 h1{
   font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.0025em;
   line-height:1.02; font-size:clamp(3.0rem,6.2vw,4.8rem);
@@ -50,7 +43,7 @@ h1{
 }
 h2{
   font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.003em;
-  line-height:1.08; font-size:clamp(2.2rem,3.6vw,3.0rem);
+  line-height:1.08; font-size:clamp(2.3rem,3.9vw,3.2rem);
   margin:0 0 12px;
 }
 h3{
@@ -63,24 +56,23 @@ p{margin:0 0 calc(var(--rh)*1.15); line-height:1.66}
 .num{font-family:"IBM Plex Mono",monospace}
 .prose{max-width:var(--prose)}
 
-/* ===================== Steady Fog (very subtle) ===================== */
+/* ===================== Subtle steady top fog ===================== */
 #fog{
-  position:fixed; left:0; right:0; top:0; height:18vh; z-index:0; pointer-events:none;
+  position:fixed; left:0; right:0; top:0; height:16vh; z-index:0; pointer-events:none;
   background:
-    radial-gradient(140% 200% at 50% -30%, rgba(255,255,255,calc(.20*var(--fog))), rgba(255,255,255,0) 58%),
-    radial-gradient(110% 160% at 40% -20%, rgba(210,210,210,calc(.12*var(--fog))), rgba(210,210,210,0) 62%);
-  filter:blur(26px) saturate(103%);
+    radial-gradient(140% 200% at 50% -30%, rgba(255,255,255,calc(.18*var(--fog))), rgba(255,255,255,0) 58%),
+    radial-gradient(110% 160% at 40% -20%, rgba(210,210,210,calc(.10*var(--fog))), rgba(210,210,210,0) 62%);
+  filter:blur(24px) saturate(103%);
   -webkit-mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,0) 100%);
           mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,0) 100%);
 }
 
-/* ===================== Header (brand left, nav right, fixed, no bar) ===================== */
+/* ===================== Header (brand L, nav R; fixed; no bar) ===================== */
 .header{
   position:fixed; top:0; left:0; right:0; z-index:40;
   display:flex; align-items:center; justify-content:space-between;
-  padding:14px 16px; background:transparent !important; border:none !important; box-shadow:none !important;
+  padding:14px 16px; background:transparent; border:none; box-shadow:none;
 }
-body{ padding-top:58px; } /* content offset */
 .brand{ font-family:"GFS Didot",serif; font-size:1.2rem; letter-spacing:.02em; }
 .nav{ display:flex; gap:1.1rem; align-items:center; margin-left:auto }
 .nav a{ font-weight:600; letter-spacing:.01em; font-size:.98rem; position:relative; padding-bottom:6px; }
@@ -94,14 +86,11 @@ body{ padding-top:58px; } /* content offset */
 .section{ padding:clamp(60px,8vw,96px) 16px; position:relative; z-index:1 }
 .container{ max-width:var(--maxw); margin:0 auto }
 
-/* Right-shifted blocks */
+/* Right-shifted blocks (hero/vision) */
 .right-shift{ max-width:var(--prose); margin-left:auto; margin-right:0; text-align:left }
+#home .right-shift p, #vision .right-shift p{ font-size:clamp(1.10rem,1.4vw,1.28rem); opacity:.98 }
 
-/* Larger, clearer body beneath hero & vision */
-#home .right-shift p{ font-size:clamp(1.08rem,1.3vw,1.22rem); opacity:.98 }
-#vision .right-shift p{ font-size:clamp(1.08rem,1.3vw,1.22rem); }
-
-/* ===================== Bloomberg strip (centered, text only + auto red/green) ===================== */
+/* ===================== Bloomberg strip (centered; auto red/green) ===================== */
 .bstrip{
   border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
   padding:12px 0;
@@ -112,7 +101,7 @@ body{ padding-top:58px; } /* content offset */
 .bitem{ display:inline-flex; align-items:baseline; gap:.55rem; line-height:1.2 }
 .bitem .label{ letter-spacing:.02em; opacity:.92; font-size:.78rem; text-transform:uppercase }
 .bitem .value{ font-weight:700; color:var(--primary) }
-.bitem .delta{ font-family:"IBM Plex Mono"; font-size:.9rem } /* color set by .up/.down */
+.bitem .delta{ font-family:"IBM Plex Mono"; font-size:.9rem }
 .bitem .up{ color:var(--up) } .bitem .down{ color:var(--down) }
 
 /* ===================== Vision features ===================== */
@@ -123,8 +112,8 @@ body{ padding-top:58px; } /* content offset */
 /* ===================== Agent Diagram (glossy) ===================== */
 .diagram svg{max-width:100%; height:auto; display:block; filter:drop-shadow(0 0 10px rgba(255,255,255,.10))}
 .diagram .lane{stroke:rgba(255,255,255,.16); stroke-width:1}
-.diagram .node{fill:rgba(255,255,255,.97)}
-.diagram text{font:600 13px "IBM Plex Sans"; fill:rgba(255,255,255,.97)}
+.diagram .node{fill:rgba(255,255,255,.98)}
+.diagram text{font:600 13px "IBM Plex Sans"; fill:rgba(255,255,255,.98)}
 .diagram .flow{
   stroke:rgba(240,245,255,.92); stroke-width:1.8; marker-end:url(#arrow);
   filter: drop-shadow(0 0 4px rgba(255,255,255,.18));
@@ -140,29 +129,29 @@ body{ padding-top:58px; } /* content offset */
 .band h2{ margin-bottom:12px }
 .band .actions{ display:flex; gap:1rem; justify-content:center; margin-top:18px }
 
-/* Shared dust + stronger astrophysical event horizon look */
+/* Shared dust canvas & event horizon */
 .twins-canvas{
-  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.62; mix-blend-mode:screen;
+  position:absolute; inset:0; z-index:1; pointer-events:none; opacity:.64; mix-blend-mode:screen;
 }
+/* Event-horizon look: dark core, luminous ring, faint lensing arcs — neutral/blue/warm, minimal green */
 .twins-glow{
   position:absolute; inset:0; z-index:2; pointer-events:none;
-  /* dark core + luminous ring + weak lensing arcs; fewer greens, more neutral/blue/cyan/warm */
   background:
-    /* subtle lensing arcs near top corners */
-    conic-gradient(from 200deg at 10% 8%, rgba(180,210,255,.12), rgba(0,0,0,0) 30%),
-    conic-gradient(from -20deg at 90% 10%, rgba(255,190,140,.10), rgba(0,0,0,0) 28%),
-    /* luminous ring */
-    radial-gradient(480px 220px at 50% 82%, rgba(210,230,255,.16), rgba(0,0,0,0) 62%),
-    radial-gradient(520px 240px at 50% 84%, rgba(140,190,255,.14), rgba(0,0,0,0) 66%),
-    radial-gradient(560px 260px at 50% 86%, rgba(255,188,120,.12), rgba(0,0,0,0) 70%),
-    /* dark core */
-    radial-gradient(540px 240px at 50% 86%, rgba(0,0,0,.70), rgba(0,0,0,0) 72%);
+    /* lensing arcs */
+    conic-gradient(from 210deg at 12% 10%, rgba(190,210,255,.10), rgba(0,0,0,0) 28%),
+    conic-gradient(from -24deg at 88% 12%, rgba(255,200,150,.08), rgba(0,0,0,0) 26%),
+    /* ring */
+    radial-gradient(520px 220px at 50% 82%, rgba(210,230,255,.15), rgba(0,0,0,0) 62%),
+    radial-gradient(560px 240px at 50% 84%, rgba(160,200,255,.13), rgba(0,0,0,0) 66%),
+    radial-gradient(600px 260px at 50% 86%, rgba(255,190,130,.11), rgba(0,0,0,0) 70%),
+    /* core */
+    radial-gradient(560px 240px at 50% 86%, rgba(0,0,0,.72), rgba(0,0,0,0) 72%);
   filter: blur(16px) saturate(120%);
   -webkit-mask-image: radial-gradient(140% 92% at 50% 84%, rgba(0,0,0,1) 44%, rgba(0,0,0,.86) 72%, rgba(0,0,0,0) 100%);
           mask-image: radial-gradient(140% 92% at 50% 84%, rgba(0,0,0,1) 44%, rgba(0,0,0,.86) 72%, rgba(0,0,0,0) 100%);
 }
 
-/* ===================== CTA ===================== */
+/* ===================== CTAs ===================== */
 .glass{
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
   border:1px solid var(--hair);
@@ -177,21 +166,19 @@ body{ padding-top:58px; } /* content offset */
 }
 .cta:hover{ background:rgba(255,255,255,.10) }
 
-/* ===================== Pricing, Integrations, Contact ===================== */
+/* ===================== Pricing, I&C, Contact ===================== */
 #pricing .right-shift, #contact .right-shift{ margin-left:auto; margin-right:auto; text-align:center }
 #pricing h2, #contact h2{ font-size:clamp(2.3rem,3.9vw,3.2rem) }
-#pricing p, #contact p{ font-size:clamp(1.08rem,1.35vw,1.22rem) }
+#pricing p, #contact p{ font-size:clamp(1.10rem,1.4vw,1.28rem) }
 
-/* I&C — text only, perfectly symmetric columns */
+/* I&C — text only, symmetric columns */
 .ic-slab{ border-top:1px solid var(--hair); padding-top:32px }
 .ic-grid{
   display:grid; grid-template-columns:1fr; gap:8px; max-width:980px; margin:0 auto;
   align-items:start; justify-items:stretch;
 }
-@media(min-width:900px){
-  .ic-grid{ grid-template-columns:1fr 1fr; column-gap:24px; }
-}
-.ic-item{ padding:0; background:transparent; border:none } /* remove boxes */
+@media(min-width:900px){ .ic-grid{ grid-template-columns:1fr 1fr; column-gap:24px; } }
+.ic-item{ padding:0; background:transparent; border:none }
 .ic-item h3{ font:600 1rem "IBM Plex Sans"; margin:0 0 6px }
 .ic-item p{ opacity:.94 }
 
@@ -208,20 +195,19 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
 .access-badges{display:flex; gap:.5rem; flex-wrap:wrap}
 
 #nebula{
-  position:absolute; left:0; right:0; bottom:0; height:150vh; pointer-events:none; z-index:1;
+  position:absolute; left:0; right:0; bottom:0; height:160vh; pointer-events:none; z-index:1;
   background:
-    /* deep purple/blue base layers */
-    radial-gradient(58% 116% at 50% 124%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
-    radial-gradient(60% 120% at 50% 136%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
-    radial-gradient(62% 124% at 50% 146%, rgba(22,98,230,.82) 0%, rgba(0,0,0,0) 74%),
-    /* cyan/green rims (subtle) */
-    radial-gradient(66% 130% at 50% 158%, rgba(0,235,255,.55) 0%, rgba(0,0,0,0) 82%),
-    radial-gradient(70% 136% at 50% 170%, rgba(64,255,198,.44) 0%, rgba(0,0,0,0) 86%),
-    /* warm inner flare */
-    radial-gradient(76% 144% at 50% 182%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%),
-    /* magenta veil */
-    radial-gradient(80% 152% at 50% 194%, rgba(212,96,255,.36) 0%, rgba(0,0,0,0) 92%);
-  filter: blur(105px) saturate(160%);
+    /* deep base */
+    radial-gradient(58% 116% at 50% 126%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
+    radial-gradient(60% 120% at 50% 138%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
+    radial-gradient(62% 124% at 50% 148%, rgba(22,98,230,.82) 0%, rgba(0,0,0,0) 74%),
+    /* cyan/green rim (subtle) */
+    radial-gradient(66% 130% at 50% 160%, rgba(0,235,255,.50) 0%, rgba(0,0,0,0) 82%),
+    radial-gradient(70% 136% at 50% 172%, rgba(64,255,198,.40) 0%, rgba(0,0,0,0) 86%),
+    /* warm flare + magenta veil */
+    radial-gradient(76% 144% at 50% 184%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%),
+    radial-gradient(80% 152% at 50% 196%, rgba(212,96,255,.34) 0%, rgba(0,0,0,0) 92%);
+  filter: blur(110px) saturate(165%);
   -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
           mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
 }
@@ -238,7 +224,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
 <!-- subtle fog -->
 <div id="fog" aria-hidden="true"></div>
 
-<!-- Header (brand left, nav right, fixed) -->
+<!-- Header -->
 <header class="header" id="siteHeader">
   <a class="brand" href="#home">Janus</a>
   <nav class="nav">
@@ -253,7 +239,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
 </header>
 
 <main>
-  <!-- HERO (right-shifted) -->
+  <!-- HERO -->
   <section id="home" class="section">
     <div class="container">
       <div class="right-shift">
@@ -263,7 +249,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- Bloomberg text strip (centered; deltas auto-colored) -->
+  <!-- Bloomberg strip -->
   <section class="bstrip">
     <div class="container">
       <span class="bitem"><span class="label">DEAL SCORE</span><span class="value num">91</span><span class="delta num">+2.1</span></span>
@@ -275,7 +261,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- VISION (right-shifted) -->
+  <!-- VISION -->
   <section id="vision" class="section">
     <div class="container">
       <div class="right-shift reveal">
@@ -292,7 +278,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- AGENTS (glossy diagram) -->
+  <!-- AGENTS -->
   <section id="agents" class="section">
     <div class="container diagram">
       <div class="right-shift reveal" style="margin-bottom:24px">
@@ -339,7 +325,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- CONSUMER + INVESTOR (continuous dust & event horizon) -->
+  <!-- CONSUMER + INVESTOR -->
   <section class="twins">
     <canvas class="twins-canvas" aria-hidden="true"></canvas>
     <div class="twins-glow" aria-hidden="true"></div>
@@ -360,7 +346,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
           <h2 id="investorTitle">Investors</h2>
           <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span class="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
 
-          <!-- Bloomberg echo: text format (centered) -->
+          <!-- Bloomberg echo (centered) -->
           <div style="margin-top:10px; display:flex; gap:1.25rem; flex-wrap:wrap; justify-content:center">
             <span class="bitem"><span class="label">LTV</span><span class="value num">64%</span><span class="delta num">+1%</span></span>
             <span class="bitem"><span class="label">CoC</span><span class="value num">8.9%</span><span class="delta num">+0.3%</span></span>
@@ -388,7 +374,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     </div>
   </section>
 
-  <!-- Integrations & Compliance (symmetric, text-only) -->
+  <!-- Integrations & Compliance (text-only, symmetric) -->
   <section class="section ic-slab">
     <div class="container">
       <div class="ic-grid reveal">
@@ -416,7 +402,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
   </section>
 </main>
 
-<!-- FOOTER (vibrant multicolor nebula) -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-wrap">
     <div class="footer-col"><h4>Resources</h4>
@@ -457,16 +443,17 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
-/* ===== Bloomberg deltas: auto-apply up/down classes based on sign ===== */
+/* Bloomberg deltas: auto-apply up/down classes based on sign */
 (function(){
   document.querySelectorAll('.bitem .delta').forEach(el=>{
     const t=(el.textContent||'').trim();
-    if(/^[-–—]/.test(t) || t.includes('-')) { el.classList.add('down'); el.classList.remove('up'); }
-    else if(/^\+/.test(t) || t.includes('+') || t==='✓') { el.classList.add('up'); el.classList.remove('down'); }
+    el.classList.remove('up','down');
+    if(/^-/.test(t) || t.includes('−')) el.classList.add('down');
+    else if(/^\+/.test(t) || t==='✓') el.classList.add('up');
   });
 })();
 
-/* ===== Continuous dust for twins (Consumer + Investor) ===== */
+/* Continuous dust across Consumer+Investor */
 (function(){
   const twins=document.querySelector('.twins'); if(!twins) return;
   const canvas=twins.querySelector('.twins-canvas'); const ctx=canvas.getContext('2d',{alpha:true});
@@ -477,7 +464,7 @@ footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; pos
     w=Math.max(1,Math.floor(r.width)); h=Math.max(1,Math.floor(r.height));
     canvas.width=w*DPR; canvas.height=h*DPR; canvas.style.width=w+'px'; canvas.style.height=h+'px';
     ctx.setTransform(DPR,0,0,DPR,0,0);
-    const count=Math.max(130,Math.floor((w*h)/9500));  // dense, full band
+    const count=Math.max(140,Math.floor((w*h)/9000));  // dense across whole band
     particles=new Array(count).fill(0).map(()=>({
       x:Math.random()*w, y:Math.random()*h,
       r:Math.random()*1.6+.6, a:Math.random()*.45+.25,
