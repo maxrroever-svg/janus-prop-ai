@@ -373,18 +373,27 @@ export default function LandingPage() {
           width: 100%;
         }
         
-        /* Add top padding to body to account for fixed header */
-        .janus-landing {
-          padding-top: 80px;
+        /* Make twins-section (consumer + investor) fill fullscreen together */
+        .twins-section {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
           position: relative;
+          background: transparent;
         }
         
-        /* Make consumer section fullscreen height */
-        #consumer.band {
-          min-height: 100vh;
+        .twins-section .band--horizon::before {
+          mix-blend-mode: normal !important;
+        }
+        
+        /* Each band takes half of the fullscreen space */
+        .twins-section #consumer,
+        .twins-section #investor {
+          flex: 1;
           display: flex;
           align-items: center;
           justify-content: center;
+          min-height: 50vh;
         }
         
         /* Make footer relative and remove extra padding */
@@ -572,7 +581,7 @@ export default function LandingPage() {
         <section className="twins-section">
           <canvas ref={dustRef} className="dust-canvas" aria-hidden="true" />
           
-          <div id="consumer" className="band band--horizon" style={{marginBottom: 0, paddingBottom: 'clamp(40px,6vh,80px)', minHeight: '100vh', display: 'flex', alignItems: 'center'}}>
+          <div id="consumer" className="band band--horizon" style={{marginBottom: 0, paddingBottom: 'clamp(40px,6vh,80px)'}}>
             <div className="band-content container">
               <h2>Consumer</h2>
               <p>
