@@ -239,11 +239,11 @@ export default function LandingPage() {
 
         /* ——— ONE combined band (Consumer + Investors) ——— */
         .landing .band{
-          width:100%; min-height:100vh; padding:clamp(96px,16vh,200px) 16px; background:rgba(255,255,255,.02);
-          overflow:hidden; position:relative; isolation:isolate;
+          width:100%; min-height:100vh; padding:0 16px; background:rgba(255,255,255,.02);
+          overflow:hidden; position:relative; isolation:isolate; display:flex; align-items:center;
         }
-        .landing .band .inner{ max-width:var(--maxw); margin:0 auto; position:relative; z-index:3 }
-        .landing .band .grid{ display:grid; gap:60px }
+        .landing .band .inner{ max-width:var(--maxw); margin:0 auto; position:relative; z-index:3; width:100% }
+        .landing .band .grid{ display:grid; gap:clamp(80px,12vh,120px); align-items:center; min-height:100vh; padding:clamp(60px,8vh,100px) 0 }
         .landing .band h2{ margin-bottom:10px; text-align:center }
         .landing .band p{ text-align:center; max-width:920px; margin:.7rem auto 0 }
         .landing .actions{ display:flex; justify-content:center; gap:1rem; margin-top:16px }
@@ -257,10 +257,10 @@ export default function LandingPage() {
         .landing .horizon{
           position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
           background:
-            radial-gradient(120% 120% at 108% 50%, rgba(255,136,60,.44) 0%, rgba(255,120,40,.30) 22%, rgba(180,80,30,.16) 48%, rgba(0,0,0,0) 72%),
-            radial-gradient(80% 70%  at 96%  50%, rgba(120,170,255,.10) 0%, rgba(120,170,255,0) 70%),
-            linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.03));
-          filter: blur(18px) saturate(140%) contrast(106%) brightness(103%);
+            radial-gradient(160% 160% at 110% 50%, rgba(255,136,60,.65) 0%, rgba(255,120,40,.48) 22%, rgba(180,80,30,.28) 48%, rgba(0,0,0,0) 72%),
+            radial-gradient(120% 100% at 98%  50%, rgba(120,170,255,.20) 0%, rgba(120,170,255,0) 70%),
+            linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.045));
+          filter: blur(24px) saturate(160%) contrast(110%) brightness(108%);
         }
 
         /* ——— Dust (covers whole band) ——— */
