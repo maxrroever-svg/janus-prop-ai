@@ -66,12 +66,13 @@ export default function LandingPage() {
     <div className="janus janus-landing">
       <style>{`
         /* Missing styles for landing page */
-        /* Navigation - clean buttons, no boxes */
+        /* Navigation - clean text links with proper underline positioning */
         .janus-landing .nav a {
           font-weight: 600;
           font-size: .96rem;
           position: relative;
-          padding: 8px 0;
+          padding: 4px 0;
+          margin: 0 8px;
           background: none !important;
           border: none !important;
           box-shadow: none !important;
@@ -83,7 +84,7 @@ export default function LandingPage() {
           position: absolute;
           left: 0;
           right: 100%;
-          bottom: 0;
+          bottom: -2px;
           height: 2px;
           background: linear-gradient(90deg, #8EC5FF, #C68CFF, #FF9E7A);
           transition: right .22s ease;
@@ -96,12 +97,13 @@ export default function LandingPage() {
           text-decoration: none;
         }
         
-        /* Bloomberg strip - thin terminal style */
+        /* Bloomberg strip - clean like Hero/Vision sections */
         .janus-landing .bstrip {
-          border-top: 1px solid var(--hair);
-          border-bottom: 1px solid var(--hair);
-          padding: 8px 0;
-          background: rgba(0,0,0,0.8);
+          padding: clamp(56px,8vw,96px) 18px;
+          position: relative;
+          z-index: 1;
+          background: transparent;
+          border: none;
         }
         .janus-landing .bstrip .container {
           display: flex;
@@ -109,17 +111,19 @@ export default function LandingPage() {
           gap: 2rem;
           flex-wrap: wrap;
           align-items: center;
+          max-width: var(--maxw);
+          margin: 0 auto;
         }
         .janus-landing .bstrip .chip {
           display: inline-flex;
           align-items: baseline;
           gap: 6px;
-          padding: 4px 8px;
-          border: 1px solid var(--hair);
-          border-radius: 4px;
-          background: rgba(255,255,255,.04);
+          padding: 0;
+          border: none;
+          border-radius: 0;
+          background: transparent;
           white-space: nowrap;
-          font-size: 0.85rem;
+          font-size: 0.9rem;
         }
         
         .janus-landing .features {
@@ -238,12 +242,12 @@ export default function LandingPage() {
           font-size: 0.9rem;
         }
         
-        /* Fixed nebula at bottom */
+        /* Nebula pinned to bottom of WEBSITE, not screen */
         .janus-landing #nebula {
-          position: fixed !important;
+          position: absolute !important;
           left: 0; 
           right: 0; 
-          bottom: 0;
+          bottom: -70vh;
           height: 140vh; 
           pointer-events: none; 
           z-index: 0;
@@ -412,25 +416,36 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* CONSUMER + INVESTOR — merged back into one big band */}
+        {/* CONSUMER SECTION */}
         <section id="consumer" className="band band--horizon">
           <div className="glowfield" aria-hidden="true" />
           <canvas ref={dustRef} className="dust-canvas" aria-hidden="true" />
           <div className="band-content container">
-            <h2>Consumer &amp; Investor</h2>
+            <h2>Consumer</h2>
             <p>
-              Two experiences sharing a single agentic core — plain-English scores, risk gates, 
-              and auditable memos for decisive action. Consumer watchlists and Investor committee-grade underwriting.
+              Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes.
+              Build a watchlist, set thresholds, and share a one-page memo from your phone.
             </p>
             <div className="actions" style={{marginTop:18}}>
-              <Link to="/consumer" className="cta glass">Enter Consumer</Link>
-              <Link to="/investor" className="cta glass">Enter Investor</Link>
+              <Link to="/consumer" className="cta glass">Enter Dashboard</Link>
             </div>
           </div>
         </section>
 
-        {/* Invisible anchor for investor nav link */}
-        <div id="investor" style={{position: 'absolute', top: '-100px'}}></div>
+        {/* INVESTOR SECTION */}
+        <section id="investor" className="band band--horizon" style={{marginTop: 16}}>
+          <div className="glowfield" aria-hidden="true" />
+          <div className="band-content container">
+            <h2>Investor</h2>
+            <p>
+              Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed
+              strategies with confidence-weighted verdicts and auditable memos.
+            </p>
+            <div className="actions" style={{marginTop:18}}>
+              <Link to="/investor" className="cta glass">Enter Dashboard</Link>
+            </div>
+          </div>
+        </section>
 
         {/* PRICING */}
         <section id="pricing" className="section">
