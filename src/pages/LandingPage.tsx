@@ -213,12 +213,23 @@ export default function LandingPage() {
         .landing .nav a:hover::after, .landing .nav a.active::after{ right:0 }
 
         /* ——— Bloomberg strip (thinner) ——— */
-        .landing .bstrip{ border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:8px 0 }
+        .landing .bstrip{ 
+          border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:8px 0;
+          background: linear-gradient(90deg, rgba(0,220,150,.08) 0%, rgba(255,105,105,.08) 50%, rgba(0,220,150,.08) 100%);
+        }
         .landing .bstrip .container{ display:flex; align-items:center; justify-content:center; gap:1rem; max-width:none; flex-wrap:wrap }
-        .landing .bitem{ display:inline-flex; align-items:baseline; gap:.5rem; line-height:1.2 }
+        .landing .bitem{ 
+          display:inline-flex; align-items:baseline; gap:.5rem; line-height:1.2;
+          padding:.4rem .6rem; border-radius:6px; transition:all .2s ease;
+        }
+        .landing .bitem.positive{ background:rgba(0,220,150,.12); border:1px solid rgba(0,220,150,.2) }
+        .landing .bitem.negative{ background:rgba(255,105,105,.12); border:1px solid rgba(255,105,105,.2) }
+        .landing .bitem.neutral{ background:rgba(207,226,255,.08); border:1px solid rgba(207,226,255,.15) }
         .landing .bitem .label{ letter-spacing:.02em; opacity:.92; font-size:.78rem; text-transform:uppercase }
         .landing .bitem .value{ font-weight:700; color:var(--primary) }
-        .landing .bitem .delta{ font-family:"IBM Plex Mono"; font-size:.9rem }
+        .landing .bitem.positive .value{ color:var(--up) }
+        .landing .bitem.negative .value{ color:var(--down) }
+        .landing .bitem .delta{ font-family:"IBM Plex Mono"; font-size:.9rem; font-weight:600 }
         .landing .bitem .delta.up{ color:var(--up)!important }   /* green */
         .landing .bitem .delta.down{ color:var(--down)!important }/* red   */
 
@@ -363,12 +374,12 @@ export default function LandingPage() {
           {/* Bloomberg strip (thin) */}
           <section className="bstrip">
             <div className="container">
-              <span className="bitem"><span className="label">DEAL SCORE</span><span className="value num">91</span><span className="delta up num">+2.1</span></span>
-              <span className="bitem"><span className="label">DSCR</span><span className="value num">1.28</span><span className="delta up num">+0.03</span></span>
-              <span className="bitem"><span className="label">CAP RATE</span><span className="value num">6.8%</span><span className="delta down num">-0.2%</span></span>
-              <span className="bitem"><span className="label">RENT BAND</span><span className="value num">$1,780</span><span className="delta up num">+15</span></span>
-              <span className="bitem"><span className="label">RISK FLAGS</span><span className="value num">Low</span><span className="delta up num">+</span></span>
-              <span className="bitem"><span className="label">SPREAD</span><span className="value num">$13.5k</span><span className="delta up num">+$900</span></span>
+              <span className="bitem positive"><span className="label">DEAL SCORE</span><span className="value num">91</span><span className="delta up num">+2.1</span></span>
+              <span className="bitem positive"><span className="label">DSCR</span><span className="value num">1.28</span><span className="delta up num">+0.03</span></span>
+              <span className="bitem negative"><span className="label">CAP RATE</span><span className="value num">6.8%</span><span className="delta down num">-0.2%</span></span>
+              <span className="bitem positive"><span className="label">RENT BAND</span><span className="value num">$1,780</span><span className="delta up num">+15</span></span>
+              <span className="bitem positive"><span className="label">RISK FLAGS</span><span className="value num">Low</span><span className="delta up num">+</span></span>
+              <span className="bitem positive"><span className="label">SPREAD</span><span className="value num">$13.5k</span><span className="delta up num">+$900</span></span>
             </div>
           </section>
 
