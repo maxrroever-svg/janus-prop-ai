@@ -63,7 +63,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="janus">
+    <div className="janus janus-landing">
       {/* Fog (very subtle) */}
       <div id="fog" aria-hidden="true" />
 
@@ -81,6 +81,8 @@ export default function LandingPage() {
             <a href="#band">Dashboards</a>
             <a href="#pricing">Pricing</a>
             <a href="#contact">Contact</a>
+            <Link to="/consumer" className="glass cta" style={{marginLeft: "16px", padding: "8px 16px"}}>Consumer Dashboard</Link>
+            <Link to="/investor" className="glass cta" style={{marginLeft: "8px", padding: "8px 16px"}}>Investor Dashboard</Link>
           </nav>
         </div>
       </header>
@@ -103,32 +105,32 @@ export default function LandingPage() {
         {/* Thinner Bloomberg strip */}
         <section className="bstrip slim">
           <div className="container">
-            <span className="bitem">
+            <span className="chip">
               <span className="label">DEAL SCORE</span>
               <span className="value num">91</span>
               <span className="delta up num">+2.1</span>
             </span>
-            <span className="bitem">
+            <span className="chip">
               <span className="label">DSCR</span>
               <span className="value num">1.28</span>
               <span className="delta up num">+0.03</span>
             </span>
-            <span className="bitem">
+            <span className="chip">
               <span className="label">CAP RATE</span>
               <span className="value num">6.8%</span>
               <span className="delta down num">-0.2%</span>
             </span>
-            <span className="bitem">
+            <span className="chip">
               <span className="label">RENT BAND</span>
               <span className="value num">$1,780</span>
               <span className="delta up num">+15</span>
             </span>
-            <span className="bitem">
+            <span className="chip">
               <span className="label">RISK FLAGS</span>
               <span className="value num">Low</span>
               <span className="delta up num">+</span>
             </span>
-            <span className="bitem">
+            <span className="chip">
               <span className="label">SPREAD</span>
               <span className="value num">$13.5k</span>
               <span className="delta up num">+$900</span>
@@ -261,24 +263,6 @@ export default function LandingPage() {
         </div>
         <div className="copyright">© 2025 Janus • All rights reserved</div>
       </footer>
-
-      {/* Local tweaks so you don't have to touch the global theme file */}
-      <style>{`
-        /* Thinner Bloomberg band */
-        .bstrip.slim { padding: 6px 0; }
-        .bstrip.slim .bitem .label { font-size: .72rem; }
-        .bstrip.slim .bitem .delta { font-size: .85rem; }
-
-        /* Pinned bottom nebula never scrolls with content */
-        #nebula {
-          position: fixed !important;
-          left: 0; right: 0; bottom: 0;
-          height: 140vh; pointer-events: none; z-index: 0;
-        }
-
-        /* Header spacing so it never looks like a bar */
-        .janus-header { background: transparent !important; }
-      `}</style>
     </div>
   );
 }
