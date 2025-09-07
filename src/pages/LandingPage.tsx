@@ -333,12 +333,12 @@ export default function LandingPage() {
           mix-blend-mode: screen;
         }
         
-        /* Nebula positioned at very bottom of website */
+        /* Nebula positioned at very bottom of website content */
         #nebula {
-          position: fixed !important;
+          position: absolute !important;
           left: 0; 
           right: 0; 
-          bottom: 0;
+          bottom: -30vh;
           height: 60vh; 
           pointer-events: none; 
           z-index: -1;
@@ -351,6 +351,11 @@ export default function LandingPage() {
           filter: blur(60px) saturate(155%);
           -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
           mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
+        }
+        
+        /* Ensure main container is positioned relative */
+        .janus-landing {
+          position: relative;
         }
         
         /* Make footer relative and remove extra padding */
