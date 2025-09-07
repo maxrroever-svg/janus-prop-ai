@@ -45,9 +45,7 @@ const Consumer = () => {
   }, []);
 
   return (
-    <>
-      {/* Activate the theme by wrapping in .janus */}
-      <div className="janus janus-dashboard">
+    <div className="janus janus-dashboard">
         <SidebarProvider>
           {/* Remove conflicting backgrounds to keep matte black */}
           <div className="min-h-screen w-full flex">
@@ -127,8 +125,7 @@ const Consumer = () => {
             </div>
           </div>
         </SidebarProvider>
-      </div>
-    </>
+    </div>
   );
 };
 

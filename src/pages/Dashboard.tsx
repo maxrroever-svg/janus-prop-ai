@@ -33,8 +33,6 @@ const Dashboard = () => {
           </div>
         </div>
       </SidebarProvider>
-      <link rel="stylesheet" href="/css/janus-theme.css" />
-      <script src="/js/janus-effects.js"></script>
     </div>
   );
 };

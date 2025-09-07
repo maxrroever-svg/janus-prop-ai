@@ -78,7 +78,7 @@ const LandingPage = () => {
   }, []);
 
   return (
-    <>
+    <div className="janus janus-landing">
       <header className="janus-header">
         <div className="row">
           <a className="brand" href="/">Janus</a>
@@ -175,6 +175,7 @@ const LandingPage = () => {
           <canvas ref={canvasRef} className="twins-canvas" aria-hidden="true"></canvas>
 
           <section id="consumer" className="band">
+            <canvas className="dust-canvas" />
             <div className="inner">
               <h2>Consumer</h2>
               <p>Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes. Build a watchlist, set thresholds (<span className="num">DSCR≥1.25</span>, <span className="num">Cap≥6%</span>), and share a one-page memo from your phone.</p>
@@ -187,6 +188,7 @@ const LandingPage = () => {
           </section>
 
           <section id="investor" className="band">
+            <canvas className="dust-canvas" />
             <div className="inner">
               <h2>Investors</h2>
               <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span className="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
@@ -251,7 +253,7 @@ const LandingPage = () => {
         <div className="copyright">© 2025 Janus • All rights reserved</div>
         <div id="nebula" aria-hidden="true"></div>
       </footer>
-    </>
+    </div>
   );
 };
 
