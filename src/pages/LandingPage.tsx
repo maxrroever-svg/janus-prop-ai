@@ -293,7 +293,7 @@ export default function LandingPage() {
         .landing .access-badges{ display:flex; gap:.5rem; flex-wrap:wrap }
         .landing .badge{ border:1px solid var(--hair); border-radius:999px; padding:.35rem .7rem; background:rgba(255,255,255,.06) }
         .landing #nebula{
-          position:fixed; left:0; right:0; bottom:0; height:150vh; pointer-events:none; z-index:0;
+          position:absolute; left:0; right:0; bottom:-50vh; height:150vh; pointer-events:none; z-index:0;
           background:
             radial-gradient(58% 116% at 50% 126%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
             radial-gradient(60% 120% at 50% 138%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
@@ -441,7 +441,7 @@ export default function LandingPage() {
                     <span className="bitem"><span className="label">DSCR</span><span className="value num">1.32</span><span className="delta down num">-0.02</span></span>
                   </div>
 
-                  <div className="actions" style={{marginTop:14}}><Link className="cta" to="/dashboard">Enter Dashboard</Link></div>
+                  <div className="actions" style={{marginTop:14}}><Link className="cta" to="/investor">Enter Dashboard</Link></div>
                 </div>
               </div>
             </div>
@@ -488,7 +488,7 @@ export default function LandingPage() {
           <div className="footer-wrap">
             <div className="footer-col"><h4>Resources</h4><a href="#safety">Safety</a><a href="#legal">Legal</a><a href="#security">Security</a><a href="#docs">Docs</a></div>
             <div className="footer-col"><h4>Company</h4><a href="#about">About</a><a href="#careers">Careers</a><a href="#news">News</a></div>
-            <div className="footer-col"><h4>Products</h4><a href="#agents">Agents</a><Link to="/consumer">Consumer</Link><Link to="/dashboard">Investors</Link></div>
+            <div className="footer-col"><h4>Products</h4><a href="#agents">Agents</a><Link to="/consumer">Consumer</Link><Link to="/investor">Investors</Link></div>
             <div className="footer-col"><h4>Access</h4><div className="access-badges"><span className="badge">Web</span><span className="badge">iOS</span><span className="badge">Android</span></div></div>
           </div>
           <div className="copyright">© 2025 Janus • All rights reserved</div>
