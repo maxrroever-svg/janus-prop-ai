@@ -333,33 +333,37 @@ export default function LandingPage() {
           z-index: 0;
 
           background:
-            /* deep midnight base */
-            radial-gradient(120% 140% at 50% 118%,
-              rgba(4,10,28,0.96) 0%,
-              rgba(4,10,28,0.85) 25%,
-              rgba(4,10,28,0.00) 65%),
+            /* noise grain overlay */
+            url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.14'/></svg>") repeat,
 
-            /* navy core */
+            /* white afterglow */
+            radial-gradient(140% 140% at 50% 140%,
+              rgba(255,255,255,0.22) 0%,
+              rgba(255,255,255,0) 70%),
+
+            /* lighter blue upper haze */
+            radial-gradient(120% 130% at 50% 128%,
+              rgba(72,160,255,0.55) 0%,
+              rgba(72,160,255,0.00) 70%),
+
+            /* cobalt mid tone */
             radial-gradient(100% 120% at 50% 120%,
-              rgba(12,24,64,0.88) 0%,
-              rgba(12,24,64,0.00) 60%),
+              rgba(20,50,140,0.85) 0%,
+              rgba(20,50,140,0.00) 60%),
 
-            /* cobalt-to-light blue haze */
-            radial-gradient(160% 140% at 50% 135%,
-              rgba(28,72,180,0.66) 0%,
-              rgba(64,160,255,0.48) 45%,
-              rgba(64,160,255,0.00) 72%),
+            /* deep base dark navy */
+            radial-gradient(120% 140% at 50% 118%,
+              rgba(6,14,36,0.96) 0%,
+              rgba(6,14,36,0.85) 25%,
+              rgba(6,14,36,0) 65%);
 
-            /* white afterglow near top */
-            radial-gradient(180% 160% at 50% 145%,
-              rgba(255,255,255,0.25) 0%,
-              rgba(255,255,255,0.00) 70%);
-
-          filter: blur(100px) saturate(150%) contrast(108%) brightness(106%);
+          background-blend-mode: screen, lighten, normal;
+          filter: blur(90px) saturate(160%) contrast(110%) brightness(106%);
+          
           -webkit-mask-image: linear-gradient(to top,
-              rgba(0,0,0,1) 10%, rgba(0,0,0,0) 65%);
+              rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
                   mask-image: linear-gradient(to top,
-              rgba(0,0,0,1) 10%, rgba(0,0,0,0) 65%);
+              rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
         }
 
         /* ——— Reveal off (we keep it immediate) ——— */
