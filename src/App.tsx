@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Consumer from "./pages/Consumer";
+import ConsumerIndex from "./pages/consumer/index";
+import InvestorIndex from "./pages/investor/index";
 import ConsumerAssistant from "./pages/consumer/Assistant";
 import ConsumerAnalysis from "./pages/consumer/Analysis";
 import ConsumerUnderwriting from "./pages/consumer/Underwriting";
@@ -46,7 +48,8 @@ const App = () => (
         >
           <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/consumer" element={<Consumer />} />
+            <Route path="/consumer" element={<ConsumerIndex />} />
+            <Route path="/investor" element={<InvestorIndex />} />
             <Route path="/consumer/assistant" element={<ConsumerAssistant />} />
             <Route path="/consumer/analysis" element={<ConsumerAnalysis />} />
             <Route path="/consumer/underwriting" element={<ConsumerUnderwriting />} />
@@ -59,7 +62,6 @@ const App = () => (
             <Route path="/consumer/data-lake" element={<ConsumerDataLake />} />
             <Route path="/consumer/map" element={<ConsumerMapView />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/investor" element={<Dashboard />} />
             <Route path="/dashboard/feed" element={<DealFeed />} />
             <Route path="/dashboard/agents" element={<Agents />} />
             <Route path="/dashboard/deals" element={<Deals />} />
