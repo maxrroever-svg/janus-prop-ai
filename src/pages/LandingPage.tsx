@@ -353,19 +353,38 @@ export default function LandingPage() {
           mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
         }
         
-        /* Ensure main container is positioned relative */
-        .janus-landing {
-          position: relative;
-        }
-        
-        /* Fix the visual separation by ensuring seamless blending */
-        .twins-section {
-          position: relative;
+        /* Header extends to full width */
+        .janus-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 100;
+          padding: 0;
           background: transparent;
         }
         
-        .twins-section .band--horizon::before {
-          mix-blend-mode: normal !important;
+        .janus-header .row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem 2rem;
+          max-width: 100%;
+          width: 100%;
+        }
+        
+        /* Add top padding to body to account for fixed header */
+        .janus-landing {
+          padding-top: 80px;
+          position: relative;
+        }
+        
+        /* Make consumer section fullscreen height */
+        #consumer.band {
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
         
         /* Make footer relative and remove extra padding */
@@ -553,7 +572,7 @@ export default function LandingPage() {
         <section className="twins-section">
           <canvas ref={dustRef} className="dust-canvas" aria-hidden="true" />
           
-          <div id="consumer" className="band band--horizon" style={{marginBottom: 0, paddingBottom: 'clamp(40px,6vh,80px)'}}>
+          <div id="consumer" className="band band--horizon" style={{marginBottom: 0, paddingBottom: 'clamp(40px,6vh,80px)', minHeight: '100vh', display: 'flex', alignItems: 'center'}}>
             <div className="band-content container">
               <h2>Consumer</h2>
               <p>
