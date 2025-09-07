@@ -1,35 +1,30 @@
-/* JANUS THEME — Stable (XAI × Bloomberg)
-   Scope: .janus wrapper
-   Paths: public/css/janus-theme.css
+/* JANUS THEME — Scoped & Stable (Landing vs Dashboards)
+   Wrap landing:   <div class="janus janus-landing">...</div>
+   Wrap dashboards:<div class="janus janus-dashboard">...</div>
 */
 
 /* Fonts */
 @import url("https://fonts.googleapis.com/css2?family=GFS+Didot&family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap");
 
-/* ---- Tokens / Base ---- */
+/* Tokens */
 .janus{
   --bg:#000; --white:#fff; --hair:rgba(255,255,255,.12);
   --gloss-1:rgba(255,255,255,.06); --gloss-2:rgba(255,255,255,.03);
   --up:#00DC96; --down:#FF6969; --primary:#CFE2FF;
   --maxw:1120px; --prose:980px;
-
   color-scheme:dark; background:var(--bg); color:var(--white);
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 
-/* Selection + links */
-.janus ::selection{background:rgba(255,255,255,.18);color:#000}
-.janus a{color:var(--white);text-decoration:none}
-.janus a:hover{text-decoration:underline;text-underline-offset:6px}
-
-/* Force text to white */
+/* Force text white + links */
 .janus :where(h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,a,button,label,div,section,footer,header,th,td){
   color:var(--white)!important; -webkit-text-fill-color:var(--white);
 }
-.janus svg text{fill:#fff!important}
+.janus a{color:var(--white);text-decoration:none}
+.janus a:hover{text-decoration:underline;text-underline-offset:6px}
 
-/* Type scale (consistent) */
-.janus h1{font-family:"GFS Didot",serif;font-weight:400;letter-spacing:.0025em;line-height:1.04;font-size:clamp(3.0rem,6.2vw,4.8rem);margin:0 0 18px}
+/* Type */
+.janus h1{font-family:"GFS Didot",serif;font-weight:400;letter-spacing:.0025em;line-height:1.04;font-size:clamp(3rem,6.2vw,4.8rem);margin:0 0 18px}
 .janus h2{font-family:"GFS Didot",serif;font-weight:400;letter-spacing:.003em;line-height:1.08;font-size:clamp(2.2rem,3.8vw,3.2rem);margin:0 0 12px}
 .janus h3{font-family:"GFS Didot",serif;font-weight:400;font-size:clamp(1.1rem,1.6vw,1.35rem);margin:0 0 12px}
 .janus p,.janus li,.janus small,.janus span,
@@ -39,71 +34,62 @@
 .janus .num{font-family:"IBM Plex Mono",monospace}
 
 /* Layout helpers */
-.janus .section{padding:clamp(56px,8vw,96px) 18px;position:relative;z-index:1}
-.janus .container{max-width:var(--maxw);margin:0 auto}
+.janus .section{padding:clamp(56px,8vw,96px) 18px; position:relative; z-index:1}
+.janus .container{max-width:var(--maxw); margin:0 auto}
 .janus .prose{max-width:var(--prose)}
-.janus .right-shift{max-width:var(--prose);margin-left:auto;margin-right:0;text-align:left}
+.janus .right-shift{max-width:var(--prose); margin-left:auto; margin-right:0; text-align:left}
 
-/* ---- Header / Nav (sticky, transparent, underline on active) ---- */
-.janus .janus-header{
+/* ===== HEADER / NAV (Landing only) ===== */
+.janus-landing .janus-header{
   position:sticky; top:0; z-index:40; padding:12px 16px;
   background:transparent!important; border:0!important; box-shadow:none!important;
 }
-.janus .janus-header .row{display:flex;align-items:center;justify-content:space-between;max-width:var(--maxw);margin:0 auto}
-.janus .brand{font-family:"GFS Didot",serif;font-size:18px;letter-spacing:.02em}
-.janus .nav{display:flex;gap:16px;align-items:center}
-.janus .nav a{font-weight:600;font-size:.96rem;position:relative;padding-bottom:6px}
-.janus .nav a::after{
-  content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;
-  background:linear-gradient(90deg,#8EC5FF,#C68CFF,#FF9E7A);transition:right .22s ease;
+.janus-landing .janus-header .row{
+  display:flex; align-items:center; justify-content:space-between;
+  max-width:var(--maxw); margin:0 auto;
 }
-.janus .nav a:hover::after,.janus .nav a.is-active::after{right:0}
+.janus-landing .brand{font-family:"GFS Didot",serif; font-size:18px; letter-spacing:.02em}
+.janus-landing .nav{display:flex; gap:16px; align-items:center}
+.janus-landing .nav a{font-weight:600; font-size:.96rem; position:relative; padding-bottom:6px}
+.janus-landing .nav a::after{
+  content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
+  background:linear-gradient(90deg,#8EC5FF,#C68CFF,#FF9E7A); transition:right .22s ease;
+}
+.janus-landing .nav a:hover::after, .janus-landing .nav a.is-active::after{ right:0 }
 
-/* ---- Glass & cards ---- */
+/* Hide landing header in dashboards */
+.janus-dashboard .janus-header{ display:none !important }
+
+/* Glass & chips */
 .janus .glass{
   background:linear-gradient(180deg,var(--gloss-1),var(--gloss-2));
   border:1px solid var(--hair); border-radius:14px;
   backdrop-filter:blur(6px) saturate(120%); -webkit-backdrop-filter:blur(6px) saturate(120%);
 }
-.janus .card{background:rgba(255,255,255,.03);border:1px solid var(--hair);border-radius:12px;padding:16px}
-
-/* ---- Bloomberg micro-metrics ---- */
-.janus .strip{display:flex;flex-wrap:wrap;gap:10px}
 .janus .chip{
-  display:inline-flex;align-items:baseline;gap:8px;padding:6px 10px;
-  border:1px solid var(--hair);border-radius:999px;background:rgba(255,255,255,.06);white-space:nowrap
+  display:inline-flex; align-items:baseline; gap:8px; padding:6px 10px;
+  border:1px solid var(--hair); border-radius:999px; background:rgba(255,255,255,.06);
+  white-space:nowrap;
 }
-.janus .chip .label{letter-spacing:.02em;opacity:.9;font-size:.78rem;text-transform:uppercase}
-.janus .chip .value{font-weight:700;color:var(--primary)}
+.janus .chip .label{letter-spacing:.02em; opacity:.9; font-size:.78rem; text-transform:uppercase}
+.janus .chip .value{font-weight:700; color:var(--primary)}
 .janus .chip .delta{font-family:"IBM Plex Mono",monospace}
 .janus .chip .delta.up{color:var(--up)!important}
 .janus .chip .delta.down{color:var(--down)!important}
 
-/* ---- Consumer/Investor bands ---- */
+/* Bands (Consumer/Investor) */
 .janus .band{
   width:100%; padding:clamp(80px,12vh,160px) 18px; position:relative; overflow:hidden;
   background:rgba(255,255,255,.02); border:none!important;
 }
-.janus .band .band-content{position:relative;z-index:3;text-align:center}
+.janus .band .band-content{position:relative; z-index:3; text-align:center}
 .janus .band h2{font-size:2rem}
-.janus .band p{font-size:1.06rem;line-height:1.7;max-width:920px;margin:.8rem auto 0}
-.janus .band .actions{display:flex;justify-content:center;gap:1rem;margin-top:1.2rem}
-.janus .band .cta{display:inline-block;padding:.7rem 1.1rem;border:1px solid var(--hair);border-radius:999px;background:rgba(255,255,255,.06)}
+.janus .band p{font-size:1.06rem; line-height:1.7; max-width:920px; margin:.8rem auto 0}
+.janus .band .actions{display:flex; justify-content:center; gap:1rem; margin-top:1.2rem}
+.janus .band .cta{display:inline-block; padding:.7rem 1.1rem; border:1px solid var(--hair); border-radius:999px; background:rgba(255,255,255,.06)}
 
-/* Dust + glow */
-.janus .dust-canvas{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.55;mix-blend-mode:screen}
-.janus .glowfield{
-  position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:
-    radial-gradient(240px 200px at 3% 6%,   rgba(140,200,255,.12), transparent 72%),
-    radial-gradient(260px 220px at 98% 12%, rgba(255,170,96,.10),  transparent 74%),
-    radial-gradient(220px 200px at 6% 96%,  rgba(200,140,255,.10), transparent 70%),
-    radial-gradient(240px 200px at 96% 92%, rgba(120,255,220,.08), transparent 70%);
-  filter:blur(8px);
-}
-
-/* Right-edge event-horizon look (static) */
-.janus .band--horizon::before{
+/* Event-horizon side glow (Landing only, inside .twins) */
+.janus-landing .band--horizon::before{
   content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
   background:
     radial-gradient(120% 120% at 108% 50%, rgba(255,136,60,.44) 0%, rgba(255,120,40,.30) 22%, rgba(180,80,30,.16) 48%, rgba(0,0,0,0) 72%),
@@ -112,9 +98,13 @@
   filter: blur(18px) saturate(140%) contrast(106%) brightness(103%);
 }
 
-/* Front page nebula (don't mount on dashboards) */
-.janus #nebula{
-  position:fixed;left:0;right:0;bottom:0;height:140vh;pointer-events:none;z-index:0;
+/* Dust canvases (Landing only) */
+.janus-landing .dust-canvas{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.55;mix-blend-mode:screen}
+
+/* Footer nebula — Landing only; anchored to footer so it DOES NOT follow scroll */
+.janus-landing footer{position:relative; z-index:1}
+.janus-landing #nebula{
+  position:absolute; left:0; right:0; bottom:0; height:140vh; pointer-events:none; z-index:0;
   background:
     radial-gradient(60% 120% at 50% 122%, rgba(32,12,64,.95) 0%, rgba(0,0,0,0) 60%),
     radial-gradient(62% 122% at 50% 134%, rgba(8,26,96,.92) 0%, rgba(0,0,0,0) 70%),
@@ -127,9 +117,7 @@
           mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 58%);
 }
 
-/* Tables / utilities (dashboards) */
-.janus .table{width:100%;border-collapse:separate;border-spacing:0}
-.janus .table thead th{font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;opacity:.8;text-align:left;padding:10px 12px;border-bottom:1px solid var(--hair)}
-.janus .table tbody td{padding:12px;border-bottom:1px solid rgba(255,255,255,.06)}
-.janus .pos{color:var(--up)} .janus .neg{color:var(--down)}
-.janus .center{text-align:center}
+/* Prevent landing-only visuals in dashboards */
+.janus-dashboard #nebula,
+.janus-dashboard .dust-canvas,
+.janus-dashboard .band--horizon::before{ display:none !important }
