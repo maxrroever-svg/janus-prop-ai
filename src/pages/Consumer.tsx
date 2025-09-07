@@ -1,4 +1,3 @@
-import Head from "next/head";
 import React, { useEffect, useRef } from "react";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
@@ -46,12 +45,6 @@ const Consumer = () => {
 
   return (
     <>
-      <Head>
-        {/* Load the scoped Janus theme */}
-        <link rel="stylesheet" href="/css/janus-theme.css" />
-        <title>Janus — Consumer Dashboard</title>
-      </Head>
-
       {/* Activate the theme by wrapping in .janus */}
       <div className="janus janus-dashboard">
         <SidebarProvider>

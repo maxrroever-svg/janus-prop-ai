@@ -43,8 +43,8 @@ const Landing = () => {
         <h1>AI for Real Estate, Without the Noise.</h1>
         <p style="max-width:820px">Agentic investment committee — sourcing, comps, underwriting, risk, portfolio fit, and a final memo with conditions to close.</p>
         <div class="actions" style="margin-top:12px">
-          <a class="glass" href="/consumer" style="padding:.7rem 1.1rem; border-radius:999px; border:1px solid var(--hair)">Enter Consumer Dashboard</a>
-          <a class="glass" href="/dashboard" style="padding:.7rem 1.1rem; border-radius:999px; border:1px solid var(--hair)">Enter Investor Dashboard</a>
+          <a class="glass" href="/consumer/consumer" style="padding:.7rem 1.1rem; border-radius:999px; border:1px solid var(--hair)">Enter Consumer Dashboard</a>
+          <a class="glass" href="/investor/investor" style="padding:.7rem 1.1rem; border-radius:999px; border:1px solid var(--hair)">Enter Investor Dashboard</a>
         </div>
       </div>
     </section>
@@ -104,7 +104,7 @@ const Landing = () => {
       <div class="container band-content reveal">
         <h2>Consumer</h2>
         <p>Plain-English deal scores with rationale; rent/ARV bands; alerts when the thesis changes. Watchlist thresholds (DSCR≥1.25, Cap≥6%).</p>
-        <div class="actions"><a class="cta glass" href="/consumer">Enter Dashboard</a></div>
+        <div class="actions"><a class="cta glass" href="/consumer/consumer">Enter Dashboard</a></div>
       </div>
     </section>
 
@@ -116,7 +116,7 @@ const Landing = () => {
         <h2>Investors</h2>
         <p>Committee-grade underwriting, risk gates (flood/HOA/title), portfolio fit, dissent, and conditions to close with a confidence verdict.</p>
         <div class="actions">
-          <a class="cta glass" href="/dashboard">Enter Dashboard</a>
+          <a class="cta glass" href="/investor/investor">Enter Dashboard</a>
         </div>
       </div>
     </section>
