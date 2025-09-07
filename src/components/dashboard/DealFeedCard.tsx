@@ -64,7 +64,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
   };
 
   return (
-    <div className="h-full w-full relative bg-black">
+    <div className="h-full w-full relative bg-background">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
@@ -72,14 +72,14 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
           backgroundImage: `url(${deal.imageUrl})`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
       </div>
 
       {/* Navigation Arrows */}
       {!isFirst && (
         <button
           onClick={onPrevious}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 z-40 bg-black/40 backdrop-blur-sm rounded-sm p-2 text-white hover:bg-black/60"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 z-40 glass rounded-sm p-2 text-foreground hover:bg-white/10"
         >
           <ChevronUp className="h-5 w-5" />
         </button>
@@ -88,7 +88,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
       {!isLast && (
         <button
           onClick={onNext}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 z-40 bg-black/40 backdrop-blur-sm rounded-sm p-2 text-white hover:bg-black/60"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 z-40 glass rounded-sm p-2 text-foreground hover:bg-white/10"
         >
           <ChevronDown className="h-5 w-5" />
         </button>
@@ -107,14 +107,14 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
                 </Badge>
               </div>
               
-              <h1 className="text-2xl font-bold text-white leading-tight">
+              <h1 className="font-display text-2xl font-bold text-foreground glow-text leading-tight">
                 {deal.address}
               </h1>
-              <div className="flex items-center space-x-2 text-gray-300">
+              <div className="flex items-center space-x-2 text-muted-foreground">
                 <MapPin className="h-4 w-4" />
                 <span className="text-sm">{deal.location}</span>
               </div>
-              <Badge variant="outline" className="bg-black/30 text-white border-white/20">
+              <Badge variant="outline" className="glass text-foreground border-border">
                 {deal.propertyType}
               </Badge>
             </div>
@@ -125,10 +125,10 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
           </div>
 
           {/* AI Summary */}
-          <div className="bg-black/50 backdrop-blur-sm rounded-lg p-4 border border-white/20">
+          <div className="glass rounded-lg p-4 border border-border">
             <div className="flex items-start space-x-2">
               <Brain className="h-4 w-4 text-accent mt-0.5" />
-              <p className="text-white text-sm leading-relaxed">
+              <p className="text-foreground text-sm leading-relaxed">
                 {deal.aiSummary}
               </p>
             </div>
@@ -140,39 +140,39 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               {/* Asking Price */}
-              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+              <div className="glass rounded-lg p-3 border border-border">
                 <div className="flex items-center space-x-2 mb-1">
                   <DollarSign className="h-4 w-4 text-success" />
-                  <span className="text-xs text-gray-300 uppercase tracking-wide">Asking</span>
+                  <span className="text-xs text-muted-foreground uppercase tracking-wide">Asking</span>
                 </div>
-                <p className="text-lg font-bold text-white">{formatPrice(deal.askingPrice)}</p>
+                <p className="text-lg font-bold text-foreground">{formatPrice(deal.askingPrice)}</p>
               </div>
 
               {/* ARV */}
-              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+              <div className="glass rounded-lg p-3 border border-border">
                 <div className="flex items-center space-x-2 mb-1">
                   <TrendingUp className="h-4 w-4 text-accent" />
-                  <span className="text-xs text-gray-300 uppercase tracking-wide">ARV</span>
+                  <span className="text-xs text-muted-foreground uppercase tracking-wide">ARV</span>
                 </div>
-                <p className="text-lg font-bold text-white">{formatPrice(deal.arv)}</p>
+                <p className="text-lg font-bold text-foreground">{formatPrice(deal.arv)}</p>
               </div>
 
               {/* Cap Rate */}
-              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+              <div className="glass rounded-lg p-3 border border-border">
                 <div className="flex items-center space-x-2 mb-1">
                   <Target className="h-4 w-4 text-primary" />
-                  <span className="text-xs text-gray-300 uppercase tracking-wide">Cap Rate</span>
+                  <span className="text-xs text-muted-foreground uppercase tracking-wide">Cap Rate</span>
                 </div>
-                <p className="text-lg font-bold text-white">{formatPercentage(deal.capRate)}</p>
+                <p className="text-lg font-bold text-foreground">{formatPercentage(deal.capRate)}</p>
               </div>
 
               {/* ROI */}
-              <div className="bg-black/40 backdrop-blur-sm rounded-lg p-3 border border-white/20">
+              <div className="glass rounded-lg p-3 border border-border">
                 <div className="flex items-center space-x-2 mb-1">
                   <TrendingUp className="h-4 w-4 text-success" />
-                  <span className="text-xs text-gray-300 uppercase tracking-wide">Proj. ROI</span>
+                  <span className="text-xs text-muted-foreground uppercase tracking-wide">Proj. ROI</span>
                 </div>
-                <p className="text-lg font-bold text-white">{formatPercentage(deal.roi)}</p>
+                <p className="text-lg font-bold text-foreground">{formatPercentage(deal.roi)}</p>
               </div>
             </div>
           </div>
@@ -201,7 +201,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
           <div className="grid grid-cols-2 gap-3">
             <Button 
               variant="outline" 
-              className="bg-black/40 backdrop-blur-sm border-white/30 text-white hover:bg-white/10 h-11 text-sm"
+              className="glass border-border text-foreground hover:bg-white/10 h-11 text-sm"
               onClick={() => console.log("Contact Seller")}
             >
               <Phone className="h-4 w-4 mr-2" />
@@ -210,10 +210,10 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
             
             <Button 
               variant="outline" 
-              className={`backdrop-blur-sm border-white/30 h-11 text-sm ${
+              className={`glass border-border h-11 text-sm ${
                 isSaved 
                   ? "bg-destructive/20 border-destructive/40 text-destructive" 
-                  : "bg-black/40 text-white hover:bg-white/10"
+                  : "text-foreground hover:bg-white/10"
               }`}
               onClick={() => setIsSaved(!isSaved)}
             >
@@ -225,7 +225,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
       </div>
 
       {/* Scroll Hint */}
-      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-white/60 text-xs flex items-center space-x-1">
+      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 text-muted-foreground text-xs flex items-center space-x-1">
         <ChevronDown className="h-3 w-3" />
         <span>Scroll for next</span>
         <ChevronDown className="h-3 w-3" />

@@ -291,9 +291,9 @@ export function DealWorkflow() {
 
   return (
     <div className="h-full flex flex-col">
-      <div className="p-6 border-b border-border">
-        <h1 className="font-display text-2xl text-foreground mb-2">Professional Deal Management</h1>
-        <p className="text-muted-foreground">Upload, parse, analyze, and manage your real estate deals with AI-powered insights</p>
+      <div className="p-4 border-b border-border glass">
+        <h1 className="font-display text-lg text-foreground glow-text">Deal Management</h1>
+        <p className="text-sm text-muted-foreground">AI-powered deal analysis</p>
       </div>
 
       <div className="flex-1 overflow-hidden">
@@ -319,19 +319,18 @@ export function DealWorkflow() {
           </TabsList>
 
           <TabsContent value="upload" className="space-y-6">
-            {/* Professional Walkthrough Button */}
-            <div className="flex justify-between items-center mb-6">
+            {/* Document Upload Header */}
+            <div className="flex justify-between items-center mb-4">
               <div>
-                <h2 className="text-xl font-semibold text-foreground">Professional Document Upload</h2>
-                <p className="text-sm text-muted-foreground">Advanced AI-powered document processing and analysis</p>
+                <h2 className="font-display text-lg font-semibold text-foreground glow-text">Document Upload</h2>
+                <p className="text-sm text-muted-foreground">AI-powered processing</p>
               </div>
               <Button 
                 variant="outline" 
                 onClick={() => setShowWalkthrough(true)}
-                className="flex items-center gap-2"
+                className="glass hover:bg-white/10 border-border"
               >
                 <HelpCircle className="w-4 h-4" />
-                View Guide
               </Button>
             </div>
 

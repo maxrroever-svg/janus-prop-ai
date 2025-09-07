@@ -111,7 +111,7 @@ export const SmartSearch = () => {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {mockProperties.map((property) => (
-          <Card key={property.id} className="institutional-card hover:border-accent/50 cursor-pointer">
+          <Card key={property.id} className="glass hover:border-accent/50 cursor-pointer">
             <div className="aspect-video bg-muted rounded-t-lg flex items-center justify-center">
               <div className="text-muted-foreground">Property Image</div>
             </div>

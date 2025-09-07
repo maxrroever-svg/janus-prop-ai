@@ -491,4 +491,40 @@ html {
   .janus-dashboard .bg-destructive {
     background: rgba(239, 68, 68, 0.8) !important;
   }
+
+  /* Remove any gray backgrounds */
+  .janus-dashboard .bg-gray-100,
+  .janus-dashboard .bg-gray-200,
+  .janus-dashboard .bg-gray-300,
+  .janus-dashboard .bg-gray-400,
+  .janus-dashboard .bg-gray-500,
+  .janus-dashboard .bg-gray-600,
+  .janus-dashboard .bg-gray-700,
+  .janus-dashboard .bg-gray-800,
+  .janus-dashboard .bg-gray-900 {
+    background: rgba(255, 255, 255, 0.04) !important;
+  }
+
+  /* Ensure all text is properly visible */
+  .janus-dashboard .text-gray-100,
+  .janus-dashboard .text-gray-200,
+  .janus-dashboard .text-gray-300,
+  .janus-dashboard .text-gray-400 {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  .janus-dashboard .text-gray-500,
+  .janus-dashboard .text-gray-600,
+  .janus-dashboard .text-gray-700,
+  .janus-dashboard .text-gray-800,
+  .janus-dashboard .text-gray-900 {
+    color: hsl(var(--foreground)) !important;
+  }
+
+  /* Enhanced glass consistency */
+  .janus-dashboard .glass {
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
 }

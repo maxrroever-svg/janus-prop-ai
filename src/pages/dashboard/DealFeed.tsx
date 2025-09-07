@@ -159,15 +159,15 @@ const DealFeed = () => {
     <SidebarProvider>
       <div className="min-h-screen w-full bg-background flex">
         <DashboardSidebar />
-        <div className="flex-1 flex flex-col bg-black">
+        <div className="flex-1 flex flex-col glass">
           {/* Header */}
-          <div className="shrink-0 p-4 bg-black border-b border-white/20 flex items-center justify-between">
+          <div className="shrink-0 p-4 glass border-b border-border flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <SidebarTrigger className="text-white hover:bg-white/10" />
+              <SidebarTrigger className="text-foreground hover:bg-white/10" />
               <Brain className="h-5 w-5 text-accent" />
               <div>
-                <h1 className="text-lg font-medium text-white">Deal Feed</h1>
-                <p className="text-xs text-gray-400">AI-curated opportunities</p>
+                <h1 className="font-display text-lg font-medium text-foreground glow-text">Deal Feed</h1>
+                <p className="text-xs text-muted-foreground">AI-curated opportunities</p>
               </div>
             </div>
             <Badge className="bg-primary/20 text-primary border-primary/30 text-xs">
@@ -179,7 +179,7 @@ const DealFeed = () => {
           <div className="flex-1 relative overflow-hidden">
             {deals.length === 0 ? (
               <div className="h-full w-full flex items-center justify-center">
-                <div className="text-white text-xl">Loading best deals...</div>
+                <div className="text-foreground text-xl font-display">Loading best deals...</div>
               </div>
             ) : (
               <>
@@ -207,8 +207,8 @@ const DealFeed = () => {
 
                 {/* Deal Counter */}
                 <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-50">
-                  <div className="bg-black/60 backdrop-blur-sm rounded px-3 py-1 border border-white/20">
-                    <div className="text-white text-xs flex items-center space-x-2">
+                  <div className="glass rounded px-3 py-1 border border-border">
+                    <div className="text-foreground text-xs flex items-center space-x-2">
                       <span>#{currentIndex + 1} of {deals.length}</span>
                     </div>
                   </div>
@@ -217,9 +217,9 @@ const DealFeed = () => {
                 {/* Loading Indicator */}
                 {isLoading && (
                   <div className="absolute bottom-32 left-1/2 transform -translate-x-1/2 z-50">
-                    <div className="bg-black/60 backdrop-blur-sm rounded-full px-4 py-2 border border-white/20">
-                      <div className="text-white text-sm flex items-center space-x-2">
-                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-yellow-400 border-t-transparent"></div>
+                    <div className="glass rounded-full px-4 py-2 border border-border">
+                      <div className="text-foreground text-sm flex items-center space-x-2">
+                        <div className="animate-spin rounded-full h-4 w-4 border-2 border-accent border-t-transparent"></div>
                         <span>Finding more deals...</span>
                       </div>
                     </div>
