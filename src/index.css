@@ -94,8 +94,8 @@ main, header, footer, section, nav, .relative { position: relative; z-index: 1; 
   }
 }
 
-/* Sticky glass navbar - DISABLED for landing page */
-.navbar, header, nav {
+/* Sticky glass navbar - DISABLED for landing page and dashboard */
+.navbar, nav {
   position: sticky;
   top: 0;
   z-index: 100;
@@ -103,6 +103,11 @@ main, header, footer, section, nav, .relative { position: relative; z-index: 1; 
   backdrop-filter: none !important;
   border-bottom: none !important;
   padding: 0.8rem 1.2rem;
+}
+
+/* Dashboard headers should NOT be sticky */
+.janus-dashboard header {
+  position: static !important;
 }
 
 /* Override for Janus landing specifically */
