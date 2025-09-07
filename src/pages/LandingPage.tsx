@@ -62,11 +62,74 @@ export default function LandingPage() {
     };
   }, []);
 
+  // Scrollspy effect for navigation
+  useEffect(() => {
+    const header = document.querySelector('.janus-header');
+    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'));
+    const sections = links
+      .map((a) => document.querySelector<HTMLElement>(a.getAttribute("href") || ""))
+      .filter(Boolean) as HTMLElement[];
+
+    const setActive = () => {
+      const headerHeight = header?.getBoundingClientRect().height || 0;
+      const scrollTop = window.scrollY + headerHeight + 50;
+      
+      let activeSection = sections[0];
+      for (const section of sections) {
+        const sectionTop = section.offsetTop;
+        if (sectionTop <= scrollTop) {
+          activeSection = section;
+        }
+      }
+      
+      const activeId = "#" + activeSection.id;
+      links.forEach((link) => {
+        const isActive = link.getAttribute("href") === activeId;
+        link.classList.toggle("is-active", isActive);
+      });
+    };
+
+    setActive();
+    const onScroll = () => setActive();
+    const onResize = () => setActive();
+    
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+    
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
   return (
     <div className="janus janus-landing">
       <style>{`
         /* Missing styles for landing page */
-        /* Navigation - clean text links with proper underline positioning */
+        /* Navigation - completely clean text links with scrollspy underline */
+        .janus-landing .janus-header {
+          position: sticky;
+          top: 0;
+          z-index: 40;
+          padding: 12px 16px;
+          background: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+        }
+        .janus-landing .janus-header .row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          max-width: var(--maxw);
+          margin: 0 auto;
+        }
+        .janus-landing .brand {
+          font-family: "GFS Didot", serif;
+          font-size: 18px;
+          letter-spacing: .02em;
+        }
         .janus-landing .nav {
           display: flex;
           gap: 24px;
@@ -83,6 +146,7 @@ export default function LandingPage() {
           backdrop-filter: none !important;
           -webkit-backdrop-filter: none !important;
           border-radius: 0 !important;
+          color: var(--white) !important;
         }
         .janus-landing .nav a::after {
           content: "";
