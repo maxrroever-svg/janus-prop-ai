@@ -1,259 +1,250 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import TestNavigation from "./TestNavigation";
 
 const LandingPage = () => {
-  console.log("LandingPage component rendering");
   const navigate = useNavigate();
-  console.log("useNavigate hook working:", typeof navigate);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const handleConsumerClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     console.log("Consumer button clicked, navigating to /consumer");
-    window.location.href = "/consumer";
+    navigate("/consumer");
   };
 
   const handleInvestorClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     console.log("Investor button clicked, navigating to /investor");
-    window.location.href = "/investor";
+    navigate("/investor");
   };
 
-  console.log("About to render LandingPage JSX");
+  // Dust animation effect
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d', { alpha: true });
+    if (!ctx) return;
+
+    const STATIC = false;
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    const w = Math.max(1, canvas.offsetWidth);
+    const h = Math.max(1, canvas.offsetHeight);
+    canvas.width = w * DPR;
+    canvas.height = h * DPR;
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+    const particles: Array<{
+      x: number;
+      y: number;
+      r: number;
+      a: number;
+      vx: number;
+      vy: number;
+    }> = [];
+    const n = Math.max(320, Math.floor((w * h) / 8000));
+    
+    for (let i = 0; i < n; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.5 + 0.4,
+        a: 0.12 + 0.22 * Math.random(),
+        vx: STATIC ? 0 : (Math.random() - 0.5) * 0.08,
+        vy: STATIC ? 0 : (Math.random() - 0.5) * 0.06
+      });
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+      for (const p of particles) {
+        if (!STATIC) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > w) p.vx *= -1;
+          if (p.y < 0 || p.y > h) p.vy *= -1;
+        }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+        ctx.fill();
+      }
+      if (!STATIC) requestAnimationFrame(draw);
+    }
+    draw();
+  }, []);
 
   return (
     <>
-      <div style={{
-        position: "fixed",
-        top: "0",
-        left: "0", 
-        background: "red",
-        color: "white",
-        padding: "20px",
-        zIndex: 999999,
-        fontSize: "20px"
-      }}>
-        LANDING PAGE LOADED - REACT IS WORKING
-      </div>
-      <TestNavigation />
-    <div className="janus" id="homeRoot">
-      {/* Steady fog + BIG nebula (front page only) */}
-      <div id="fog" aria-hidden="true"></div>
-      <div id="nebula" aria-hidden="true"></div>
-
-      {/* Header */}
-      <header className="janus-header">
-        <div className="section" style={{ padding: "18px" }}>
-          <div className="container" style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-            <div style={{ fontFamily: "'GFS Didot',serif", fontSize: "20px", letterSpacing: ".02em" }}>
-              Janus
-            </div>
-            <nav className="nav" style={{ display: "flex", gap: "16px", marginLeft: "auto", fontWeight: "600" }}>
-              <a href="#home">Home</a>
-              <a href="#vision">Vision</a>
-              <a href="#agents">Agents</a>
-              <a href="#consumer">Consumer</a>
-              <a href="#investor">Investors</a>
-              <a href="#pricing">Pricing</a>
-              <a href="#contact">Contact</a>
-            </nav>
-          </div>
-        </div>
+      <header className="header" id="siteHeader">
+        <a className="brand" href="#home">Janus</a>
+        <nav className="nav" id="siteNav">
+          <a href="#home">Home</a><a href="#vision">Vision</a><a href="#agents">Agents</a>
+          <a href="#consumer">Consumer</a><a href="#investor">Investors</a>
+          <a href="#pricing">Pricing</a><a href="#contact">Contact</a>
+        </nav>
       </header>
 
       <main>
         {/* HERO */}
         <section id="home" className="section">
-          <div className="container reveal">
-            <h1>AI for Real Estate, Without the Noise.</h1>
-            <p style={{ maxWidth: "820px" }}>
-              Agentic investment committee — sourcing, comps, underwriting, risk, portfolio fit, and a final memo with conditions to close.
-            </p>
-            <div className="actions" style={{ marginTop: "12px" }}>
-              <button
-                className="glass react-nav-button"
-                onClick={handleConsumerClick}
-                type="button"
-                style={{ 
-                  padding: ".7rem 1.1rem", 
-                  borderRadius: "999px", 
-                  border: "1px solid var(--hair)", 
-                  background: "transparent", 
-                  cursor: "pointer", 
-                  color: "white",
-                  zIndex: 9999,
-                  position: "relative"
-                }}
-              >
-                Enter Consumer Dashboard
-              </button>
-              <button
-                className="glass react-nav-button"
-                onClick={handleInvestorClick}
-                type="button"
-                style={{ 
-                  padding: ".7rem 1.1rem", 
-                  borderRadius: "999px", 
-                  border: "1px solid var(--hair)", 
-                  background: "transparent", 
-                  cursor: "pointer", 
-                  color: "white", 
-                  marginLeft: "1rem",
-                  zIndex: 9999,
-                  position: "relative"
-                }}
-              >
-                Enter Investor Dashboard
-              </button>
+          <div className="container">
+            <div className="right-shift">
+              <h1>AI for Real Estate, Without<br/>the Noise.</h1>
+              <p>Janus runs every opportunity through an <b>agentic investment committee</b> — sourcing, comps, underwriting, risk, fit, and a final memo — so you act with confidence.</p>
             </div>
           </div>
         </section>
 
-        {/* Bloomberg Ticker */}
-        <section className="section" style={{ paddingTop: "12px" }}>
-          <div className="container reveal" style={{ overflowX: "auto", whiteSpace: "nowrap" }}>
-            <span className="tick">
-              <span className="label">Deal Score</span>
-              <span className="value num">91</span>
-            </span>
-            <span className="tick">
-              <span className="label">DSCR</span>
-              <span className="value num">1.31</span>
-            </span>
-            <span className="tick">
-              <span className="label">Cap</span>
-              <span className="value num">6.9%</span>
-            </span>
-            <span className="tick">
-              <span className="label">Rent Band</span>
-              <span className="value num">$1,780</span>
-            </span>
-            <span className="tick">
-              <span className="label">Risk Flags</span>
-              <span className="value num">Low</span>
-            </span>
-            <span className="tick">
-              <span className="label">Spread</span>
-              <span className="value num">$13.5k</span>
-            </span>
+        {/* Bloomberg strip (manual colors via classes) */}
+        <section className="bstrip">
+          <div className="container">
+            <span className="bitem"><span className="label">DEAL SCORE</span><span className="value num">91</span><span className="delta up num">+2.1</span></span>
+            <span className="bitem"><span className="label">DSCR</span><span className="value num">1.28</span><span className="delta up num">+0.03</span></span>
+            <span className="bitem"><span className="label">CAP RATE</span><span className="value num">6.8%</span><span className="delta down num">-0.2%</span></span>
+            <span className="bitem"><span className="label">RENT BAND</span><span className="value num">$1,780</span><span className="delta up num">+15</span></span>
+            <span className="bitem"><span className="label">RISK FLAGS</span><span className="value num">Low</span><span className="delta up num">+</span></span>
+            <span className="bitem"><span className="label">SPREAD</span><span className="value num">$13.5k</span><span className="delta up num">+$900</span></span>
           </div>
         </section>
 
-        {/* Vision */}
+        {/* VISION */}
         <section id="vision" className="section">
-          <div className="container reveal" style={{ maxWidth: "920px" }}>
-            <h2>Vision</h2>
-            <p>
-              Bloomberg-grade rigor meets XAI-native intelligence. Explainable, risk-aware, portfolio-fit decisions with audit trails and one-tap memos.
-            </p>
-          </div>
-        </section>
-
-        {/* Consumer band with dust + corner glows */}
-        <section id="consumer" className="band">
-          <canvas className="dust-canvas" aria-hidden="true"></canvas>
-          <div className="glowfield" aria-hidden="true"></div>
-          <div className="container band-content reveal">
-            <h2>Consumer</h2>
-            <p>
-              Plain-English deal scores with rationale; rent/ARV bands; alerts when the thesis changes. Watchlist thresholds (DSCR≥1.25, Cap≥6%).
-            </p>
-            <div className="actions">
-              <button
-                className="cta glass react-nav-button"
-                onClick={handleConsumerClick}
-                type="button"
-                style={{ 
-                  display: "inline-block", 
-                  padding: ".7rem 1.1rem", 
-                  border: "1px solid var(--hair)", 
-                  borderRadius: "999px", 
-                  background: "rgba(255,255,255,.06)",
-                  cursor: "pointer",
-                  color: "white",
-                  zIndex: 9999,
-                  position: "relative"
-                }}
-              >
-                Enter Dashboard
-              </button>
+          <div className="container">
+            <div className="right-shift reveal">
+              <h2>Vision</h2>
+              <p>Build the <b>agent-first</b> platform for real estate. Specialist agents — <em>Sourcing</em>, <em>Comps</em>, <em>Underwriter</em>, <em>Risk</em>, <em>Portfolio Fit</em>, <em>Critic</em> — produce evidence, challenge each other, and deliver a clean memo with a verdict: <span className="num">YES / REVISE / NO</span>. Every conclusion is cited and auditable.</p>
+            </div>
+            <div style={{borderTop:'1px solid var(--hair)',margin:'28px 0'}}></div>
+            <div className="features reveal">
+              <div className="feature"><div className="kicker">Explainable by Default</div><p>Every number is traceable to comps, assumptions, and sources. No black boxes.</p></div>
+              <div className="feature"><div className="kicker">Risk-Aware</div><p>Flood, crime, HOA, title, permits — surfaced as gates with severity thresholds.</p></div>
+              <div className="feature"><div className="kicker">Portfolio Fit</div><p>Your "box" enforced: metros, leverage, min DSCR/CoC, hold, and concentration.</p></div>
+              <div className="feature"><div className="kicker">One-Tap Memo</div><p>Final IC memo with dissent, sensitivities, and conditions to close.</p></div>
             </div>
           </div>
         </section>
 
-        {/* Investors band with dust + corner glows */}
-        <section id="investor" className="band">
-          <canvas className="dust-canvas" aria-hidden="true"></canvas>
-          <div className="glowfield" aria-hidden="true"></div>
-          <div className="container band-content reveal">
-            <h2>Investors</h2>
-            <p>
-              Committee-grade underwriting, risk gates (flood/HOA/title), portfolio fit, dissent, and conditions to close with a confidence verdict.
-            </p>
-            <div className="actions">
-              <button
-                className="cta glass react-nav-button"
-                onClick={handleInvestorClick}
-                type="button"
-                style={{ 
-                  display: "inline-block", 
-                  padding: ".7rem 1.1rem", 
-                  border: "1px solid var(--hair)", 
-                  borderRadius: "999px", 
-                  background: "rgba(255,255,255,.06)",
-                  cursor: "pointer",
-                  color: "white",
-                  zIndex: 9999,
-                  position: "relative"
-                }}
-              >
-                Enter Dashboard
-              </button>
+        {/* AGENTS */}
+        <section id="agents" className="section">
+          <div className="container diagram">
+            <div className="right-shift" style={{marginBottom:'24px'}}>
+              <h2>Agent Strategy</h2>
+              <p>Sourcing → Comps → Underwrite → Risk → Portfolio Fit → Critic → Memo</p>
             </div>
+            <svg viewBox="0 0 1000 260" role="img" aria-label="Agent Pipeline Diagram">
+              <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,.98)"></path></marker></defs>
+              <text x="500" y="78" textAnchor="middle">Rent / ARV Band</text>
+              <line className="lane" x1="80" y1="90" x2="920" y2="90"/>
+              <line className="lane" x1="80" y1="150" x2="920" y2="150"/>
+              <g>
+                <circle className="node" cx="140" cy="150" r="2.6"/><text x="140" y="130" textAnchor="middle">Sourcing</text>
+                <circle className="node" cx="260" cy="150" r="2.6"/><text x="260" y="130" textAnchor="middle">Comps</text>
+                <circle className="node" cx="420" cy="150" r="2.6"/><text x="420" y="130" textAnchor="middle">Underwrite</text>
+                <circle className="node" cx="560" cy="150" r="2.6"/><text x="560" y="130" textAnchor="middle">Risk</text>
+                <circle className="node" cx="700" cy="150" r="2.6"/><text x="700" y="130" textAnchor="middle">Portfolio Fit</text>
+                <circle className="node" cx="820" cy="150" r="2.6"/><text x="820" y="130" textAnchor="middle">Critic</text>
+                <circle className="node" cx="900" cy="150" r="2.6"/><text x="900" y="130" textAnchor="middle">Memo</text>
+              </g>
+              <path className="flow" d="M140 150 L260 150" markerEnd="url(#arrow)"/>
+              <path className="flow" d="M260 150 L420 150" markerEnd="url(#arrow)"/>
+              <path className="flow" d="M420 150 L560 150" markerEnd="url(#arrow)"/>
+              <path className="flow" d="M560 150 L700 150" markerEnd="url(#arrow)"/>
+              <path className="flow" d="M700 150 L820 150" markerEnd="url(#arrow)"/>
+              <path className="flow" d="M820 150 L900 150" markerEnd="url(#arrow)"/>
+              <text x="500" y="178" textAnchor="middle">Cap • CoC • DSCR • IRR • Sensitivities</text>
+              <line className="lane" x1="80" y1="210" x2="920" y2="210"/>
+              <text x="500" y="232" textAnchor="middle">Gates &amp; Conditions</text>
+            </svg>
           </div>
         </section>
 
-        {/* Pricing (template only) */}
+        {/* Band with RIGHT-SIDE glow + dust */}
+        <section className="twins">
+          <div className="horizon" aria-hidden="true"></div>
+          <canvas ref={canvasRef} className="twins-canvas" aria-hidden="true"></canvas>
+
+          <section id="consumer" className="band">
+            <div className="inner">
+              <h2>Consumer</h2>
+              <p>Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes. Build a watchlist, set thresholds (<span className="num">DSCR≥1.25</span>, <span className="num">Cap≥6%</span>), and share a one-page memo from your phone.</p>
+              <div className="actions">
+                <button className="cta glass" onClick={handleConsumerClick}>
+                  Enter Dashboard
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section id="investor" className="band">
+            <div className="inner">
+              <h2>Investors</h2>
+              <p>Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed: <span className="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.</p>
+              <div style={{marginTop:'10px',display:'flex',gap:'1.25rem',flexWrap:'wrap',justifyContent:'center'}}>
+                <span className="bitem"><span className="label">LTV</span><span className="value num">64%</span><span className="delta up num">+1%</span></span>
+                <span className="bitem"><span className="label">CoC</span><span className="value num">8.9%</span><span className="delta up num">+0.3%</span></span>
+                <span className="bitem"><span className="label">IRR(5y)</span><span className="value num">17.2%</span><span className="delta up num">+0.6%</span></span>
+                <span className="bitem"><span className="label">DSCR</span><span className="value num">1.32</span><span className="delta down num">-0.02</span></span>
+              </div>
+              <div className="actions" style={{marginTop:'14px'}}>
+                <button className="cta glass" onClick={handleInvestorClick}>
+                  Enter Dashboard
+                </button>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        {/* PRICING */}
         <section id="pricing" className="section">
-          <div className="container reveal" style={{ textAlign: "center" }}>
-            <h2>Pricing</h2>
-            <p>Templates only — final pricing TBD.</p>
-            <div className="actions" style={{ justifyContent: "center" }}>
-              <a
-                className="glass"
-                href="#contact"
-                style={{ padding: ".7rem 1.1rem", borderRadius: "999px", border: "1px solid var(--hair)" }}
-              >
-                Consumer — Learn More
-              </a>
-              <a
-                className="glass"
-                href="#contact"
-                style={{ padding: ".7rem 1.1rem", borderRadius: "999px", border: "1px solid var(--hair)" }}
-              >
-                Investors — Learn More
-              </a>
+          <div className="container">
+            <div className="right-shift" style={{marginLeft:'auto',marginRight:'auto',textAlign:'center'}}>
+              <h2>Pricing</h2>
+              <p>Templates only — final pricing TBD.</p>
+              <div className="actions" style={{marginTop:'1.2rem',justifyContent:'center'}}>
+                <a className="cta glass" href="#contact">Consumer — Learn More</a>
+                <a className="cta glass" href="#contact">Investors — Learn More</a>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Contact */}
+        {/* Integrations & Compliance */}
+        <section className="section ic-slab">
+          <div className="container">
+            <div className="ic-grid">
+              <div className="ic-item"><h3>Integrations</h3><p>MLS/assessor proxies, rental datasets, permit/title sources, FEMA flood, and alerts to email/SMS.</p></div>
+              <div className="ic-item"><h3>Compliance</h3><p>Evidence objects stored with citations; guardrails on DSCR/CoC/risk. Exportable audit trail.</p></div>
+            </div>
+          </div>
+        </section>
+
+        {/* CONTACT */}
         <section id="contact" className="section">
-          <div className="container reveal" style={{ textAlign: "center" }}>
-            <h2>Contact</h2>
-            <p>
-              <a href="mailto:contact@janus.ai">contact@janus.ai</a>
-            </p>
+          <div className="container">
+            <div className="right-shift" style={{marginLeft:'auto',marginRight:'auto',textAlign:'center'}}>
+              <h2>Contact</h2>
+              <p>Partnerships, pilots, or access:</p>
+              <p style={{fontSize:'1.12rem'}}><a href="mailto:contact@janus.ai">contact@janus.ai</a></p>
+            </div>
           </div>
         </section>
       </main>
 
-      <link rel="stylesheet" href="/css/janus-theme.css" />
-      {/* Temporarily removing janus-effects.js to prevent navigation interference */}
-      {/* <script src="/js/janus-effects.js"></script> */}
-    </div>
+      <footer>
+        <div className="footer-wrap">
+          <div className="footer-col"><h4>Resources</h4><a href="#safety">Safety</a><a href="#legal">Legal</a><a href="#security">Security</a><a href="#docs">Docs</a></div>
+          <div className="footer-col"><h4>Company</h4><a href="#about">About</a><a href="#careers">Careers</a><a href="#news">News</a></div>
+          <div className="footer-col"><h4>Products</h4><a href="#agents">Agents</a><a href="/consumer">Consumer</a><a href="/investor">Investors</a></div>
+          <div className="footer-col"><h4>Access</h4><div className="access-badges"><span className="badge">Web</span><span className="badge">iOS</span><span className="badge">Android</span></div></div>
+        </div>
+        <div className="copyright">© 2025 Janus • All rights reserved</div>
+        <div id="nebula" aria-hidden="true"></div>
+      </footer>
     </>
   );
 };
