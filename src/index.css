@@ -71,33 +71,6 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
-/* Top fog/haze */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0 0 auto 0;
-  height: 28vh;
-  pointer-events: none;
-  background: radial-gradient(80% 120% at 50% -20%, hsl(var(--fog)), rgba(255,255,255,0) 60%);
-  filter: blur(28px) saturate(110%);
-  opacity: 0.9;
-  z-index: 0;
-}
-
-/* Bottom white horizon glow */
-body::after {
-  content: "";
-  position: fixed;
-  inset: auto 0 0 0;
-  height: 26vh;
-  pointer-events: none;
-  background: 
-    radial-gradient(55% 140% at 50% 120%, hsl(var(--horizon)), rgba(255,255,255,0) 65%),
-    radial-gradient(100% 60% at 50% 100%, rgba(255,255,255,0.04), rgba(255,255,255,0) 70%);
-  filter: blur(24px);
-  z-index: 0;
-}
-
 /* Keep content above atmospherics */
 main, header, footer, section, nav, .relative { position: relative; z-index: 1; }
 
