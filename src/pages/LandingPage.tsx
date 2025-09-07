@@ -314,18 +314,18 @@ export default function LandingPage() {
         .landing .access-badges{ display:flex; gap:.5rem; flex-wrap:wrap }
         .landing .badge{ border:1px solid var(--hair); border-radius:999px; padding:.35rem .7rem; background:rgba(255,255,255,.06) }
         .landing #nebula{
-          position:absolute; left:0; right:0; bottom:-50vh; height:150vh; pointer-events:none; z-index:0;
+          position:fixed; left:0; right:0; bottom:0; height:60vh; pointer-events:none; z-index:-1;
           background:
-            radial-gradient(58% 116% at 50% 126%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
-            radial-gradient(60% 120% at 50% 138%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
-            radial-gradient(62% 124% at 50% 148%, rgba(22,98,230,.82) 0%, rgba(0,0,0,0) 74%),
-            radial-gradient(66% 130% at 50% 160%, rgba(0,235,255,.50) 0%, rgba(0,0,0,0) 82%),
-            radial-gradient(70% 136% at 50% 172%, rgba(64,255,198,.40) 0%, rgba(0,0,0,0) 86%),
-            radial-gradient(76% 144% at 50% 184%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%),
-            radial-gradient(80% 152% at 50% 196%, rgba(212,96,255,.34) 0%, rgba(0,0,0,0) 92%);
+            radial-gradient(58% 116% at 50% 100%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
+            radial-gradient(60% 120% at 50% 100%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
+            radial-gradient(62% 124% at 50% 100%, rgba(22,98,230,.82) 0%, rgba(0,0,0,0) 74%),
+            radial-gradient(66% 130% at 50% 100%, rgba(0,235,255,.50) 0%, rgba(0,0,0,0) 82%),
+            radial-gradient(70% 136% at 50% 100%, rgba(64,255,198,.40) 0%, rgba(0,0,0,0) 86%),
+            radial-gradient(76% 144% at 50% 100%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%),
+            radial-gradient(80% 152% at 50% 100%, rgba(212,96,255,.34) 0%, rgba(0,0,0,0) 92%);
           filter:blur(110px) saturate(165%);
-          -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
-                  mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
+          -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
+                  mask-image:linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 70%);
         }
 
         /* ——— Reveal off (we keep it immediate) ——— */
