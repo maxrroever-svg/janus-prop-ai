@@ -16,12 +16,12 @@
   -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
 }
 
-/* Force text white + links */
-.janus :where(h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,a,button,label,div,section,footer,header,th,td){
+/* Force text white + links - DISABLED for dashboards */
+.janus-landing :where(h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,a,button,label,div,section,footer,header,th,td){
   color:var(--white)!important; -webkit-text-fill-color:var(--white);
 }
-.janus a{color:var(--white);text-decoration:none}
-.janus a:hover{text-decoration:underline;text-underline-offset:6px}
+.janus-landing a{color:var(--white);text-decoration:none}
+.janus-landing a:hover{text-decoration:underline;text-underline-offset:6px}
 
 /* Type */
 .janus h1{font-family:"GFS Didot",serif;font-weight:400;letter-spacing:.0025em;line-height:1.04;font-size:clamp(3rem,6.2vw,4.8rem);margin:0 0 18px}
@@ -68,8 +68,8 @@
 /* Hide landing header in dashboards */
 .janus-dashboard .janus-header{ display:none !important }
 
-/* Glass & chips - RESTORED for landing (except nav) */
-.janus .glass{
+/* Glass & chips - ONLY for landing (except nav) */
+.janus-landing .glass{
   background:linear-gradient(180deg,var(--gloss-1),var(--gloss-2));
   border:1px solid var(--hair); border-radius:14px;
   backdrop-filter:blur(6px) saturate(120%); -webkit-backdrop-filter:blur(6px) saturate(120%);
@@ -84,16 +84,16 @@
   -webkit-backdrop-filter: none !important;
   box-shadow: none !important;
 }
-.janus .chip{
+.janus-landing .chip{
   display:inline-flex; align-items:baseline; gap:8px; padding:6px 10px;
   border:1px solid var(--hair); border-radius:999px; background:rgba(255,255,255,.06);
   white-space:nowrap;
 }
-.janus .chip .label{letter-spacing:.02em; opacity:.9; font-size:.78rem; text-transform:uppercase}
-.janus .chip .value{font-weight:700; color:var(--primary)}
-.janus .chip .delta{font-family:"IBM Plex Mono",monospace}
-.janus .chip .delta.up{color:var(--up)!important}
-.janus .chip .delta.down{color:var(--down)!important}
+.janus-landing .chip .label{letter-spacing:.02em; opacity:.9; font-size:.78rem; text-transform:uppercase}
+.janus-landing .chip .value{font-weight:700; color:var(--primary)}
+.janus-landing .chip .delta{font-family:"IBM Plex Mono",monospace}
+.janus-landing .chip .delta.up{color:var(--up)!important}
+.janus-landing .chip .delta.down{color:var(--down)!important}
 
 /* Bands (Consumer/Investor) - Remove background to eliminate separator line */
 .janus .band{

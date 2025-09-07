@@ -362,15 +362,41 @@ html {
     color: hsl(var(--foreground));
   }
 
-  /* Dashboard cards with enhanced glass effect */
+  /* Dashboard cards with enhanced glass effect - OVERRIDE JANUS */
   .janus-dashboard .glass,
-  .janus-dashboard [class*="card"] {
+  .janus-dashboard [class*="card"],
+  .janus-dashboard .dashboard-card {
     background: rgba(255, 255, 255, 0.08) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
     border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: var(--radius) !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  /* Force dashboard text styling - OVERRIDE JANUS */
+  .janus-dashboard * {
+    color: inherit !important;
+    -webkit-text-fill-color: unset !important;
+  }
+  
+  .janus-dashboard h1, 
+  .janus-dashboard h2, 
+  .janus-dashboard h3, 
+  .janus-dashboard h4, 
+  .janus-dashboard h5, 
+  .janus-dashboard h6 {
+    color: hsl(var(--foreground)) !important;
+    -webkit-text-fill-color: hsl(var(--foreground)) !important;
+  }
+  
+  .janus-dashboard p, 
+  .janus-dashboard span, 
+  .janus-dashboard div, 
+  .janus-dashboard button, 
+  .janus-dashboard label {
+    color: hsl(var(--muted-foreground)) !important;
+    -webkit-text-fill-color: hsl(var(--muted-foreground)) !important;
   }
 
   /* Dashboard buttons with enhanced monochrome styling */
