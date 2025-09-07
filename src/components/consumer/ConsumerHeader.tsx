@@ -27,7 +27,7 @@ export function ConsumerHeader({ title, subtitle }: ConsumerHeaderProps) {
       <Button 
         variant="ghost" 
         onClick={() => navigate('/')}
-        className="font-display text-lg font-semibold text-foreground hover:text-primary glow-text"
+        className="font-display text-sm font-medium text-muted-foreground hover:text-foreground"
       >
         Janus AI
       </Button>

@@ -60,8 +60,8 @@ export function ConsumerSidebar() {
   return (
     <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible="icon">
       <SidebarContent>
-        <div className="p-4 border-b border-border">
-          <h2 className={`font-display text-lg font-semibold text-foreground ${collapsed ? "sr-only" : ""}`}>
+        <div className="p-3 border-b border-border/30">
+          <h2 className={`font-display text-sm font-medium text-muted-foreground ${collapsed ? "sr-only" : ""}`}>
             Janus Consumer
           </h2>
         </div>
