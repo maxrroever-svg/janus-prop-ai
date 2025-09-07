@@ -1,5 +1,6 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { ConsumerSidebar } from "@/components/consumer/ConsumerSidebar";
+import { ConsumerHeader } from "@/components/consumer/ConsumerHeader";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -154,12 +155,7 @@ const ConsumerOutreach = () => {
       <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
         <div className="flex-1 flex flex-col">
-          <header className="h-16 border-b border-border bg-card flex items-center px-6">
-            <SidebarTrigger />
-            <h1 className="ml-4 font-display text-xl font-semibold text-foreground">
-              Outreach
-            </h1>
-          </header>
+          <ConsumerHeader title="Outreach" subtitle="Manage communications and follow-ups" />
           <main className="flex-1 p-6">
             <div className="max-w-7xl mx-auto">
               <div className="mb-6">

@@ -1,5 +1,6 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { ConsumerSidebar } from "@/components/consumer/ConsumerSidebar";
+import { ConsumerHeader } from "@/components/consumer/ConsumerHeader";
 import { ClosingRoom } from "@/components/consumer/ClosingRoom";
 
 const ConsumerClosing = () => {
@@ -8,12 +9,7 @@ const ConsumerClosing = () => {
       <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
         <div className="flex-1 flex flex-col">
-          <header className="h-16 border-b border-border bg-card flex items-center px-6">
-            <SidebarTrigger />
-            <h1 className="ml-4 font-display text-xl font-semibold text-foreground">
-              Closing Room
-            </h1>
-          </header>
+          <ConsumerHeader title="Closing Room" />
           <main className="flex-1 p-6">
             <ClosingRoom />
           </main>

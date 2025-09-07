@@ -2,10 +2,11 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { DealFeedCard } from "@/components/dashboard/DealFeedCard";
 import { DealFeedControls } from "@/components/dashboard/DealFeedControls";
 import { mockDeals } from "@/lib/seedData";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
+import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { Badge } from "@/components/ui/badge";
-import { Brain, TrendingUp } from "lucide-react";
+import { Brain } from "lucide-react";
 
 export type DealFeedMode = "feed" | "search" | "upload";
 
@@ -160,21 +161,8 @@ const DealFeed = () => {
       <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <DashboardSidebar />
         <div className="flex-1 flex flex-col bg-background">
-          {/* Header */}
-          <div className="shrink-0 p-4 dashboard-surface border-b border-border/30 flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <SidebarTrigger className="text-foreground hover:bg-accent/10" />
-              <Brain className="h-5 w-5 text-primary" />
-              <div>
-                <h1 className="font-display text-xl font-bold text-foreground glow-text">Deal Feed</h1>
-                <p className="text-sm text-muted-foreground">AI-curated opportunities</p>
-              </div>
-            </div>
-            <Badge className="bg-primary/20 text-primary border-primary/30">
-              Live
-            </Badge>
-          </div>
-
+          <DashboardHeader />
+          
           {/* Main Feed */}
           <div className="flex-1 relative overflow-hidden">
             {deals.length === 0 ? (

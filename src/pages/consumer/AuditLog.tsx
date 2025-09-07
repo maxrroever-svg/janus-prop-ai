@@ -1,5 +1,6 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import { ConsumerSidebar } from "@/components/consumer/ConsumerSidebar";
+import { ConsumerHeader } from "@/components/consumer/ConsumerHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -165,22 +166,7 @@ const AuditLog = () => {
       <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
         <div className="flex-1 flex flex-col">
-          <header className="h-16 border-b border-border bg-background flex items-center justify-between px-6">
-            <div className="flex items-center gap-4">
-              <SidebarTrigger />
-              <div className="flex items-center gap-4">
-                <span className="font-display text-lg font-semibold text-foreground">
-                  Janus Consumer
-                </span>
-                <button 
-                  onClick={() => window.location.href = '/'} 
-                  className="hover:opacity-80 transition-opacity"
-                >
-                  <span className="font-display text-xl text-foreground">Janus AI</span>
-                </button>
-              </div>
-            </div>
-          </header>
+          <ConsumerHeader title="Audit Log" subtitle="Track system activity and agent operations" />
           <main className="flex-1 p-6">
             <div className="max-w-7xl mx-auto">
               <div className="mb-6">
