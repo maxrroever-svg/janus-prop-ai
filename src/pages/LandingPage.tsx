@@ -79,13 +79,19 @@ const LandingPage = () => {
 
   return (
     <>
-      <header className="header" id="siteHeader">
-        <a className="brand" href="#home">Janus</a>
-        <nav className="nav" id="siteNav">
-          <a href="#home">Home</a><a href="#vision">Vision</a><a href="#agents">Agents</a>
-          <a href="#consumer">Consumer</a><a href="#investor">Investors</a>
-          <a href="#pricing">Pricing</a><a href="#contact">Contact</a>
-        </nav>
+      <header className="janus-header">
+        <div className="row">
+          <a className="brand" href="/">Janus</a>
+          <nav className="nav">
+            <a href="#home">Home</a>
+            <a href="#vision">Vision</a>
+            <a href="#agents">Agents</a>
+            <a href="#consumer">Consumer</a>
+            <a href="#investor">Investors</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
       </header>
 
       <main>
@@ -173,9 +179,9 @@ const LandingPage = () => {
               <h2>Consumer</h2>
               <p>Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes. Build a watchlist, set thresholds (<span className="num">DSCR≥1.25</span>, <span className="num">Cap≥6%</span>), and share a one-page memo from your phone.</p>
               <div className="actions">
-                <button className="cta glass" onClick={handleConsumerClick}>
+                <a className="cta glass" href="/consumer">
                   Enter Dashboard
-                </button>
+                </a>
               </div>
             </div>
           </section>
@@ -191,9 +197,9 @@ const LandingPage = () => {
                 <span className="bitem"><span className="label">DSCR</span><span className="value num">1.32</span><span className="delta down num">-0.02</span></span>
               </div>
               <div className="actions" style={{marginTop:'14px'}}>
-                <button className="cta glass" onClick={handleInvestorClick}>
+                <a className="cta glass" href="/investor">
                   Enter Dashboard
-                </button>
+                </a>
               </div>
             </div>
           </section>

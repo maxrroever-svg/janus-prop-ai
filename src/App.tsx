@@ -39,7 +39,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<div className="janus"><LandingPage /></div>} />
         <Route path="/consumer" element={<Consumer />} />
         <Route path="/investor" element={<Dashboard />} />
         <Route path="/consumer/assistant" element={<ConsumerAssistant />} />
