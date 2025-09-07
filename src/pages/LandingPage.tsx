@@ -64,6 +64,184 @@ export default function LandingPage() {
 
   return (
     <div className="janus janus-landing">
+      <style>{`
+        /* Missing styles for landing page */
+        .janus-landing .bstrip {
+          border-top: 1px solid var(--hair);
+          border-bottom: 1px solid var(--hair);
+          padding: 12px 0;
+        }
+        .janus-landing .bstrip.slim { 
+          padding: 6px 0; 
+        }
+        .janus-landing .bstrip .container {
+          display: flex;
+          justify-content: center;
+          gap: 1.5rem;
+          flex-wrap: wrap;
+        }
+        .janus-landing .bstrip.slim .chip .label { 
+          font-size: .72rem; 
+        }
+        .janus-landing .bstrip.slim .chip .delta { 
+          font-size: .85rem; 
+        }
+        
+        .janus-landing .features {
+          display: grid;
+          gap: 16px;
+          margin-top: 28px;
+        }
+        @media(min-width:900px) {
+          .janus-landing .features {
+            grid-template-columns: repeat(4,1fr);
+          }
+        }
+        .janus-landing .feature .kicker {
+          font-weight: 600;
+          margin-bottom: 8px;
+          color: var(--primary);
+        }
+        
+        .janus-landing .diagram svg {
+          max-width: 100%;
+          height: auto;
+          display: block;
+          filter: drop-shadow(0 0 12px rgba(255,255,255,.10));
+        }
+        .janus-landing .diagram .lane {
+          stroke: rgba(255,255,255,.16);
+          stroke-width: 1;
+        }
+        .janus-landing .diagram .node {
+          fill: rgba(255,255,255,.98);
+        }
+        .janus-landing .diagram text {
+          font: 600 13px "IBM Plex Sans";
+          fill: rgba(255,255,255,.98);
+        }
+        .janus-landing .diagram .flow {
+          stroke: rgba(245,248,255,.96);
+          stroke-width: 1.9;
+          filter: drop-shadow(0 0 6px rgba(255,255,255,.22));
+        }
+        
+        .janus-landing .glowfield {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          pointer-events: none;
+          background:
+            radial-gradient(240px 200px at 3% 6%, rgba(140,200,255,.12), transparent 72%),
+            radial-gradient(260px 220px at 98% 12%, rgba(255,170,96,.10), transparent 74%),
+            radial-gradient(220px 200px at 6% 96%, rgba(200,140,255,.10), transparent 70%),
+            radial-gradient(240px 200px at 96% 92%, rgba(120,255,220,.08), transparent 70%);
+          filter: blur(8px);
+        }
+        
+        .janus-landing .ic-slab {
+          border-top: 1px solid var(--hair);
+          padding-top: 32px;
+        }
+        .janus-landing .ic-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 8px;
+          max-width: 980px;
+          margin: 0 auto;
+        }
+        @media(min-width:900px) {
+          .janus-landing .ic-grid {
+            grid-template-columns: 1fr 1fr;
+            column-gap: 24px;
+          }
+        }
+        .janus-landing .ic-item h3 {
+          margin-bottom: 8px;
+        }
+        
+        .janus-landing footer {
+          position: relative;
+          z-index: 1;
+          padding: 48px 24px 24px;
+          border-top: 1px solid var(--hair);
+          margin-top: 48px;
+        }
+        .janus-landing .footer-wrap {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 24px;
+          max-width: var(--maxw);
+          margin: 0 auto 24px;
+        }
+        .janus-landing .footer-col h4 {
+          margin-bottom: 12px;
+          font-size: 1rem;
+        }
+        .janus-landing .footer-col a {
+          display: block;
+          margin-bottom: 8px;
+          opacity: 0.8;
+        }
+        .janus-landing .footer-col a:hover {
+          opacity: 1;
+        }
+        .janus-landing .access-badges {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .janus-landing .badge {
+          padding: 4px 8px;
+          border: 1px solid var(--hair);
+          border-radius: 4px;
+          font-size: 0.8rem;
+        }
+        .janus-landing .copyright {
+          text-align: center;
+          opacity: 0.6;
+          font-size: 0.9rem;
+        }
+        
+        /* Fixed nebula at bottom */
+        .janus-landing #nebula {
+          position: fixed !important;
+          left: 0; 
+          right: 0; 
+          bottom: 0;
+          height: 140vh; 
+          pointer-events: none; 
+          z-index: 0;
+          background:
+            radial-gradient(60% 120% at 50% 122%, rgba(32,12,64,.95) 0%, rgba(0,0,0,0) 60%),
+            radial-gradient(62% 122% at 50% 134%, rgba(8,26,96,.92) 0%, rgba(0,0,0,0) 70%),
+            radial-gradient(64% 126% at 50% 146%, rgba(18,88,220,.78) 0%, rgba(0,0,0,0) 76%),
+            radial-gradient(70% 136% at 50% 158%, rgba(0,235,255,.44) 0%, rgba(0,0,0,0) 82%),
+            radial-gradient(78% 150% at 50% 170%, rgba(255,178,84,.48) 0%, rgba(0,0,0,0) 88%),
+            radial-gradient(76% 146% at 50% 178%, rgba(212,96,255,.38) 0%, rgba(0,0,0,0) 90%);
+          filter: blur(100px) saturate(155%);
+          -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 58%);
+          mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 58%);
+        }
+        
+        /* Top fog */
+        .janus-landing #fog {
+          position: fixed;
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 22vh;
+          z-index: 0;
+          pointer-events: none;
+          background:
+            radial-gradient(140% 200% at 50% -30%, rgba(255,255,255,.18), rgba(255,255,255,0) 58%),
+            radial-gradient(110% 160% at 40% -20%, rgba(210,210,210,.12), rgba(210,210,210,0) 62%),
+            radial-gradient(120% 180% at 60% -18%, rgba(200,200,200,.10), rgba(200,200,200,0) 64%);
+          filter: blur(28px) saturate(103%);
+          -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5) 55%, rgba(0,0,0,0));
+          mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5) 55%, rgba(0,0,0,0));
+        }
+      `}</style>
       {/* Fog (very subtle) */}
       <div id="fog" aria-hidden="true" />
 
@@ -78,11 +256,10 @@ export default function LandingPage() {
             <a href="#home">Home</a>
             <a href="#vision">Vision</a>
             <a href="#agents">Agents</a>
-            <a href="#band">Dashboards</a>
+            <a href="#consumer">Consumer</a>
+            <a href="#investor">Investor</a>
             <a href="#pricing">Pricing</a>
             <a href="#contact">Contact</a>
-            <Link to="/consumer" className="glass cta" style={{marginLeft: "16px", padding: "8px 16px"}}>Consumer Dashboard</Link>
-            <Link to="/investor" className="glass cta" style={{marginLeft: "8px", padding: "8px 16px"}}>Investor Dashboard</Link>
           </nav>
         </div>
       </header>
@@ -200,19 +377,33 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* MERGED CONSUMER + INVESTOR — one big section with shared glow/dust */}
-        <section id="band" className="band band--horizon">
+        {/* CONSUMER SECTION */}
+        <section id="consumer" className="band band--horizon">
           <div className="glowfield" aria-hidden="true" />
           <canvas ref={dustRef} className="dust-canvas" aria-hidden="true" />
           <div className="band-content container">
-            <h2>Dashboards</h2>
+            <h2>Consumer</h2>
             <p>
-              Consumer &amp; Investor experiences share a single agentic core —
-              plain-English scores, risk gates, and auditable memos for decisive action.
+              Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes.
+              Build a watchlist, set thresholds, and share a one-page memo from your phone.
             </p>
             <div className="actions" style={{marginTop:18}}>
-              <Link to="/consumer" className="cta glass">Enter Consumer</Link>
-              <Link to="/investor" className="cta glass">Enter Investor</Link>
+              <Link to="/consumer" className="cta glass">Enter Consumer Dashboard</Link>
+            </div>
+          </div>
+        </section>
+
+        {/* INVESTOR SECTION */}
+        <section id="investor" className="band band--horizon" style={{marginTop: 16}}>
+          <div className="glowfield" aria-hidden="true" />
+          <div className="band-content container">
+            <h2>Investor</h2>
+            <p>
+              Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed
+              strategies with confidence-weighted verdicts and auditable memos.
+            </p>
+            <div className="actions" style={{marginTop:18}}>
+              <Link to="/investor" className="cta glass">Enter Investor Dashboard</Link>
             </div>
           </div>
         </section>
