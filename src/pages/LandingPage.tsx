@@ -314,7 +314,7 @@ export default function LandingPage() {
         .landing .access-badges{ display:flex; gap:.5rem; flex-wrap:wrap }
         .landing .badge{ border:1px solid var(--hair); border-radius:999px; padding:.35rem .7rem; background:rgba(255,255,255,.06) }
         .landing #nebula{
-          position:fixed; left:0; right:0; bottom:0; height:60vh; pointer-events:none; z-index:-1;
+          position:absolute; left:0; right:0; bottom:0; height:60vh; pointer-events:none; z-index:-1;
           background:
             radial-gradient(58% 116% at 50% 100%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
             radial-gradient(60% 120% at 50% 100%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
