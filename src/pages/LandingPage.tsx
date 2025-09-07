@@ -62,62 +62,51 @@ export default function LandingPage() {
     };
   }, []);
 
-  // Scrollspy effect - Debug and fix for ALL sections
+  // Scrollspy effect - FIXED: Consumer section positioning issue
   useEffect(() => {
-    console.log('=== SCROLLSPY DEBUG START ===');
+    console.log('=== SCROLLSPY INIT ===');
     
-    // Wait for DOM to be fully ready
     const initScrollspy = () => {
       const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'));
-      console.log('Navigation links found:', links.map(l => l.href));
-      
-      // Find all sections
-      const sectionData: {id: string, element: HTMLElement, offsetTop: number}[] = [];
-      
-      const sectionIds = ['#home', '#vision', '#agents', '#consumer', '#investor', '#pricing', '#contact'];
-      
-      sectionIds.forEach(id => {
-        const element = document.querySelector<HTMLElement>(id);
-        if (element) {
-          sectionData.push({
-            id: id,
-            element: element,
-            offsetTop: element.offsetTop
-          });
-          console.log(`Found section ${id} at position ${element.offsetTop}`);
-        } else {
-          console.log(`Section ${id} NOT FOUND`);
-        }
-      });
-      
-      console.log('All sections:', sectionData);
       
       const updateActiveLink = () => {
-        const scrollPosition = window.scrollY + 100;
-        console.log('Current scroll position:', scrollPosition);
+        const scrollPosition = window.scrollY + 150;
         
-        let activeSection = sectionData[0];
+        // Get sections in the correct order with proper positions
+        const sectionElements = [
+          { id: '#home', element: document.querySelector('#home') as HTMLElement },
+          { id: '#vision', element: document.querySelector('#vision') as HTMLElement },
+          { id: '#agents', element: document.querySelector('#agents') as HTMLElement },
+          { id: '#consumer', element: document.querySelector('#consumer') as HTMLElement },
+          { id: '#investor', element: document.querySelector('#investor') as HTMLElement },
+          { id: '#pricing', element: document.querySelector('#pricing') as HTMLElement },
+          { id: '#contact', element: document.querySelector('#contact') as HTMLElement }
+        ].filter(s => s.element).map(s => ({
+          id: s.id,
+          element: s.element!,
+          offsetTop: s.element!.offsetTop
+        }));
         
-        for (const section of sectionData) {
+        // Find the active section by checking which one we've scrolled past
+        let activeSection = sectionElements[0];
+        
+        for (const section of sectionElements) {
+          // Only update if this section is above our scroll position
           if (section.offsetTop <= scrollPosition) {
             activeSection = section;
-            console.log(`Active section: ${section.id} (${section.offsetTop})`);
           }
         }
         
-        // Update link states
+        console.log(`Scroll: ${scrollPosition}, Active: ${activeSection.id} (${activeSection.offsetTop})`);
+        
+        // Update all links
         links.forEach(link => {
           const href = link.getAttribute('href');
           const isActive = href === activeSection.id;
           link.classList.toggle('is-active', isActive);
-          
-          if (isActive) {
-            console.log(`Activated link: ${href}`);
-          }
         });
       };
       
-      // Initial update
       updateActiveLink();
       
       const onScroll = () => requestAnimationFrame(updateActiveLink);
@@ -126,8 +115,7 @@ export default function LandingPage() {
       return () => window.removeEventListener('scroll', onScroll);
     };
     
-    // Wait for everything to load
-    const timer = setTimeout(initScrollspy, 500);
+    const timer = setTimeout(initScrollspy, 300);
     return () => clearTimeout(timer);
   }, []);
 
@@ -188,16 +176,26 @@ export default function LandingPage() {
           opacity: 1 !important;
         }
         
-        /* Override any glass class that might be applied */
+        /* NUCLEAR OVERRIDE - Remove ALL glassmorphic effects */
+        .janus-landing .nav *,
+        .janus-landing .nav a,
+        .janus-landing .nav a *,
         .janus-landing .nav .glass,
-        .janus-landing .nav a.glass {
+        .janus-landing .nav a.glass,
+        .janus-landing .nav a:hover,
+        .janus-landing .nav a:focus,
+        .janus-landing .nav a:active {
           background: none !important;
           background-color: transparent !important;
+          background-image: none !important;
           border: none !important;
           box-shadow: none !important;
           backdrop-filter: none !important;
           -webkit-backdrop-filter: none !important;
           border-radius: 0 !important;
+          filter: none !important;
+          opacity: 1 !important;
+          text-shadow: none !important;
         }
         .janus-landing .nav a::after {
           content: "";
