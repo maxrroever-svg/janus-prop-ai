@@ -13,7 +13,7 @@ import { Plus, User, Settings, LogOut, MessageSquare } from "lucide-react";
 
 export function Header() {
   return (
-    <header className="h-16 border-b border-border/50 bg-card/30 backdrop-blur-lg flex items-center justify-between px-6">
+    <header className="h-16 border-b border-border/50 glass backdrop-blur-lg flex items-center justify-between px-6">
       <div className="flex items-center gap-4">
         <SidebarTrigger className="text-muted-foreground hover:text-foreground" />
         
@@ -27,7 +27,7 @@ export function Header() {
         <Button 
           variant="default" 
           size="sm" 
-          className="bg-gradient-primary hover:bg-primary/90 glow-primary"
+          className="glass text-foreground hover:bg-white/10 border border-white/20"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add New Property
@@ -46,7 +46,7 @@ export function Header() {
             </Button>
           </DropdownMenuTrigger>
           
-          <DropdownMenuContent className="w-56 bg-card/95 backdrop-blur-sm border-border/50" align="end">
+          <DropdownMenuContent className="w-56 glass backdrop-blur-sm border-border/50" align="end">
             <DropdownMenuLabel>Asset Intelligence</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

@@ -22,7 +22,7 @@ export function MainDashboard() {
   };
 
   return (
-    <section className="bg-background">
+    <section className="glass">
       <div className="h-screen flex">
         {/* Left Panel - Smart Filters & Agent Modules */}
         <div className="w-80 flex flex-col">

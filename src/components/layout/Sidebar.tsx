@@ -43,13 +43,13 @@ export function Sidebar() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <ShadcnSidebar className={`border-r border-border/50 bg-card/30 backdrop-blur-lg ${collapsed ? "w-16" : "w-64"}`}>
+    <ShadcnSidebar className={`border-r border-border/50 glass backdrop-blur-lg ${collapsed ? "w-16" : "w-64"}`}>
       <SidebarContent className="pt-8">
         {/* Logo */}
         <div className="px-6 mb-8">
           {!collapsed && (
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center glow-primary">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center glass">
                 <Bot className="w-5 h-5 text-primary-foreground" />
               </div>
               <h1 className="font-display text-xl font-normal">Janus AI</h1>
@@ -57,7 +57,7 @@ export function Sidebar() {
           )}
           {collapsed && (
             <div className="flex justify-center">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center glow-primary">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center glass">
                 <Bot className="w-5 h-5 text-primary-foreground" />
               </div>
             </div>

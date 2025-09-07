@@ -46,7 +46,7 @@ export function SmartFilters() {
   };
 
   return (
-    <div className="w-80 h-screen bg-card border-r border-border p-6 overflow-y-auto">
+    <div className="w-80 h-screen glass border-r border-border p-6 overflow-y-auto">
       <div className="flex items-center gap-3 mb-6">
         <Filter className="w-5 h-5 text-ice" />
         <h2 className="font-display text-lg font-semibold text-foreground">Smart Filters</h2>
@@ -95,7 +95,7 @@ export function SmartFilters() {
       </Collapsible>
 
       {/* Key Toggles */}
-      <Card className="mb-6 bg-secondary border-border">
+      <Card className="mb-6 glass border-border">
         <CardContent className="p-4 space-y-4">
           <div className="flex items-center justify-between">
             <Label htmlFor="off-market" className="text-sm font-medium">Off-Market Only</Label>

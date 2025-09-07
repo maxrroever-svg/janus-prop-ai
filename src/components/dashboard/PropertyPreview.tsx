@@ -22,7 +22,7 @@ interface PropertyPreviewProps {
 export function PropertyPreview({ property }: PropertyPreviewProps) {
   if (!property) {
     return (
-      <div className="w-96 h-screen bg-card border-l border-border p-6 flex items-center justify-center">
+      <div className="w-96 h-screen glass border-l border-border p-6 flex items-center justify-center">
         <div className="text-center">
           <Home className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
           <h3 className="font-display text-lg font-semibold text-foreground mb-2">
@@ -46,7 +46,7 @@ export function PropertyPreview({ property }: PropertyPreviewProps) {
   const equityPercentage = ((equityGain / property.price) * 100).toFixed(1);
 
   return (
-    <div className="w-96 h-screen bg-card border-l border-border overflow-y-auto">
+    <div className="w-96 h-screen glass border-l border-border overflow-y-auto">
       {/* Property Header */}
       <div className="p-6 border-b border-border">
         <div className="mb-4">
@@ -137,7 +137,7 @@ export function PropertyPreview({ property }: PropertyPreviewProps) {
           </h4>
         </div>
         
-        <Card className="bg-secondary border-border">
+        <Card className="glass border-border">
           <CardContent className="p-4">
             <div className="flex items-start gap-3">
               <div className="w-8 h-8 bg-ice/20 rounded-full flex items-center justify-center shrink-0">
@@ -163,7 +163,7 @@ export function PropertyPreview({ property }: PropertyPreviewProps) {
         </h4>
         
         <div className="space-y-3">
-          <Button className="w-full justify-start bg-ice text-ice-foreground hover:bg-ice/90">
+          <Button className="w-full justify-start glass text-foreground hover:bg-white/10 border border-white/20">
             <Eye className="w-4 h-4 mr-2" />
             View Full Details
           </Button>

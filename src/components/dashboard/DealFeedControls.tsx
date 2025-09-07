@@ -275,7 +275,7 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
                   </p>
                 </div>
 
-                <Button className="w-full bg-gradient-primary text-white">
+                <Button className="w-full glass text-foreground hover:bg-white/10 border border-white/20">
                   <Settings className="h-4 w-4 mr-2" />
                   Analyze with Janus AI
                 </Button>

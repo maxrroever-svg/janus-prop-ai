@@ -22,13 +22,13 @@ export function DealCanvas() {
       </div>
       
       {/* Deal Upload Actions */}
-      <div className="shrink-0 p-4 border-b border-border bg-card/20">
+      <div className="shrink-0 p-4 border-b border-border glass">
         <div className="flex items-center justify-between">
-          <h3 className="font-display text-lg font-semibold text-foreground">
+          <h3 className="font-display text-lg font-semibold text-foreground glow-text">
             Deal Canvas
           </h3>
           <Button 
-            className="btn-professional"
+            className="glass hover:bg-white/10 border border-white/20 text-foreground hover:text-white"
             onClick={() => setShowUploader(true)}
           >
             <Upload className="h-4 w-4 mr-2" />

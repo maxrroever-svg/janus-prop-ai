@@ -322,4 +322,142 @@ html {
   .reveal.is-visible {
     animation: fadeUp 420ms ease forwards;
   }
+
+  /* ===========================================
+     Dashboard-Specific Monochrome Styling
+     Extends the x.ai aesthetic to dashboard
+     =========================================== */
+
+  /* Dashboard background and core styling */
+  .janus-dashboard {
+    background: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  /* Dashboard cards with glass effect */
+  .janus-dashboard .glass,
+  .janus-dashboard [class*="card"] {
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: var(--radius) !important;
+  }
+
+  /* Dashboard buttons with monochrome styling */
+  .janus-dashboard .btn-professional,
+  .janus-dashboard button[class*="btn-"] {
+    background: rgba(255, 255, 255, 0.06) !important;
+    color: hsl(var(--foreground)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+    backdrop-filter: blur(8px) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .janus-dashboard .btn-professional:hover,
+  .janus-dashboard button[class*="btn-"]:hover {
+    background: rgba(255, 255, 255, 0.10) !important;
+    border-color: rgba(255, 255, 255, 0.24) !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Dashboard headers with glass effect */
+  .janus-dashboard .janus-header,
+  .janus-dashboard header {
+    background: rgba(255, 255, 255, 0.04) !important;
+    backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+
+  /* Dashboard sidebar styling */
+  .janus-dashboard .sidebar {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* Dashboard content panels */
+  .janus-dashboard .bg-card {
+    background: rgba(255, 255, 255, 0.04) !important;
+  }
+
+  /* Dashboard gradients - monochrome versions */
+  .janus-dashboard .bg-gradient-cosmic {
+    background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--card))) !important;
+  }
+
+  .janus-dashboard .bg-gradient-primary {
+    background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04)) !important;
+  }
+
+  /* Dashboard text with proper contrast */
+  .janus-dashboard .text-foreground {
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .janus-dashboard .text-muted-foreground {
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  /* Dashboard borders */
+  .janus-dashboard .border-border {
+    border-color: rgba(255, 255, 255, 0.12) !important;
+  }
+
+  /* Dashboard inputs and forms */
+  .janus-dashboard input,
+  .janus-dashboard textarea,
+  .janus-dashboard select {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: hsl(var(--foreground)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: var(--radius) !important;
+  }
+
+  .janus-dashboard input:focus,
+  .janus-dashboard textarea:focus,
+  .janus-dashboard select:focus {
+    border-color: rgba(255, 255, 255, 0.24) !important;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1) !important;
+  }
+
+  /* Dashboard dropdown menus */
+  .janus-dashboard [class*="dropdown"],
+  .janus-dashboard [class*="popover"],
+  .janus-dashboard [class*="menu"] {
+    background: rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  }
+
+  /* Dashboard table styling */
+  .janus-dashboard table {
+    background: transparent !important;
+  }
+
+  .janus-dashboard th {
+    background: rgba(255, 255, 255, 0.04) !important;
+    color: hsl(var(--muted-foreground)) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+
+  .janus-dashboard td {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  }
+
+  .janus-dashboard tr:hover {
+    background: rgba(255, 255, 255, 0.04) !important;
+  }
+
+  /* Dashboard status indicators */
+  .janus-dashboard .bg-success {
+    background: rgba(34, 197, 94, 0.8) !important;
+  }
+
+  .janus-dashboard .bg-warning {
+    background: rgba(251, 191, 36, 0.8) !important;
+  }
+
+  .janus-dashboard .bg-destructive {
+    background: rgba(239, 68, 68, 0.8) !important;
+  }
 }

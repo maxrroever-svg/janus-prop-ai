@@ -163,7 +163,7 @@ export function PropertyModal({ property, open, onClose }: PropertyModalProps) {
                 <CardTitle>Actions</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Button className="w-full bg-gradient-primary glow-primary">
+                <Button className="w-full glass text-foreground hover:bg-white/10 border border-white/20">
                   <Briefcase className="w-4 h-4 mr-2" />
                   Add to Portfolio
                 </Button>
@@ -256,7 +256,7 @@ export function PropertyModal({ property, open, onClose }: PropertyModalProps) {
             <Button variant="outline" onClick={onClose}>
               Close
             </Button>
-            <Button className="bg-gradient-primary glow-primary">
+            <Button className="glass text-foreground hover:bg-white/10 border border-white/20">
               Schedule Analysis
             </Button>
           </div>
