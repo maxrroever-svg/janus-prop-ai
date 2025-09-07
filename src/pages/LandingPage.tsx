@@ -358,6 +358,15 @@ export default function LandingPage() {
           position: relative;
         }
         
+        /* Remove padding between consumer and investor in twins section */
+        .twins-section #consumer {
+          padding-bottom: 0 !important;
+        }
+        
+        .twins-section #investor {
+          padding-top: 0 !important;
+        }
+        
         /* Make footer relative and remove extra padding */
         .janus-landing footer {
           position: relative;
@@ -543,7 +552,7 @@ export default function LandingPage() {
         <section className="twins-section">
           <canvas ref={dustRef} className="dust-canvas" aria-hidden="true" />
           
-          <div id="consumer" className="band band--horizon" style={{marginBottom: 0, paddingBottom: 'clamp(40px,6vh,80px)'}}>
+          <div id="consumer" className="band band--horizon" style={{marginBottom: 0, paddingBottom: 0}}>
             <div className="band-content container">
               <h2>Consumer</h2>
               <p>
@@ -556,7 +565,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div id="investor" className="band band--horizon" style={{marginTop: 0, paddingTop: 'clamp(40px,6vh,80px)'}}>
+          <div id="investor" className="band band--horizon" style={{marginTop: 0, paddingTop: 0}}>
             <div className="band-content container">
               <h2>Investor</h2>
               <p>
