@@ -157,13 +157,7 @@ const ConsumerOutreach = () => {
         <div className="flex-1 flex flex-col">
           <ConsumerHeader title="Outreach" subtitle="Manage communications and follow-ups" />
           <main className="flex-1 p-6">
-            <div className="max-w-7xl mx-auto">
-              <div className="mb-6">
-                <h1 className="font-display text-2xl text-foreground mb-2">Property Communications</h1>
-                <p className="text-muted-foreground">
-                  Track conversations with sellers, agents, and other stakeholders in your homebuying journey
-                </p>
-              </div>
+            <div className="max-w-7xl mx-auto space-y-6">
 
               {/* AI Ranking Notice */}
               <Card className="mb-6 bg-primary/5 border-primary/20">

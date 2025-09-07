@@ -168,13 +168,7 @@ const AuditLog = () => {
         <div className="flex-1 flex flex-col">
           <ConsumerHeader title="Audit Log" subtitle="Track system activity and agent operations" />
           <main className="flex-1 p-6">
-            <div className="max-w-7xl mx-auto">
-              <div className="mb-6">
-                <h1 className="font-display text-2xl text-foreground mb-2">AI Agent Activity</h1>
-                <p className="text-muted-foreground">
-                  Monitor your AI agents and system activity log
-                </p>
-              </div>
+            <div className="max-w-7xl mx-auto space-y-6">
 
               {/* AI Agents Status */}
               <Card className="mb-6">
