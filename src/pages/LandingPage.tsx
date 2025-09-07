@@ -239,12 +239,11 @@ export default function LandingPage() {
 
         /* ——— ONE combined band (Consumer + Investors) ——— */
         .landing .band{
-          width:100%; min-height:520px; padding:clamp(96px,16vh,200px) 16px; background:rgba(255,255,255,.02);
+          width:100%; min-height:100vh; padding:clamp(96px,16vh,200px) 16px; background:rgba(255,255,255,.02);
           overflow:hidden; position:relative; isolation:isolate;
         }
         .landing .band .inner{ max-width:var(--maxw); margin:0 auto; position:relative; z-index:3 }
-        .landing .band .grid{ display:grid; gap:40px }
-        @media (min-width:900px){ .landing .band .grid{ grid-template-columns:1fr 1fr; gap:56px } }
+        .landing .band .grid{ display:grid; gap:60px }
         .landing .band h2{ margin-bottom:10px; text-align:center }
         .landing .band p{ text-align:center; max-width:920px; margin:.7rem auto 0 }
         .landing .actions{ display:flex; justify-content:center; gap:1rem; margin-top:16px }
