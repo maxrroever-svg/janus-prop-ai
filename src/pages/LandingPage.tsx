@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import TestNavigation from "./TestNavigation";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ const LandingPage = () => {
   };
 
   return (
+    <>
+      <TestNavigation />
     <div className="janus" id="homeRoot">
       {/* Steady fog + BIG nebula (front page only) */}
       <div id="fog" aria-hidden="true"></div>
@@ -232,8 +235,10 @@ const LandingPage = () => {
       </main>
 
       <link rel="stylesheet" href="/css/janus-theme.css" />
-      <script src="/js/janus-effects.js"></script>
+      {/* Temporarily removing janus-effects.js to prevent navigation interference */}
+      {/* <script src="/js/janus-effects.js"></script> */}
     </div>
+    </>
   );
 };
 
