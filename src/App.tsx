@@ -2,8 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Landing from "./pages/Landing";
+import { Routes, Route, Navigate } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
 import Consumer from "./pages/Consumer";
 import Dashboard from "./pages/Dashboard";
 import ConsumerAssistant from "./pages/consumer/Assistant";
@@ -37,45 +37,37 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
-        <Sonner />
-        <BrowserRouter
-          future={{
-            v7_startTransition: true,
-            v7_relativeSplatPath: true,
-          }}
-        >
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/consumer" element={<Consumer />} />
-            <Route path="/investor" element={<Dashboard />} />
-            <Route path="/consumer/assistant" element={<ConsumerAssistant />} />
-            <Route path="/consumer/analysis" element={<ConsumerAnalysis />} />
-            <Route path="/consumer/underwriting" element={<ConsumerUnderwriting />} />
-            <Route path="/consumer/financing" element={<ConsumerFinancing />} />
-            <Route path="/consumer/closing" element={<ConsumerClosing />} />
-            <Route path="/consumer/ownership" element={<ConsumerOwnership />} />
-            <Route path="/consumer/outreach" element={<ConsumerOutreach />} />
-            <Route path="/consumer/settings" element={<ConsumerSettings />} />
-            <Route path="/consumer/audit" element={<ConsumerAuditLog />} />
-            <Route path="/consumer/data-lake" element={<ConsumerDataLake />} />
-            <Route path="/consumer/map" element={<ConsumerMapView />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/dashboard/feed" element={<DealFeed />} />
-            <Route path="/dashboard/agents" element={<Agents />} />
-            <Route path="/dashboard/deals" element={<Deals />} />
-            <Route path="/dashboard/plans" element={<Plans />} />
-            <Route path="/dashboard/portfolio" element={<Portfolio />} />
-            <Route path="/dashboard/outreach" element={<Outreach />} />
-            <Route path="/dashboard/memos" element={<ICMemos />} />
-            <Route path="/dashboard/intelligence" element={<Intelligence />} />
-            <Route path="/dashboard/assistant" element={<Assistant />} />
-            <Route path="/dashboard/settings" element={<Settings />} />
-            <Route path="/dashboard/audit" element={<AuditLog />} />
-            <Route path="/dashboard/data-lake" element={<DataLake />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+      <Sonner />
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/consumer" element={<Consumer />} />
+        <Route path="/investor" element={<Dashboard />} />
+        <Route path="/consumer/assistant" element={<ConsumerAssistant />} />
+        <Route path="/consumer/analysis" element={<ConsumerAnalysis />} />
+        <Route path="/consumer/underwriting" element={<ConsumerUnderwriting />} />
+        <Route path="/consumer/financing" element={<ConsumerFinancing />} />
+        <Route path="/consumer/closing" element={<ConsumerClosing />} />
+        <Route path="/consumer/ownership" element={<ConsumerOwnership />} />
+        <Route path="/consumer/outreach" element={<ConsumerOutreach />} />
+        <Route path="/consumer/settings" element={<ConsumerSettings />} />
+        <Route path="/consumer/audit" element={<ConsumerAuditLog />} />
+        <Route path="/consumer/data-lake" element={<ConsumerDataLake />} />
+        <Route path="/consumer/map" element={<ConsumerMapView />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/feed" element={<DealFeed />} />
+        <Route path="/dashboard/agents" element={<Agents />} />
+        <Route path="/dashboard/deals" element={<Deals />} />
+        <Route path="/dashboard/plans" element={<Plans />} />
+        <Route path="/dashboard/portfolio" element={<Portfolio />} />
+        <Route path="/dashboard/outreach" element={<Outreach />} />
+        <Route path="/dashboard/memos" element={<ICMemos />} />
+        <Route path="/dashboard/intelligence" element={<Intelligence />} />
+        <Route path="/dashboard/assistant" element={<Assistant />} />
+        <Route path="/dashboard/settings" element={<Settings />} />
+        <Route path="/dashboard/audit" element={<AuditLog />} />
+        <Route path="/dashboard/data-lake" element={<DataLake />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </TooltipProvider>
   </QueryClientProvider>
 );
