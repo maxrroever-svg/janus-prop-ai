@@ -279,10 +279,10 @@ export default function LandingPage() {
         .landing .horizon{
           position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
           background:
-            radial-gradient(126% 126% at 108% 50%, rgba(255,136,60,.462) 0%, rgba(255,120,40,.315) 22%, rgba(180,80,30,.168) 48%, rgba(0,0,0,0) 72%),
-            radial-gradient(84% 74%  at 96%  50%, rgba(120,170,255,.105) 0%, rgba(120,170,255,0) 70%),
-            linear-gradient(180deg, rgba(255,255,255,.037), rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.032));
-          filter: blur(19px) saturate(147%) contrast(111%) brightness(108%);
+            radial-gradient(126% 126% at 108% 50%, rgba(255,136,60,.434) 0%, rgba(255,120,40,.296) 22%, rgba(180,80,30,.158) 48%, rgba(0,0,0,0) 72%),
+            radial-gradient(84% 74%  at 96%  50%, rgba(120,170,255,.099) 0%, rgba(120,170,255,0) 70%),
+            linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.030));
+          filter: blur(19px) saturate(138%) contrast(111%) brightness(102%);
         }
 
         /* ——— Dust (covers whole band) ——— */
