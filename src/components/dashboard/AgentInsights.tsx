@@ -102,7 +102,7 @@ export function AgentInsights() {
           const Icon = insight.icon;
           
           return (
-            <Card key={insight.id} className={`institutional-card cursor-pointer hover:border-primary/30 transition-all duration-200 ${
+            <Card key={insight.id} className={`dashboard-card cursor-pointer hover:border-primary/30 transition-all duration-200 ${
               insight.priority === "high" ? "border-destructive/20 bg-destructive/5" : ""
             }`}>
               <CardContent className="p-4">

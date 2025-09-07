@@ -123,25 +123,22 @@ html {
 }
 
 @layer components {
-  /* Glassmorphic UI components */
+  /* Remove any legacy institutional-card styling that might conflict */
   .institutional-card {
-    background: linear-gradient(180deg, hsl(var(--surface-2)), hsl(var(--surface))) !important;
-    border: 1px solid hsl(var(--border));
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    box-shadow: 
-      0 0 0 1px rgba(255,255,255,0.03) inset,
-      0 8px 24px rgba(0,0,0,0.6),
-      0 0 120px rgba(255,255,255,0.06);
-    transition: var(--transition-glow);
+    background: rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    transition: all 0.3s ease !important;
   }
   
   .institutional-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 
-      0 0 0 1px rgba(255,255,255,0.04) inset,
-      0 14px 40px rgba(0,0,0,0.7),
-      0 0 140px rgba(255,255,255,0.07);
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.20) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(-2px) !important;
   }
 
 /* Restore glass effects except for navigation */

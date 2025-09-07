@@ -46,7 +46,7 @@ export function ExplainPanel({ deal, onClose }: ExplainPanelProps) {
         )}
       </div>
       
-      <Card className="institutional-card p-4 mb-6">
+      <Card className="dashboard-card p-4 mb-6">
         <h3 className="font-medium text-foreground mb-3">AI Brief</h3>
         <p className="text-sm text-muted-foreground leading-relaxed">
           This property surfaced due to multiple distress signals: tax delinquency, 
@@ -55,7 +55,7 @@ export function ExplainPanel({ deal, onClose }: ExplainPanelProps) {
         </p>
       </Card>
       
-      <Card className="institutional-card p-4 mb-6">
+      <Card className="dashboard-card p-4 mb-6">
         <h3 className="font-medium text-foreground mb-3">Distress Signals</h3>
         <div className="space-y-2">
           <Badge variant="destructive" className="text-xs">Tax Delinquency</Badge>
@@ -64,7 +64,7 @@ export function ExplainPanel({ deal, onClose }: ExplainPanelProps) {
         </div>
       </Card>
       
-      <Card className="institutional-card p-4 mb-6">
+      <Card className="dashboard-card p-4 mb-6">
         <h3 className="font-medium text-foreground mb-3">Quick Comparables</h3>
         <div className="space-y-3 text-sm">
           <div className="flex justify-between">

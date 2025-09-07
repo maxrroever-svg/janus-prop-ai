@@ -202,7 +202,7 @@ const Portfolio = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="dashboard-card">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-warning/10 rounded-lg">
@@ -216,7 +216,7 @@ const Portfolio = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="dashboard-card">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-success/10 rounded-lg">
@@ -230,7 +230,7 @@ const Portfolio = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="dashboard-card">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-gold/10 rounded-lg">

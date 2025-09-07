@@ -493,7 +493,7 @@ const Plans = () => {
                     </Card>
 
                     {/* AI Advantage & Risk Profile */}
-                    <Card className="institutional-card p-6">
+                    <Card className="dashboard-card p-6">
                       <h3 className="font-medium text-foreground mb-4 flex items-center">
                         <Brain className="h-4 w-4 mr-2 text-accent" />
                         AI Advantage & Risk
@@ -528,7 +528,7 @@ const Plans = () => {
                     </Card>
 
                     {/* Progress Ring */}
-                    <Card className="institutional-card p-6">
+                    <Card className="dashboard-card p-6">
                       <h3 className="font-medium text-foreground mb-4 flex items-center">
                         <BarChart3 className="h-4 w-4 mr-2 text-primary" />
                         Progress
@@ -548,7 +548,7 @@ const Plans = () => {
                     </Card>
 
                     {/* Risk Gates */}
-                    <Card className="institutional-card p-6">
+                    <Card className="dashboard-card p-6">
                       <h3 className="font-medium text-foreground mb-4 flex items-center">
                         <AlertTriangle className="h-4 w-4 mr-2 text-warning" />
                         Risk Gates
@@ -566,7 +566,7 @@ const Plans = () => {
                 )}
 
                 {activeTab === "tasks" && (
-                  <Card className="institutional-card p-6">
+                  <Card className="dashboard-card p-6">
                     <h3 className="font-medium text-foreground mb-6">Execution Tasks</h3>
                     <div className="space-y-4">
                       {selectedPlaybook.steps.map((step, index) => (
@@ -608,7 +608,7 @@ const Plans = () => {
                 {activeTab === "kpis" && (
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {selectedPlaybook.kpis.map((kpi, index) => (
-                      <Card key={index} className="institutional-card p-6">
+                      <Card key={index} className="dashboard-card p-6">
                         <div className="flex items-center justify-between mb-4">
                           <h4 className="font-medium text-foreground">{kpi.label}</h4>
                           <TrendingUp className={`h-4 w-4 ${getKPIColor(kpi.status)}`} />

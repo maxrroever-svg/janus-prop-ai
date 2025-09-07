@@ -107,7 +107,7 @@ const getConfidenceColor = (confidence: number) => {
 
 export function DecisionHistory() {
   return (
-    <Card className="institutional-card h-full">
+    <Card className="dashboard-card h-full">
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2">
           <Bot className="w-5 h-5 text-primary" />

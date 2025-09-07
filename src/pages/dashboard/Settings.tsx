@@ -180,7 +180,7 @@ const Settings = () => {
                 </TabsContent>
 
                 <TabsContent value="integrations" className="space-y-6">
-                  <Card className="institutional-card">
+                  <Card className="dashboard-card">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Database className="w-5 h-5" />
@@ -247,7 +247,7 @@ const Settings = () => {
                 </TabsContent>
 
                 <TabsContent value="agents" className="space-y-6">
-                  <Card className="institutional-card">
+                  <Card className="dashboard-card">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Zap className="w-5 h-5" />
@@ -321,7 +321,7 @@ const Settings = () => {
                 </TabsContent>
 
                 <TabsContent value="security" className="space-y-6">
-                  <Card className="institutional-card">
+                  <Card className="dashboard-card">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Shield className="w-5 h-5" />

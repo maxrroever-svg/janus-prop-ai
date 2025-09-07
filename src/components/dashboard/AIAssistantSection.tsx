@@ -50,7 +50,7 @@ export function AIAssistantSection() {
   };
 
   return (
-    <Card className="institutional-card h-full">
+    <Card className="dashboard-card h-full">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">

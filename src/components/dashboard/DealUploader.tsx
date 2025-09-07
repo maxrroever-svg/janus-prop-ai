@@ -34,7 +34,7 @@ export const DealUploader = ({ onClose }: DealUploaderProps) => {
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
-      <Card className="institutional-card w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+      <Card className="dashboard-card w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="font-display text-2xl font-bold text-foreground">

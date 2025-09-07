@@ -56,7 +56,7 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
     <>
       {/* Mode Selector - Top Right */}
       <div className="absolute top-6 right-6 z-50">
-        <div className="bg-black/40 backdrop-blur-md rounded-xl border border-white/10 p-2">
+        <div className="dashboard-surface backdrop-blur-md rounded-xl border border-border/30 p-2">
           <div className="flex space-x-1">
             {modes.map((modeOption) => {
               const Icon = modeOption.icon;
@@ -70,8 +70,8 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
                   className={`
                     relative px-3 py-2 text-xs transition-all duration-200
                     ${isActive 
-                      ? "text-white bg-white/20" 
-                      : "text-gray-400 hover:text-white hover:bg-white/10"
+                      ? "text-foreground bg-primary/20 border-primary/30" 
+                      : "text-muted-foreground hover:text-foreground hover:bg-accent/10"
                     }
                   `}
                   onClick={() => onModeChange(modeOption.id)}
@@ -81,7 +81,7 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
                   
                   {isActive && (
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-md"
+                      className="absolute inset-0 bg-primary/10 rounded-md"
                       layoutId="activeMode"
                       initial={false}
                       transition={{ type: "spring", damping: 25, stiffness: 200 }}
@@ -100,13 +100,13 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
           <Button
             variant="ghost"
             size="sm"
-            className="bg-black/40 backdrop-blur-md border border-white/10 text-white hover:bg-white/10"
+            className="dashboard-surface backdrop-blur-md border border-border/30 text-foreground hover:bg-accent/10"
             onClick={() => setShowFilters(!showFilters)}
           >
             <Filter className="h-4 w-4 mr-2" />
             Filters
             {Object.values(filters).some(v => v) && (
-              <Badge className="ml-2 bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs">
+              <Badge className="ml-2 bg-primary/20 text-primary border-primary/30 text-xs">
                 Active
               </Badge>
             )}
@@ -122,16 +122,16 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -300, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="absolute top-0 left-0 h-full w-80 bg-black/60 backdrop-blur-xl border-r border-white/10 z-40"
+            className="absolute top-0 left-0 h-full w-80 dashboard-surface backdrop-blur-xl border-r border-border/30 z-40"
           >
             <div className="p-6 space-y-6">
               {/* Header */}
               <div className="flex items-center justify-between">
-                <h3 className="text-lg font-semibold text-white">Search Filters</h3>
+                <h3 className="text-lg font-semibold text-foreground glow-text">Search Filters</h3>
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-gray-400 hover:text-white"
+                  className="text-muted-foreground hover:text-foreground"
                   onClick={() => setShowFilters(false)}
                 >
                   <X className="h-4 w-4" />
@@ -140,14 +140,14 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
 
               {/* Location Filter */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300 flex items-center">
+                <label className="text-sm font-medium text-foreground flex items-center">
                   <MapPin className="h-4 w-4 mr-2" />
                   Location
                 </label>
                 <input
                   type="text"
                   placeholder="Brooklyn, Manhattan, etc."
-                  className="w-full px-3 py-2 bg-black/30 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-background/80 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none backdrop-blur-sm"
                   value={filters.location}
                   onChange={(e) => setFilters(prev => ({ ...prev, location: e.target.value }))}
                 />
@@ -155,7 +155,7 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
 
               {/* Price Range */}
               <div className="space-y-3">
-                <label className="text-sm font-medium text-gray-300 flex items-center">
+                <label className="text-sm font-medium text-foreground flex items-center">
                   <DollarSign className="h-4 w-4 mr-2" />
                   Price Range
                 </label>
@@ -163,14 +163,14 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
                   <input
                     type="text"
                     placeholder="Min"
-                    className="px-3 py-2 bg-black/30 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none text-sm"
+                    className="px-3 py-2 bg-background/80 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none text-sm backdrop-blur-sm"
                     value={filters.priceMin}
                     onChange={(e) => setFilters(prev => ({ ...prev, priceMin: e.target.value }))}
                   />
                   <input
                     type="text"
                     placeholder="Max"
-                    className="px-3 py-2 bg-black/30 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-blue-500 focus:outline-none text-sm"
+                    className="px-3 py-2 bg-background/80 border border-border/50 rounded-lg text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none text-sm backdrop-blur-sm"
                     value={filters.priceMax}
                     onChange={(e) => setFilters(prev => ({ ...prev, priceMax: e.target.value }))}
                   />
@@ -179,12 +179,12 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
 
               {/* Property Type */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-gray-300 flex items-center">
+                <label className="text-sm font-medium text-foreground flex items-center">
                   <Home className="h-4 w-4 mr-2" />
                   Property Type
                 </label>
                 <select
-                  className="w-full px-3 py-2 bg-black/30 border border-white/20 rounded-lg text-white focus:border-blue-500 focus:outline-none"
+                  className="w-full px-3 py-2 bg-background/80 border border-border/50 rounded-lg text-foreground focus:border-primary/50 focus:outline-none backdrop-blur-sm"
                   value={filters.propertyType}
                   onChange={(e) => setFilters(prev => ({ ...prev, propertyType: e.target.value }))}
                 >
@@ -199,7 +199,7 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
 
               {/* Risk Level */}
               <div className="space-y-3">
-                <label className="text-sm font-medium text-gray-300">Risk Level</label>
+                <label className="text-sm font-medium text-foreground">Risk Level</label>
                 <div className="flex space-x-2">
                   {["low", "medium", "high"].map((risk) => (
                     <Button
@@ -207,10 +207,10 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
                       variant="outline"
                       size="sm"
                       className={`
-                        border-white/20 text-xs transition-all
+                        border-border/50 text-xs transition-all backdrop-blur-sm
                         ${filters.riskLevel === risk
-                          ? "bg-white/20 text-white border-white/40"
-                          : "text-gray-400 hover:text-white hover:bg-white/10"
+                          ? "bg-primary/20 text-primary border-primary/40"
+                          : "text-muted-foreground hover:text-foreground hover:bg-accent/10"
                         }
                       `}
                       onClick={() => setFilters(prev => ({ 
@@ -227,7 +227,7 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
               {/* Clear Filters */}
               <Button
                 variant="outline"
-                className="w-full border-white/20 text-gray-400 hover:text-white hover:bg-white/10"
+                className="w-full border-border/50 text-muted-foreground hover:text-foreground hover:bg-accent/10 backdrop-blur-sm"
                 onClick={() => setFilters({
                   location: "",
                   priceMin: "",
@@ -251,31 +251,31 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: "100%", opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="absolute inset-0 bg-black/80 backdrop-blur-xl z-40 flex items-center justify-center"
+            className="absolute inset-0 dashboard-surface backdrop-blur-xl z-40 flex items-center justify-center"
           >
             <div className="max-w-md w-full mx-6 space-y-6">
               <div className="text-center space-y-2">
-                <div className="mx-auto w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-                  <Upload className="h-8 w-8 text-white" />
+                <div className="mx-auto w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-primary/30">
+                  <Upload className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-xl font-semibold text-white">Upload Deal for Analysis</h3>
-                <p className="text-gray-400 text-sm">
+                <h3 className="text-xl font-semibold text-foreground glow-text">Upload Deal for Analysis</h3>
+                <p className="text-muted-foreground text-sm">
                   Upload property documents, photos, or deals for AI analysis
                 </p>
               </div>
 
               <div className="space-y-4">
-                <div className="border-2 border-dashed border-white/30 rounded-xl p-8 text-center hover:border-white/50 transition-colors cursor-pointer">
-                  <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-white text-sm">
+                <div className="border-2 border-dashed border-border/50 rounded-xl p-8 text-center hover:border-primary/50 transition-colors cursor-pointer backdrop-blur-sm">
+                  <Upload className="h-8 w-8 text-primary mx-auto mb-2" />
+                  <p className="text-foreground text-sm">
                     Drop files here or click to browse
                   </p>
-                  <p className="text-gray-500 text-xs mt-1">
+                  <p className="text-muted-foreground text-xs mt-1">
                     PDF, JPG, PNG up to 10MB
                   </p>
                 </div>
 
-                <Button className="w-full glass text-foreground hover:bg-white/10 border border-white/20">
+                <Button className="w-full dashboard-card text-foreground hover:bg-accent/10 border border-border/30">
                   <Settings className="h-4 w-4 mr-2" />
                   Analyze with Janus AI
                 </Button>

@@ -64,9 +64,9 @@ export function InvestmentMap() {
                 .setHTML(`
                   <div class="p-2">
                     <h4 class="font-medium">${investment.address}</h4>
-                    <p class="text-sm text-gray-600">Value: $${investment.value.toLocaleString()}</p>
-                    <p class="text-sm text-gray-600">ROI: ${investment.roi}%</p>
-                    <p class="text-sm text-gray-600">Status: ${investment.status}</p>
+                    <p class="text-sm text-muted-foreground">Value: $${investment.value.toLocaleString()}</p>
+                    <p class="text-sm text-muted-foreground">ROI: ${investment.roi}%</p>
+                    <p class="text-sm text-muted-foreground">Status: ${investment.status}</p>
                   </div>
                 `)
             )
@@ -89,7 +89,7 @@ export function InvestmentMap() {
   };
 
   return (
-    <Card className="institutional-card h-full">
+    <Card className="dashboard-card h-full">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <MapPin className="w-5 h-5 text-primary" />
@@ -99,7 +99,7 @@ export function InvestmentMap() {
       
       <CardContent className="p-0 h-[500px] relative">
         {showTokenInput ? (
-          <div className="absolute inset-0 bg-card/95 backdrop-blur-sm flex items-center justify-center z-10">
+          <div className="absolute inset-0 dashboard-surface backdrop-blur-sm flex items-center justify-center z-10">
             <div className="max-w-md mx-auto p-6 space-y-4">
               <div className="flex items-center gap-2 text-warning">
                 <AlertCircle className="w-5 h-5" />
@@ -134,7 +134,7 @@ export function InvestmentMap() {
         <div ref={mapContainer} className="w-full h-full rounded-lg" />
         
         {!showTokenInput && (
-          <div className="absolute bottom-4 left-4 bg-card/90 backdrop-blur-sm p-3 rounded-lg border">
+          <div className="absolute bottom-4 left-4 dashboard-card backdrop-blur-sm p-3 rounded-lg border border-border/30">
             <div className="flex items-center gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-success rounded-full"></div>

@@ -115,7 +115,7 @@ export function InvestmentCharts() {
     <div className="space-y-6">
       {/* Key Performance Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="institutional-card">
+        <Card className="dashboard-card">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-primary/10 rounded-lg">
@@ -130,7 +130,7 @@ export function InvestmentCharts() {
           </CardContent>
         </Card>
 
-        <Card className="institutional-card">
+        <Card className="dashboard-card">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-gold/10 rounded-lg">
@@ -145,7 +145,7 @@ export function InvestmentCharts() {
           </CardContent>
         </Card>
 
-        <Card className="institutional-card">
+        <Card className="dashboard-card">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-ice/10 rounded-lg">
@@ -160,7 +160,7 @@ export function InvestmentCharts() {
           </CardContent>
         </Card>
 
-        <Card className="institutional-card">
+        <Card className="dashboard-card">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-warning/10 rounded-lg">
