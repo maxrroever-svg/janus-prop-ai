@@ -5,7 +5,7 @@ import { AfterYouOwnIt } from "@/components/consumer/AfterYouOwnIt";
 const ConsumerOwnership = () => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen w-full bg-background flex">
+      <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
         <div className="flex-1 flex flex-col">
           <header className="h-16 border-b border-border bg-card flex items-center px-6">

@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 const MapView = () => {
   return (
     <div className="janus janus-consumer">
-      <SidebarProvider>
-        <div className="min-h-screen w-full bg-background flex">
+    <SidebarProvider>
+      <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
           <div className="star-field"></div>
           <ConsumerSidebar />
           <div className="flex-1 flex flex-col relative z-10">

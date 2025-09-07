@@ -11,7 +11,7 @@ import { User, Bell, Shield, CreditCard } from "lucide-react";
 const ConsumerSettings = () => {
   return (
     <SidebarProvider>
-      <div className="min-h-screen w-full bg-background flex">
+      <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
         <div className="flex-1 flex flex-col">
           <div className="p-4 border-b border-border">
