@@ -4,660 +4,463 @@ import { useEffect, useRef } from "react";
 export default function LandingPage() {
   const dustRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Lightweight dust field covering the whole merged band
+  // Scrollspy implementation from the refined HTML
   useEffect(() => {
-    const c = dustRef.current;
-    if (!c) return;
-    const ctx = c.getContext("2d", { alpha: true });
-    if (!ctx) return;
+    const links = [...document.querySelectorAll('.landing .nav a')] as HTMLAnchorElement[];
+    const targets = links.map(a => document.querySelector(a.getAttribute('href')!)).filter(Boolean) as HTMLElement[];
+    const header = document.getElementById('siteHeader');
+    
+    if (!links.length || !targets.length || !header) return;
 
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    let w = 0, h = 0;
-    let particles: {x:number;y:number;r:number;a:number;vx:number;vy:number;}[] = [];
-
-    const resize = () => {
-      const parent = c.parentElement!;
-      const rect = parent.getBoundingClientRect();
-      w = Math.max(1, Math.floor(rect.width));
-      h = Math.max(1, Math.floor(rect.height));
-      c.width = w * DPR;
-      c.height = h * DPR;
-      c.style.width = w + "px";
-      c.style.height = h + "px";
-      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-
-      const n = Math.max(240, Math.floor((w * h) / 7000));
-      particles = new Array(n).fill(0).map(() => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: Math.random() * 1.2 + 0.6,
-        a: Math.random() * 0.35 + 0.25,
-        vx: (Math.random() * 0.12 - 0.06),
-        vy: (Math.random() * 0.12 - 0.06),
-      }));
+    const setActive = () => {
+      const top = window.scrollY + header.offsetHeight + 8;
+      let active = targets[0];
+      for (const sec of targets) {
+        const rect = sec.getBoundingClientRect();
+        const sTop = window.scrollY + rect.top;
+        if (sTop <= top) active = sec;
+        else break;
+      }
+      const id = '#' + active.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
     };
 
-    const step = () => {
+    setActive();
+    const onScroll = () => setActive();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', setActive);
+
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', setActive);
+    };
+  }, []);
+
+  // Dust effect implementation from the refined HTML
+  useEffect(() => {
+    const host = document.getElementById('twins');
+    if (!host) return;
+    
+    const c = dustRef.current;
+    if (!c) return;
+    
+    const ctx = c.getContext('2d', { alpha: true });
+    if (!ctx) return;
+    
+    const DPR = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0, h = 0, P: Array<{x:number;y:number;r:number;a:number;vx:number;vy:number}> = [];
+
+    function size() {
+      const r = host.getBoundingClientRect();
+      w = Math.max(1, Math.floor(r.width));
+      h = Math.max(1, Math.floor(r.height));
+      c.width = w * DPR;
+      c.height = h * DPR;
+      c.style.width = w + 'px';
+      c.style.height = h + 'px';
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+      
+      const n = Math.max(260, Math.floor((w * h) / 6000));
+      P = new Array(n).fill(0).map(() => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.4 + .6,
+        a: Math.random() * .40 + .25,
+        vx: (Math.random() * .12 - .06),
+        vy: (Math.random() * .12 - .06)
+      }));
+    }
+
+    function frame() {
       ctx.clearRect(0, 0, w, h);
-      for (const p of particles) {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < -10) p.x = w + 10; if (p.x > w + 10) p.x = -10;
-        if (p.y < -10) p.y = h + 10; if (p.y > h + 10) p.y = -10;
+      for (const p of P) {
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < -12) p.x = w + 12;
+        if (p.x > w + 12) p.x = -12;
+        if (p.y < -12) p.y = h + 12;
+        if (p.y > h + 12) p.y = -12;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255,255,255,${p.a})`;
         ctx.fill();
       }
-      requestAnimationFrame(step);
-    };
+      requestAnimationFrame(frame);
+    }
 
-    resize();
-    step();
-    const ro = "ResizeObserver" in window ? new ResizeObserver(resize) : null;
-    ro?.observe(c.parentElement!);
-    window.addEventListener("resize", resize);
+    size();
+    frame();
+    window.addEventListener('resize', size, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(size).observe(host);
+
     return () => {
-      ro?.disconnect();
-      window.removeEventListener("resize", resize);
+      window.removeEventListener('resize', size);
     };
   }, []);
 
-  // Fixed scrollspy - proper section detection
+  // Client-side routing handler from the refined HTML
   useEffect(() => {
-    const initScrollspy = () => {
-      const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'));
-      
-      const updateActiveLink = () => {
-        const scrollPos = window.scrollY + 120;
-        
-        // Get all sections with their actual positions
-        const sections = [
-          'home', 'vision', 'agents', 'consumer', 'investor', 'pricing', 'contact'
-        ].map(id => {
-          const element = document.getElementById(id);
-          if (element) {
-            return {
-              id: `#${id}`,
-              element,
-              offsetTop: element.getBoundingClientRect().top + window.scrollY
-            };
-          }
-          return null;
-        }).filter(Boolean) as Array<{id: string, element: HTMLElement, offsetTop: number}>;
-        
-        // Sort by position
-        sections.sort((a, b) => a.offsetTop - b.offsetTop);
-        
-        // Find active section
-        let activeSection = sections[0];
-        for (const section of sections) {
-          if (section.offsetTop <= scrollPos) {
-            activeSection = section;
-          }
-        }
-        
-        // Update links
-        links.forEach(link => {
-          const href = link.getAttribute('href');
-          const isActive = href === activeSection.id;
-          link.classList.toggle('is-active', isActive);
-        });
-        
-        console.log(`Scroll: ${scrollPos}, Active: ${activeSection.id} (${activeSection.offsetTop})`);
-      };
-      
-      updateActiveLink();
-      
-      const onScroll = () => requestAnimationFrame(updateActiveLink);
-      window.addEventListener('scroll', onScroll, { passive: true });
-      
-      return () => window.removeEventListener('scroll', onScroll);
+    function go(href: string) {
+      // Since we're using React Router, this will be handled by Link components
+      window.location.href = href;
+    }
+    
+    const handleClick = (e: Event) => {
+      const a = (e.target as Element).closest('a[data-route]') as HTMLAnchorElement;
+      if (!a) return;
+      e.preventDefault();
+      go(a.getAttribute('data-route') || a.getAttribute('href') || '');
     };
     
-    // Wait for layout to settle
-    const timer = setTimeout(initScrollspy, 500);
-    return () => clearTimeout(timer);
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
   }, []);
 
   return (
-    <div className="janus janus-landing">
+    <>
       <style>{`
-        /* Missing styles for landing page */
-        /* Navigation - override ALL possible styles */
-        .janus-landing .janus-header {
-          position: sticky;
-          top: 0;
-          z-index: 40;
-          padding: 12px 16px;
-          background: transparent !important;
-          border: none !important;
-          box-shadow: none !important;
-          backdrop-filter: none !important;
-          -webkit-backdrop-filter: none !important;
+        /* ===========================================================
+           JANUS Landing — Perfect Front Page (scoped)
+           =========================================================== */
+        :root { color-scheme: dark }
+
+        .landing{
+          /* tokens */
+          --bg:#000; --white:#fff; --hair:rgba(255,255,255,.12);
+          --up:#00DC96; --down:#FF6969; --primary:#CFE2FF;
+          --maxw:1120px; --prose:980px;
+          background:var(--bg); color:var(--white);
+          -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
         }
-        .janus-landing .janus-header .row {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          max-width: var(--maxw);
-          margin: 0 auto;
+
+        /* ——— Base ——— */
+        .landing *{ box-sizing:border-box }
+        .landing a{ color:var(--white); text-decoration:none }
+        .landing a:hover{ text-decoration:underline; text-underline-offset:6px }
+        .landing ::selection{ background:rgba(255,255,255,.18); color:#000 }
+        .landing :where(h1,h2,h3,h4,h5,h6,p,li,small,span,em,strong,nav,button,label,div,section,footer,header,svg text){
+          color:var(--white)!important; -webkit-text-fill-color:var(--white);
         }
-        .janus-landing .brand {
-          font-family: "GFS Didot", serif;
-          font-size: 18px;
-          letter-spacing: .02em;
+        .landing svg text{ fill:#fff }
+
+        /* ——— Type ——— */
+        .landing h1{ font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.0025em; line-height:1.02;
+          font-size:clamp(3.0rem,6.2vw,4.8rem); margin:0 0 18px }
+        .landing h2{ font-family:"GFS Didot",serif; font-weight:400; letter-spacing:.003em; line-height:1.08;
+          font-size:clamp(2.3rem,3.9vw,3.2rem); margin:0 0 12px }
+        .landing h3{ font-family:"GFS Didot",serif; font-weight:400; font-size:clamp(1.15rem,1.6vw,1.35rem); margin:0 0 12px }
+        .landing p, .landing li, .landing small, .landing span, .landing nav, .landing button, .landing input, .landing textarea, .landing select{
+          font-family:"IBM Plex Sans", system-ui, sans-serif;
         }
-        .janus-landing .nav {
-          display: flex;
-          gap: 24px;
-          align-items: center;
+        .landing p{ margin:0 0 16px; line-height:1.66 }
+        .landing .num{ font-family:"IBM Plex Mono", monospace }
+        .landing .prose{ max-width:var(--prose) }
+
+        /* ——— Structure ——— */
+        .landing .section{ padding:clamp(60px,8vw,96px) 16px; position:relative; z-index:1 }
+        .landing .container{ max-width:var(--maxw); margin:0 auto }
+        .landing .right-shift{ max-width:var(--prose); margin-left:auto; margin-right:0; text-align:left }
+        .landing #home .right-shift p,
+        .landing #vision .right-shift p{ font-size:clamp(1.10rem,1.4vw,1.28rem); opacity:.98 }
+
+        /* ——— Header (transparent, sticky, no boxes) ——— */
+        .landing .header{
+          position:sticky; top:0; left:0; right:0; z-index:40;
+          display:flex; align-items:center; justify-content:space-between;
+          padding:14px 16px; background:transparent; border:none; box-shadow:none;
         }
-        /* Navigation - FORCE override ALL glass/blur effects */
-        .janus-landing .nav a,
-        .janus-landing .nav a:hover,
-        .janus-landing .nav a:focus,
-        .janus-landing .nav a:active,
-        .janus-landing .nav a:visited {
-          font-weight: 600 !important;
-          font-size: .96rem !important;
-          position: relative !important;
-          padding: 6px 0 !important;
-          margin: 0 !important;
-          background: none !important;
-          background-color: transparent !important;
-          border: none !important;
-          box-shadow: none !important;
-          backdrop-filter: none !important;
-          -webkit-backdrop-filter: none !important;
-          border-radius: 0 !important;
-          color: var(--white) !important;
-          text-decoration: none !important;
-          filter: none !important;
-          opacity: 1 !important;
+        .landing .brand{ font-family:"GFS Didot",serif; font-size:1.2rem; letter-spacing:.02em }
+        .landing .nav{ display:flex; gap:1.1rem; align-items:center; margin-left:auto }
+        .landing .nav a{ font-weight:600; letter-spacing:.01em; font-size:.98rem; position:relative; padding-bottom:6px }
+        .landing .nav a::after{
+          content:""; position:absolute; left:0; right:100%; bottom:0; height:2px;
+          background:linear-gradient(90deg,#8EC5FF,#C68CFF,#FF9E7A); transition:right .22s ease;
         }
-        
-        /* Glass effects ONLY disabled for navigation */
-        .janus-landing .nav a,
-        .janus-landing .nav .glass,
-        .janus-landing .nav a.glass {
-          background: transparent !important;
-          backdrop-filter: none !important;
-          -webkit-backdrop-filter: none !important;
-          box-shadow: none !important;
-          border: none !important;
+        .landing .nav a:hover::after, .landing .nav a.active::after{ right:0 }
+
+        /* ——— Bloomberg strip (thinner) ——— */
+        .landing .bstrip{ border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:8px 0 }
+        .landing .bstrip .container{ display:flex; align-items:center; justify-content:center; gap:1rem; max-width:none; flex-wrap:wrap }
+        .landing .bitem{ display:inline-flex; align-items:baseline; gap:.5rem; line-height:1.2 }
+        .landing .bitem .label{ letter-spacing:.02em; opacity:.92; font-size:.78rem; text-transform:uppercase }
+        .landing .bitem .value{ font-weight:700; color:var(--primary) }
+        .landing .bitem .delta{ font-family:"IBM Plex Mono"; font-size:.9rem }
+        .landing .bitem .delta.up{ color:var(--up)!important }   /* green */
+        .landing .bitem .delta.down{ color:var(--down)!important }/* red   */
+
+        /* ——— Features grid ——— */
+        .landing .features{ display:grid; gap:16px; margin-top:28px }
+        @media (min-width:900px){ .landing .features{ grid-template-columns:repeat(4,1fr) } }
+        .landing .feature .kicker{ font:700 1rem "IBM Plex Sans" }
+
+        /* ——— Agent diagram (glossy) ——— */
+        .landing .diagram svg{ max-width:100%; height:auto; display:block; filter:drop-shadow(0 0 12px rgba(255,255,255,.10)) }
+        .landing .diagram .lane{ stroke:rgba(255,255,255,.16); stroke-width:1 }
+        .landing .diagram .node{ fill:rgba(255,255,255,.98) }
+        .landing .diagram text{ font:600 13px "IBM Plex Sans"; fill:rgba(255,255,255,.98) }
+        .landing .diagram .flow{
+          stroke:rgba(245,248,255,.96); stroke-width:1.9; marker-end:url(#arrow);
+          filter:drop-shadow(0 0 6px rgba(255,255,255,.22))
         }
-        .janus-landing .nav a::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 100%;
-          bottom: 5px;
-          height: 2px;
-          background: linear-gradient(90deg, #8EC5FF, #C68CFF, #FF9E7A);
-          transition: right .22s ease;
+
+        /* ——— ONE combined band (Consumer + Investors) ——— */
+        .landing .band{
+          width:100%; min-height:520px; padding:clamp(96px,16vh,200px) 16px; background:rgba(255,255,255,.02);
+          overflow:hidden; position:relative; isolation:isolate;
         }
-        .janus-landing .nav a:hover::after,
-        .janus-landing .nav a.is-active::after {
-          right: 0;
+        .landing .band .inner{ max-width:var(--maxw); margin:0 auto; position:relative; z-index:3 }
+        .landing .band .grid{ display:grid; gap:40px }
+        @media (min-width:900px){ .landing .band .grid{ grid-template-columns:1fr 1fr; gap:56px } }
+        .landing .band h2{ margin-bottom:10px; text-align:center }
+        .landing .band p{ text-align:center; max-width:920px; margin:.7rem auto 0 }
+        .landing .actions{ display:flex; justify-content:center; gap:1rem; margin-top:16px }
+        .landing .cta{
+          display:inline-flex; align-items:center; justify-content:center;
+          padding:.82rem 1.25rem; border:1px solid var(--hair); border-radius:999px; background:rgba(255,255,255,.06)
         }
-        .janus-landing .nav a:hover {
-          text-decoration: none;
-        }
-        
-        /* Bloomberg strip - clean like Hero/Vision sections */
-        .janus-landing .bstrip {
-          padding: clamp(56px,8vw,96px) 18px;
-          position: relative;
-          z-index: 1;
-          background: transparent;
-          border: none;
-        }
-        .janus-landing .bstrip .container {
-          display: flex;
-          justify-content: center;
-          gap: 2rem;
-          flex-wrap: wrap;
-          align-items: center;
-          max-width: var(--maxw);
-          margin: 0 auto;
-        }
-        .janus-landing .bstrip .chip {
-          display: inline-flex;
-          align-items: baseline;
-          gap: 6px;
-          padding: 0;
-          border: none;
-          border-radius: 0;
-          background: transparent;
-          white-space: nowrap;
-          font-size: 0.9rem;
-        }
-        
-        .janus-landing .features {
-          display: grid;
-          gap: 16px;
-          margin-top: 28px;
-        }
-        @media(min-width:900px) {
-          .janus-landing .features {
-            grid-template-columns: repeat(4,1fr);
-          }
-        }
-        .janus-landing .feature .kicker {
-          font-weight: 600;
-          margin-bottom: 8px;
-          color: var(--primary);
-        }
-        
-        .janus-landing .diagram svg {
-          max-width: 100%;
-          height: auto;
-          display: block;
-          filter: drop-shadow(0 0 12px rgba(255,255,255,.10));
-        }
-        .janus-landing .diagram .lane {
-          stroke: rgba(255,255,255,.16);
-          stroke-width: 1;
-        }
-        .janus-landing .diagram .node {
-          fill: rgba(255,255,255,.98);
-        }
-        .janus-landing .diagram text {
-          font: 600 13px "IBM Plex Sans";
-          fill: rgba(255,255,255,.98);
-        }
-        .janus-landing .diagram .flow {
-          stroke: rgba(245,248,255,.96);
-          stroke-width: 1.9;
-          filter: drop-shadow(0 0 6px rgba(255,255,255,.22));
-        }
-        
-        .janus-landing .glowfield {
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-          pointer-events: none;
+        .landing .cta:hover{ background:rgba(255,255,255,.10) }
+
+        /* ——— Event-horizon glow from RIGHT (static, hazy, glossy) ——— */
+        .landing .horizon{
+          position:absolute; inset:0; z-index:1; pointer-events:none; overflow:hidden;
           background:
-            radial-gradient(240px 200px at 3% 6%, rgba(140,200,255,.12), transparent 72%),
-            radial-gradient(260px 220px at 98% 12%, rgba(255,170,96,.10), transparent 74%),
-            radial-gradient(220px 200px at 6% 96%, rgba(200,140,255,.10), transparent 70%),
-            radial-gradient(240px 200px at 96% 92%, rgba(120,255,220,.08), transparent 70%);
-          filter: blur(8px);
+            radial-gradient(120% 120% at 108% 50%, rgba(255,136,60,.44) 0%, rgba(255,120,40,.30) 22%, rgba(180,80,30,.16) 48%, rgba(0,0,0,0) 72%),
+            radial-gradient(80% 70%  at 96%  50%, rgba(120,170,255,.10) 0%, rgba(120,170,255,0) 70%),
+            linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.03));
+          filter: blur(18px) saturate(140%) contrast(106%) brightness(103%);
         }
-        
-        .janus-landing .ic-slab {
-          border-top: 1px solid var(--hair);
-          padding-top: 32px;
+
+        /* ——— Dust (covers whole band) ——— */
+        .landing .dust-canvas{
+          position:absolute; inset:0; z-index:2; pointer-events:none; opacity:.55; mix-blend-mode:screen;
         }
-        .janus-landing .ic-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 8px;
-          max-width: 980px;
-          margin: 0 auto;
+
+        /* ——— Pricing / I&C / Contact ——— */
+        .landing #pricing .right-shift,
+        .landing #contact .right-shift{ margin-left:auto; margin-right:auto; text-align:center }
+        .landing #pricing h2, .landing #contact h2{ font-size:clamp(2.3rem,3.9vw,3.2rem) }
+        .landing #pricing p,  .landing #contact p{ font-size:clamp(1.10rem,1.4vw,1.28rem) }
+        .landing .ic-slab{ border-top:1px solid var(--hair); padding-top:32px }
+        .landing .ic-grid{ display:grid; grid-template-columns:1fr; gap:8px; max-width:980px; margin:0 auto }
+        @media (min-width:900px){ .landing .ic-grid{ grid-template-columns:1fr 1fr; column-gap:24px } }
+        .landing .ic-item h3{ font:600 1rem "IBM Plex Sans"; margin:0 0 6px }
+        .landing .ic-item p{ opacity:.94 }
+
+        /* ——— Footer + Nebula (PINNED BOTTOM) ——— */
+        .landing footer{ background:transparent; border-top:none; padding:3.2rem 16px 2.4rem; position:relative; z-index:1 }
+        .landing .footer-wrap{
+          position:relative; z-index:2; max-width:var(--maxw); margin:0 auto 1.2rem;
+          display:grid; gap:1.2rem; grid-template-columns:repeat(2,1fr)
         }
-        @media(min-width:900px) {
-          .janus-landing .ic-grid {
-            grid-template-columns: 1fr 1fr;
-            column-gap: 24px;
-          }
-        }
-        .janus-landing .ic-item h3 {
-          margin-bottom: 8px;
-        }
-        
-        .janus-landing footer {
-          position: relative;
-          z-index: 1;
-          padding: 48px 24px 24px;
-          border-top: 1px solid var(--hair);
-          margin-top: 48px;
-        }
-        /* Twins section - one seamless section, no glow, no separator */
-        .janus-landing .twins-section {
-          position: relative;
-          width: 100%;
-          background: rgba(255,255,255,.02);
-          overflow: hidden;
-        }
-        .janus-landing .twins-section .band {
-          background: transparent !important;
-          border: none !important;
-        }
-        .janus-landing .twins-section .dust-canvas {
-          position: absolute;
-          inset: 0;
-          z-index: 2;
-          pointer-events: none;
-          opacity: .55;
-          mix-blend-mode: screen;
-        }
-        
-        /* Nebula positioned at very bottom of website content */
-        #nebula {
-          position: absolute !important;
-          left: 0; 
-          right: 0; 
-          bottom: -30vh;
-          height: 60vh; 
-          pointer-events: none; 
-          z-index: -1;
+        @media (min-width:900px){ .landing .footer-wrap{ grid-template-columns:repeat(4,1fr) } }
+        .landing .footer-col h4{ font:600 .95rem "IBM Plex Sans"; margin:0 0 .6rem }
+        .landing .footer-col a{ display:block; margin:.28rem 0 }
+        .landing .footer-col a:hover{ text-decoration:underline }
+        .landing .access-badges{ display:flex; gap:.5rem; flex-wrap:wrap }
+        .landing .badge{ border:1px solid var(--hair); border-radius:999px; padding:.35rem .7rem; background:rgba(255,255,255,.06) }
+        .landing #nebula{
+          position:fixed; left:0; right:0; bottom:0; height:150vh; pointer-events:none; z-index:0;
           background:
-            radial-gradient(60% 80% at 50% 100%, rgba(32,12,64,.95) 0%, rgba(0,0,0,0) 60%),
-            radial-gradient(62% 82% at 50% 100%, rgba(8,26,96,.92) 0%, rgba(0,0,0,0) 70%),
-            radial-gradient(64% 86% at 50% 100%, rgba(18,88,220,.78) 0%, rgba(0,0,0,0) 76%),
-            radial-gradient(70% 96% at 50% 100%, rgba(0,235,255,.44) 0%, rgba(0,0,0,0) 82%),
-            radial-gradient(76% 106% at 50% 100%, rgba(212,96,255,.38) 0%, rgba(0,0,0,0) 90%);
-          filter: blur(60px) saturate(155%);
-          -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
-          mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0) 100%);
+            radial-gradient(58% 116% at 50% 126%, rgba(48,18,92,.96) 0%, rgba(0,0,0,0) 58%),
+            radial-gradient(60% 120% at 50% 138%, rgba(12,28,110,.92) 0%, rgba(0,0,0,0) 66%),
+            radial-gradient(62% 124% at 50% 148%, rgba(22,98,230,.82) 0%, rgba(0,0,0,0) 74%),
+            radial-gradient(66% 130% at 50% 160%, rgba(0,235,255,.50) 0%, rgba(0,0,0,0) 82%),
+            radial-gradient(70% 136% at 50% 172%, rgba(64,255,198,.40) 0%, rgba(0,0,0,0) 86%),
+            radial-gradient(76% 144% at 50% 184%, rgba(255,178,84,.50) 0%, rgba(0,0,0,0) 90%),
+            radial-gradient(80% 152% at 50% 196%, rgba(212,96,255,.34) 0%, rgba(0,0,0,0) 92%);
+          filter:blur(110px) saturate(165%);
+          -webkit-mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
+                  mask-image:linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
         }
-        
-        /* Header extends to full width */
-        .janus-header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          z-index: 100;
-          padding: 0;
-          background: transparent;
-        }
-        
-        .janus-header .row {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 1rem 2rem;
-          max-width: 100%;
-          width: 100%;
-        }
-        
-        /* Make twins-section (consumer + investor) exactly 100vh total */
-        .twins-section {
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-          position: relative;
-          background: transparent;
-        }
-        
-        .twins-section .band--horizon::before {
-          mix-blend-mode: normal !important;
-        }
-        
-        /* Each band takes exactly half of the 100vh */
-        .twins-section #consumer,
-        .twins-section #investor {
-          flex: 1;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 50vh;
-          padding: clamp(20px,3vh,40px) 18px;
-        }
-        
-        /* Make footer relative and remove extra padding */
-        .janus-landing footer {
-          position: relative;
-          z-index: 1;
-          padding: 48px 24px;
-          border-top: 1px solid var(--hair);
-          margin-top: 48px;
-          background: transparent;
-        }
-        .janus-landing .footer-col h4 {
-          margin-bottom: 12px;
-          font-size: 1rem;
-        }
-        .janus-landing .footer-col a {
-          display: block;
-          margin-bottom: 8px;
-          opacity: 0.8;
-        }
-        .janus-landing .footer-col a:hover {
-          opacity: 1;
-        }
-        .janus-landing .access-badges {
-          display: flex;
-          gap: 8px;
-          flex-wrap: wrap;
-        }
-        .janus-landing .badge {
-          padding: 4px 8px;
-          border: 1px solid var(--hair);
-          border-radius: 4px;
-          font-size: 0.8rem;
-        }
-        .janus-landing .copyright {
-          text-align: center;
-          opacity: 0.6;
-          font-size: 0.9rem;
-        }
-        
-        .janus-landing .footer-wrap {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 24px;
-          max-width: var(--maxw);
-          margin: 0 auto 24px;
-        }
-        
-        /* Remove top fog glow */
-        .janus-landing #fog {
-          display: none !important;
-        }
+
+        /* ——— Reveal off (we keep it immediate) ——— */
+        .landing .reveal{ opacity:1; transform:none }
+
+        .landing .copyright{ text-align:center; margin-top:1.2rem; opacity:.6; font-size:.9rem }
       `}</style>
 
-      {/* Header */}
-      <header className="janus-header">
-        <div className="row">
-          <Link to="/" className="brand">Janus</Link>
-          <nav className="nav">
+      <div className="landing">
+        {/* Header */}
+        <header className="header" id="siteHeader">
+          <Link className="brand" to="/">Janus</Link>
+          <nav className="nav" id="siteNav">
             <a href="#home">Home</a>
             <a href="#vision">Vision</a>
             <a href="#agents">Agents</a>
             <a href="#consumer">Consumer</a>
-            <a href="#investor">Investor</a>
+            <a href="#investor">Investors</a>
             <a href="#pricing">Pricing</a>
             <a href="#contact">Contact</a>
           </nav>
-        </div>
-      </header>
+        </header>
 
-      <main>
-        {/* HERO */}
-        <section id="home" className="section">
-          <div className="container">
-            <div className="right-shift">
-              <h1>AI for Real Estate, Without<br/>the Noise.</h1>
-              <p>
-                Janus runs every opportunity through an <b>agentic investment
-                committee</b> — sourcing, comps, underwriting, risk, fit, and a
-                final memo — so you act with confidence.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Thinner Bloomberg strip */}
-        <section className="bstrip slim">
-          <div className="container">
-            <span className="chip">
-              <span className="label">DEAL SCORE</span>
-              <span className="value num">91</span>
-              <span className="delta up num">+2.1</span>
-            </span>
-            <span className="chip">
-              <span className="label">DSCR</span>
-              <span className="value num">1.28</span>
-              <span className="delta up num">+0.03</span>
-            </span>
-            <span className="chip">
-              <span className="label">CAP RATE</span>
-              <span className="value num">6.8%</span>
-              <span className="delta down num">-0.2%</span>
-            </span>
-            <span className="chip">
-              <span className="label">RENT BAND</span>
-              <span className="value num">$1,780</span>
-              <span className="delta up num">+15</span>
-            </span>
-            <span className="chip">
-              <span className="label">RISK FLAGS</span>
-              <span className="value num">Low</span>
-              <span className="delta up num">+</span>
-            </span>
-            <span className="chip">
-              <span className="label">SPREAD</span>
-              <span className="value num">$13.5k</span>
-              <span className="delta up num">+$900</span>
-            </span>
-          </div>
-        </section>
-
-        {/* VISION */}
-        <section id="vision" className="section">
-          <div className="container">
-            <div className="right-shift">
-              <h2>Vision</h2>
-              <p>
-                Build the <b>agent-first</b> platform for real estate. Specialist
-                agents — <em>Sourcing</em>, <em>Comps</em>, <em>Underwriter</em>,{" "}
-                <em>Risk</em>, <em>Portfolio Fit</em>, <em>Critic</em> — produce
-                evidence, challenge each other, and deliver a clean memo with a
-                verdict: <span className="num">YES / REVISE / NO</span>. Every
-                conclusion is cited and auditable.
-              </p>
-              <div style={{borderTop:"1px solid var(--hair)", margin:"28px 0"}} />
-              <div className="features">
-                <div className="feature"><div className="kicker">Explainable by Default</div><p>Every number is traceable to comps, assumptions, and sources. No black boxes.</p></div>
-                <div className="feature"><div className="kicker">Risk-Aware</div><p>Flood, crime, HOA, title, permits — surfaced as gates with severity thresholds.</p></div>
-                <div className="feature"><div className="kicker">Portfolio Fit</div><p>Your "box" enforced: metros, leverage, min DSCR/CoC, hold, and concentration.</p></div>
-                <div className="feature"><div className="kicker">One-Tap Memo</div><p>Final IC memo with dissent, sensitivities, and conditions to close.</p></div>
+        <main>
+          {/* HERO */}
+          <section id="home" className="section">
+            <div className="container">
+              <div className="right-shift">
+                <h1>AI for Real Estate, Without<br/>the Noise.</h1>
+                <p>Janus runs every opportunity through an <b>agentic investment committee</b> — sourcing, comps, underwriting, risk, fit, and a final memo — so you act with confidence.</p>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* AGENTS */}
-        <section id="agents" className="section">
-          <div className="container diagram">
-            <div className="right-shift" style={{marginBottom:24}}>
-              <h2>Agent Strategy</h2>
-              <p>Sourcing → Comps → Underwrite → Risk → Portfolio Fit → Critic → Memo</p>
+          {/* Bloomberg strip (thin) */}
+          <section className="bstrip">
+            <div className="container">
+              <span className="bitem"><span className="label">DEAL SCORE</span><span className="value num">91</span><span className="delta up num">+2.1</span></span>
+              <span className="bitem"><span className="label">DSCR</span><span className="value num">1.28</span><span className="delta up num">+0.03</span></span>
+              <span className="bitem"><span className="label">CAP RATE</span><span className="value num">6.8%</span><span className="delta down num">-0.2%</span></span>
+              <span className="bitem"><span className="label">RENT BAND</span><span className="value num">$1,780</span><span className="delta up num">+15</span></span>
+              <span className="bitem"><span className="label">RISK FLAGS</span><span className="value num">Low</span><span className="delta up num">+</span></span>
+              <span className="bitem"><span className="label">SPREAD</span><span className="value num">$13.5k</span><span className="delta up num">+$900</span></span>
             </div>
-            <svg viewBox="0 0 1000 260" role="img" aria-label="Agent Pipeline Diagram">
-              <defs>
-                <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
-                  <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,.98)" />
-                </marker>
-              </defs>
-              <text x="500" y="78" textAnchor="middle">Rent / ARV Band</text>
-              <line className="lane" x1="80" y1="90" x2="920" y2="90" />
-              <line className="lane" x1="80" y1="150" x2="920" y2="150" />
-              <g>
-                <circle className="node" cx="140" cy="150" r="2.6"/><text x="140" y="130" textAnchor="middle">Sourcing</text>
-                <circle className="node" cx="260" cy="150" r="2.6"/><text x="260" y="130" textAnchor="middle">Comps</text>
-                <circle className="node" cx="420" cy="150" r="2.6"/><text x="420" y="130" textAnchor="middle">Underwrite</text>
-                <circle className="node" cx="560" cy="150" r="2.6"/><text x="560" y="130" textAnchor="middle">Risk</text>
-                <circle className="node" cx="700" cy="150" r="2.6"/><text x="700" y="130" textAnchor="middle">Portfolio Fit</text>
-                <circle className="node" cx="820" cy="150" r="2.6"/><text x="820" y="130" textAnchor="middle">Critic</text>
-                <circle className="node" cx="900" cy="150" r="2.6"/><text x="900" y="130" textAnchor="middle">Memo</text>
-              </g>
-              <path className="flow" d="M140 150 L260 150" markerEnd="url(#arrow)"/>
-              <path className="flow" d="M260 150 L420 150" markerEnd="url(#arrow)"/>
-              <path className="flow" d="M420 150 L560 150" markerEnd="url(#arrow)"/>
-              <path className="flow" d="M560 150 L700 150" markerEnd="url(#arrow)"/>
-              <path className="flow" d="M700 150 L820 150" markerEnd="url(#arrow)"/>
-              <path className="flow" d="M820 150 L900 150" markerEnd="url(#arrow)"/>
-              <text x="500" y="178" textAnchor="middle">Cap • CoC • DSCR • IRR • Sensitivities</text>
-              <line className="lane" x1="80" y1="210" x2="920" y2="210" />
-              <text x="500" y="232" textAnchor="middle">Gates &amp; Conditions</text>
-            </svg>
-          </div>
-        </section>
+          </section>
 
-        {/* CONSUMER + INVESTOR — one section, shared dust/light, no gap */}
-        <section className="twins-section">
-          <canvas ref={dustRef} className="dust-canvas" aria-hidden="true" />
-          
-          <div id="consumer" className="band band--horizon">
-            <div className="band-content container">
-              <h2>Consumer</h2>
-              <p>
-                Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes.
-                Build a watchlist, set thresholds, and share a one-page memo from your phone.
-              </p>
-              <div className="actions" style={{marginTop:18}}>
-                <Link to="/consumer" className="cta glass">Enter Dashboard</Link>
+          {/* VISION */}
+          <section id="vision" className="section">
+            <div className="container">
+              <div className="right-shift">
+                <h2>Vision</h2>
+                <p>
+                  Build the <b>agent-first</b> platform for real estate. Specialist agents — <em>Sourcing</em>, <em>Comps</em>, <em>Underwriter</em>, <em>Risk</em>, <em>Portfolio Fit</em>, <em>Critic</em> — produce evidence, challenge each other, and deliver a clean memo with a verdict: <span className="num">YES / REVISE / NO</span>. Every conclusion is cited and auditable.
+                </p>
+                <div style={{borderTop:"1px solid var(--hair)", margin:"28px 0"}} />
+                <div className="features">
+                  <div className="feature"><div className="kicker">Explainable by Default</div><p>Every number is traceable to comps, assumptions, and sources. No black boxes.</p></div>
+                  <div className="feature"><div className="kicker">Risk-Aware</div><p>Flood, crime, HOA, title, permits — surfaced as gates with severity thresholds.</p></div>
+                  <div className="feature"><div className="kicker">Portfolio Fit</div><p>Your "box" enforced: metros, leverage, min DSCR/CoC, hold, and concentration.</p></div>
+                  <div className="feature"><div className="kicker">One-Tap Memo</div><p>Final IC memo with dissent, sensitivities, and conditions to close.</p></div>
+                </div>
               </div>
             </div>
-          </div>
+          </section>
 
-          <div id="investor" className="band band--horizon">
-            <div className="band-content container">
-              <h2>Investor</h2>
-              <p>
-                Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed
-                strategies with confidence-weighted verdicts and auditable memos.
-              </p>
-              <div className="actions" style={{marginTop:18}}>
-                <Link to="/investor" className="cta glass">Enter Dashboard</Link>
+          {/* AGENTS */}
+          <section id="agents" className="section">
+            <div className="container diagram">
+              <div className="right-shift" style={{marginBottom:24}}>
+                <h2>Agent Strategy</h2>
+                <p>Sourcing → Comps → Underwrite → Risk → Portfolio Fit → Critic → Memo</p>
+              </div>
+              <svg viewBox="0 0 1000 260" role="img" aria-label="Agent Pipeline Diagram">
+                <defs>
+                  <marker id="arrow" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+                    <path d="M0,0 L0,6 L6,3 z" fill="rgba(255,255,255,.98)"></path>
+                  </marker>
+                </defs>
+                <text x="500" y="78" textAnchor="middle">Rent / ARV Band</text>
+                <line className="lane" x1="80" y1="90" x2="920" y2="90"/>
+                <line className="lane" x1="80" y1="150" x2="920" y2="150"/>
+                <g>
+                  <circle className="node" cx="140" cy="150" r="2.6"/><text x="140" y="130" textAnchor="middle">Sourcing</text>
+                  <circle className="node" cx="260" cy="150" r="2.6"/><text x="260" y="130" textAnchor="middle">Comps</text>
+                  <circle className="node" cx="420" cy="150" r="2.6"/><text x="420" y="130" textAnchor="middle">Underwrite</text>
+                  <circle className="node" cx="560" cy="150" r="2.6"/><text x="560" y="130" textAnchor="middle">Risk</text>
+                  <circle className="node" cx="700" cy="150" r="2.6"/><text x="700" y="130" textAnchor="middle">Portfolio Fit</text>
+                  <circle className="node" cx="820" cy="150" r="2.6"/><text x="820" y="130" textAnchor="middle">Critic</text>
+                  <circle className="node" cx="900" cy="150" r="2.6"/><text x="900" y="130" textAnchor="middle">Memo</text>
+                </g>
+                <path className="flow" d="M140 150 L260 150" markerEnd="url(#arrow)"/>
+                <path className="flow" d="M260 150 L420 150" markerEnd="url(#arrow)"/>
+                <path className="flow" d="M420 150 L560 150" markerEnd="url(#arrow)"/>
+                <path className="flow" d="M560 150 L700 150" markerEnd="url(#arrow)"/>
+                <path className="flow" d="M700 150 L820 150" markerEnd="url(#arrow)"/>
+                <path className="flow" d="M820 150 L900 150" markerEnd="url(#arrow)"/>
+                <text x="500" y="178" textAnchor="middle">Cap • CoC • DSCR • IRR • Sensitivities</text>
+                <line className="lane" x1="80" y1="210" x2="920" y2="210"/>
+                <text x="500" y="232" textAnchor="middle">Gates &amp; Conditions</text>
+              </svg>
+            </div>
+          </section>
+
+          {/* ONE Combined Band: Consumer + Investors */}
+          <section id="twins" className="band">
+            <div className="horizon" aria-hidden="true"></div>
+            <canvas ref={dustRef} className="dust-canvas" aria-hidden="true"></canvas>
+
+            <div className="inner">
+              <div className="grid">
+                {/* Consumer Column */}
+                <div>
+                  <h2 id="consumer">Consumer</h2>
+                  <p>
+                    Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes.
+                    Build a watchlist, set thresholds (<span className="num">DSCR≥1.25</span>, <span className="num">Cap≥6%</span>), and share a one-page memo from your phone.
+                  </p>
+                  <div className="actions"><Link className="cta" to="/consumer">Enter Dashboard</Link></div>
+                </div>
+
+                {/* Investors Column */}
+                <div>
+                  <h2 id="investor">Investors</h2>
+                  <p>
+                    Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed:
+                    <span className="num">Cap • CoC • DSCR • IRR</span>, risk gates (flood/HOA/title), conditions to close, and a confidence-weighted verdict.
+                  </p>
+
+                  {/* Bloomberg-style micro line */}
+                  <div style={{marginTop:10, display:'flex', gap:'1rem', flexWrap:'wrap', justifyContent:'center'}}>
+                    <span className="bitem"><span className="label">LTV</span><span className="value num">64%</span><span className="delta up num">+1%</span></span>
+                    <span className="bitem"><span className="label">CoC</span><span className="value num">8.9%</span><span className="delta up num">+0.3%</span></span>
+                    <span className="bitem"><span className="label">IRR(5y)</span><span className="value num">17.2%</span><span className="delta up num">+0.6%</span></span>
+                    <span className="bitem"><span className="label">DSCR</span><span className="value num">1.32</span><span className="delta down num">-0.02</span></span>
+                  </div>
+
+                  <div className="actions" style={{marginTop:14}}><Link className="cta" to="/dashboard">Enter Dashboard</Link></div>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* PRICING */}
-        <section id="pricing" className="section">
-          <div className="container">
-            <div className="right-shift" style={{marginLeft:"auto", marginRight:"auto", textAlign:"center"}}>
-              <h2>Pricing</h2>
-              <p>Templates only — final pricing TBD.</p>
-              <div className="actions" style={{marginTop:"1.2rem", justifyContent:"center", display:"flex", gap:"1rem"}}>
-                <a className="cta glass" href="#contact">Consumer — Learn More</a>
-                <a className="cta glass" href="#contact">Investors — Learn More</a>
+          {/* PRICING */}
+          <section id="pricing" className="section">
+            <div className="container">
+              <div className="right-shift" style={{marginLeft:'auto', marginRight:'auto', textAlign:'center'}}>
+                <h2>Pricing</h2>
+                <p>Templates only — final pricing TBD.</p>
+                <div className="actions" style={{marginTop:'1.2rem', justifyContent:'center'}}>
+                  <a className="cta" href="#contact">Consumer — Learn More</a>
+                  <a className="cta" href="#contact">Investors — Learn More</a>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Integrations & Compliance */}
-        <section className="section ic-slab">
-          <div className="container">
-            <div className="ic-grid">
-              <div className="ic-item"><h3>Integrations</h3><p>MLS/assessor proxies, rental datasets, permit/title sources, FEMA flood, and alerts to email/SMS.</p></div>
-              <div className="ic-item"><h3>Compliance</h3><p>Evidence objects stored with citations; guardrails on DSCR/CoC/risk. Exportable audit trail.</p></div>
+          {/* Integrations & Compliance */}
+          <section className="section ic-slab">
+            <div className="container">
+              <div className="ic-grid">
+                <div className="ic-item"><h3>Integrations</h3><p>MLS/assessor proxies, rental datasets, permit/title sources, FEMA flood, and alerts to email/SMS.</p></div>
+                <div className="ic-item"><h3>Compliance</h3><p>Evidence objects stored with citations; guardrails on DSCR/CoC/risk. Exportable audit trail.</p></div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* CONTACT */}
-        <section id="contact" className="section">
-          <div className="container">
-            <div className="right-shift" style={{marginLeft:"auto", marginRight:"auto", textAlign:"center"}}>
-              <h2>Contact</h2>
-              <p>Partnerships, pilots, or access:</p>
-              <p style={{fontSize:"1.12rem"}}><a href="mailto:contact@janus.ai">contact@janus.ai</a></p>
+          {/* CONTACT */}
+          <section id="contact" className="section">
+            <div className="container">
+              <div className="right-shift" style={{marginLeft:'auto', marginRight:'auto', textAlign:'center'}}>
+                <h2>Contact</h2>
+                <p>Partnerships, pilots, or access:</p>
+                <p style={{fontSize:'1.12rem'}}><a href="mailto:contact@janus.ai">contact@janus.ai</a></p>
+              </div>
             </div>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
 
-      {/* Footer links remain; nebula is pinned behind */}
-      <footer>
-        <div className="footer-wrap">
-          <div className="footer-col"><h4>Resources</h4><a href="#safety">Safety</a><a href="#legal">Legal</a><a href="#security">Security</a><a href="#docs">Docs</a></div>
-          <div className="footer-col"><h4>Company</h4><a href="#about">About</a><a href="#careers">Careers</a><a href="#news">News</a></div>
-          <div className="footer-col"><h4>Products</h4><a href="#agents">Agents</a><Link to="/consumer">Consumer</Link><Link to="/investor">Investors</Link></div>
-          <div className="footer-col"><h4>Access</h4><div className="access-badges"><span className="badge">Web</span><span className="badge">iOS</span><span className="badge">Android</span></div></div>
-        </div>
-        <div className="copyright">© 2025 Janus • All rights reserved</div>
-      </footer>
-      
-      {/* Nebula positioned at very bottom */}
-      <div id="nebula" aria-hidden="true" />
-    </div>
+        {/* Footer + Nebula pinned bottom */}
+        <footer>
+          <div className="footer-wrap">
+            <div className="footer-col"><h4>Resources</h4><a href="#safety">Safety</a><a href="#legal">Legal</a><a href="#security">Security</a><a href="#docs">Docs</a></div>
+            <div className="footer-col"><h4>Company</h4><a href="#about">About</a><a href="#careers">Careers</a><a href="#news">News</a></div>
+            <div className="footer-col"><h4>Products</h4><a href="#agents">Agents</a><Link to="/consumer">Consumer</Link><Link to="/dashboard">Investors</Link></div>
+            <div className="footer-col"><h4>Access</h4><div className="access-badges"><span className="badge">Web</span><span className="badge">iOS</span><span className="badge">Android</span></div></div>
+          </div>
+          <div className="copyright">© 2025 Janus • All rights reserved</div>
+          <div id="nebula" aria-hidden="true"></div>
+        </footer>
+      </div>
+    </>
   );
 }
