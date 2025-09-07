@@ -336,11 +336,6 @@ export default function LandingPage() {
             /* noise grain overlay */
             url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/></filter><rect width='200' height='200' filter='url(%23n)' opacity='0.14'/></svg>") repeat,
 
-            /* white afterglow */
-            radial-gradient(140% 140% at 50% 140%,
-              rgba(255,255,255,0.22) 0%,
-              rgba(255,255,255,0) 70%),
-
             /* lighter blue upper haze */
             radial-gradient(120% 130% at 50% 128%,
               rgba(72,160,255,0.55) 0%,
