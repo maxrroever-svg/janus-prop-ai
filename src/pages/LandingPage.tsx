@@ -211,24 +211,12 @@ export default function LandingPage() {
           border-top: 1px solid var(--hair);
           margin-top: 48px;
         }
-        /* Twins section - one seamless section */
+        /* Twins section - one seamless section, no glow, no separator */
         .janus-landing .twins-section {
           position: relative;
           width: 100%;
           background: rgba(255,255,255,.02);
           overflow: hidden;
-        }
-        .janus-landing .twins-section .glowfield {
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-          pointer-events: none;
-          background:
-            radial-gradient(240px 200px at 3% 6%, rgba(140,200,255,.12), transparent 72%),
-            radial-gradient(260px 220px at 98% 12%, rgba(255,170,96,.10), transparent 74%),
-            radial-gradient(220px 200px at 6% 96%, rgba(200,140,255,.10), transparent 70%),
-            radial-gradient(240px 200px at 96% 92%, rgba(120,255,220,.08), transparent 70%);
-          filter: blur(8px);
         }
         .janus-landing .twins-section .band {
           background: transparent !important;
@@ -243,18 +231,16 @@ export default function LandingPage() {
           mix-blend-mode: screen;
         }
         
-        /* Footer positioned to contain nebula */
+        /* Nebula pinned to very bottom of website */
         .janus-landing footer {
           position: relative;
           z-index: 1;
-          padding: 48px 24px 24px;
+          padding: 48px 24px 160px;
           border-top: 1px solid var(--hair);
           margin-top: 48px;
         }
-        
-        /* Nebula pinned to very bottom of website */
         .janus-landing #nebula {
-          position: absolute !important;
+          position: fixed !important;
           left: 0; 
           right: 0; 
           bottom: 0;
@@ -464,7 +450,6 @@ export default function LandingPage() {
 
         {/* CONSUMER + INVESTOR — one section, shared dust/light, no gap */}
         <section className="twins-section">
-          <div className="glowfield" aria-hidden="true" />
           <canvas ref={dustRef} className="dust-canvas" aria-hidden="true" />
           
           <div id="consumer" className="band band--horizon" style={{marginBottom: 0, paddingBottom: 'clamp(40px,6vh,80px)'}}>
