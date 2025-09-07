@@ -324,42 +324,42 @@ export default function LandingPage() {
         .landing .footer-col a:hover{ text-decoration:underline }
         .landing .access-badges{ display:flex; gap:.5rem; flex-wrap:wrap }
         .landing .badge{ border:1px solid var(--hair); border-radius:999px; padding:.35rem .7rem; background:rgba(255,255,255,.06) }
-        /* Pinned bottom nebula — dark-to-light blue gradient */
+        /* Pinned bottom nebula — dark to light blue with white afterglow */
         #nebula {
-          position: fixed;          /* PIN to viewport bottom */
+          position: absolute;       /* Stays at the bottom of web content */
           left: 0; right: 0; bottom: 0;
-          height: 60vh;             /* adjust how tall the glow reaches */
+          height: 90vh;             /* Taller so the glow rises higher */
           pointer-events: none;
           z-index: 0;
 
-          /* Layered blue glows */
           background:
-            /* base: almost black midnight */
+            /* deep midnight base */
             radial-gradient(120% 140% at 50% 118%,
-              rgba(4,10,28,0.95) 0%,
+              rgba(4,10,28,0.96) 0%,
               rgba(4,10,28,0.85) 25%,
               rgba(4,10,28,0.00) 65%),
 
-            /* deeper navy core */
-            radial-gradient(100% 100% at 50% 120%,
+            /* navy core */
+            radial-gradient(100% 120% at 50% 120%,
               rgba(12,24,64,0.88) 0%,
-              rgba(12,24,64,0.00) 55%),
+              rgba(12,24,64,0.00) 60%),
 
-            /* lighter cobalt haze */
-            radial-gradient(160% 120% at 50% 130%,
+            /* cobalt-to-light blue haze */
+            radial-gradient(160% 140% at 50% 135%,
               rgba(28,72,180,0.66) 0%,
-              rgba(28,72,180,0.00) 65%),
+              rgba(64,160,255,0.48) 45%,
+              rgba(64,160,255,0.00) 72%),
 
-            /* faint aqua halo for atmosphere */
-            radial-gradient(180% 160% at 50% 140%,
-              rgba(64,160,255,0.38) 0%,
-              rgba(64,160,255,0.00) 70%);
+            /* white afterglow near top */
+            radial-gradient(180% 160% at 50% 145%,
+              rgba(255,255,255,0.25) 0%,
+              rgba(255,255,255,0.00) 70%);
 
-          filter: blur(90px) saturate(145%) contrast(110%) brightness(103%);
+          filter: blur(100px) saturate(150%) contrast(108%) brightness(106%);
           -webkit-mask-image: linear-gradient(to top,
-              rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
+              rgba(0,0,0,1) 10%, rgba(0,0,0,0) 65%);
                   mask-image: linear-gradient(to top,
-              rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
+              rgba(0,0,0,1) 10%, rgba(0,0,0,0) 65%);
         }
 
         /* ——— Reveal off (we keep it immediate) ——— */
