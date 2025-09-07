@@ -202,7 +202,7 @@ export default function LandingPage() {
           position: absolute;
           left: 0;
           right: 100%;
-          bottom: 0px;
+          bottom: 2px;
           height: 2px;
           background: linear-gradient(90deg, #8EC5FF, #C68CFF, #FF9E7A);
           transition: right .22s ease;
