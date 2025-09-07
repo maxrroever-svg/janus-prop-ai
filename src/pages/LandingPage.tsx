@@ -64,34 +64,39 @@ export default function LandingPage() {
 
   // Scrollspy effect for navigation
   useEffect(() => {
-    const header = document.querySelector('.janus-header');
     const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'));
     const sections = links
-      .map((a) => document.querySelector<HTMLElement>(a.getAttribute("href") || ""))
+      .map((a) => {
+        const href = a.getAttribute("href");
+        return href ? document.querySelector<HTMLElement>(href) : null;
+      })
       .filter(Boolean) as HTMLElement[];
 
     const setActive = () => {
-      const headerHeight = header?.getBoundingClientRect().height || 0;
-      const scrollTop = window.scrollY + headerHeight + 50;
+      const scrollTop = window.scrollY + 100; // offset for better detection
       
       let activeSection = sections[0];
       for (const section of sections) {
-        const sectionTop = section.offsetTop;
-        if (sectionTop <= scrollTop) {
+        if (section && section.offsetTop <= scrollTop) {
           activeSection = section;
         }
       }
       
-      const activeId = "#" + activeSection.id;
-      links.forEach((link) => {
-        const isActive = link.getAttribute("href") === activeId;
-        link.classList.toggle("is-active", isActive);
-      });
+      if (activeSection) {
+        const activeId = "#" + activeSection.id;
+        links.forEach((link) => {
+          const href = link.getAttribute("href");
+          const isActive = href === activeId;
+          link.classList.toggle("is-active", isActive);
+        });
+      }
     };
 
-    setActive();
-    const onScroll = () => setActive();
-    const onResize = () => setActive();
+    // Initial check
+    setTimeout(setActive, 100);
+    
+    const onScroll = () => requestAnimationFrame(setActive);
+    const onResize = () => requestAnimationFrame(setActive);
     
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize, { passive: true });
@@ -139,21 +144,22 @@ export default function LandingPage() {
           font-weight: 600;
           font-size: .96rem;
           position: relative;
-          padding: 8px 0;
-          background: none !important;
+          padding: 6px 0;
+          background: transparent !important;
           border: none !important;
           box-shadow: none !important;
           backdrop-filter: none !important;
           -webkit-backdrop-filter: none !important;
           border-radius: 0 !important;
           color: var(--white) !important;
+          text-decoration: none !important;
         }
         .janus-landing .nav a::after {
           content: "";
           position: absolute;
           left: 0;
           right: 100%;
-          bottom: 2px;
+          bottom: 0px;
           height: 2px;
           background: linear-gradient(90deg, #8EC5FF, #C68CFF, #FF9E7A);
           transition: right .22s ease;
@@ -359,22 +365,9 @@ export default function LandingPage() {
           margin: 0 auto 24px;
         }
         
-        /* Top fog */
+        /* Remove top fog glow */
         .janus-landing #fog {
-          position: fixed;
-          left: 0;
-          right: 0;
-          top: 0;
-          height: 22vh;
-          z-index: 0;
-          pointer-events: none;
-          background:
-            radial-gradient(140% 200% at 50% -30%, rgba(255,255,255,.18), rgba(255,255,255,0) 58%),
-            radial-gradient(110% 160% at 40% -20%, rgba(210,210,210,.12), rgba(210,210,210,0) 62%),
-            radial-gradient(120% 180% at 60% -18%, rgba(200,200,200,.10), rgba(200,200,200,0) 64%);
-          filter: blur(28px) saturate(103%);
-          -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5) 55%, rgba(0,0,0,0));
-          mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,.5) 55%, rgba(0,0,0,0));
+          display: none !important;
         }
       `}</style>
       {/* Fog (very subtle) */}
