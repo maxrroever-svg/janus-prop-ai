@@ -62,64 +62,69 @@ export default function LandingPage() {
     };
   }, []);
 
-  // Scrollspy effect for navigation
+  // Scrollspy effect for navigation - Fixed for all sections
   useEffect(() => {
-    console.log('Scrollspy initializing...');
-    
-    const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'));
-    console.log('Found navigation links:', links.map(l => l.getAttribute('href')));
-    
-    const sections = links
-      .map((a) => {
-        const href = a.getAttribute("href");
-        const section = href ? document.querySelector<HTMLElement>(href) : null;
-        console.log(`Section ${href}:`, section ? 'found' : 'not found');
-        return section;
-      })
-      .filter(Boolean) as HTMLElement[];
-
-    console.log('Found sections:', sections.map(s => s.id));
-
-    const setActive = () => {
-      const scrollTop = window.scrollY + 150; // Increased offset for better detection
-      console.log('Scroll position:', scrollTop);
+    const setScrollspy = () => {
+      const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'));
+      const sections: {element: HTMLElement, id: string, top: number}[] = [];
       
-      let activeSection = sections[0];
-      for (const section of sections) {
-        if (section && section.offsetTop <= scrollTop) {
-          activeSection = section;
-          console.log('Active section:', section.id, 'at', section.offsetTop);
+      // Get all sections with their positions
+      links.forEach((link) => {
+        const href = link.getAttribute("href");
+        if (href) {
+          const element = document.querySelector<HTMLElement>(href);
+          if (element) {
+            sections.push({
+              element,
+              id: href,
+              top: element.offsetTop
+            });
+          }
         }
-      }
+      });
       
-      if (activeSection) {
-        const activeId = "#" + activeSection.id;
-        console.log('Setting active:', activeId);
+      // Sort sections by their position on page
+      sections.sort((a, b) => a.top - b.top);
+      
+      const updateActive = () => {
+        const scrollPos = window.scrollY + 200; // Adjust offset as needed
         
-        links.forEach((link) => {
-          const href = link.getAttribute("href");
-          const isActive = href === activeId;
-          link.classList.toggle("is-active", isActive);
-          if (isActive) console.log('Activated link:', href);
-        });
-      }
+        let activeSection = sections[0]?.element;
+        
+        // Find the section we're currently in
+        for (const section of sections) {
+          if (section.top <= scrollPos) {
+            activeSection = section.element;
+          } else {
+            break;
+          }
+        }
+        
+        if (activeSection) {
+          const activeId = "#" + activeSection.id;
+          
+          // Update link states
+          links.forEach((link) => {
+            const href = link.getAttribute("href");
+            const isActive = href === activeId;
+            link.classList.toggle("is-active", isActive);
+          });
+        }
+      };
+      
+      // Initial update
+      updateActive();
+      
+      // Add scroll listener
+      const onScroll = () => requestAnimationFrame(updateActive);
+      window.addEventListener("scroll", onScroll, { passive: true });
+      
+      return () => window.removeEventListener("scroll", onScroll);
     };
-
-    // Initial check with delay
-    setTimeout(() => {
-      console.log('Initial scrollspy check');
-      setActive();
-    }, 500);
     
-    const onScroll = () => {
-      requestAnimationFrame(setActive);
-    };
-    
-    window.addEventListener("scroll", onScroll, { passive: true });
-    
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-    };
+    // Wait for DOM to be ready
+    const timer = setTimeout(setScrollspy, 100);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -155,13 +160,19 @@ export default function LandingPage() {
           gap: 24px;
           align-items: center;
         }
-        .janus-landing .nav a {
+        /* Navigation - FORCE override ALL glass/blur effects */
+        .janus-landing .nav a,
+        .janus-landing .nav a:hover,
+        .janus-landing .nav a:focus,
+        .janus-landing .nav a:active,
+        .janus-landing .nav a:visited {
           font-weight: 600 !important;
           font-size: .96rem !important;
           position: relative !important;
           padding: 6px 0 !important;
           margin: 0 !important;
-          background: transparent !important;
+          background: none !important;
+          background-color: transparent !important;
           border: none !important;
           box-shadow: none !important;
           backdrop-filter: none !important;
@@ -169,16 +180,20 @@ export default function LandingPage() {
           border-radius: 0 !important;
           color: var(--white) !important;
           text-decoration: none !important;
+          filter: none !important;
+          opacity: 1 !important;
         }
-        .janus-landing .nav a:hover,
-        .janus-landing .nav a:focus,
-        .janus-landing .nav a:active {
-          background: transparent !important;
+        
+        /* Override any glass class that might be applied */
+        .janus-landing .nav .glass,
+        .janus-landing .nav a.glass {
+          background: none !important;
+          background-color: transparent !important;
           border: none !important;
           box-shadow: none !important;
           backdrop-filter: none !important;
           -webkit-backdrop-filter: none !important;
-          text-decoration: none !important;
+          border-radius: 0 !important;
         }
         .janus-landing .nav a::after {
           content: "";
