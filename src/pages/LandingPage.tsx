@@ -359,11 +359,6 @@ export default function LandingPage() {
 
           background-blend-mode: screen, lighten, normal;
           filter: blur(90px) saturate(160%) contrast(110%) brightness(106%);
-          
-          -webkit-mask-image: linear-gradient(to top,
-              rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
-                  mask-image: linear-gradient(to top,
-              rgba(0,0,0,1) 12%, rgba(0,0,0,0) 62%);
         }
 
         /* ——— Reveal off (we keep it immediate) ——— */
