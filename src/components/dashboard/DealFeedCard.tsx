@@ -79,7 +79,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
       {!isFirst && (
         <button
           onClick={onPrevious}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 z-40 glass rounded-sm p-2 text-foreground hover:bg-white/10"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 z-40 dashboard-card rounded-sm p-2 text-foreground hover:bg-white/15"
         >
           <ChevronUp className="h-5 w-5" />
         </button>
@@ -88,7 +88,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
       {!isLast && (
         <button
           onClick={onNext}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 z-40 glass rounded-sm p-2 text-foreground hover:bg-white/10"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 z-40 dashboard-card rounded-sm p-2 text-foreground hover:bg-white/15"
         >
           <ChevronDown className="h-5 w-5" />
         </button>
@@ -114,7 +114,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
                 <MapPin className="h-4 w-4" />
                 <span className="text-sm">{deal.location}</span>
               </div>
-              <Badge variant="outline" className="glass text-foreground border-border">
+              <Badge variant="outline" className="dashboard-card text-foreground border-border/30">
                 {deal.propertyType}
               </Badge>
             </div>
@@ -125,9 +125,9 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
           </div>
 
           {/* AI Summary */}
-          <div className="glass rounded-lg p-4 border border-border">
+          <div className="dashboard-card rounded-lg p-4 border border-border/20">
             <div className="flex items-start space-x-2">
-              <Brain className="h-4 w-4 text-accent mt-0.5" />
+              <Brain className="h-4 w-4 text-primary mt-0.5" />
               <p className="text-foreground text-sm leading-relaxed">
                 {deal.aiSummary}
               </p>
@@ -140,25 +140,25 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-3">
               {/* Asking Price */}
-              <div className="glass rounded-lg p-3 border border-border">
+              <div className="dashboard-card rounded-lg p-3 border border-border/20">
                 <div className="flex items-center space-x-2 mb-1">
-                  <DollarSign className="h-4 w-4 text-success" />
+                  <DollarSign className="h-4 w-4 text-primary" />
                   <span className="text-xs text-muted-foreground uppercase tracking-wide">Asking</span>
                 </div>
                 <p className="text-lg font-bold text-foreground">{formatPrice(deal.askingPrice)}</p>
               </div>
 
               {/* ARV */}
-              <div className="glass rounded-lg p-3 border border-border">
+              <div className="dashboard-card rounded-lg p-3 border border-border/20">
                 <div className="flex items-center space-x-2 mb-1">
-                  <TrendingUp className="h-4 w-4 text-accent" />
+                  <TrendingUp className="h-4 w-4 text-primary" />
                   <span className="text-xs text-muted-foreground uppercase tracking-wide">ARV</span>
                 </div>
                 <p className="text-lg font-bold text-foreground">{formatPrice(deal.arv)}</p>
               </div>
 
               {/* Cap Rate */}
-              <div className="glass rounded-lg p-3 border border-border">
+              <div className="dashboard-card rounded-lg p-3 border border-border/20">
                 <div className="flex items-center space-x-2 mb-1">
                   <Target className="h-4 w-4 text-primary" />
                   <span className="text-xs text-muted-foreground uppercase tracking-wide">Cap Rate</span>
@@ -167,9 +167,9 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
               </div>
 
               {/* ROI */}
-              <div className="glass rounded-lg p-3 border border-border">
+              <div className="dashboard-card rounded-lg p-3 border border-border/20">
                 <div className="flex items-center space-x-2 mb-1">
-                  <TrendingUp className="h-4 w-4 text-success" />
+                  <TrendingUp className="h-4 w-4 text-primary" />
                   <span className="text-xs text-muted-foreground uppercase tracking-wide">Proj. ROI</span>
                 </div>
                 <p className="text-lg font-bold text-foreground">{formatPercentage(deal.roi)}</p>
@@ -201,7 +201,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
           <div className="grid grid-cols-2 gap-3">
             <Button 
               variant="outline" 
-              className="glass border-border text-foreground hover:bg-white/10 h-11 text-sm"
+              className="dashboard-card border-border/30 text-foreground hover:bg-white/15 h-11 text-sm"
               onClick={() => console.log("Contact Seller")}
             >
               <Phone className="h-4 w-4 mr-2" />
@@ -210,10 +210,10 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
             
             <Button 
               variant="outline" 
-              className={`glass border-border h-11 text-sm ${
+              className={`dashboard-card border-border/30 h-11 text-sm ${
                 isSaved 
                   ? "bg-destructive/20 border-destructive/40 text-destructive" 
-                  : "text-foreground hover:bg-white/10"
+                  : "text-foreground hover:bg-white/15"
               }`}
               onClick={() => setIsSaved(!isSaved)}
             >

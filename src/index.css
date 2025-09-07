@@ -365,31 +365,36 @@ html {
     color: hsl(var(--foreground));
   }
 
-  /* Dashboard cards with glass effect */
+  /* Dashboard cards with enhanced glass effect */
   .janus-dashboard .glass,
   .janus-dashboard [class*="card"] {
-    background: rgba(255, 255, 255, 0.04) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
     border-radius: var(--radius) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
   }
 
-  /* Dashboard buttons with monochrome styling */
+  /* Dashboard buttons with enhanced monochrome styling */
   .janus-dashboard .btn-professional,
   .janus-dashboard button[class*="btn-"] {
-    background: rgba(255, 255, 255, 0.06) !important;
+    background: rgba(255, 255, 255, 0.10) !important;
     color: hsl(var(--foreground)) !important;
-    border: 1px solid rgba(255, 255, 255, 0.16) !important;
-    backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.20) !important;
+    backdrop-filter: blur(12px) !important;
+    border-radius: var(--radius) !important;
+    font-weight: 500 !important;
     transition: all 0.3s ease !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
   }
 
   .janus-dashboard .btn-professional:hover,
   .janus-dashboard button[class*="btn-"]:hover {
-    background: rgba(255, 255, 255, 0.10) !important;
-    border-color: rgba(255, 255, 255, 0.24) !important;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-color: rgba(255, 255, 255, 0.30) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 255, 255, 0.1) !important;
+    transform: translateY(-1px) !important;
   }
 
   /* Dashboard headers with glass effect */
@@ -521,10 +526,35 @@ html {
     color: hsl(var(--foreground)) !important;
   }
 
-  /* Enhanced glass consistency */
+  /* Enhanced glass consistency - Updated */
   .janus-dashboard .glass {
-    background: rgba(255, 255, 255, 0.04) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Dashboard card improvements */
+  .dashboard-card {
+    background: rgba(255, 255, 255, 0.06) !important;
     backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .dashboard-card:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.18) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Dashboard surface improvements */
+  .dashboard-surface {
+    background: rgba(255, 255, 255, 0.05) !important;
+    backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.10) !important;
   }
 }

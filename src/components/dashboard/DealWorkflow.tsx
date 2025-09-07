@@ -290,12 +290,7 @@ export function DealWorkflow() {
   };
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="p-4 border-b border-border glass">
-        <h1 className="font-display text-lg text-foreground glow-text">Deal Management</h1>
-        <p className="text-sm text-muted-foreground">AI-powered deal analysis</p>
-      </div>
-
+    <div className="h-full flex flex-col bg-background">
       <div className="flex-1 overflow-hidden">
         <div className="h-full overflow-y-auto p-6">
           <Tabs defaultValue="upload" className="h-full">

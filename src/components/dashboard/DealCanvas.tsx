@@ -15,30 +15,47 @@ export function DealCanvas() {
   };
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+    <div className="h-screen flex flex-col overflow-hidden bg-background">
       {/* Command Bar */}
-      <div className="shrink-0 border-b border-border">
+      <div className="shrink-0 border-b border-border/30">
         <CommandBar onCommand={handleCommand} />
       </div>
       
-      {/* Deal Upload Actions */}
-      <div className="shrink-0 p-4 border-b border-border glass">
-        <div className="flex items-center justify-between">
-          <h3 className="font-display text-lg font-semibold text-foreground glow-text">
-            Deal Canvas
-          </h3>
+      {/* Deal Canvas Header - Simple */}
+      <div className="shrink-0 p-4 border-b border-border/30 bg-background/80 backdrop-blur-sm">
+        <h3 className="font-display text-xl font-bold text-foreground glow-text">
+          Deal Canvas
+        </h3>
+      </div>
+
+      {/* Address Input Section */}
+      <div className="shrink-0 p-4 border-b border-border/30 bg-background/50 backdrop-blur-sm">
+        <div className="flex gap-3 items-center">
+          <div className="flex-1">
+            <input
+              type="text"
+              placeholder="Enter property address..."
+              className="w-full px-4 py-3 rounded-lg bg-background/80 border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50 backdrop-blur-sm"
+            />
+          </div>
           <Button 
-            className="glass hover:bg-white/10 border border-white/20 text-foreground hover:text-white"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3"
+          >
+            Search
+          </Button>
+          <Button 
+            variant="outline"
+            className="bg-background/80 border-border/50 text-foreground hover:bg-background/60 px-6 py-3"
             onClick={() => setShowUploader(true)}
           >
             <Upload className="h-4 w-4 mr-2" />
-            Upload Deal
+            Upload
           </Button>
         </div>
       </div>
       
-      {/* Main Content Area - Full Width */}
-      <div className="flex-1 overflow-hidden">
+      {/* Main Content Area */}
+      <div className="flex-1 overflow-hidden bg-background">
         <DealWorkflow />
       </div>
 
