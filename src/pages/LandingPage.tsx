@@ -4,71 +4,70 @@ import { useEffect, useRef } from "react";
 export default function LandingPage() {
   const dustRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Scrollspy implementation - wait for DOM to be ready
+  // Simplified scrollspy with robust error handling
   useEffect(() => {
-    const initScrollspy = (): (() => void) | null => {
-      const links = [...document.querySelectorAll('.landing .nav a')] as HTMLAnchorElement[];
-      const targets = links.map(a => document.querySelector(a.getAttribute('href')!)).filter(Boolean) as HTMLElement[];
-      const header = document.getElementById('siteHeader');
+    // Wait for DOM to be fully ready
+    const timer = setTimeout(() => {
+      console.log('Initializing scrollspy...');
       
-      // Ensure we have all required elements
-      if (!links.length || !targets.length || !header) {
-        console.log('Scrollspy: Missing elements, retrying...', { links: links.length, targets: targets.length, header: !!header });
-        return null;
+      const links = document.querySelectorAll('.landing .nav a[href^="#"]');
+      console.log('Found navigation links:', links.length);
+      
+      if (links.length === 0) {
+        console.warn('No navigation links found');
+        return;
       }
 
-      const setActive = () => {
-        const top = window.scrollY + header.offsetHeight + 8;
-        let active = targets[0];
-        
-        // Ensure we have a valid active section
-        if (!active) return;
-        
-        for (const sec of targets) {
-          const rect = sec.getBoundingClientRect();
-          const sTop = window.scrollY + rect.top;
-          if (sTop <= top) active = sec;
-          else break;
+      const updateActive = () => {
+        try {
+          const scrollY = window.scrollY + 100; // offset for header
+          let activeId = 'home'; // default
+
+          // Check each section
+          const sections = ['home', 'vision', 'agents', 'consumer', 'investor', 'pricing', 'contact'];
+          
+          for (const sectionId of sections) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              const elementTop = window.scrollY + rect.top;
+              
+              if (elementTop <= scrollY) {
+                activeId = sectionId;
+              }
+            }
+          }
+
+          // Update active state
+          links.forEach((link: Element) => {
+            const href = link.getAttribute('href');
+            const isActive = href === `#${activeId}`;
+            link.classList.toggle('active', isActive);
+          });
+          
+        } catch (error) {
+          console.error('Scrollspy error:', error);
         }
-        
-        // Double-check active section has an id
-        if (!active || !active.id) return;
-        
-        const id = '#' + active.id;
-        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
       };
 
-      setActive();
-      const onScroll = () => setActive();
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', setActive);
+      // Initial update
+      updateActive();
+
+      // Listen to scroll
+      const handleScroll = () => {
+        requestAnimationFrame(updateActive);
+      };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      window.addEventListener('resize', updateActive, { passive: true });
 
       return () => {
-        window.removeEventListener('scroll', onScroll);
-        window.removeEventListener('resize', setActive);
+        window.removeEventListener('scroll', handleScroll);
+        window.removeEventListener('resize', updateActive);
       };
-    };
+    }, 200);
 
-    // Try to initialize, with retries if elements aren't ready
-    let cleanup: (() => void) | null = null;
-    let retryCount = 0;
-    const maxRetries = 10;
-    
-    const tryInit = () => {
-      cleanup = initScrollspy();
-      if (!cleanup && retryCount < maxRetries) {
-        retryCount++;
-        setTimeout(tryInit, 100);
-      }
-    };
-    
-    // Start after a small delay to ensure DOM is ready
-    const timer = setTimeout(tryInit, 100);
-    
-    return () => {
-      clearTimeout(timer);
-      cleanup?.();
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   // Dust effect implementation from the refined HTML
