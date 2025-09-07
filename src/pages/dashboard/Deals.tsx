@@ -17,7 +17,7 @@ const Deals = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen w-full bg-background flex overflow-hidden">
+      <div className="janus janus-dashboard min-h-screen w-full bg-background flex overflow-hidden">
         <DashboardSidebar />
         <div className="flex-1 flex flex-col overflow-hidden">
           <DashboardHeader />
