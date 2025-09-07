@@ -106,14 +106,14 @@
 .janus .band .actions{display:flex; justify-content:center; gap:1rem; margin-top:1.2rem}
 .janus .band .cta{display:inline-block; padding:.7rem 1.1rem; border:1px solid var(--hair); border-radius:999px; background:rgba(255,255,255,.06)}
 
-/* Event-horizon side glow (Landing only, inside .twins) */
+/* Event-horizon side glow (Landing only, inside .twins) - Remove potential visual artifacts */
 .janus-landing .band--horizon::before{
   content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
   background:
     radial-gradient(120% 120% at 108% 50%, rgba(255,136,60,.44) 0%, rgba(255,120,40,.30) 22%, rgba(180,80,30,.16) 48%, rgba(0,0,0,0) 72%),
-    radial-gradient(80% 70%  at 96%  50%, rgba(120,170,255,.10) 0%, rgba(120,170,255,0) 70%),
-    linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,0) 25%, rgba(255,255,255,0) 75%, rgba(255,255,255,.03));
+    radial-gradient(80% 70%  at 96%  50%, rgba(120,170,255,.10) 0%, rgba(120,170,255,0) 70%);
   filter: blur(18px) saturate(140%) contrast(106%) brightness(103%);
+  mix-blend-mode: normal;
 }
 
 /* Dust canvases (Landing only) */
