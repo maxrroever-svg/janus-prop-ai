@@ -4,14 +4,18 @@ import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
   const navigate = useNavigate();
 
-  const handleConsumerClick = () => {
+  const handleConsumerClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log("Consumer button clicked, navigating to /consumer");
-    navigate("/consumer");
+    window.location.href = "/consumer";
   };
 
-  const handleInvestorClick = () => {
+  const handleInvestorClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log("Investor button clicked, navigating to /investor");
-    navigate("/investor");
+    window.location.href = "/investor";
   };
 
   return (
@@ -50,16 +54,37 @@ const LandingPage = () => {
             </p>
             <div className="actions" style={{ marginTop: "12px" }}>
               <button
-                className="glass"
+                className="glass react-nav-button"
                 onClick={handleConsumerClick}
-                style={{ padding: ".7rem 1.1rem", borderRadius: "999px", border: "1px solid var(--hair)", background: "transparent", cursor: "pointer", color: "white" }}
+                type="button"
+                style={{ 
+                  padding: ".7rem 1.1rem", 
+                  borderRadius: "999px", 
+                  border: "1px solid var(--hair)", 
+                  background: "transparent", 
+                  cursor: "pointer", 
+                  color: "white",
+                  zIndex: 9999,
+                  position: "relative"
+                }}
               >
                 Enter Consumer Dashboard
               </button>
               <button
-                className="glass"
+                className="glass react-nav-button"
                 onClick={handleInvestorClick}
-                style={{ padding: ".7rem 1.1rem", borderRadius: "999px", border: "1px solid var(--hair)", background: "transparent", cursor: "pointer", color: "white", marginLeft: "1rem" }}
+                type="button"
+                style={{ 
+                  padding: ".7rem 1.1rem", 
+                  borderRadius: "999px", 
+                  border: "1px solid var(--hair)", 
+                  background: "transparent", 
+                  cursor: "pointer", 
+                  color: "white", 
+                  marginLeft: "1rem",
+                  zIndex: 9999,
+                  position: "relative"
+                }}
               >
                 Enter Investor Dashboard
               </button>
@@ -118,8 +143,9 @@ const LandingPage = () => {
             </p>
             <div className="actions">
               <button
-                className="cta glass"
+                className="cta glass react-nav-button"
                 onClick={handleConsumerClick}
+                type="button"
                 style={{ 
                   display: "inline-block", 
                   padding: ".7rem 1.1rem", 
@@ -127,7 +153,9 @@ const LandingPage = () => {
                   borderRadius: "999px", 
                   background: "rgba(255,255,255,.06)",
                   cursor: "pointer",
-                  color: "white"
+                  color: "white",
+                  zIndex: 9999,
+                  position: "relative"
                 }}
               >
                 Enter Dashboard
@@ -147,8 +175,9 @@ const LandingPage = () => {
             </p>
             <div className="actions">
               <button
-                className="cta glass"
+                className="cta glass react-nav-button"
                 onClick={handleInvestorClick}
+                type="button"
                 style={{ 
                   display: "inline-block", 
                   padding: ".7rem 1.1rem", 
@@ -156,7 +185,9 @@ const LandingPage = () => {
                   borderRadius: "999px", 
                   background: "rgba(255,255,255,.06)",
                   cursor: "pointer",
-                  color: "white"
+                  color: "white",
+                  zIndex: 9999,
+                  position: "relative"
                 }}
               >
                 Enter Dashboard
