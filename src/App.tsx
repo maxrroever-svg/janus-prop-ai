@@ -29,8 +29,6 @@ import DataLake from "./pages/dashboard/DataLake";
 import ConsumerOutreach from "./pages/consumer/Outreach";
 import ConsumerDataLake from "./pages/consumer/DataLake";
 import ConsumerMapView from "./pages/consumer/MapView";
-import ConsumerRedirect from "./pages/consumer/consumer";
-import InvestorRedirect from "./pages/investor/investor";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -60,9 +58,8 @@ const App = () => (
             <Route path="/consumer/audit" element={<ConsumerAuditLog />} />
             <Route path="/consumer/data-lake" element={<ConsumerDataLake />} />
             <Route path="/consumer/map" element={<ConsumerMapView />} />
-            <Route path="/consumer/consumer" element={<ConsumerRedirect />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/investor/investor" element={<InvestorRedirect />} />
+            <Route path="/investor" element={<Dashboard />} />
             <Route path="/dashboard/feed" element={<DealFeed />} />
             <Route path="/dashboard/agents" element={<Agents />} />
             <Route path="/dashboard/deals" element={<Deals />} />
