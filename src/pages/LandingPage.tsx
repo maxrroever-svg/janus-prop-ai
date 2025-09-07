@@ -176,20 +176,15 @@ export default function LandingPage() {
           opacity: 1 !important;
         }
         
-        /* COMPLETE glass override for ALL landing page elements */
-        .janus-landing .glass,
-        .janus-landing .cta,
-        .janus-landing .cta.glass,
-        .janus-landing .band .cta,
-        .janus-landing .actions .cta,
-        .janus-landing .actions .glass,
-        .janus-landing a.glass {
+        /* Glass effects ONLY disabled for navigation */
+        .janus-landing .nav a,
+        .janus-landing .nav .glass,
+        .janus-landing .nav a.glass {
           background: transparent !important;
           backdrop-filter: none !important;
           -webkit-backdrop-filter: none !important;
-          border: 1px solid var(--hair) !important;
           box-shadow: none !important;
-          filter: none !important;
+          border: none !important;
         }
         .janus-landing .nav a::after {
           content: "";
@@ -338,19 +333,12 @@ export default function LandingPage() {
           mix-blend-mode: screen;
         }
         
-        /* Nebula pinned to very bottom of website */
-        .janus-landing footer {
-          position: relative;
-          z-index: 1;
-          padding: 48px 24px 160px;
-          border-top: 1px solid var(--hair);
-          margin-top: 48px;
-        }
+        /* Nebula positioned at very bottom of website */
         .janus-landing #nebula {
-          position: fixed !important;
+          position: absolute !important;
           left: 0; 
           right: 0; 
-          bottom: 0;
+          bottom: -50vh;
           height: 140vh; 
           pointer-events: none; 
           z-index: -1;
@@ -364,6 +352,15 @@ export default function LandingPage() {
           filter: blur(100px) saturate(155%);
           -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 58%);
           mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 58%);
+        }
+        
+        /* Make footer relative to contain nebula */
+        .janus-landing footer {
+          position: relative;
+          z-index: 1;
+          padding: 48px 24px 160px;
+          border-top: 1px solid var(--hair);
+          margin-top: 48px;
         }
         .janus-landing .footer-col h4 {
           margin-bottom: 12px;

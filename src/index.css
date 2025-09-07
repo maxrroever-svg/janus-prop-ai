@@ -171,17 +171,38 @@ html {
       0 0 140px rgba(255,255,255,0.07);
   }
 
-/* Override ALL glass effects globally for landing */
+/* Restore glass effects except for navigation */
 .janus-landing .institutional-card,
-.janus-landing .institutional-panel,
+.janus-landing .institutional-panel {
+  background: linear-gradient(180deg, hsl(var(--surface-2)), hsl(var(--surface))) !important;
+  border: 1px solid hsl(var(--border));
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-glass);
+}
+
 .janus-landing .btn-professional,
-.janus-landing .btn-gradient,
+.janus-landing .btn-gradient {
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)) !important;
+  border: 1px solid hsl(var(--border-strong)) !important;
+  backdrop-filter: blur(6px);
+}
+
 .janus-landing .btn-institutional {
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  backdrop-filter: blur(10px);
+}
+
+/* Override ONLY navigation elements */
+.janus-landing .nav a,
+.janus-landing .nav .glass,
+.janus-landing .nav a.glass {
   background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   box-shadow: none !important;
-  border: 1px solid var(--hair) !important;
+  border: none !important;
 }
 
 /* Monochrome buttons - DISABLED for landing page */
@@ -214,16 +235,23 @@ html {
   box-shadow: none !important;
 }
 
-/* Override for Janus landing page */
+/* Restore glass effects everywhere except navigation */
 .janus-landing .btn-professional,
 .janus-landing .btn-gradient,
 .janus-landing .btn-institutional,
 .janus-landing .glass,
 .janus-landing .cta {
+  /* Keep original glass styling */
+}
+
+/* Override ONLY navigation elements */
+.janus-landing .nav a,
+.janus-landing .nav .glass,
+.janus-landing .nav a.glass {
   background: transparent !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  border: 1px solid var(--hair) !important;
+  border: none !important;
   box-shadow: none !important;
 }
 
