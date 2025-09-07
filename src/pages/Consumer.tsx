@@ -6,6 +6,7 @@ import { SmartSearch } from "@/components/consumer/SmartSearch";
 import { Button } from "@/components/ui/button";
 
 const Consumer = () => {
+  console.log("Consumer component is rendering");
   // static dust (draw once) for the top band
   const dustRef = useRef<HTMLCanvasElement | null>(null);
   const bandRef = useRef<HTMLElement | null>(null);

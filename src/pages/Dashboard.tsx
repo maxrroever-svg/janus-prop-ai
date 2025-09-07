@@ -4,6 +4,7 @@ import { DealCanvas } from "@/components/dashboard/DealCanvas";
 import { Button } from "@/components/ui/button";
 
 const Dashboard = () => {
+  console.log("Dashboard component is rendering");
   return (
     <div className="janus janus-dashboard">
       <SidebarProvider>

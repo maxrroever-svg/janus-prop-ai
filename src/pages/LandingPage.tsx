@@ -5,10 +5,12 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleConsumerClick = () => {
+    console.log("Consumer button clicked, navigating to /consumer");
     navigate("/consumer");
   };
 
   const handleInvestorClick = () => {
+    console.log("Investor button clicked, navigating to /investor");
     navigate("/investor");
   };
 
