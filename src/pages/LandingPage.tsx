@@ -62,49 +62,48 @@ export default function LandingPage() {
     };
   }, []);
 
-  // Scrollspy effect - FIXED: Consumer section positioning issue
+  // Fixed scrollspy - proper section detection
   useEffect(() => {
-    console.log('=== SCROLLSPY INIT ===');
-    
     const initScrollspy = () => {
       const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'));
       
       const updateActiveLink = () => {
-        const scrollPosition = window.scrollY + 150;
+        const scrollPos = window.scrollY + 120;
         
-        // Get sections in the correct order with proper positions
-        const sectionElements = [
-          { id: '#home', element: document.querySelector('#home') as HTMLElement },
-          { id: '#vision', element: document.querySelector('#vision') as HTMLElement },
-          { id: '#agents', element: document.querySelector('#agents') as HTMLElement },
-          { id: '#consumer', element: document.querySelector('#consumer') as HTMLElement },
-          { id: '#investor', element: document.querySelector('#investor') as HTMLElement },
-          { id: '#pricing', element: document.querySelector('#pricing') as HTMLElement },
-          { id: '#contact', element: document.querySelector('#contact') as HTMLElement }
-        ].filter(s => s.element).map(s => ({
-          id: s.id,
-          element: s.element!,
-          offsetTop: s.element!.offsetTop
-        }));
+        // Get all sections with their actual positions
+        const sections = [
+          'home', 'vision', 'agents', 'consumer', 'investor', 'pricing', 'contact'
+        ].map(id => {
+          const element = document.getElementById(id);
+          if (element) {
+            return {
+              id: `#${id}`,
+              element,
+              offsetTop: element.getBoundingClientRect().top + window.scrollY
+            };
+          }
+          return null;
+        }).filter(Boolean) as Array<{id: string, element: HTMLElement, offsetTop: number}>;
         
-        // Find the active section by checking which one we've scrolled past
-        let activeSection = sectionElements[0];
+        // Sort by position
+        sections.sort((a, b) => a.offsetTop - b.offsetTop);
         
-        for (const section of sectionElements) {
-          // Only update if this section is above our scroll position
-          if (section.offsetTop <= scrollPosition) {
+        // Find active section
+        let activeSection = sections[0];
+        for (const section of sections) {
+          if (section.offsetTop <= scrollPos) {
             activeSection = section;
           }
         }
         
-        console.log(`Scroll: ${scrollPosition}, Active: ${activeSection.id} (${activeSection.offsetTop})`);
-        
-        // Update all links
+        // Update links
         links.forEach(link => {
           const href = link.getAttribute('href');
           const isActive = href === activeSection.id;
           link.classList.toggle('is-active', isActive);
         });
+        
+        console.log(`Scroll: ${scrollPos}, Active: ${activeSection.id} (${activeSection.offsetTop})`);
       };
       
       updateActiveLink();
@@ -115,7 +114,8 @@ export default function LandingPage() {
       return () => window.removeEventListener('scroll', onScroll);
     };
     
-    const timer = setTimeout(initScrollspy, 300);
+    // Wait for layout to settle
+    const timer = setTimeout(initScrollspy, 500);
     return () => clearTimeout(timer);
   }, []);
 

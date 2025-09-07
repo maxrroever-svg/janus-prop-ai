@@ -68,11 +68,22 @@
 /* Hide landing header in dashboards */
 .janus-dashboard .janus-header{ display:none !important }
 
-/* Glass & chips */
+/* Glass & chips - DISABLED for landing */
 .janus .glass{
-  background:linear-gradient(180deg,var(--gloss-1),var(--gloss-2));
-  border:1px solid var(--hair); border-radius:14px;
-  backdrop-filter:blur(6px) saturate(120%); -webkit-backdrop-filter:blur(6px) saturate(120%);
+  background: transparent !important;
+  border: 1px solid var(--hair) !important; 
+  border-radius: 14px !important;
+  backdrop-filter: none !important; 
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Override specifically for landing page */
+.janus-landing .glass,
+.janus-landing .cta.glass {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
 }
 .janus .chip{
   display:inline-flex; align-items:baseline; gap:8px; padding:6px 10px;

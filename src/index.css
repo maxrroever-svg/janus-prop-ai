@@ -121,15 +121,27 @@ main, header, footer, section, nav, .relative { position: relative; z-index: 1; 
   }
 }
 
-/* Sticky glass navbar */
+/* Sticky glass navbar - DISABLED for landing page */
 .navbar, header, nav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(0,0,0,0.55) !important;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid hsl(var(--border));
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border-bottom: none !important;
   padding: 0.8rem 1.2rem;
+}
+
+/* Override for Janus landing specifically */
+.janus-landing .navbar, 
+.janus-landing header, 
+.janus-landing nav,
+.janus-landing .janus-header {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* Smooth scrolling */
@@ -167,35 +179,48 @@ html {
     box-shadow: var(--shadow-glass);
   }
 
-  /* Monochrome buttons with subtle glow */
-  .btn-professional, .btn-gradient {
-    position: relative;
-    background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)) !important;
-    color: hsl(var(--foreground)) !important;
-    border: 1px solid hsl(var(--border-strong)) !important;
-    border-radius: 999px !important;
-    padding: 10px 18px;
-    box-shadow: 0 0 0 0 rgba(255,255,255,0.0);
-    transition: all 220ms ease;
-  }
+/* Monochrome buttons - DISABLED for landing page */
+.btn-professional, .btn-gradient {
+  position: relative;
+  background: transparent !important;
+  color: hsl(var(--foreground)) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 10px 18px;
+  box-shadow: none !important;
+  transition: all 220ms ease;
+}
 
-  .btn-professional:hover, .btn-gradient:hover {
-    box-shadow: 0 8px 30px rgba(255,255,255,0.10);
-    transform: translateY(-1px);
-  }
+.btn-professional:hover, .btn-gradient:hover {
+  box-shadow: none !important;
+  transform: none !important;
+}
 
-  .btn-institutional {
-    background: rgba(255,255,255,0.04) !important;
-    color: hsl(var(--foreground)) !important;
-    border: 1px solid hsl(var(--border)) !important;
-    border-radius: 999px !important;
-    backdrop-filter: blur(10px);
-    transition: all 220ms ease;
-  }
+.btn-institutional {
+  background: transparent !important;
+  color: hsl(var(--foreground)) !important;
+  border: none !important;
+  border-radius: 999px !important;
+  backdrop-filter: none !important;
+  transition: all 220ms ease;
+}
 
-  .btn-institutional:hover {
-    box-shadow: 0 8px 30px rgba(255,255,255,0.06);
-  }
+.btn-institutional:hover {
+  box-shadow: none !important;
+}
+
+/* Override for Janus landing page */
+.janus-landing .btn-professional,
+.janus-landing .btn-gradient,
+.janus-landing .btn-institutional,
+.janus-landing .glass,
+.janus-landing .cta {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid var(--hair) !important;
+  box-shadow: none !important;
+}
 
   /* Navigation links */
   .nav-link {
