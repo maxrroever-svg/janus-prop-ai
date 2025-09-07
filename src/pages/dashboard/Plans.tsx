@@ -335,7 +335,7 @@ const Plans = () => {
                     return (
                       <Card 
                         key={playbook.id}
-                        className="institutional-card p-6 cursor-pointer transition-all duration-300 group"
+                        className="glass p-6 cursor-pointer transition-all duration-300 group"
                         onClick={() => setSelectedPlaybook(playbook)}
                       >
                         <div className="flex items-start justify-between mb-4">
@@ -455,7 +455,7 @@ const Plans = () => {
                 {activeTab === "overview" && (
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                     {/* Investment Thesis */}
-                    <Card className="institutional-card p-6">
+                    <Card className="glass p-6">
                       <h3 className="font-medium text-foreground mb-4 flex items-center">
                         <Target className="h-4 w-4 mr-2 text-primary" />
                         Investment Thesis

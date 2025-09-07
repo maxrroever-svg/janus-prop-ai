@@ -52,7 +52,7 @@ const Settings = () => {
                 </TabsList>
 
                 <TabsContent value="profile" className="space-y-6">
-                  <Card className="institutional-card">
+                  <Card className="glass">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <User className="w-5 h-5" />
@@ -105,7 +105,7 @@ const Settings = () => {
                 </TabsContent>
 
                 <TabsContent value="notifications" className="space-y-6">
-                  <Card className="institutional-card">
+                  <Card className="glass">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Bell className="w-5 h-5" />

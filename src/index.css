@@ -257,31 +257,62 @@ html {
     z-index: 10;
   }
 
-  /* Simplified star field */
-  .star-field {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-      radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.3), transparent),
-      radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.2), transparent),
-      radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent);
-    background-repeat: repeat;
-    background-size: 200px 100px;
-    animation: sparkle 30s linear infinite;
-    opacity: 0.6;
+  /* Enhanced glassmorphic effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
   }
 
-  @keyframes sparkle {
-    from { transform: translateX(0); }
-    to { transform: translateX(200px); }
+  .glass:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.20) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
   }
 
-  /* Monochrome text effects */
+  /* Enhanced glow text effect */
   .glow-text {
-    text-shadow: 0 0 20px rgba(255,255,255,0.06);
+    text-shadow: 0 0 20px rgba(255,255,255,0.1) !important;
+  }
+
+  /* Enhanced professional buttons */
+  .btn-professional, .btn-gradient {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: hsl(var(--foreground)) !important;
+    border: 1px solid rgba(255, 255, 255, 0.20) !important;
+    backdrop-filter: blur(12px) !important;
+    border-radius: var(--radius) !important;
+    transition: all 0.3s ease !important;
+    font-weight: 500 !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  .btn-professional:hover, .btn-gradient:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: rgba(255, 255, 255, 0.30) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Enhanced institutional cards */
+  .institutional-card {
+    background: rgba(255, 255, 255, 0.06) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    transition: all 0.3s ease !important;
+  }
+
+  .institutional-card:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.20) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
+    transform: translateY(-2px) !important;
   }
 
   /* Inputs */

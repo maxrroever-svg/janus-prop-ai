@@ -103,7 +103,7 @@ const Portfolio = () => {
   };
 
   const DealCard = ({ deal, showStage = false, showROI = false }: any) => (
-    <Card className="institutional-card">
+    <Card className="glass">
       <CardContent className="p-4">
         <div className="flex items-start justify-between mb-3">
           <div className="flex-1 min-w-0">
@@ -188,7 +188,7 @@ const Portfolio = () => {
 
               {/* Portfolio Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-ice/10 rounded-lg">

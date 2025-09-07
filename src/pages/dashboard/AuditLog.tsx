@@ -196,7 +196,7 @@ const AuditLog = () => {
 
               {/* Audit Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-success/10 rounded-lg">
@@ -210,7 +210,7 @@ const AuditLog = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-warning/10 rounded-lg">
@@ -226,7 +226,7 @@ const AuditLog = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-destructive/10 rounded-lg">
@@ -242,7 +242,7 @@ const AuditLog = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-ice/10 rounded-lg">
@@ -260,7 +260,7 @@ const AuditLog = () => {
               </div>
 
               {/* Filters */}
-              <Card className="institutional-card mb-6">
+              <Card className="glass mb-6">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-4">
                     <div className="relative flex-1">
@@ -306,7 +306,7 @@ const AuditLog = () => {
               </Card>
 
               {/* Audit Log Entries */}
-              <Card className="institutional-card">
+              <Card className="glass">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <Shield className="w-5 h-5" />

@@ -132,7 +132,7 @@ const ICMemos = () => {
 
               {/* IC Memo Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-success/10 rounded-lg">
@@ -146,7 +146,7 @@ const ICMemos = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-warning/10 rounded-lg">
@@ -160,7 +160,7 @@ const ICMemos = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-ice/10 rounded-lg">
@@ -174,7 +174,7 @@ const ICMemos = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
                       <div className="p-2 bg-gold/10 rounded-lg">
@@ -206,7 +206,7 @@ const ICMemos = () => {
                   
                   <div className="space-y-4">
                     {generatedMemos.map((memo) => (
-                      <Card key={memo.id} className="institutional-card">
+                      <Card key={memo.id} className="glass">
                         <CardContent className="p-6">
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex-1 min-w-0">
@@ -284,7 +284,7 @@ const ICMemos = () => {
                   
                   <div className="space-y-4">
                     {inProgressMemos.map((memo) => (
-                      <Card key={memo.id} className="institutional-card">
+                      <Card key={memo.id} className="glass">
                         <CardContent className="p-6">
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex-1 min-w-0">

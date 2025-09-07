@@ -130,7 +130,7 @@ export function AgentStack({ runs }: AgentStackProps) {
           const isRunning = agent.status === 'running';
           
           return (
-            <Card key={agent.name} className={`institutional-card p-4 ${
+            <Card key={agent.name} className={`glass border-border p-4 ${
               isRunning ? 'border-primary/30 bg-primary/5' : ''
             }`}>
               <div className="space-y-3">
@@ -149,7 +149,7 @@ export function AgentStack({ runs }: AgentStackProps) {
                          {agent.status}
                        </Badge>
                      </div>
-                     <p className="text-xs text-muted-foreground mb-2 break-words leading-relaxed">{agent.description}</p>
+                     <div className="text-xs text-muted-foreground mb-2 break-words leading-relaxed">{agent.description}</div>
                      
                      {agent.status === 'running' && (
                        <div className="space-y-2">
@@ -217,11 +217,11 @@ export function AgentStack({ runs }: AgentStackProps) {
          })}
        </div>
        
-       <div className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-ice/5 border border-primary/20 rounded-lg">
-         <p className="text-xs text-foreground italic flex items-center gap-2">
+       <div className="mt-6 p-4 glass border border-primary/20 rounded-lg">
+         <div className="text-xs text-foreground italic flex items-center gap-2">
            <div className="w-2 h-2 bg-primary rounded-full"></div>
            "All agents coordinated through Eden's orchestration engine."
-         </p>
+          </div>
        </div>
      </div>
    );

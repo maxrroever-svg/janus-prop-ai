@@ -16,13 +16,13 @@ export function DashboardHeader() {
   const navigate = useNavigate();
 
   return (
-    <header className="h-16 border-b border-border bg-background flex items-center justify-between px-6">
+    <header className="h-16 border-b border-border glass backdrop-blur-lg flex items-center justify-between px-6">
       <div className="flex items-center gap-4">
         <SidebarTrigger />
         <Button 
           variant="ghost" 
           onClick={() => navigate('/')}
-          className="font-display text-lg font-semibold text-foreground hover:text-primary"
+          className="font-display text-lg font-semibold text-foreground hover:text-white glow-text"
         >
           Janus AI
         </Button>
@@ -37,7 +37,7 @@ export function DashboardHeader() {
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end" forceMount>
+          <DropdownMenuContent className="w-56 glass backdrop-blur-sm border-border/50" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">Demo User</p>

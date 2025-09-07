@@ -152,21 +152,21 @@ const Outreach = () => {
           <main className="flex-1 p-6">
             <div className="max-w-7xl mx-auto">
               <div className="mb-6">
-                <h1 className="font-display text-2xl text-foreground mb-2">Outreach</h1>
+                <h1 className="font-display text-3xl font-bold text-foreground mb-2 glow-text">Outreach</h1>
                 <p className="text-muted-foreground">
                   Manage conversations, track progress, and coordinate next steps with property owners
                 </p>
               </div>
 
               {/* AI Ranking Notice */}
-              <Card className="mb-6 bg-primary/5 border-primary/20">
+              <Card className="mb-6 glass border-primary/30">
                 <CardContent className="p-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-primary/10 rounded-lg">
-                      <TrendingUp className="w-5 h-5 text-primary" />
+                    <div className="p-2 bg-primary/20 rounded-lg glass">
+                      <TrendingUp className="w-5 h-5 text-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-medium text-foreground">AI-Powered Contact Ranking</h3>
+                      <h3 className="font-display font-semibold text-foreground glow-text">AI-Powered Contact Ranking</h3>
                       <p className="text-sm text-muted-foreground">
                         AI ranks contacts by deal likelihood, motivation, or profitability. Example: "Owner of 123 Main St has high motivation, 3 missed mortgage payments, likely to respond."
                       </p>
@@ -177,57 +177,57 @@ const Outreach = () => {
 
               {/* Outreach Stats */}
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-success/10 rounded-lg">
-                        <MessageSquare className="w-5 h-5 text-success" />
+                      <div className="p-2 bg-success/20 rounded-lg glass">
+                        <MessageSquare className="w-5 h-5 text-foreground" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Active Conversations</p>
-                        <p className="text-2xl font-semibold text-foreground">{progressConversations.filter(c => c.status === 'active').length}</p>
+                        <p className="text-2xl font-display font-semibold text-foreground glow-text">{progressConversations.filter(c => c.status === 'active').length}</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-warning/10 rounded-lg">
-                        <Clock className="w-5 h-5 text-warning" />
+                      <div className="p-2 bg-warning/20 rounded-lg glass">
+                        <Clock className="w-5 h-5 text-foreground" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Pending Actions</p>
-                        <p className="text-2xl font-semibold text-foreground">{nextSteps.length}</p>
+                        <p className="text-2xl font-display font-semibold text-foreground glow-text">{nextSteps.length}</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-ice/10 rounded-lg">
-                        <Mail className="w-5 h-5 text-ice" />
+                      <div className="p-2 bg-ice/20 rounded-lg glass">
+                        <Mail className="w-5 h-5 text-foreground" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Unread Emails</p>
-                        <p className="text-2xl font-semibold text-foreground">{emails.filter(e => e.status === 'unread').length}</p>
+                        <p className="text-2xl font-display font-semibold text-foreground glow-text">{emails.filter(e => e.status === 'unread').length}</p>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="institutional-card">
+                <Card className="glass">
                   <CardContent className="p-4">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 bg-gold/10 rounded-lg">
-                        <CheckCircle className="w-5 h-5 text-gold" />
+                      <div className="p-2 bg-gold/20 rounded-lg glass">
+                        <CheckCircle className="w-5 h-5 text-foreground" />
                       </div>
                       <div>
                         <p className="text-sm text-muted-foreground">Response Rate</p>
-                        <p className="text-2xl font-semibold text-foreground">67%</p>
+                        <p className="text-2xl font-display font-semibold text-foreground glow-text">67%</p>
                       </div>
                     </div>
                   </CardContent>
@@ -235,72 +235,72 @@ const Outreach = () => {
               </div>
 
               <Tabs defaultValue="conversations" className="space-y-6">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="conversations">Progress Conversations</TabsTrigger>
-                  <TabsTrigger value="next-steps">Next Steps</TabsTrigger>
-                  <TabsTrigger value="emails">Email Inbox</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 glass">
+                  <TabsTrigger value="conversations" className="font-display">Progress Conversations</TabsTrigger>
+                  <TabsTrigger value="next-steps" className="font-display">Next Steps</TabsTrigger>
+                  <TabsTrigger value="emails" className="font-display">Email Inbox</TabsTrigger>
                 </TabsList>
 
                 <TabsContent value="conversations" className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-display text-lg text-foreground">Active Conversations</h2>
-                    <Button size="sm" variant="outline">
+                    <h2 className="font-display text-lg text-foreground glow-text">Active Conversations</h2>
+                    <Button size="sm" variant="outline" className="glass text-foreground hover:bg-white/10 border border-white/20">
                       <Send className="w-4 h-4 mr-2" />
                       New Outreach
                     </Button>
                   </div>
                   
                   <div className="space-y-4">
-                    {progressConversations.map((conversation) => (
-                      <Card key={conversation.id} className="institutional-card">
-                        <CardContent className="p-4">
-                          <div className="flex items-start justify-between mb-3">
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center gap-2 mb-1">
-                                <h3 className="font-medium text-foreground">{conversation.contact}</h3>
-                                <Badge className={getStatusColor(conversation.status)}>
-                                  {conversation.status}
-                                </Badge>
-                              </div>
-                              <p className="text-sm text-muted-foreground mb-2">{conversation.property}</p>
-                              <p className="text-sm text-foreground break-words mb-2">{conversation.lastMessage}</p>
-                              <div className="flex items-center gap-2 p-2 bg-primary/5 rounded-lg">
-                                <TrendingUp className="w-4 h-4 text-primary" />
-                                <p className="text-xs text-primary font-medium">{conversation.aiRanking}</p>
-                              </div>
-                            </div>
-                            <div className="text-right ml-4">
-                              <div className="flex items-center gap-2 mb-2">
-                                {conversation.type === 'email' ? (
-                                  <Mail className="w-4 h-4 text-ice" />
-                                ) : (
-                                  <Phone className="w-4 h-4 text-success" />
-                                )}
-                                <span className="text-xs text-muted-foreground">{conversation.messages} messages</span>
-                              </div>
-                              <p className="text-xs text-muted-foreground">{conversation.timestamp}</p>
-                            </div>
-                          </div>
-                          
-                          <div className="flex gap-2">
-                            <Button size="sm" variant="outline" className="flex-1">
-                              <Reply className="w-4 h-4 mr-2" />
-                              Reply
-                            </Button>
-                            <Button size="sm" variant="ghost" className="flex-1">
-                              View History
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
+                     {progressConversations.map((conversation) => (
+                       <Card key={conversation.id} className="glass">
+                         <CardContent className="p-4">
+                           <div className="flex items-start justify-between mb-3">
+                             <div className="flex-1 min-w-0">
+                               <div className="flex items-center gap-2 mb-1">
+                                 <h3 className="font-display font-medium text-foreground glow-text">{conversation.contact}</h3>
+                                 <Badge className={getStatusColor(conversation.status)}>
+                                   {conversation.status}
+                                 </Badge>
+                               </div>
+                               <p className="text-sm text-muted-foreground mb-2">{conversation.property}</p>
+                               <p className="text-sm text-foreground break-words mb-2">{conversation.lastMessage}</p>
+                               <div className="flex items-center gap-2 p-2 glass rounded-lg">
+                                 <TrendingUp className="w-4 h-4 text-foreground" />
+                                 <p className="text-xs text-foreground font-medium">{conversation.aiRanking}</p>
+                               </div>
+                             </div>
+                             <div className="text-right ml-4">
+                               <div className="flex items-center gap-2 mb-2">
+                                 {conversation.type === 'email' ? (
+                                   <Mail className="w-4 h-4 text-foreground" />
+                                 ) : (
+                                   <Phone className="w-4 h-4 text-foreground" />
+                                 )}
+                                 <span className="text-xs text-muted-foreground">{conversation.messages} messages</span>
+                               </div>
+                               <p className="text-xs text-muted-foreground">{conversation.timestamp}</p>
+                             </div>
+                           </div>
+                           
+                           <div className="flex gap-2">
+                             <Button size="sm" variant="outline" className="flex-1 glass text-foreground hover:bg-white/10 border border-white/20">
+                               <Reply className="w-4 h-4 mr-2" />
+                               Reply
+                             </Button>
+                             <Button size="sm" variant="ghost" className="flex-1">
+                               View History
+                             </Button>
+                           </div>
+                         </CardContent>
+                       </Card>
+                     ))}
                   </div>
                 </TabsContent>
 
                 <TabsContent value="next-steps" className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-display text-lg text-foreground">Next Steps</h2>
-                    <Button size="sm" variant="outline">
+                    <h2 className="font-display text-lg text-foreground glow-text">Next Steps</h2>
+                    <Button size="sm" variant="outline" className="glass text-foreground hover:bg-white/10 border border-white/20">
                       <Calendar className="w-4 h-4 mr-2" />
                       Schedule Action
                     </Button>
@@ -308,26 +308,26 @@ const Outreach = () => {
                   
                   <div className="space-y-4">
                     {nextSteps.map((step) => (
-                      <Card key={step.id} className="institutional-card">
+                      <Card key={step.id} className="glass">
                         <CardContent className="p-4">
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 mb-1">
-                                <h3 className="font-medium text-foreground truncate">{step.action}</h3>
+                                <h3 className="font-display font-medium text-foreground truncate glow-text">{step.action}</h3>
                                 <Badge className={getPriorityColor(step.priority)}>
                                   {step.priority}
                                 </Badge>
                               </div>
                               <p className="text-sm text-muted-foreground mb-1">{step.property} • {step.contact}</p>
                               <div className="flex items-center gap-2 text-sm">
-                                <Badge variant="outline" className="text-xs">{step.agent}</Badge>
+                                <Badge variant="outline" className="text-xs glass">{step.agent}</Badge>
                                 <span className="text-muted-foreground">Due: {step.dueDate}</span>
                               </div>
                             </div>
                           </div>
                           
                           <div className="flex gap-2">
-                            <Button size="sm" variant="outline" className="flex-1">
+                            <Button size="sm" variant="outline" className="flex-1 glass text-foreground hover:bg-white/10 border border-white/20">
                               <CheckCircle className="w-4 h-4 mr-2" />
                               Complete
                             </Button>
@@ -343,13 +343,13 @@ const Outreach = () => {
 
                 <TabsContent value="emails" className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <h2 className="font-display text-lg text-foreground">Email Communications</h2>
+                    <h2 className="font-display text-lg text-foreground glow-text">Email Communications</h2>
                     <div className="flex gap-2">
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" className="glass text-foreground hover:bg-white/10 border border-white/20">
                         <Archive className="w-4 h-4 mr-2" />
                         Archive Read
                       </Button>
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" className="glass text-foreground hover:bg-white/10 border border-white/20">
                         <Send className="w-4 h-4 mr-2" />
                         Compose
                       </Button>
@@ -358,12 +358,12 @@ const Outreach = () => {
                   
                   <div className="space-y-4">
                     {emails.map((email) => (
-                      <Card key={email.id} className="institutional-card">
+                      <Card key={email.id} className="glass">
                         <CardContent className="p-4">
                           <div className="flex items-start justify-between mb-3">
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 mb-1">
-                                <h3 className="font-medium text-foreground truncate">{email.subject}</h3>
+                                <h3 className="font-display font-medium text-foreground truncate glow-text">{email.subject}</h3>
                                 <Badge className={getStatusColor(email.status)}>
                                   {email.status}
                                 </Badge>
@@ -378,7 +378,7 @@ const Outreach = () => {
                           </div>
                           
                           <div className="flex gap-2">
-                            <Button size="sm" variant="outline" className="flex-1">
+                            <Button size="sm" variant="outline" className="flex-1 glass text-foreground hover:bg-white/10 border border-white/20">
                               <Reply className="w-4 h-4 mr-2" />
                               Reply
                             </Button>
