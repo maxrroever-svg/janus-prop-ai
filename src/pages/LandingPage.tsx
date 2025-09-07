@@ -62,68 +62,72 @@ export default function LandingPage() {
     };
   }, []);
 
-  // Scrollspy effect for navigation - Fixed for all sections
+  // Scrollspy effect - Debug and fix for ALL sections
   useEffect(() => {
-    const setScrollspy = () => {
+    console.log('=== SCROLLSPY DEBUG START ===');
+    
+    // Wait for DOM to be fully ready
+    const initScrollspy = () => {
       const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'));
-      const sections: {element: HTMLElement, id: string, top: number}[] = [];
+      console.log('Navigation links found:', links.map(l => l.href));
       
-      // Get all sections with their positions
-      links.forEach((link) => {
-        const href = link.getAttribute("href");
-        if (href) {
-          const element = document.querySelector<HTMLElement>(href);
-          if (element) {
-            sections.push({
-              element,
-              id: href,
-              top: element.offsetTop
-            });
-          }
+      // Find all sections
+      const sectionData: {id: string, element: HTMLElement, offsetTop: number}[] = [];
+      
+      const sectionIds = ['#home', '#vision', '#agents', '#consumer', '#investor', '#pricing', '#contact'];
+      
+      sectionIds.forEach(id => {
+        const element = document.querySelector<HTMLElement>(id);
+        if (element) {
+          sectionData.push({
+            id: id,
+            element: element,
+            offsetTop: element.offsetTop
+          });
+          console.log(`Found section ${id} at position ${element.offsetTop}`);
+        } else {
+          console.log(`Section ${id} NOT FOUND`);
         }
       });
       
-      // Sort sections by their position on page
-      sections.sort((a, b) => a.top - b.top);
+      console.log('All sections:', sectionData);
       
-      const updateActive = () => {
-        const scrollPos = window.scrollY + 200; // Adjust offset as needed
+      const updateActiveLink = () => {
+        const scrollPosition = window.scrollY + 100;
+        console.log('Current scroll position:', scrollPosition);
         
-        let activeSection = sections[0]?.element;
+        let activeSection = sectionData[0];
         
-        // Find the section we're currently in
-        for (const section of sections) {
-          if (section.top <= scrollPos) {
-            activeSection = section.element;
-          } else {
-            break;
+        for (const section of sectionData) {
+          if (section.offsetTop <= scrollPosition) {
+            activeSection = section;
+            console.log(`Active section: ${section.id} (${section.offsetTop})`);
           }
         }
         
-        if (activeSection) {
-          const activeId = "#" + activeSection.id;
+        // Update link states
+        links.forEach(link => {
+          const href = link.getAttribute('href');
+          const isActive = href === activeSection.id;
+          link.classList.toggle('is-active', isActive);
           
-          // Update link states
-          links.forEach((link) => {
-            const href = link.getAttribute("href");
-            const isActive = href === activeId;
-            link.classList.toggle("is-active", isActive);
-          });
-        }
+          if (isActive) {
+            console.log(`Activated link: ${href}`);
+          }
+        });
       };
       
       // Initial update
-      updateActive();
+      updateActiveLink();
       
-      // Add scroll listener
-      const onScroll = () => requestAnimationFrame(updateActive);
-      window.addEventListener("scroll", onScroll, { passive: true });
+      const onScroll = () => requestAnimationFrame(updateActiveLink);
+      window.addEventListener('scroll', onScroll, { passive: true });
       
-      return () => window.removeEventListener("scroll", onScroll);
+      return () => window.removeEventListener('scroll', onScroll);
     };
     
-    // Wait for DOM to be ready
-    const timer = setTimeout(setScrollspy, 100);
+    // Wait for everything to load
+    const timer = setTimeout(initScrollspy, 500);
     return () => clearTimeout(timer);
   }, []);
 
