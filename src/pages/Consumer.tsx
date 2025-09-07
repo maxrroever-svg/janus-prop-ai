@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { ConsumerSidebar } from "@/components/consumer/ConsumerSidebar";
@@ -7,6 +8,7 @@ import { Button } from "@/components/ui/button";
 
 const Consumer = () => {
   console.log("Consumer component is rendering");
+  const navigate = useNavigate();
   // static dust (draw once) for the top band
   const dustRef = useRef<HTMLCanvasElement | null>(null);
   const bandRef = useRef<HTMLElement | null>(null);
@@ -115,7 +117,7 @@ const Consumer = () => {
                 <div className="mt-4">
                   <Button
                     variant="ghost"
-                    onClick={() => (window.location.href = "/")}
+                    onClick={() => navigate("/")}
                     className="font-display text-lg font-semibold hover:text-white"
                   >
                     Back to Home

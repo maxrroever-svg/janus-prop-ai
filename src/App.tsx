@@ -14,11 +14,35 @@ import Assistant from "./pages/dashboard/Assistant";
 import Settings from "./pages/dashboard/Settings";
 import AuditLog from "./pages/dashboard/AuditLog";
 
+// Consumer pages
+import ConsumerAnalysis from "./pages/consumer/Analysis";
+import ConsumerMapView from "./pages/consumer/MapView";
+import ConsumerUnderwriting from "./pages/consumer/Underwriting";
+import ConsumerFinancing from "./pages/consumer/Financing";
+import ConsumerClosing from "./pages/consumer/Closing";
+import ConsumerOutreach from "./pages/consumer/Outreach";
+import ConsumerOwnership from "./pages/consumer/Ownership";
+import ConsumerDataLake from "./pages/consumer/DataLake";
+import ConsumerAssistant from "./pages/consumer/Assistant";
+import ConsumerSettings from "./pages/consumer/Settings";
+import ConsumerAuditLog from "./pages/consumer/AuditLog";
+
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
       <Route path="/consumer" element={<Consumer />} />
+      <Route path="/consumer/analysis" element={<ConsumerAnalysis />} />
+      <Route path="/consumer/map" element={<ConsumerMapView />} />
+      <Route path="/consumer/underwriting" element={<ConsumerUnderwriting />} />
+      <Route path="/consumer/financing" element={<ConsumerFinancing />} />
+      <Route path="/consumer/closing" element={<ConsumerClosing />} />
+      <Route path="/consumer/outreach" element={<ConsumerOutreach />} />
+      <Route path="/consumer/ownership" element={<ConsumerOwnership />} />
+      <Route path="/consumer/data-lake" element={<ConsumerDataLake />} />
+      <Route path="/consumer/assistant" element={<ConsumerAssistant />} />
+      <Route path="/consumer/settings" element={<ConsumerSettings />} />
+      <Route path="/consumer/audit" element={<ConsumerAuditLog />} />
       <Route path="/investor" element={<Dashboard />} />
       <Route path="/investor/feed" element={<DealFeed />} />
       <Route path="/investor/deals" element={<Deals />} />
