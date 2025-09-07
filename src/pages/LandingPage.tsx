@@ -64,46 +64,61 @@ export default function LandingPage() {
 
   // Scrollspy effect for navigation
   useEffect(() => {
+    console.log('Scrollspy initializing...');
+    
     const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]'));
+    console.log('Found navigation links:', links.map(l => l.getAttribute('href')));
+    
     const sections = links
       .map((a) => {
         const href = a.getAttribute("href");
-        return href ? document.querySelector<HTMLElement>(href) : null;
+        const section = href ? document.querySelector<HTMLElement>(href) : null;
+        console.log(`Section ${href}:`, section ? 'found' : 'not found');
+        return section;
       })
       .filter(Boolean) as HTMLElement[];
 
+    console.log('Found sections:', sections.map(s => s.id));
+
     const setActive = () => {
-      const scrollTop = window.scrollY + 100; // offset for better detection
+      const scrollTop = window.scrollY + 150; // Increased offset for better detection
+      console.log('Scroll position:', scrollTop);
       
       let activeSection = sections[0];
       for (const section of sections) {
         if (section && section.offsetTop <= scrollTop) {
           activeSection = section;
+          console.log('Active section:', section.id, 'at', section.offsetTop);
         }
       }
       
       if (activeSection) {
         const activeId = "#" + activeSection.id;
+        console.log('Setting active:', activeId);
+        
         links.forEach((link) => {
           const href = link.getAttribute("href");
           const isActive = href === activeId;
           link.classList.toggle("is-active", isActive);
+          if (isActive) console.log('Activated link:', href);
         });
       }
     };
 
-    // Initial check
-    setTimeout(setActive, 100);
+    // Initial check with delay
+    setTimeout(() => {
+      console.log('Initial scrollspy check');
+      setActive();
+    }, 500);
     
-    const onScroll = () => requestAnimationFrame(setActive);
-    const onResize = () => requestAnimationFrame(setActive);
+    const onScroll = () => {
+      requestAnimationFrame(setActive);
+    };
     
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onResize, { passive: true });
     
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onResize);
     };
   }, []);
 
@@ -111,7 +126,7 @@ export default function LandingPage() {
     <div className="janus janus-landing">
       <style>{`
         /* Missing styles for landing page */
-        /* Navigation - completely clean text links with scrollspy underline */
+        /* Navigation - override ALL possible styles */
         .janus-landing .janus-header {
           position: sticky;
           top: 0;
@@ -141,10 +156,11 @@ export default function LandingPage() {
           align-items: center;
         }
         .janus-landing .nav a {
-          font-weight: 600;
-          font-size: .96rem;
-          position: relative;
-          padding: 6px 0;
+          font-weight: 600 !important;
+          font-size: .96rem !important;
+          position: relative !important;
+          padding: 6px 0 !important;
+          margin: 0 !important;
           background: transparent !important;
           border: none !important;
           box-shadow: none !important;
@@ -152,6 +168,16 @@ export default function LandingPage() {
           -webkit-backdrop-filter: none !important;
           border-radius: 0 !important;
           color: var(--white) !important;
+          text-decoration: none !important;
+        }
+        .janus-landing .nav a:hover,
+        .janus-landing .nav a:focus,
+        .janus-landing .nav a:active {
+          background: transparent !important;
+          border: none !important;
+          box-shadow: none !important;
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
           text-decoration: none !important;
         }
         .janus-landing .nav a::after {
@@ -370,9 +396,6 @@ export default function LandingPage() {
           display: none !important;
         }
       `}</style>
-      {/* Fog (very subtle) */}
-      <div id="fog" aria-hidden="true" />
-
       {/* Pinned bottom nebula */}
       <div id="nebula" aria-hidden="true" />
 
