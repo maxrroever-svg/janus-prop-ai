@@ -4,35 +4,70 @@ import { useEffect, useRef } from "react";
 export default function LandingPage() {
   const dustRef = useRef<HTMLCanvasElement | null>(null);
 
-  // Scrollspy implementation from the refined HTML
+  // Scrollspy implementation - wait for DOM to be ready
   useEffect(() => {
-    const links = [...document.querySelectorAll('.landing .nav a')] as HTMLAnchorElement[];
-    const targets = links.map(a => document.querySelector(a.getAttribute('href')!)).filter(Boolean) as HTMLElement[];
-    const header = document.getElementById('siteHeader');
-    
-    if (!links.length || !targets.length || !header) return;
-
-    const setActive = () => {
-      const top = window.scrollY + header.offsetHeight + 8;
-      let active = targets[0];
-      for (const sec of targets) {
-        const rect = sec.getBoundingClientRect();
-        const sTop = window.scrollY + rect.top;
-        if (sTop <= top) active = sec;
-        else break;
+    const initScrollspy = (): (() => void) | null => {
+      const links = [...document.querySelectorAll('.landing .nav a')] as HTMLAnchorElement[];
+      const targets = links.map(a => document.querySelector(a.getAttribute('href')!)).filter(Boolean) as HTMLElement[];
+      const header = document.getElementById('siteHeader');
+      
+      // Ensure we have all required elements
+      if (!links.length || !targets.length || !header) {
+        console.log('Scrollspy: Missing elements, retrying...', { links: links.length, targets: targets.length, header: !!header });
+        return null;
       }
-      const id = '#' + active.id;
-      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+
+      const setActive = () => {
+        const top = window.scrollY + header.offsetHeight + 8;
+        let active = targets[0];
+        
+        // Ensure we have a valid active section
+        if (!active) return;
+        
+        for (const sec of targets) {
+          const rect = sec.getBoundingClientRect();
+          const sTop = window.scrollY + rect.top;
+          if (sTop <= top) active = sec;
+          else break;
+        }
+        
+        // Double-check active section has an id
+        if (!active || !active.id) return;
+        
+        const id = '#' + active.id;
+        links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === id));
+      };
+
+      setActive();
+      const onScroll = () => setActive();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', setActive);
+
+      return () => {
+        window.removeEventListener('scroll', onScroll);
+        window.removeEventListener('resize', setActive);
+      };
     };
 
-    setActive();
-    const onScroll = () => setActive();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', setActive);
-
+    // Try to initialize, with retries if elements aren't ready
+    let cleanup: (() => void) | null = null;
+    let retryCount = 0;
+    const maxRetries = 10;
+    
+    const tryInit = () => {
+      cleanup = initScrollspy();
+      if (!cleanup && retryCount < maxRetries) {
+        retryCount++;
+        setTimeout(tryInit, 100);
+      }
+    };
+    
+    // Start after a small delay to ensure DOM is ready
+    const timer = setTimeout(tryInit, 100);
+    
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', setActive);
+      clearTimeout(timer);
+      cleanup?.();
     };
   }, []);
 
