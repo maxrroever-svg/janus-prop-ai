@@ -249,9 +249,29 @@ export default function LandingPage() {
         .landing .actions{ display:flex; justify-content:center; gap:1rem; margin-top:16px }
         .landing .cta{
           display:inline-flex; align-items:center; justify-content:center;
-          padding:.82rem 1.25rem; border:1px solid var(--hair); border-radius:999px; background:rgba(255,255,255,.06)
+          padding:.82rem 1.25rem; border:1px solid rgba(255,255,255,.25); border-radius:12px; 
+          background:rgba(255,255,255,.12); color:white; text-decoration:none; font-weight:600;
+          backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); position:relative;
+          box-shadow:
+            0 8px 32px rgba(0,0,0,.3),
+            inset 0 1px 0 rgba(255,255,255,.4),
+            inset 0 -1px 0 rgba(255,255,255,.1);
+          text-shadow:0 1px 2px rgba(0,0,0,.5);
+          transition:all .25s ease;
         }
-        .landing .cta:hover{ background:rgba(255,255,255,.10) }
+        .landing .cta:hover{ 
+          background:rgba(255,255,255,.20); border-color:rgba(255,255,255,.45);
+          transform:translateY(-2px);
+          box-shadow:
+            0 12px 40px rgba(0,0,0,.4),
+            inset 0 1px 0 rgba(255,255,255,.5),
+            inset 0 -1px 0 rgba(255,255,255,.15);
+        }
+        .landing .cta::before{
+          content:''; position:absolute; top:0; left:0; right:0; bottom:0;
+          background:linear-gradient(135deg, rgba(255,255,255,.15) 0%, rgba(255,255,255,.05) 100%);
+          border-radius:12px; pointer-events:none;
+        }
 
         /* ——— Event-horizon glow from RIGHT (static, hazy, glossy) ——— */
         .landing .horizon{
