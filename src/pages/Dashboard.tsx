@@ -2,9 +2,12 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DealCanvas } from "@/components/dashboard/DealCanvas";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   console.log("Dashboard component is rendering");
+  const navigate = useNavigate();
+  
   return (
     <div className="janus janus-dashboard">
       <SidebarProvider>
@@ -21,7 +24,7 @@ const Dashboard = () => {
               </div>
               <Button 
                 variant="ghost" 
-                onClick={() => window.location.href = '/'}
+                onClick={() => navigate('/')}
                 className="font-display text-lg font-semibold text-foreground hover:text-white glow-text"
               >
                 Janus AI

@@ -26,21 +26,21 @@ import {
 } from "@/components/ui/sidebar";
 
 const navigation = [
-  { name: "Deal Canvas", href: "/dashboard", icon: Home },
-  { name: "Janus Deal Feed", href: "/dashboard/feed", icon: Zap },
-  { name: "Active Deals", href: "/dashboard/deals", icon: TrendingUp },
-  { name: "Plans", href: "/dashboard/plans", icon: CheckSquare },
-  { name: "Intelligence", href: "/dashboard/intelligence", icon: BarChart3 },
-  { name: "IC Memos", href: "/dashboard/memos", icon: FileText },
-  { name: "Outreach", href: "/dashboard/outreach", icon: MessageSquare },
-  { name: "Portfolio", href: "/dashboard/portfolio", icon: Target },
-  { name: "Data Lake", href: "/dashboard/data-lake", icon: Database },
-  { name: "AI Assistant", href: "/dashboard/assistant", icon: MessageSquare },
+  { name: "Deal Canvas", href: "/investor", icon: Home },
+  { name: "Janus Deal Feed", href: "/investor/feed", icon: Zap },
+  { name: "Active Deals", href: "/investor/deals", icon: TrendingUp },
+  { name: "Plans", href: "/investor/plans", icon: CheckSquare },
+  { name: "Intelligence", href: "/investor/intelligence", icon: BarChart3 },
+  { name: "IC Memos", href: "/investor/memos", icon: FileText },
+  { name: "Outreach", href: "/investor/outreach", icon: MessageSquare },
+  { name: "Portfolio", href: "/investor/portfolio", icon: Target },
+  { name: "Data Lake", href: "/investor/data-lake", icon: Database },
+  { name: "AI Assistant", href: "/investor/assistant", icon: MessageSquare },
 ];
 
 const bottomNavigation = [
-  { name: "Settings", href: "/dashboard/settings", icon: Settings },
-  { name: "Audit Log", href: "/dashboard/audit", icon: Shield },
+  { name: "Settings", href: "/investor/settings", icon: Settings },
+  { name: "Audit Log", href: "/investor/audit", icon: Shield },
 ];
 
 export function DashboardSidebar() {
@@ -49,8 +49,8 @@ export function DashboardSidebar() {
   const collapsed = state === "collapsed";
   
   const isActive = (path: string) => {
-    if (path === "/dashboard") {
-      return location.pathname === "/dashboard";
+    if (path === "/investor") {
+      return location.pathname === "/investor";
     }
     return location.pathname.startsWith(path);
   };
