@@ -404,8 +404,6 @@ export default function LandingPage() {
           display: none !important;
         }
       `}</style>
-      {/* Pinned bottom nebula */}
-      <div id="nebula" aria-hidden="true" />
 
       {/* Header */}
       <header className="janus-header">
@@ -613,6 +611,9 @@ export default function LandingPage() {
         </div>
         <div className="copyright">© 2025 Janus • All rights reserved</div>
       </footer>
+      
+      {/* Nebula positioned at very bottom */}
+      <div id="nebula" aria-hidden="true" />
     </div>
   );
 }
