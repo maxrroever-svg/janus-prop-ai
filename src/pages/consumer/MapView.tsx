@@ -11,6 +11,7 @@ const MapView = () => {
         <div className="flex-1 flex flex-col">
           <ConsumerHeader title="Map View" subtitle="Interactive property search and analysis" />
           <main className="flex-1 p-6">
+            <DealMapContainer onDealSelect={(deal) => console.log('Selected property:', deal)} />
           </main>
         </div>
       </div>
