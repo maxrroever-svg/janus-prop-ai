@@ -373,9 +373,9 @@ export default function LandingPage() {
           width: 100%;
         }
         
-        /* Make twins-section (consumer + investor) fill fullscreen together */
+        /* Make twins-section (consumer + investor) exactly 100vh total */
         .twins-section {
-          min-height: 100vh;
+          height: 100vh;
           display: flex;
           flex-direction: column;
           position: relative;
@@ -386,14 +386,15 @@ export default function LandingPage() {
           mix-blend-mode: normal !important;
         }
         
-        /* Each band takes half of the fullscreen space */
+        /* Each band takes exactly half of the 100vh */
         .twins-section #consumer,
         .twins-section #investor {
           flex: 1;
           display: flex;
           align-items: center;
           justify-content: center;
-          min-height: 50vh;
+          height: 50vh;
+          padding: clamp(20px,3vh,40px) 18px;
         }
         
         /* Make footer relative and remove extra padding */
@@ -581,7 +582,7 @@ export default function LandingPage() {
         <section className="twins-section">
           <canvas ref={dustRef} className="dust-canvas" aria-hidden="true" />
           
-          <div id="consumer" className="band band--horizon" style={{marginBottom: 0, paddingBottom: 'clamp(40px,6vh,80px)'}}>
+          <div id="consumer" className="band band--horizon">
             <div className="band-content container">
               <h2>Consumer</h2>
               <p>
@@ -594,7 +595,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div id="investor" className="band band--horizon" style={{marginTop: 0, paddingTop: 'clamp(40px,6vh,80px)'}}>
+          <div id="investor" className="band band--horizon">
             <div className="band-content container">
               <h2>Investor</h2>
               <p>
