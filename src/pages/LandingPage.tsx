@@ -67,24 +67,29 @@ export default function LandingPage() {
       <style>{`
         /* Missing styles for landing page */
         /* Navigation - clean text links with proper underline positioning */
+        .janus-landing .nav {
+          display: flex;
+          gap: 24px;
+          align-items: center;
+        }
         .janus-landing .nav a {
           font-weight: 600;
           font-size: .96rem;
           position: relative;
-          padding: 4px 0;
-          margin: 0 8px;
+          padding: 8px 0;
           background: none !important;
           border: none !important;
           box-shadow: none !important;
           backdrop-filter: none !important;
           -webkit-backdrop-filter: none !important;
+          border-radius: 0 !important;
         }
         .janus-landing .nav a::after {
           content: "";
           position: absolute;
           left: 0;
           right: 100%;
-          bottom: -2px;
+          bottom: 2px;
           height: 2px;
           background: linear-gradient(90deg, #8EC5FF, #C68CFF, #FF9E7A);
           transition: right .22s ease;
@@ -206,12 +211,66 @@ export default function LandingPage() {
           border-top: 1px solid var(--hair);
           margin-top: 48px;
         }
-        .janus-landing .footer-wrap {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 24px;
-          max-width: var(--maxw);
-          margin: 0 auto 24px;
+        /* Twins section - one seamless section */
+        .janus-landing .twins-section {
+          position: relative;
+          width: 100%;
+          background: rgba(255,255,255,.02);
+          overflow: hidden;
+        }
+        .janus-landing .twins-section .glowfield {
+          position: absolute;
+          inset: 0;
+          z-index: 1;
+          pointer-events: none;
+          background:
+            radial-gradient(240px 200px at 3% 6%, rgba(140,200,255,.12), transparent 72%),
+            radial-gradient(260px 220px at 98% 12%, rgba(255,170,96,.10), transparent 74%),
+            radial-gradient(220px 200px at 6% 96%, rgba(200,140,255,.10), transparent 70%),
+            radial-gradient(240px 200px at 96% 92%, rgba(120,255,220,.08), transparent 70%);
+          filter: blur(8px);
+        }
+        .janus-landing .twins-section .band {
+          background: transparent !important;
+          border: none !important;
+        }
+        .janus-landing .twins-section .dust-canvas {
+          position: absolute;
+          inset: 0;
+          z-index: 2;
+          pointer-events: none;
+          opacity: .55;
+          mix-blend-mode: screen;
+        }
+        
+        /* Footer positioned to contain nebula */
+        .janus-landing footer {
+          position: relative;
+          z-index: 1;
+          padding: 48px 24px 24px;
+          border-top: 1px solid var(--hair);
+          margin-top: 48px;
+        }
+        
+        /* Nebula pinned to very bottom of website */
+        .janus-landing #nebula {
+          position: absolute !important;
+          left: 0; 
+          right: 0; 
+          bottom: 0;
+          height: 140vh; 
+          pointer-events: none; 
+          z-index: -1;
+          background:
+            radial-gradient(60% 120% at 50% 122%, rgba(32,12,64,.95) 0%, rgba(0,0,0,0) 60%),
+            radial-gradient(62% 122% at 50% 134%, rgba(8,26,96,.92) 0%, rgba(0,0,0,0) 70%),
+            radial-gradient(64% 126% at 50% 146%, rgba(18,88,220,.78) 0%, rgba(0,0,0,0) 76%),
+            radial-gradient(70% 136% at 50% 158%, rgba(0,235,255,.44) 0%, rgba(0,0,0,0) 82%),
+            radial-gradient(78% 150% at 50% 170%, rgba(255,178,84,.48) 0%, rgba(0,0,0,0) 88%),
+            radial-gradient(76% 146% at 50% 178%, rgba(212,96,255,.38) 0%, rgba(0,0,0,0) 90%);
+          filter: blur(100px) saturate(155%);
+          -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 58%);
+          mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 58%);
         }
         .janus-landing .footer-col h4 {
           margin-bottom: 12px;
@@ -242,25 +301,12 @@ export default function LandingPage() {
           font-size: 0.9rem;
         }
         
-        /* Nebula pinned to bottom of WEBSITE, not screen */
-        .janus-landing #nebula {
-          position: absolute !important;
-          left: 0; 
-          right: 0; 
-          bottom: -70vh;
-          height: 140vh; 
-          pointer-events: none; 
-          z-index: 0;
-          background:
-            radial-gradient(60% 120% at 50% 122%, rgba(32,12,64,.95) 0%, rgba(0,0,0,0) 60%),
-            radial-gradient(62% 122% at 50% 134%, rgba(8,26,96,.92) 0%, rgba(0,0,0,0) 70%),
-            radial-gradient(64% 126% at 50% 146%, rgba(18,88,220,.78) 0%, rgba(0,0,0,0) 76%),
-            radial-gradient(70% 136% at 50% 158%, rgba(0,235,255,.44) 0%, rgba(0,0,0,0) 82%),
-            radial-gradient(78% 150% at 50% 170%, rgba(255,178,84,.48) 0%, rgba(0,0,0,0) 88%),
-            radial-gradient(76% 146% at 50% 178%, rgba(212,96,255,.38) 0%, rgba(0,0,0,0) 90%);
-          filter: blur(100px) saturate(155%);
-          -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 58%);
-          mask-image: linear-gradient(to top, rgba(0,0,0,1) 12%, rgba(0,0,0,0) 58%);
+        .janus-landing .footer-wrap {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 24px;
+          max-width: var(--maxw);
+          margin: 0 auto 24px;
         }
         
         /* Top fog */
@@ -416,33 +462,34 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* CONSUMER SECTION */}
-        <section id="consumer" className="band band--horizon">
+        {/* CONSUMER + INVESTOR — one section, shared dust/light, no gap */}
+        <section className="twins-section">
           <div className="glowfield" aria-hidden="true" />
           <canvas ref={dustRef} className="dust-canvas" aria-hidden="true" />
-          <div className="band-content container">
-            <h2>Consumer</h2>
-            <p>
-              Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes.
-              Build a watchlist, set thresholds, and share a one-page memo from your phone.
-            </p>
-            <div className="actions" style={{marginTop:18}}>
-              <Link to="/consumer" className="cta glass">Enter Dashboard</Link>
+          
+          <div id="consumer" className="band band--horizon" style={{marginBottom: 0, paddingBottom: 'clamp(40px,6vh,80px)'}}>
+            <div className="band-content container">
+              <h2>Consumer</h2>
+              <p>
+                Plain-English deal scores with rationale; market rent and ARV bands; alerts when the thesis changes.
+                Build a watchlist, set thresholds, and share a one-page memo from your phone.
+              </p>
+              <div className="actions" style={{marginTop:18}}>
+                <Link to="/consumer" className="cta glass">Enter Dashboard</Link>
+              </div>
             </div>
           </div>
-        </section>
 
-        {/* INVESTOR SECTION */}
-        <section id="investor" className="band band--horizon" style={{marginTop: 16}}>
-          <div className="glowfield" aria-hidden="true" />
-          <div className="band-content container">
-            <h2>Investor</h2>
-            <p>
-              Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed
-              strategies with confidence-weighted verdicts and auditable memos.
-            </p>
-            <div className="actions" style={{marginTop:18}}>
-              <Link to="/investor" className="cta glass">Enter Dashboard</Link>
+          <div id="investor" className="band band--horizon" style={{marginTop: 0, paddingTop: 'clamp(40px,6vh,80px)'}}>
+            <div className="band-content container">
+              <h2>Investor</h2>
+              <p>
+                Committee-grade underwriting with adversarial review. Standardize BRRRR, value-add, and distressed
+                strategies with confidence-weighted verdicts and auditable memos.
+              </p>
+              <div className="actions" style={{marginTop:18}}>
+                <Link to="/investor" className="cta glass">Enter Dashboard</Link>
+              </div>
             </div>
           </div>
         </section>
