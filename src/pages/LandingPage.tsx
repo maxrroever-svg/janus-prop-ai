@@ -249,34 +249,30 @@ export default function LandingPage() {
         .landing .actions{ display:flex; justify-content:center; gap:1rem; margin-top:16px }
         .landing .cta{
           display:inline-flex; align-items:center; justify-content:center;
-          padding:.82rem 1.25rem; border:1px solid rgba(255,255,255,.15); border-radius:16px; 
-          background:rgba(255,255,255,.08); color:rgba(255,255,255,.95); text-decoration:none; font-weight:600;
-          backdrop-filter:blur(40px); -webkit-backdrop-filter:blur(40px); position:relative;
-          box-shadow:
-            0 8px 32px rgba(0,0,0,.25),
-            inset 0 1px 0 rgba(255,255,255,.2),
-            inset 0 -1px 0 rgba(255,255,255,.05);
-          text-shadow:0 1px 3px rgba(0,0,0,.3);
-          transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);
-          overflow:hidden;
+          padding:.82rem 1.25rem;
+          border:1px solid rgba(255,255,255,.12);            /* hairline */
+          border-radius:999px;                                /* pill */
+          background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+          color:#fff; text-decoration:none;
+
+          /* the magic: blur the BACKGROUND behind the button */
+          backdrop-filter: blur(6px) saturate(120%);
+          -webkit-backdrop-filter: blur(6px) saturate(120%);  /* Safari */
+
+          transition: background .2s ease, border-color .2s ease, transform .12s ease;
         }
-        .landing .cta:hover{ 
-          background:rgba(255,255,255,.15); border-color:rgba(255,255,255,.25);
-          transform:translateY(-1px);
-          box-shadow:
-            0 12px 48px rgba(0,0,0,.35),
-            inset 0 1px 0 rgba(255,255,255,.3),
-            inset 0 -1px 0 rgba(255,255,255,.08);
-          backdrop-filter:blur(50px); -webkit-backdrop-filter:blur(50px);
+
+        .landing .cta:hover {
+          background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
         }
-        .landing .cta::before{
-          content:''; position:absolute; top:0; left:0; right:0; bottom:0;
-          background:linear-gradient(135deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.02) 50%, rgba(255,255,255,.08) 100%);
-          border-radius:16px; pointer-events:none; opacity:.6;
-          transition:opacity .3s ease;
+
+        .landing .cta:active {
+          transform: translateY(1px);
         }
-        .landing .cta:hover::before{
-          opacity:.8;
+
+        .landing .cta:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(255,255,255,.18);
         }
 
         /* ——— Event-horizon glow from RIGHT (static, hazy, glossy) ——— */
