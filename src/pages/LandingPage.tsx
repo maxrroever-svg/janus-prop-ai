@@ -328,7 +328,7 @@ export default function LandingPage() {
         #nebula {
           position: absolute;       /* Stays at the bottom of web content */
           left: 0; right: 0; bottom: 0;
-          height: 90vh;             /* Taller so the glow rises higher */
+          height: 110vh;            /* Even taller so the glow rises higher */
           pointer-events: none;
           z-index: 0;
 
