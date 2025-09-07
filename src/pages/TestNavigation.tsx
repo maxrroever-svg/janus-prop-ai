@@ -2,7 +2,9 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const TestNavigation = () => {
+  console.log("TestNavigation component rendering");
   const navigate = useNavigate();
+  console.log("TestNavigation useNavigate:", typeof navigate);
 
   const testConsumerNav = () => {
     console.log("TEST: Consumer navigation triggered");

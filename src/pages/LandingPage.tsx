@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import TestNavigation from "./TestNavigation";
 
 const LandingPage = () => {
+  console.log("LandingPage component rendering");
   const navigate = useNavigate();
+  console.log("useNavigate hook working:", typeof navigate);
 
   const handleConsumerClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -19,8 +21,22 @@ const LandingPage = () => {
     window.location.href = "/investor";
   };
 
+  console.log("About to render LandingPage JSX");
+
   return (
     <>
+      <div style={{
+        position: "fixed",
+        top: "0",
+        left: "0", 
+        background: "red",
+        color: "white",
+        padding: "20px",
+        zIndex: 999999,
+        fontSize: "20px"
+      }}>
+        LANDING PAGE LOADED - REACT IS WORKING
+      </div>
       <TestNavigation />
     <div className="janus" id="homeRoot">
       {/* Steady fog + BIG nebula (front page only) */}
