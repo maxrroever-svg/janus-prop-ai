@@ -215,7 +215,7 @@ export default function LandingPage() {
         /* ——— Bloomberg strip (thinner) ——— */
         .landing .bstrip{ 
           border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); padding:8px 0;
-          background: linear-gradient(90deg, rgba(0,220,150,.08) 0%, rgba(255,105,105,.08) 50%, rgba(0,220,150,.08) 100%);
+          background: #000;
         }
         .landing .bstrip .container{ display:flex; align-items:center; justify-content:center; gap:1rem; max-width:none; flex-wrap:wrap }
         .landing .bitem{ 
