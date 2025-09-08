@@ -1,4 +1,4 @@
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar-simple";
 import { ConsumerSidebar } from "@/components/consumer/ConsumerSidebar";
 import { ConsumerHeader } from "@/components/consumer/ConsumerHeader";
 import { Card, CardContent } from "@/components/ui/card";

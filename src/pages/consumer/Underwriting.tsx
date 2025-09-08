@@ -1,4 +1,4 @@
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar-simple";
 import { ConsumerSidebar } from "@/components/consumer/ConsumerSidebar";
 import { ConsumerHeader } from "@/components/consumer/ConsumerHeader";
 import { OneClickUnderwriting } from "@/components/consumer/OneClickUnderwriting";
@@ -6,13 +6,11 @@ import { OneClickUnderwriting } from "@/components/consumer/OneClickUnderwriting
 const ConsumerUnderwriting = () => {
   return (
     <SidebarProvider>
-      <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
-        <ConsumerSidebar />
-        <main className="flex-1 flex flex-col">
-          <ConsumerHeader title="One-Click Underwriting" />
-          <div className="flex-1 p-6">
-            <OneClickUnderwriting />
-          </div>
+      <ConsumerSidebar />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <ConsumerHeader title="One-Click Underwriting" />
+        <main className="flex-1 overflow-y-auto p-6">
+          <OneClickUnderwriting />
         </main>
       </div>
     </SidebarProvider>
