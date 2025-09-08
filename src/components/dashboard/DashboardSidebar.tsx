@@ -22,6 +22,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar-simple";
 
 const navigation = [
@@ -44,6 +45,8 @@ const bottomNavigation = [
 
 export function DashboardSidebar() {
   const location = useLocation();
+  const { state } = useSidebar();
+  const collapsed = state === "collapsed";
   
   const isActive = (path: string) => {
     if (path === "/investor") {
@@ -55,26 +58,32 @@ export function DashboardSidebar() {
   const getNavClass = (path: string) => 
     isActive(path) 
       ? "bg-accent-green/10 text-accent-green border-r-2 border-accent-green" 
-      : "text-muted-foreground hover:text-foreground hover:bg-accent-blue/10";
+      : "text-muted-foreground hover:text-foreground hover:bg-accent/10";
 
   return (
-    <Sidebar className="sidebar dashboard-sidebar">
-      <SidebarContent className="sidebar-content">
-        <SidebarGroup className="sidebar-group">
-          <SidebarGroupLabel className="sidebar-group-label">
+    <Sidebar>
+      <SidebarContent>
+        <div className="p-3 border-b border-border/30">
+          <h2 className={`font-display text-sm font-medium text-muted-foreground ${collapsed ? "sr-only" : ""}`}>
+            Janus Investor
+          </h2>
+        </div>
+        
+        <SidebarGroup>
+          <SidebarGroupLabel>
             Main Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu className="sidebar-menu">
+            <SidebarMenu>
               {navigation.map((item) => (
-                <SidebarMenuItem key={item.name} className="sidebar-menu-item">
+                <SidebarMenuItem key={item.name}>
                   <SidebarMenuButton asChild>
                     <NavLink 
                       to={item.href} 
-                      className={`sidebar-menu-button ${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
+                      className={`${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
                     >
                        <item.icon className="h-4 w-4" />
-                       <span>{item.name}</span>
+                       {!collapsed && <span>{item.name}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -83,18 +92,18 @@ export function DashboardSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup className="sidebar-group mt-auto">
+        <SidebarGroup className="mt-auto">
           <SidebarGroupContent>
-            <SidebarMenu className="sidebar-menu">
+            <SidebarMenu>
               {bottomNavigation.map((item) => (
-                <SidebarMenuItem key={item.name} className="sidebar-menu-item">
+                <SidebarMenuItem key={item.name}>
                   <SidebarMenuButton asChild>
                     <NavLink 
                       to={item.href} 
-                      className={`sidebar-menu-button ${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
+                      className={`${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
                     >
                        <item.icon className="h-4 w-4" />
-                       <span>{item.name}</span>
+                       {!collapsed && <span>{item.name}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
