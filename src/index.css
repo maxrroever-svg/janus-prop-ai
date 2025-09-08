@@ -979,6 +979,91 @@ html {
   }
 
   /* ===========================================
+     DASHBOARD LAYOUT - FIXED POSITIONING 
+     =========================================== */
+
+  /* Dashboard Layout - Fixed positioning and overflow */
+  .janus-dashboard .min-h-screen {
+    overflow: hidden !important;
+    height: 100vh !important;
+  }
+
+  .janus-dashboard .flex-1 {
+    min-width: 0 !important; /* Prevent flex item from growing beyond container */
+    overflow: hidden !important;
+  }
+
+  /* Sidebar - Fixed positioning */
+  .sidebar {
+    flex-shrink: 0 !important; /* Prevent sidebar from shrinking */
+    position: relative !important;
+    z-index: 30 !important;
+  }
+
+  /* Main content positioning */
+  .janus-dashboard main {
+    overflow-y: auto !important;
+    height: calc(100vh - 4rem) !important; /* Account for header height */
+  }
+
+  /* Header positioning */
+  .janus-header {
+    flex-shrink: 0 !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+
+  /* Prevent horizontal scrolling */
+  .janus-dashboard * {
+    box-sizing: border-box !important;
+  }
+
+  /* Consumer specific layout */
+  .janus-dashboard .container {
+    max-width: none !important;
+    width: 100% !important;
+    padding: 0 2rem !important;
+  }
+
+  .janus-dashboard .band-content {
+    text-align: center !important;
+  }
+
+  /* Deal Canvas layout fix */
+  .deal-canvas {
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .deal-canvas .grid {
+    height: 100% !important;
+    overflow-y: auto !important;
+  }
+
+  /* Ensure proper scrolling for dashboard sections */
+  .dashboard-card,
+  .glass {
+    overflow: hidden !important;
+  }
+
+  .dashboard-card .content,
+  .glass .content {
+    overflow-y: auto !important;
+  }
+
+  /* Fix any z-index conflicts */
+  .star-field {
+    pointer-events: none !important;
+  }
+
+  /* Responsive sidebar behavior */
+  @media (max-width: 768px) {
+    .janus-dashboard .nav {
+      display: none !important;
+    }
+  }
+
+  /* ===========================================
      FINAL LAYOUT STABILITY FIXES
      =========================================== */
 

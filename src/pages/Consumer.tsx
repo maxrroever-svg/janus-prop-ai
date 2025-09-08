@@ -48,85 +48,86 @@ const Consumer = () => {
 
   return (
     <div className="janus janus-dashboard">
-        <SidebarProvider>
-          {/* Remove conflicting backgrounds to keep matte black */}
-          <div className="min-h-screen w-full flex">
-            <ConsumerSidebar />
-
-            {/* MAIN COLUMN */}
-            <div className="flex-1 flex flex-col relative z-10">
-              {/* Sticky transparent header (logo left, nav right) */}
-              <header className="janus-header">
-                <div className="row">
-                  <div className="flex items-center gap-3">
-                    <SidebarTrigger />
-                    <a className="brand" href="/">Janus</a>
-                  </div>
-                  <nav className="nav">
-                    <a href="/">Home</a>
-                    <a href="/#vision">Vision</a>
-                    <a href="/#agents">Agents</a>
-                    <a href="/consumer" className="is-active">Consumer</a>
-                    <a href="/investor">Investors</a>
-                    <a href="/#pricing">Pricing</a>
-                    <a href="/#contact">Contact</a>
-                  </nav>
+      <SidebarProvider>
+        <div className="min-h-screen w-full flex overflow-hidden">
+          <ConsumerSidebar />
+          
+          {/* MAIN CONTENT - Properly positioned relative to sidebar */}
+          <div className="flex-1 flex flex-col min-w-0 relative">
+            {/* Fixed header */}
+            <header className="janus-header sticky top-0 z-40 bg-background/80 backdrop-blur-sm border-b border-border/30">
+              <div className="flex items-center justify-between px-6 h-16">
+                <div className="flex items-center gap-3">
+                  <SidebarTrigger />
+                  <a className="brand text-foreground font-display font-semibold" href="/">Janus</a>
                 </div>
-              </header>
+                <nav className="nav hidden md:flex items-center gap-6">
+                  <a href="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</a>
+                  <a href="/#vision" className="text-muted-foreground hover:text-foreground transition-colors">Vision</a>
+                  <a href="/#agents" className="text-muted-foreground hover:text-foreground transition-colors">Agents</a>
+                  <a href="/consumer" className="text-accent-green font-medium">Consumer</a>
+                  <a href="/investor" className="text-muted-foreground hover:text-foreground transition-colors">Investors</a>
+                  <a href="/#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
+                  <a href="/#contact" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+                </nav>
+              </div>
+            </header>
 
-              {/* TOP BAND: right-edge event horizon + static dust + Bloomberg strip */}
-              <section ref={bandRef as any} className="section band band--horizon" style={{ paddingTop: 48, paddingBottom: 48 }}>
+            {/* Scrollable main content */}
+            <main className="flex-1 overflow-y-auto">
+              {/* TOP BAND */}
+              <section ref={bandRef as any} className="section band band--horizon glass border-b border-border/30" style={{ paddingTop: 48, paddingBottom: 48 }}>
                 <canvas ref={dustRef as any} className="dust-canvas" aria-hidden="true" />
                 <div className="container band-content">
-                  <h2>Consumer Dashboard</h2>
-                  <p className="prose" style={{ margin: "8px auto 0" }}>
+                  <h2 className="text-2xl font-display font-bold text-foreground mb-2">Consumer Dashboard</h2>
+                  <p className="text-muted-foreground max-w-2xl mx-auto">
                     Real-time deal analysis, market bands, alerts when your thesis changes.
                   </p>
 
-                  {/* Bloomberg micro-metrics (manual red/green via .up / .down) */}
-                  <div className="strip" style={{ marginTop: 14, justifyContent: "center" }}>
-                    <span className="chip">
-                      <span className="label">DEAL SCORE</span>
-                      <span className="value num">91</span>
-                      <span className="delta up num">+2.1</span>
+                  {/* Bloomberg metrics */}
+                  <div className="flex flex-wrap justify-center gap-4 mt-6">
+                    <span className="chip glass border border-border/30 px-3 py-2 rounded-lg">
+                      <span className="label text-xs text-muted-foreground uppercase tracking-wide">DEAL SCORE</span>
+                      <span className="value num text-lg font-bold text-foreground ml-2">91</span>
+                      <span className="delta up num text-accent-green text-sm ml-1">+2.1</span>
                     </span>
-                    <span className="chip">
-                      <span className="label">DSCR</span>
-                      <span className="value num">1.28</span>
-                      <span className="delta up num">+0.03</span>
+                    <span className="chip glass border border-border/30 px-3 py-2 rounded-lg">
+                      <span className="label text-xs text-muted-foreground uppercase tracking-wide">DSCR</span>
+                      <span className="value num text-lg font-bold text-foreground ml-2">1.28</span>
+                      <span className="delta up num text-accent-green text-sm ml-1">+0.03</span>
                     </span>
-                    <span className="chip">
-                      <span className="label">CAP RATE</span>
-                      <span className="value num">6.8%</span>
-                      <span className="delta down num">-0.2%</span>
+                    <span className="chip glass border border-border/30 px-3 py-2 rounded-lg">
+                      <span className="label text-xs text-muted-foreground uppercase tracking-wide">CAP RATE</span>
+                      <span className="value num text-lg font-bold text-foreground ml-2">6.8%</span>
+                      <span className="delta down num text-red-400 text-sm ml-1">-0.2%</span>
                     </span>
-                    <span className="chip">
-                      <span className="label">RENT BAND</span>
-                      <span className="value num">$1,780</span>
-                      <span className="delta up num">+15</span>
+                    <span className="chip glass border border-border/30 px-3 py-2 rounded-lg">
+                      <span className="label text-xs text-muted-foreground uppercase tracking-wide">RENT BAND</span>
+                      <span className="value num text-lg font-bold text-foreground ml-2">$1,780</span>
+                      <span className="delta up num text-accent-green text-sm ml-1">+15</span>
                     </span>
                   </div>
                 </div>
               </section>
 
-              {/* YOUR EXISTING DASHBOARD CONTENT */}
-              <main className="flex-1 p-6">
+              {/* Dashboard content */}
+              <div className="p-6">
                 <SmartSearch />
-
-                {/* Example: keep your CTA to home if you like */}
-                <div className="mt-4">
+                
+                <div className="mt-6">
                   <Button
                     variant="ghost"
                     onClick={() => navigate("/")}
-                    className="font-display text-lg font-semibold hover:text-white"
+                    className="font-display font-semibold text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    Back to Home
+                    ← Back to Home
                   </Button>
                 </div>
-              </main>
-            </div>
+              </div>
+            </main>
           </div>
-        </SidebarProvider>
+        </div>
+      </SidebarProvider>
     </div>
   );
 };

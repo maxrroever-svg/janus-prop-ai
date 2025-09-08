@@ -11,26 +11,33 @@ const Dashboard = () => {
   return (
     <div className="janus janus-dashboard">
       <SidebarProvider>
-        <div className="min-h-screen w-full bg-background flex">
-          <div className="star-field opacity-30"></div>
+        <div className="min-h-screen w-full flex overflow-hidden">
+          <div className="star-field opacity-30 fixed inset-0 z-0"></div>
           <DashboardSidebar />
-          <div className="flex-1 flex flex-col relative z-10">
-            <header className="janus-header navbar flex items-center justify-between px-6 h-16">
-              <div className="flex items-center gap-4">
-                <SidebarTrigger />
-                <span className="font-display text-lg font-semibold text-foreground glow-text">
-                  Janus Investor
-                </span>
+          
+          {/* MAIN CONTENT - Properly positioned relative to sidebar */}
+          <div className="flex-1 flex flex-col min-w-0 relative z-10">
+            {/* Fixed header */}
+            <header className="janus-header sticky top-0 z-40 bg-background/80 backdrop-blur-sm border-b border-border/30">
+              <div className="flex items-center justify-between px-6 h-16">
+                <div className="flex items-center gap-4">
+                  <SidebarTrigger />
+                  <span className="font-display text-lg font-semibold text-foreground">
+                    Janus Investor
+                  </span>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  onClick={() => navigate('/')}
+                  className="font-display font-semibold text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  Janus AI
+                </Button>
               </div>
-              <Button 
-                variant="ghost" 
-                onClick={() => navigate('/')}
-                className="font-display text-lg font-semibold text-foreground hover:text-white glow-text"
-              >
-                Janus AI
-              </Button>
             </header>
-            <main className="flex-1">
+            
+            {/* Scrollable main content */}
+            <main className="flex-1 overflow-y-auto">
               <DealCanvas />
             </main>
           </div>
