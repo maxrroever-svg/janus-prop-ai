@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger } from "@/components/ui/sidebar-simple";
 import { useNavigate } from "react-router-dom";
 
 interface ConsumerHeaderProps {
