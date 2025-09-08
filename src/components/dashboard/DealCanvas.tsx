@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { CommandBar } from "./CommandBar";
 import { DealWorkflow } from "./DealWorkflow";
 import { DealUploader } from "./DealUploader";
-import { Button } from "@/components/ui/button";
-import { Upload } from "lucide-react";
 
 export function DealCanvas() {
   const [showUploader, setShowUploader] = useState(false);
@@ -16,11 +13,6 @@ export function DealCanvas() {
 
   return (
     <div className="flex flex-col overflow-hidden">
-      {/* Command Bar */}
-      <div className="shrink-0">
-        <CommandBar onCommand={handleCommand} onUpload={() => setShowUploader(true)} />
-      </div>
-      
       {/* Main Content Area - Glass Grid */}
       <div className="flex-1 overflow-hidden bg-background p-6">
         <div className="glass-grid-container">
