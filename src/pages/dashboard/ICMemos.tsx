@@ -117,11 +117,10 @@ const ICMemos = () => {
 
   return (
     <SidebarProvider>
-      <div className="janus janus-dashboard min-h-screen w-full flex overflow-hidden">
-        <DashboardSidebar />
-        <div className="flex-1 flex flex-col min-w-0 relative">
-          <DashboardHeader />
-          <main className="flex-1 overflow-y-auto p-6">
+      <DashboardSidebar />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <DashboardHeader />
+        <main className="flex-1 overflow-y-auto p-6">
             <div className="max-w-7xl mx-auto">
               <div className="mb-6">
                 <h1 className="font-display text-2xl text-foreground mb-2">IC Memos</h1>
@@ -353,8 +352,7 @@ const ICMemos = () => {
                 </TabsContent>
               </Tabs>
             </div>
-          </main>
-        </div>
+        </main>
       </div>
     </SidebarProvider>
   );
