@@ -20,53 +20,67 @@ export function CommandBar({ onCommand, onUpload }: CommandBarProps) {
   };
 
   return (
-    <div className="border-b border-border glass p-4">
-      <form onSubmit={handleSubmit} className="flex gap-3">
-        <div className="flex-1 relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <Input
-            value={command}
-            onChange={(e) => setCommand(e.target.value)}
-            placeholder="Paste an address or describe your investment criteria..."
-            className="pl-10 bg-muted/30 border-border focus:bg-background"
-          />
-        </div>
-        <Button 
-          type="submit" 
-          className="glass text-foreground hover:bg-white/10 border border-white/20 px-6"
-          disabled={!command.trim()}
-        >
-          <Zap className="w-4 h-4 mr-2" />
-          Orchestrate
-        </Button>
-        {onUpload && (
-          <Button 
+    <div className="section band band--fog glass border-b border-border/30 p-6">
+      <div className="container max-w-4xl mx-auto">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+            <Input
+              value={command}
+              onChange={(e) => setCommand(e.target.value)}
+              placeholder="Paste an address or describe your investment criteria..."
+              className="pl-10 text-base py-6 glass border-border/50 bg-surface/50 backdrop-blur-sm placeholder:text-muted-foreground focus:border-primary/50 focus:ring-primary/20"
+            />
+          </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button 
+              type="submit" 
+              size="lg"
+              className="btn-professional px-8"
+              disabled={!command.trim()}
+            >
+              <Zap className="w-4 h-4 mr-2" />
+              Orchestrate
+            </Button>
+            {onUpload && (
+              <Button 
+                type="button"
+                onClick={onUpload}
+                variant="outline"
+                size="lg"
+                className="px-8"
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                Upload Deal
+              </Button>
+            )}
+          </div>
+        </form>
+        
+        <div className="flex flex-wrap gap-2 justify-center mt-6">
+          <button 
             type="button"
-            onClick={onUpload}
-            variant="outline"
-            className="glass text-foreground hover:bg-white/10 border border-white/20 px-6"
+            onClick={() => setCommand("Find distressed 2-4 unit MF in Brooklyn; CoC > 12%")}
+            className="chip glass border border-border/30 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:border-accent/50 transition-colors"
           >
-            <Upload className="w-4 h-4 mr-2" />
-            Upload
-          </Button>
-        )}
-      </form>
-      
-      <div className="mt-3 flex gap-2">
-        <button 
-          type="button"
-          onClick={() => setCommand("Find distressed 2-4 unit MF in Brooklyn; CoC > 12%")}
-          className="text-xs px-3 py-1 glass hover:bg-white/10 border border-white/20 text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Distressed MF Brooklyn
-        </button>
-        <button 
-          type="button"
-          onClick={() => setCommand("123 Main St, Queens, NY")}
-          className="text-xs px-3 py-1 glass hover:bg-white/10 border border-white/20 text-muted-foreground hover:text-foreground transition-colors"
-        >
-          Analyze Address
-        </button>
+            Distressed MF Brooklyn
+          </button>
+          <button 
+            type="button"
+            onClick={() => setCommand("123 Main St, Queens, NY")}
+            className="chip glass border border-border/30 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:border-accent/50 transition-colors"
+          >
+            Analyze Address
+          </button>
+          <button 
+            type="button"
+            onClick={() => setCommand("Find 1-2 unit SFH in Miami; rental yield > 8%")}
+            className="chip glass border border-border/30 px-3 py-2 rounded-lg text-sm text-muted-foreground hover:text-foreground hover:border-accent/50 transition-colors"
+          >
+            Miami SFH Rental
+          </button>
+        </div>
       </div>
     </div>
   );
