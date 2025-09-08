@@ -676,4 +676,159 @@ html {
     background: hsl(var(--accent-green)) !important;
     color: hsl(var(--accent-green-foreground)) !important;
   }
+
+  /* ===========================================
+     CRITICAL Z-INDEX HIERARCHY OVERRIDES
+     =========================================== */
+  
+  /* Base content layer */
+  .janus-dashboard main,
+  .janus-dashboard .main-content {
+    z-index: 1 !important;
+  }
+
+  /* Sidebar - Primary navigation layer */
+  .janus-dashboard [data-sidebar],
+  .janus-dashboard .sidebar {
+    z-index: 30 !important;
+    position: relative !important;
+  }
+
+  /* Header - Secondary navigation layer */
+  .janus-dashboard header {
+    z-index: 35 !important;
+    position: sticky !important;
+    top: 0 !important;
+  }
+
+  /* Modals and overlays - Top layer */
+  .janus-dashboard .fixed,
+  .janus-dashboard [class*="z-50"],
+  .janus-dashboard .modal,
+  .janus-dashboard .dialog {
+    z-index: 50 !important;
+  }
+
+  /* Tooltips and dropdowns - Above modals */
+  .janus-dashboard .tooltip,
+  .janus-dashboard .dropdown-menu,
+  .janus-dashboard .popover {
+    z-index: 60 !important;
+  }
+
+  /* ===========================================
+     SIDEBAR INTERACTION FIXES
+     =========================================== */
+
+  /* Prevent sidebar content from interfering */
+  .janus-dashboard .sidebar-content {
+    overflow-y: auto !important;
+    height: 100vh !important;
+    position: relative !important;
+  }
+
+  /* Fix sidebar trigger positioning */
+  .janus-dashboard .sidebar-trigger {
+    z-index: 36 !important;
+    position: relative !important;
+  }
+
+  /* Ensure sidebar doesn't affect main content flow */
+  .janus-dashboard .sidebar + * {
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+
+  /* ===========================================
+     HEADER INTERACTION FIXES
+     =========================================== */
+
+  /* Clean header positioning */
+  .janus-dashboard .consumer-header,
+  .janus-dashboard .dashboard-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 35 !important;
+    backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(124, 156, 255, 0.15) !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+  }
+
+  /* Header content alignment */
+  .janus-dashboard header .flex {
+    align-items: center !important;
+    gap: 1rem !important;
+  }
+
+  /* Header text sizing fixes */
+  .janus-dashboard header h1 {
+    font-size: 0.875rem !important;
+    max-height: 36px !important;
+    overflow: hidden !important;
+  }
+
+  /* ===========================================
+     LAYOUT FLOW FIXES
+     =========================================== */
+
+  /* Prevent layout shift from positioning changes */
+  .janus-dashboard .flex-1 {
+    display: flex !important;
+    flex-direction: column !important;
+    min-height: 100vh !important;
+  }
+
+  /* Ensure proper content scrolling */
+  .janus-dashboard .flex-1 > main {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    position: relative !important;
+  }
+
+  /* Fix any absolute positioned elements that might interfere */
+  .janus-dashboard .absolute:not(.modal):not(.dialog):not(.tooltip) {
+    z-index: 5 !important;
+  }
+
+  /* ===========================================
+     FINAL CLEAN-UP OVERRIDES
+     =========================================== */
+
+  /* Ensure all dashboard and consumer pages work consistently */
+  .janus-dashboard .min-h-screen {
+    min-height: 100vh !important;
+    display: flex !important;
+  }
+
+  /* Clean up any remaining background conflicts */
+  .janus-dashboard .bg-muted,
+  .janus-dashboard .bg-muted\/30 {
+    background: transparent !important;
+  }
+
+  /* Ensure proper button styling with accent colors */
+  .janus-dashboard .btn-accent-blue {
+    background: hsl(var(--accent-blue)) !important;
+    color: hsl(var(--accent-blue-foreground)) !important;
+    border: 1px solid rgba(124, 156, 255, 0.3) !important;
+  }
+
+  .janus-dashboard .btn-accent-green {
+    background: hsl(var(--accent-green)) !important;
+    color: hsl(var(--accent-green-foreground)) !important;
+    border: 1px solid rgba(168, 255, 206, 0.3) !important;
+  }
+
+  /* Clean sidebar and header interaction */
+  .janus-dashboard .sidebar ~ .flex-1 {
+    flex: 1 1 0% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Ensure proper text rendering */
+  .janus-dashboard * {
+    -webkit-font-smoothing: antialiased !important;
+    text-rendering: optimizeLegibility !important;
+  }
 }

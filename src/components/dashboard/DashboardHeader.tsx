@@ -16,9 +16,9 @@ export function DashboardHeader() {
   const navigate = useNavigate();
 
   return (
-    <header className="h-16 border-b border-border glass backdrop-blur-lg flex items-center justify-between px-6">
+    <header className="dashboard-header h-16 border-b border-border glass backdrop-blur-lg flex items-center justify-between px-6">
       <div className="flex items-center gap-4">
-        <SidebarTrigger />
+        <SidebarTrigger className="sidebar-trigger" />
         <Button 
           variant="ghost" 
           onClick={() => navigate('/')}

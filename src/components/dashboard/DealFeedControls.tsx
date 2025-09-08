@@ -55,7 +55,7 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
   return (
     <>
       {/* Mode Selector - Top Right */}
-      <div className="absolute top-6 right-6 z-50">
+      <div className="absolute top-6 right-6 z-[10]">
         <div className="dashboard-surface backdrop-blur-md rounded-xl border border-border/30 p-2">
           <div className="flex space-x-1">
             {modes.map((modeOption) => {
@@ -96,7 +96,7 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
 
       {/* Filter Toggle - Top Left */}
       {mode === "search" && (
-        <div className="absolute top-6 left-6 z-50">
+        <div className="absolute top-6 left-6 z-[10]">
           <Button
             variant="ghost"
             size="sm"
@@ -122,7 +122,7 @@ export const DealFeedControls = ({ mode, onModeChange }: DealFeedControlsProps) 
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -300, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="absolute top-0 left-0 h-full w-80 dashboard-surface backdrop-blur-xl border-r border-border/30 z-40"
+            className="absolute top-0 left-0 h-full w-80 dashboard-surface backdrop-blur-xl border-r border-border/30 z-[15]"
           >
             <div className="p-6 space-y-6">
               {/* Header */}

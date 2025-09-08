@@ -61,8 +61,8 @@ export function DashboardSidebar() {
       : "text-muted-foreground hover:text-foreground hover:bg-muted/50";
 
   return (
-    <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible="icon">
-      <SidebarContent>
+    <Sidebar className={`sidebar dashboard-sidebar ${collapsed ? "w-16" : "w-64"}`} collapsible="icon">
+      <SidebarContent className="sidebar-content">
         <SidebarGroup>
           <SidebarGroupLabel className={collapsed ? "sr-only" : ""}>
             Main Navigation

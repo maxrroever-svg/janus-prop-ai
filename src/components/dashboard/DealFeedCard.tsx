@@ -79,7 +79,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
       {!isFirst && (
         <button
           onClick={onPrevious}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 z-40 dashboard-card rounded-sm p-2 text-foreground hover:bg-white/15"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 z-[5] dashboard-card rounded-sm p-2 text-foreground hover:bg-white/15"
         >
           <ChevronUp className="h-5 w-5" />
         </button>
@@ -88,14 +88,14 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
       {!isLast && (
         <button
           onClick={onNext}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 z-40 dashboard-card rounded-sm p-2 text-foreground hover:bg-white/15"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 z-[5] dashboard-card rounded-sm p-2 text-foreground hover:bg-white/15"
         >
           <ChevronDown className="h-5 w-5" />
         </button>
       )}
 
       {/* Content Overlay */}
-      <div className="absolute inset-0 flex flex-col justify-between p-6 z-30">
+      <div className="absolute inset-0 flex flex-col justify-between p-6 z-[2]">
         {/* Top Section - Property Info */}
         <div className="space-y-4">
           <div className="flex items-start justify-between">

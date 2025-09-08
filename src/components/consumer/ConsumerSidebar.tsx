@@ -58,8 +58,8 @@ export function ConsumerSidebar() {
       : "text-muted-foreground hover:text-foreground hover:bg-muted/50";
 
   return (
-    <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible="icon">
-      <SidebarContent>
+    <Sidebar className={`sidebar ${collapsed ? "w-16" : "w-64"}`} collapsible="icon">
+      <SidebarContent className="sidebar-content">
         <div className="p-3 border-b border-border/30">
           <h2 className={`font-display text-[10px] font-medium text-muted-foreground ${collapsed ? "sr-only" : ""}`}>
             Janus Consumer
