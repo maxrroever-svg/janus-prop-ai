@@ -199,7 +199,7 @@ export default function LandingPage() {
 
         /* ——— Header (transparent, fixed, follows scroll) ——— */
         .landing .header{
-          position:fixed; top:0; left:0; right:0; z-index:40;
+          position:fixed !important; top:0; left:0; right:0; z-index:40;
           display:flex; align-items:center; justify-content:space-between;
           padding:14px 16px; background:transparent; border:none; box-shadow:none;
         }

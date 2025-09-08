@@ -79,8 +79,8 @@ html, body {
 
 /* Keep content above atmospherics */
 main, footer, section, nav, .relative { position: relative; z-index: 1; }
-/* Headers get special treatment */
-header { position: static !important; z-index: 1; }
+/* Headers get special treatment - but not landing headers */
+header:not(.landing header) { position: static !important; z-index: 1; }
 
 @layer base {
   * {
