@@ -1065,66 +1065,85 @@ html {
     box-sizing: border-box !important;
   }
 
-  /* Mobile responsive */
-  @media (max-width: 768px) {
-    .janus-dashboard .sidebar {
-      position: fixed !important;
-      z-index: 50 !important;
-    }
+  /* ===========================================
+     DASHBOARD LAYOUT - RESTORED AND WORKING
+     =========================================== */
+
+  /* Basic dashboard layout */
+  .janus-dashboard {
+    display: flex;
+    min-height: 100vh;
+  }
+
+  .janus-dashboard .min-h-screen {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+  }
+
+  /* Sidebar - Always visible and functional */
+  .janus-dashboard .sidebar {
+    width: 16rem;
+    height: 100vh;
+    background: hsl(var(--background));
+    border-right: 1px solid hsl(var(--border));
+    flex-shrink: 0;
+    position: relative;
+    z-index: 30;
+  }
+
+  .janus-dashboard .sidebar-content {
+    background: hsl(var(--background));
+    height: 100%;
+  }
+
+  .janus-dashboard .sidebar-header {
+    background: hsl(var(--background));
+  }
+
+  /* Main content area */
+  .janus-dashboard .flex-1 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  /* Header */
+  .janus-dashboard header,
+  .janus-dashboard .janus-header {
+    height: 4rem;
+    flex-shrink: 0;
+    background: hsl(var(--background));
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  /* Main content scrolling */
+  .janus-dashboard main {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  /* Sidebar navigation */
+  .sidebar-menu-button {
+    background: transparent;
+  }
+
+  .sidebar-menu-button:hover {
+    background: hsl(var(--accent) / 0.1);
+  }
+
+  .sidebar-menu-button.active {
+    background: hsl(var(--accent-green) / 0.1);
+    color: hsl(var(--accent-green));
+  }
+
+  /* Remove problematic overrides */
+  .janus-dashboard * {
+    box-sizing: border-box;
   }
 
   /* ===========================================
-     FINAL LAYOUT STABILITY FIXES
+     END DASHBOARD LAYOUT
      =========================================== */
-
-  /* Sidebar - ALWAYS VISIBLE AND STYLED */
-  .janus-dashboard .sidebar {
-    flex-shrink: 0 !important;
-    position: relative !important;
-    z-index: 30 !important;
-    height: 100vh !important;
-    background: hsl(var(--background)) !important;
-    border-right: 1px solid hsl(var(--border) / 0.3) !important;
-    transition: width 0.2s ease !important;
-  }
-
-  /* Restore sidebar backgrounds */
-  .janus-dashboard .sidebar,
-  .janus-dashboard .sidebar-content,
-  .janus-dashboard .sidebar-header {
-    background: hsl(var(--background)) !important;
-  }
-
-  /* Sidebar navigation styling */
-  .janus-dashboard .sidebar-menu-button {
-    background: transparent !important;
-  }
-
-  .janus-dashboard .sidebar-menu-button:hover {
-    background: hsl(var(--accent) / 0.1) !important;
-  }
-
-  .janus-dashboard .sidebar-menu-button.active {
-    background: hsl(var(--accent-green) / 0.1) !important;
-    color: hsl(var(--accent-green)) !important;
-  }
-
-  /* Ensure SidebarProvider wrapper has proper flex */
-  .janus-dashboard .group\/sidebar-wrapper {
-    display: flex !important;
-    min-height: 100vh !important;
-    width: 100% !important;
-  }
-
-  /* Ensure all flex containers maintain proper height */
-  .janus-dashboard .min-h-screen,
-  .janus-dashboard .min-h-svh {
-    min-height: 100vh !important;
-  }
-
-  /* Selective background override - PRESERVE sidebar and cards */
-  .janus-dashboard .min-h-screen.bg-background,
-  .janus-dashboard .flex.bg-background:not(.sidebar):not(.card):not(.consumer-header) {
-    background: transparent !important;
-  }
 }
