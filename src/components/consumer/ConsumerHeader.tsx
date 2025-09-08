@@ -15,11 +15,11 @@ export function ConsumerHeader({ title, subtitle }: ConsumerHeaderProps) {
       <div className="flex items-center gap-4">
         <SidebarTrigger className="text-foreground hover:bg-accent/10" />
         <div>
-          <h1 className="font-display text-xl font-semibold text-foreground glow-text">
+          <h1 className="font-display text-sm font-semibold text-foreground glow-text" style={{ maxHeight: '36px' }}>
             {title}
           </h1>
           {subtitle && (
-            <p className="text-sm text-muted-foreground">{subtitle}</p>
+            <p className="text-xs text-muted-foreground">{subtitle}</p>
           )}
         </div>
       </div>

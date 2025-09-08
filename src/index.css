@@ -12,7 +12,7 @@
     /* Monochrome x.ai palette */
     --background: 0 0% 4%; /* Matte black #0B0B0B */
     --foreground: 0 0% 96%; /* White text #F5F5F5 */
-    --card: 0 0% 6%; /* Almost black card #0E0E0E */
+    --card: transparent; /* Transparent cards */
     --card-foreground: 0 0% 96%;
     --popover: 0 0% 6%;
     --popover-foreground: 0 0% 96%;
@@ -20,6 +20,12 @@
     /* Monochrome primary (white) */
     --primary: 0 0% 100%; /* Pure white */
     --primary-foreground: 0 0% 4%;
+    
+    /* New accent colors */
+    --accent-blue: 227 100% 85%; /* #7c9cff */
+    --accent-green: 154 100% 84%; /* #a8ffce */
+    --accent-blue-foreground: 0 0% 4%;
+    --accent-green-foreground: 0 0% 4%;
     
     /* Monochrome secondary layers */
     --secondary: 0 0% 8%; /* Slightly lighter */
@@ -121,6 +127,40 @@ header { position: static !important; z-index: 1; }
   -webkit-backdrop-filter: none !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+/* Glass tiles and grid styling */
+.glass-tile {
+  background: rgba(255, 255, 255, 0.02) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.glass-tile:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(124, 156, 255, 0.3) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+}
+
+.glass-grid-container {
+  display: grid;
+  gap: 1.5rem;
+  height: 100%;
+}
+
+/* Responsive glass grid */
+@media (min-width: 768px) {
+  .glass-grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .glass-grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  }
 }
 
 /* Smooth scrolling */

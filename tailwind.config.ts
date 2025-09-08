@@ -52,6 +52,14 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				'accent-blue': {
+					DEFAULT: 'hsl(var(--accent-blue))',
+					foreground: 'hsl(var(--accent-blue-foreground))'
+				},
+				'accent-green': {
+					DEFAULT: 'hsl(var(--accent-green))',
+					foreground: 'hsl(var(--accent-green-foreground))'
+				},
 				gold: {
 					DEFAULT: 'hsl(var(--gold))',
 					foreground: 'hsl(var(--gold-foreground))'

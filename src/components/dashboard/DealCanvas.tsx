@@ -54,9 +54,11 @@ export function DealCanvas() {
         </div>
       </div>
       
-      {/* Main Content Area */}
-      <div className="flex-1 overflow-hidden bg-background">
-        <DealWorkflow />
+      {/* Main Content Area - Glass Grid */}
+      <div className="flex-1 overflow-hidden bg-background p-6">
+        <div className="glass-grid-container">
+          <DealWorkflow />
+        </div>
       </div>
 
       {/* Deal Uploader Modal */}
