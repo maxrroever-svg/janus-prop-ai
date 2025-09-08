@@ -20,9 +20,10 @@ const Deals = () => {
       <DashboardSidebar />
       <div className="flex-1 flex flex-col min-h-screen">
         <DashboardHeader title="Deal Management" subtitle="View and manage active deals" />
-        <main className="flex-1 flex overflow-hidden">
+        <main className="flex-1 overflow-y-auto">
+          <div className="h-full flex">
             {/* Left Panel - Main Content */}
-            <div className="flex-1 flex flex-col overflow-hidden">
+            <div className="flex-1 flex flex-col">
               {/* Agent Insights Section */}
               <div className="shrink-0 p-6 border-b border-border bg-secondary/20">
                 <AgentInsights />
@@ -54,28 +55,27 @@ const Deals = () => {
                 </div>
               </div>
               
-              {/* Content Area - NO HORIZONTAL SCROLLING */}
-              <div className="flex-1 overflow-y-auto overflow-x-hidden">
-                <div className="p-6 w-full">
-                  {view === 'deals' ? (
-                    <div className="w-full max-w-none">
-                      <SimplifiedDealTable onPropertySelect={handlePropertySelect} />
-                    </div>
-                  ) : (
-                    <div className="w-full h-full">
-                      <DealMap onDealSelect={setSelectedDeal} />
-                    </div>
-                  )}
-                </div>
+              {/* Content Area */}
+              <div className="flex-1 p-6">
+                {view === 'deals' ? (
+                  <div className="w-full">
+                    <SimplifiedDealTable onPropertySelect={handlePropertySelect} />
+                  </div>
+                ) : (
+                  <div className="w-full h-full min-h-[600px]">
+                    <DealMap onDealSelect={setSelectedDeal} />
+                  </div>
+                )}
               </div>
             </div>
             
             {/* Right Panel - Property Details ONLY WHEN SELECTED */}
             {selectedDeal && (
-              <div className="w-96 shrink-0 border-l border-border bg-secondary/30 overflow-hidden">
+              <div className="w-96 shrink-0 border-l border-border bg-secondary/30 overflow-y-auto">
                 <ExplainPanel deal={selectedDeal} onClose={() => setSelectedDeal(null)} />
               </div>
             )}
+          </div>
         </main>
       </div>
     </SidebarProvider>
