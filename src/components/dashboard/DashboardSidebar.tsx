@@ -63,8 +63,8 @@ export function DashboardSidebar() {
   return (
     <Sidebar>
       <SidebarContent>
-        <div className="p-3 border-b border-border/30">
-          <h2 className={`font-display text-sm font-medium text-muted-foreground ${collapsed ? "sr-only" : ""}`}>
+        <div className="h-16 flex items-center px-4 border-b border-border/30 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <h2 className={`font-display text-sm font-semibold text-foreground glow-text ${collapsed ? "sr-only" : ""}`}>
             Janus Investor
           </h2>
         </div>
