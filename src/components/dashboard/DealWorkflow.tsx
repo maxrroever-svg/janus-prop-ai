@@ -314,406 +314,373 @@ export function DealWorkflow() {
           </TabsList>
 
           <TabsContent value="upload" className="space-y-6">
-            {/* Document Upload Header */}
-            <div className="flex justify-between items-center mb-4">
-              <div>
-                <h2 className="font-display text-lg font-semibold text-foreground glow-text">Document Upload</h2>
-                <p className="text-sm text-muted-foreground">AI-powered processing</p>
-              </div>
-              <Button 
-                variant="outline" 
-                onClick={() => setShowWalkthrough(true)}
-                className="glass hover:bg-white/10 border-border"
-              >
-                <HelpCircle className="w-4 h-4" />
-              </Button>
-            </div>
-
-            {/* Upload Method Selection */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-bold">1</div>
-                  Select Upload Method
+                <CardTitle className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Upload className="w-5 h-5" />
+                    Document Upload & AI Processing
+                  </div>
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => setShowWalkthrough(true)}
+                  >
+                    <HelpCircle className="w-4 h-4" />
+                  </Button>
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <Card 
-                    className={`cursor-pointer transition-all ${uploadMethod === 'local' ? 'ring-2 ring-primary' : 'hover:shadow-md'}`}
-                    onClick={() => setUploadMethod('local')}
-                  >
-                    <CardContent className="p-4 text-center">
-                      <Upload className="w-8 h-8 text-primary mx-auto mb-2" />
-                      <h4 className="font-semibold text-foreground">Local Files</h4>
-                      <p className="text-xs text-muted-foreground">Upload from your device</p>
-                    </CardContent>
-                  </Card>
-                  <Card 
-                    className={`cursor-pointer transition-all ${uploadMethod === 'cloud' ? 'ring-2 ring-primary' : 'hover:shadow-md'}`}
-                    onClick={() => setUploadMethod('cloud')}
-                  >
-                    <CardContent className="p-4 text-center">
-                      <CloudUpload className="w-8 h-8 text-primary mx-auto mb-2" />
-                      <h4 className="font-semibold text-foreground">Cloud Storage</h4>
-                      <p className="text-xs text-muted-foreground">Google Drive, Dropbox</p>
-                    </CardContent>
-                  </Card>
-                  <Card 
-                    className={`cursor-pointer transition-all ${uploadMethod === 'url' ? 'ring-2 ring-primary' : 'hover:shadow-md'}`}
-                    onClick={() => setUploadMethod('url')}
-                  >
-                    <CardContent className="p-4 text-center">
-                      <FolderOpen className="w-8 h-8 text-primary mx-auto mb-2" />
-                      <h4 className="font-semibold text-foreground">URL Import</h4>
-                      <p className="text-xs text-muted-foreground">Import from web links</p>
-                    </CardContent>
-                  </Card>
+              <CardContent className="space-y-6">
+                {/* Upload Method Selection */}
+                <div className="space-y-3">
+                  <h3 className="text-sm font-medium text-foreground">Select Upload Method</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div 
+                      className={`p-4 rounded-lg border cursor-pointer transition-all ${uploadMethod === 'local' ? 'ring-2 ring-primary bg-primary/5' : 'hover:shadow-md'}`}
+                      onClick={() => setUploadMethod('local')}
+                    >
+                      <div className="text-center">
+                        <Upload className="w-8 h-8 text-primary mx-auto mb-2" />
+                        <h4 className="font-semibold text-foreground">Local Files</h4>
+                        <p className="text-xs text-muted-foreground">Upload from your device</p>
+                      </div>
+                    </div>
+                    <div 
+                      className={`p-4 rounded-lg border cursor-pointer transition-all ${uploadMethod === 'cloud' ? 'ring-2 ring-primary bg-primary/5' : 'hover:shadow-md'}`}
+                      onClick={() => setUploadMethod('cloud')}
+                    >
+                      <div className="text-center">
+                        <CloudUpload className="w-8 h-8 text-primary mx-auto mb-2" />
+                        <h4 className="font-semibold text-foreground">Cloud Storage</h4>
+                        <p className="text-xs text-muted-foreground">Google Drive, Dropbox</p>
+                      </div>
+                    </div>
+                    <div 
+                      className={`p-4 rounded-lg border cursor-pointer transition-all ${uploadMethod === 'url' ? 'ring-2 ring-primary bg-primary/5' : 'hover:shadow-md'}`}
+                      onClick={() => setUploadMethod('url')}
+                    >
+                      <div className="text-center">
+                        <FolderOpen className="w-8 h-8 text-primary mx-auto mb-2" />
+                        <h4 className="font-semibold text-foreground">URL Import</h4>
+                        <p className="text-xs text-muted-foreground">Import from web links</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </CardContent>
-            </Card>
 
-            {/* Advanced Upload Interface */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-bold">2</div>
-                  Upload Deal Documents
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {uploadMethod === 'local' && (
-                  <div 
-                    className={`border-2 border-dashed rounded-lg p-8 text-center transition-all ${
-                      isDragOver 
-                        ? 'border-primary bg-primary/5 scale-105' 
-                        : 'border-border hover:border-primary/50'
-                    }`}
-                    onDragOver={handleDragOver}
-                    onDragLeave={handleDragLeave}
-                    onDrop={handleDrop}
-                  >
-                    <div className="flex flex-col items-center">
-                      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                        <Upload className="w-8 h-8 text-primary" />
+                <Separator />
+
+                {/* Upload Interface */}
+                <div className="space-y-4">
+                  {uploadMethod === 'local' && (
+                    <div 
+                      className={`border-2 border-dashed rounded-lg p-8 text-center transition-all ${
+                        isDragOver 
+                          ? 'border-primary bg-primary/5 scale-105' 
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                      onDragOver={handleDragOver}
+                      onDragLeave={handleDragLeave}
+                      onDrop={handleDrop}
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                          <Upload className="w-8 h-8 text-primary" />
+                        </div>
+                        <h3 className="text-lg font-semibold text-foreground mb-2">
+                          Drag & Drop Your Documents
+                        </h3>
+                        <p className="text-muted-foreground mb-4">
+                          or click to browse your files
+                        </p>
+                        <div className="flex flex-wrap gap-2 justify-center mb-4">
+                          <Badge variant="secondary">PDF</Badge>
+                          <Badge variant="secondary">Excel</Badge>
+                          <Badge variant="secondary">Word</Badge>
+                          <Badge variant="secondary">CSV</Badge>
+                        </div>
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          multiple
+                          accept=".pdf,.xlsx,.xls,.csv,.doc,.docx"
+                          onChange={handleFileUpload}
+                          className="hidden"
+                          id="file-upload"
+                        />
+                        <div className="flex gap-2">
+                          <Button 
+                            variant="default"
+                            onClick={() => fileInputRef.current?.click()}
+                            className="cursor-pointer"
+                          >
+                            <Plus className="w-4 h-4 mr-2" />
+                            Select Files
+                          </Button>
+                          <Button variant="outline">
+                            <FolderOpen className="w-4 h-4 mr-2" />
+                            Browse Folder
+                          </Button>
+                        </div>
                       </div>
-                      <h3 className="text-lg font-semibold text-foreground mb-2">
-                        Drag & Drop Your Documents
-                      </h3>
-                      <p className="text-muted-foreground mb-4">
-                        or click to browse your files
-                      </p>
-                      <div className="flex flex-wrap gap-2 justify-center mb-4">
-                        <Badge variant="secondary">PDF</Badge>
-                        <Badge variant="secondary">Excel</Badge>
-                        <Badge variant="secondary">Word</Badge>
-                        <Badge variant="secondary">CSV</Badge>
-                      </div>
-                      <input
-                        ref={fileInputRef}
-                        type="file"
-                        multiple
-                        accept=".pdf,.xlsx,.xls,.csv,.doc,.docx"
-                        onChange={handleFileUpload}
-                        className="hidden"
-                        id="file-upload"
-                      />
-                      <div className="flex gap-2">
-                        <Button 
-                          variant="default"
-                          onClick={() => fileInputRef.current?.click()}
-                          className="cursor-pointer"
-                        >
-                          <Plus className="w-4 h-4 mr-2" />
-                          Select Files
+                    </div>
+                  )}
+
+                  {uploadMethod === 'cloud' && (
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <Button variant="outline" className="h-16 flex flex-col gap-2">
+                          <CloudUpload className="w-6 h-6" />
+                          Google Drive
                         </Button>
-                        <Button variant="outline">
-                          <FolderOpen className="w-4 h-4 mr-2" />
-                          Browse Folder
+                        <Button variant="outline" className="h-16 flex flex-col gap-2">
+                          <FolderOpen className="w-6 h-6" />
+                          Dropbox
                         </Button>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {uploadMethod === 'cloud' && (
-                  <div className="space-y-4">
-                    <div className="grid grid-cols-2 gap-4">
-                      <Button variant="outline" className="h-16 flex flex-col gap-2">
-                        <CloudUpload className="w-6 h-6" />
-                        <span>Google Drive</span>
-                      </Button>
-                      <Button variant="outline" className="h-16 flex flex-col gap-2">
-                        <CloudUpload className="w-6 h-6" />
-                        <span>Dropbox</span>
-                      </Button>
+                  {uploadMethod === 'url' && (
+                    <div className="space-y-4">
+                      <Input placeholder="Enter document URL..." />
+                      <Button className="w-full">Import from URL</Button>
                     </div>
-                    <p className="text-sm text-muted-foreground text-center">
-                      Connect your cloud storage to import documents directly
-                    </p>
-                  </div>
-                )}
+                  )}
+                </div>
 
-                {uploadMethod === 'url' && (
-                  <div className="space-y-4">
-                    <Input 
-                      placeholder="Enter document URL (PDF, Excel, etc.)" 
-                      className="w-full"
-                    />
-                    <Button className="w-full">
-                      <CloudUpload className="w-4 h-4 mr-2" />
-                      Import from URL
-                    </Button>
-                  </div>
-                )}
-                
-                {/* Uploaded Files with Advanced Status */}
+                {/* Uploaded Files Queue */}
                 {uploadedFiles.length > 0 && (
-                  <div className="space-y-4">
-                    <Separator />
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-sm font-semibold text-foreground">Processing Queue</h4>
-                      <Badge variant="outline">
-                        {uploadedFiles.filter(f => f.status === 'completed').length} / {uploadedFiles.length} Complete
-                      </Badge>
+                      <h3 className="text-sm font-medium text-foreground">Upload Queue</h3>
+                      <Badge variant="outline">{uploadedFiles.length} files</Badge>
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-2 max-h-64 overflow-y-auto">
                       {uploadedFiles.map((file) => (
-                        <Card key={file.id} className="p-4">
-                          <div className="flex items-start gap-3">
-                            <div className="flex-shrink-0">
-                              {file.status === 'completed' && <CheckCircle className="w-5 h-5 text-success" />}
-                              {file.status === 'processing' && <Clock className="w-5 h-5 text-primary animate-spin" />}
-                              {file.status === 'error' && <AlertCircle className="w-5 h-5 text-destructive" />}
-                              {file.status === 'pending' && <Clock className="w-5 h-5 text-muted-foreground" />}
+                        <div key={file.id} className="p-3 border border-border rounded-lg">
+                          <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                              <File className="w-4 h-4 text-muted-foreground" />
+                              <span className="text-sm font-medium text-foreground">{file.name}</span>
+                              <Badge variant="outline" className="text-xs">
+                                {file.documentType}
+                              </Badge>
                             </div>
-                            <div className="flex-1 min-w-0">
-                              <div className="flex items-center justify-between mb-2">
-                                <div>
-                                  <h5 className="font-medium text-foreground truncate">{file.name}</h5>
-                                  <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                                    <span>{(file.size / 1024 / 1024).toFixed(1)} MB</span>
-                                    <span>•</span>
-                                    <span>{file.documentType}</span>
-                                  </div>
-                                </div>
-                                <Button 
-                                  variant="ghost" 
-                                  size="sm"
-                                  onClick={() => removeFile(file.id)}
-                                >
-                                  <X className="w-4 h-4" />
-                                </Button>
-                              </div>
-                              
-                              {file.status === 'processing' && (
-                                <div className="space-y-2">
-                                  <Progress value={file.progress} className="w-full h-2" />
-                                  <p className="text-xs text-muted-foreground">
-                                    Analyzing document structure and extracting data...
-                                  </p>
-                                </div>
-                              )}
-                              
-                              {file.status === 'completed' && file.extractedData && (
-                                <div className="mt-2 p-3 bg-success/10 rounded border border-success/20">
-                                  <div className="flex items-center gap-2 mb-2">
-                                    <Shield className="w-4 h-4 text-success" />
-                                    <span className="text-sm font-medium text-success">Data Extracted Successfully</span>
-                                  </div>
-                                  <div className="grid grid-cols-2 gap-4 text-xs">
-                                    <div>
-                                      <span className="text-muted-foreground">Type: </span>
-                                      <span className="font-medium">{file.extractedData.propertyType}</span>
-                                    </div>
-                                    <div>
-                                      <span className="text-muted-foreground">Est. Value: </span>
-                                      <span className="font-medium">{file.extractedData.estimatedValue}</span>
-                                    </div>
-                                  </div>
-                                </div>
-                              )}
-                              
-                              {file.status === 'error' && file.validationErrors && (
-                                <div className="mt-2 p-3 bg-destructive/10 rounded border border-destructive/20">
-                                  <div className="flex items-center gap-2 mb-2">
-                                    <AlertCircle className="w-4 h-4 text-destructive" />
-                                    <span className="text-sm font-medium text-destructive">Upload Failed</span>
-                                  </div>
-                                  <ul className="text-xs text-destructive space-y-1">
-                                    {file.validationErrors.map((error, idx) => (
-                                      <li key={idx}>• {error}</li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              )}
+                            <div className="flex items-center gap-2">
+                              {file.status === 'pending' && <Clock className="w-4 h-4 text-muted-foreground" />}
+                              {file.status === 'processing' && <Clock className="w-4 h-4 text-primary animate-spin" />}
+                              {file.status === 'completed' && <CheckCircle className="w-4 h-4 text-success" />}
+                              {file.status === 'error' && <AlertCircle className="w-4 h-4 text-destructive" />}
+                              <Button 
+                                variant="ghost" 
+                                size="sm"
+                                onClick={() => removeFile(file.id)}
+                              >
+                                <X className="w-4 h-4" />
+                              </Button>
                             </div>
                           </div>
-                        </Card>
+                          
+                          {file.status === 'processing' && (
+                            <div className="space-y-2">
+                              <Progress value={file.progress} className="w-full h-2" />
+                              <p className="text-xs text-muted-foreground">
+                                Analyzing document structure and extracting data...
+                              </p>
+                            </div>
+                          )}
+                          
+                          {file.status === 'completed' && file.extractedData && (
+                            <div className="mt-2 p-3 bg-success/10 rounded border border-success/20">
+                              <div className="flex items-center gap-2 mb-2">
+                                <Shield className="w-4 h-4 text-success" />
+                                <span className="text-sm font-medium text-success">Data Extracted Successfully</span>
+                              </div>
+                              <div className="grid grid-cols-2 gap-4 text-xs">
+                                <div>
+                                  <span className="text-muted-foreground">Type: </span>
+                                  <span className="font-medium">{file.extractedData.propertyType}</span>
+                                </div>
+                                <div>
+                                  <span className="text-muted-foreground">Est. Value: </span>
+                                  <span className="font-medium">{file.extractedData.estimatedValue}</span>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          
+                          {file.status === 'error' && file.validationErrors && (
+                            <div className="mt-2 p-3 bg-destructive/10 rounded border border-destructive/20">
+                              <div className="flex items-center gap-2 mb-2">
+                                <AlertCircle className="w-4 h-4 text-destructive" />
+                                <span className="text-sm font-medium text-destructive">Upload Failed</span>
+                              </div>
+                              <ul className="text-xs text-destructive space-y-1">
+                                {file.validationErrors.map((error, idx) => (
+                                  <li key={idx}>• {error}</li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
+                        </div>
                       ))}
                     </div>
                   </div>
                 )}
-              </CardContent>
-            </Card>
 
-            {/* Advanced AI Processing */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-bold">3</div>
-                  Janus AI Processing Engine
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-lg border border-primary/20">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Brain className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">OCR & NLP</p>
-                      <p className="text-xs text-muted-foreground">Advanced text extraction</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-lg border border-primary/20">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Zap className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">Smart Analysis</p>
-                      <p className="text-xs text-muted-foreground">Automated insights</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-lg border border-primary/20">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Shield className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-foreground">Data Validation</p>
-                      <p className="text-xs text-muted-foreground">Quality assurance</p>
-                    </div>
-                  </div>
-                </div>
-                
                 <Separator />
                 
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-foreground">Ready for Processing</p>
-                    <p className="text-xs text-muted-foreground">
-                      {uploadedFiles.filter(f => f.status === 'completed').length} documents uploaded successfully
-                    </p>
+                {/* AI Processing Section */}
+                <div className="space-y-4">
+                  <h3 className="text-sm font-medium text-foreground">Janus AI Processing Engine</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Brain className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">OCR & NLP</p>
+                        <p className="text-xs text-muted-foreground">Advanced text extraction</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Zap className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">Smart Analysis</p>
+                        <p className="text-xs text-muted-foreground">Automated insights</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                      <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        <Shield className="w-5 h-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground">Data Validation</p>
+                        <p className="text-xs text-muted-foreground">Quality assurance</p>
+                      </div>
+                    </div>
                   </div>
-                  <Button 
-                    size="sm" 
-                    disabled={uploadedFiles.filter(f => f.status === 'completed').length === 0 || processingStatus === 'processing'}
-                    onClick={handleProcessFiles}
-                    className="flex items-center gap-2"
-                  >
-                    {processingStatus === 'processing' ? (
-                      <>
-                        <Clock className="w-4 h-4 animate-spin" />
-                        Processing Pipeline...
-                      </>
-                    ) : (
-                      <>
-                        <Brain className="w-4 h-4" />
-                        Start AI Analysis
-                      </>
-                    )}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Processing Status */}
-            {processingStatus !== 'idle' && (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-lg">
-                    <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-bold">3</div>
-                    Processing Status
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <Progress value={processingStatus === 'processing' ? 60 : 100} className="w-full" />
-                    <div className="flex items-center gap-3">
+                  
+                  <div className="flex items-center justify-between p-4 bg-secondary/30 rounded-lg">
+                    <div>
+                      <p className="text-sm font-medium text-foreground">Ready for Processing</p>
+                      <p className="text-xs text-muted-foreground">
+                        {uploadedFiles.filter(f => f.status === 'completed').length} documents uploaded successfully
+                      </p>
+                    </div>
+                    <Button 
+                      size="sm" 
+                      disabled={uploadedFiles.filter(f => f.status === 'completed').length === 0 || processingStatus === 'processing'}
+                      onClick={handleProcessFiles}
+                      className="flex items-center gap-2"
+                    >
                       {processingStatus === 'processing' ? (
                         <>
-                          <Clock className="w-5 h-5 text-primary animate-spin" />
-                          <span className="text-sm text-foreground">Extracting data from documents...</span>
+                          <Clock className="w-4 h-4 animate-spin" />
+                          Processing Pipeline...
                         </>
                       ) : (
                         <>
-                          <CheckCircle className="w-5 h-5 text-success" />
-                          <span className="text-sm text-foreground">Processing complete! {uploadedFiles.length} deals parsed successfully.</span>
+                          <Brain className="w-4 h-4" />
+                          Start AI Analysis
                         </>
                       )}
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Processing Status */}
+                {processingStatus !== 'idle' && (
+                  <div className="space-y-3">
+                    <h3 className="text-sm font-medium text-foreground">Processing Status</h3>
+                    <div className="p-4 border border-border rounded-lg">
+                      <Progress value={processingStatus === 'processing' ? 60 : 100} className="w-full mb-3" />
+                      <div className="flex items-center gap-3">
+                        {processingStatus === 'processing' ? (
+                          <>
+                            <Clock className="w-5 h-5 text-primary animate-spin" />
+                            <span className="text-sm text-foreground">Extracting data from documents...</span>
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle className="w-5 h-5 text-success" />
+                            <span className="text-sm text-foreground">Processing complete! {uploadedFiles.length} deals parsed successfully.</span>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
-            )}
+                )}
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="search" className="space-y-6">
-            {/* Step 1: Search Properties */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <div className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm flex items-center justify-center font-bold">1</div>
-                  Search Properties
+                <CardTitle className="flex items-center gap-2">
+                  <Search className="w-5 h-5" />
+                  Property Search & Discovery
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex gap-2">
-                  <Input
-                    placeholder="Enter address, city, or property details..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="flex-1"
-                  />
-                  <Button onClick={handleSearch}>
-                    <Search className="w-4 h-4 mr-2" />
-                    Search
-                  </Button>
+              <CardContent className="space-y-6">
+                <div className="space-y-3">
+                  <h3 className="text-sm font-medium text-foreground">Search Properties</h3>
+                  <div className="flex gap-2">
+                    <Input
+                      placeholder="Enter address, city, or property details..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="flex-1"
+                    />
+                    <Button onClick={handleSearch}>
+                      <Search className="w-4 h-4 mr-2" />
+                      Search
+                    </Button>
+                  </div>
                 </div>
                 
                 {searchResults.length > 0 && (
-                  <div className="space-y-3">
-                    <p className="text-sm font-medium text-foreground">Search Results:</p>
-                    {searchResults.map((property) => (
-                      <div key={property.id} className="border border-border rounded-lg p-4">
-                        <div className="flex justify-between items-start mb-2">
-                          <div>
-                            <h4 className="font-medium text-foreground flex items-center gap-2">
-                              <MapPin className="w-4 h-4 text-muted-foreground" />
-                              {property.address}
-                            </h4>
-                            <p className="text-sm text-muted-foreground">{property.city}</p>
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-sm font-medium text-foreground">Search Results</h3>
+                      <Badge variant="outline">{searchResults.length} properties found</Badge>
+                    </div>
+                    <div className="space-y-3">
+                      {searchResults.map((property) => (
+                        <div key={property.id} className="border border-border rounded-lg p-4">
+                          <div className="flex justify-between items-start mb-3">
+                            <div>
+                              <h4 className="font-medium text-foreground flex items-center gap-2">
+                                <MapPin className="w-4 h-4 text-muted-foreground" />
+                                {property.address}
+                              </h4>
+                              <p className="text-sm text-muted-foreground">{property.city}</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="font-semibold text-foreground">{property.price}</p>
+                              <Badge variant="outline">{property.type}</Badge>
+                            </div>
                           </div>
-                          <div className="text-right">
-                            <p className="font-semibold text-foreground">{property.price}</p>
-                            <Badge variant="outline">{property.type}</Badge>
+                          <div className="flex gap-4 text-sm text-muted-foreground mb-4">
+                            <span>{property.bedrooms} bed</span>
+                            <span>{property.bathrooms} bath</span>
+                            <span>{property.sqft} sqft</span>
                           </div>
+                          <Button 
+                            size="sm" 
+                            onClick={() => handleAnalyzeProperty(property)}
+                            className="w-full"
+                          >
+                            <TrendingUp className="w-4 h-4 mr-2" />
+                            Run Janus Analysis
+                          </Button>
                         </div>
-                        <div className="flex gap-4 text-sm text-muted-foreground mb-3">
-                          <span>{property.bedrooms} bed</span>
-                          <span>{property.bathrooms} bath</span>
-                          <span>{property.sqft} sqft</span>
-                        </div>
-                        <Button 
-                          size="sm" 
-                          onClick={() => handleAnalyzeProperty(property)}
-                          className="w-full"
-                        >
-                          <TrendingUp className="w-4 h-4 mr-2" />
-                          Run Janus Analysis
-                        </Button>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
               </CardContent>
@@ -728,22 +695,26 @@ export function DealWorkflow() {
                   Deal Analysis Results
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-6">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-medium text-foreground">Analysis Overview</h3>
+                  <Badge variant="outline">{analysisResults.length} deals analyzed</Badge>
+                </div>
+                
                 <div className="space-y-4">
-                  {analysisResults.map((deal, index) => (
+                  {analysisResults.map((deal) => (
                     <div key={deal.id} className="border border-border rounded-lg p-4">
-                      <div className="flex justify-between items-start mb-3">
+                      <div className="flex justify-between items-start mb-4">
                         <div>
                           <h4 className="font-medium text-foreground">{deal.address}</h4>
                           <p className="text-sm text-muted-foreground">{deal.city} • {deal.type}</p>
                         </div>
-                        <div className="text-right">
-                          <Badge variant={deal.janusScore > 80 ? "default" : deal.janusScore > 60 ? "secondary" : "destructive"}>
-                            Janus Score: {deal.janusScore}
-                          </Badge>
-                        </div>
+                        <Badge variant={deal.janusScore > 80 ? "default" : deal.janusScore > 60 ? "secondary" : "destructive"}>
+                          Janus Score: {deal.janusScore}
+                        </Badge>
                       </div>
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-3">
+                      
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mb-4">
                         <div>
                           <span className="text-muted-foreground">Price: </span>
                           <span className="font-medium text-foreground">{deal.price}</span>
@@ -763,15 +734,17 @@ export function DealWorkflow() {
                           <span className="font-medium text-success">{deal.predictedUpside}</span>
                         </div>
                       </div>
-                      <div className="mt-3 p-3 bg-secondary/30 rounded">
+                      
+                      <div className="p-3 bg-secondary/30 rounded-lg mb-4">
                         <p className="text-sm text-foreground">{deal.aiInsights}</p>
                       </div>
-                      <div className="mt-3 flex gap-2">
-                        <Button size="sm" variant="outline">
+                      
+                      <div className="flex gap-2">
+                        <Button size="sm" variant="outline" className="flex-1">
                           <FileText className="w-4 h-4 mr-2" />
                           View Details
                         </Button>
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="outline" className="flex-1">
                           <TrendingUp className="w-4 h-4 mr-2" />
                           Run Analysis
                         </Button>
