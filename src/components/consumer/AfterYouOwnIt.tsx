@@ -32,9 +32,6 @@ const ownershipFeatures = [
 export const AfterYouOwnIt = () => {
   return (
     <section className="space-y-6">
-      <h2 className="font-display text-3xl font-semibold text-foreground">
-        After You Own It
-      </h2>
       
       <div className="grid md:grid-cols-2 gap-6">
         {ownershipFeatures.map((feature, index) => (

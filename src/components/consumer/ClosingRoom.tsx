@@ -65,10 +65,7 @@ export const ClosingRoom = () => {
 
   return (
     <section className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="font-display text-3xl font-semibold text-foreground">
-          Closing Room
-        </h2>
+      <div className="flex justify-end mb-6">
         <Button className="btn-professional">
           <Home className="h-4 w-4 mr-2" />
           Start Closing Process

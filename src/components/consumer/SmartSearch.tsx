@@ -41,14 +41,6 @@ export const SmartSearch = () => {
   
   return (
     <section className="space-y-6">
-      <div className="text-center mb-8">
-        <h2 className="font-display text-3xl font-semibold text-foreground mb-4">
-          Find Your Perfect Home
-        </h2>
-        <p className="text-lg text-muted-foreground">
-          AI-powered search that understands what you're really looking for
-        </p>
-      </div>
 
       {/* Smart Search Controls */}
       <Card>

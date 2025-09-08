@@ -299,22 +299,22 @@ html {
     transform: translateY(-1px) !important;
   }
 
-  /* Enhanced institutional cards */
+  /* Enhanced institutional cards - transparent */
   .institutional-card {
-    background: rgba(255, 255, 255, 0.06) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-radius: var(--radius) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: none !important;
     transition: all 0.3s ease !important;
   }
 
   .institutional-card:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border-color: rgba(255, 255, 255, 0.20) !important;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5) !important;
-    transform: translateY(-2px) !important;
+    background: transparent !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+    box-shadow: none !important;
+    transform: translateY(-1px) !important;
   }
 
   /* Inputs */
@@ -367,16 +367,16 @@ html {
     color: hsl(var(--foreground));
   }
 
-  /* Dashboard cards with enhanced glass effect - OVERRIDE JANUS */
+  /* Dashboard cards with transparent glass effect - OVERRIDE JANUS */
   .janus-dashboard .glass,
   .janus-dashboard [class*="card"],
   .janus-dashboard .dashboard-card {
-    background: rgba(255, 255, 255, 0.08) !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
     border-radius: var(--radius) !important;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: none !important;
   }
   
   /* Force dashboard text styling - OVERRIDE JANUS */

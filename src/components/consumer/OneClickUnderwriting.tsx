@@ -8,9 +8,6 @@ export const OneClickUnderwriting = () => {
   const [showModal, setShowModal] = useState(false);
   return (
     <section className="space-y-6">
-      <h2 className="font-display text-3xl font-semibold text-foreground">
-        One-Click Underwriting
-      </h2>
       
       <Card className="institutional-card">
         <CardHeader>
