@@ -14,7 +14,7 @@ export function ConsumerHeader({ title, subtitle }: ConsumerHeaderProps) {
   console.log('ConsumerHeader rendering:', title);
 
   return (
-    <header className="h-16 border-b border-border/30 dashboard-card flex items-center justify-between px-6 relative" style={{ position: 'static', top: 0, zIndex: 1 }}>
+    <header className="sticky top-0 h-16 border-b border-border/30 dashboard-card flex items-center justify-between px-6 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
       <div className="flex items-center gap-4">
         <SidebarTrigger className="text-foreground hover:bg-accent/10" />
         <div>
