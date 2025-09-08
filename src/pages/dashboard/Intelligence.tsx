@@ -12,7 +12,7 @@ const Intelligence = () => {
     <SidebarProvider>
       <DashboardSidebar />
       <div className="flex-1 flex flex-col min-h-screen">
-        <DashboardHeader />
+        <DashboardHeader title="Market Intelligence" subtitle="AI-powered market insights and analytics" />
         <main className="flex-1 overflow-y-auto p-6">
             <div className="max-w-7xl mx-auto">
               <div className="mb-6">

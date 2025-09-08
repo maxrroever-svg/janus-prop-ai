@@ -12,7 +12,7 @@ const Dashboard = () => {
       
       {/* MAIN CONTENT */}
       <div className="flex-1 flex flex-col min-h-screen">
-        <DashboardHeader />
+        <DashboardHeader title="Deal Canvas" />
         
         {/* Scrollable main content */}
         <main className="flex-1 overflow-y-auto">

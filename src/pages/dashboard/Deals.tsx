@@ -19,7 +19,7 @@ const Deals = () => {
     <SidebarProvider>
       <DashboardSidebar />
       <div className="flex-1 flex flex-col min-h-screen">
-        <DashboardHeader />
+        <DashboardHeader title="Deal Management" subtitle="View and manage active deals" />
         <main className="flex-1 flex overflow-hidden">
             {/* Left Panel - Main Content */}
             <div className="flex-1 flex flex-col overflow-hidden">

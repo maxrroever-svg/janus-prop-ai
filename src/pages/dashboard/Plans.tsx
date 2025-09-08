@@ -290,7 +290,7 @@ const Plans = () => {
     <SidebarProvider>
       <DashboardSidebar />
       <div className="flex-1 flex flex-col min-h-screen">
-        <DashboardHeader />
+        <DashboardHeader title="Investment Plans" subtitle="Automated investment strategies and playbooks" />
         <main className="flex-1 overflow-y-auto p-6">
             <div className="mb-6">
               <h1 className="text-2xl font-display text-foreground mb-2">Investment Plans</h1>
