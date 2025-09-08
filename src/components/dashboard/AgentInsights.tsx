@@ -56,9 +56,9 @@ const agentInsights = [
 export function AgentInsights() {
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high": return "bg-destructive/10 text-destructive border-destructive/20";
-      case "medium": return "bg-warning/10 text-warning border-warning/20";
-      case "low": return "bg-muted text-muted-foreground";
+      case "high": return "bg-red-500/10 text-red-600 border-red-500/20";
+      case "medium": return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
+      case "low": return "bg-green-500/10 text-green-600 border-green-500/20";
       default: return "bg-muted text-muted-foreground";
     }
   };
@@ -68,9 +68,24 @@ export function AgentInsights() {
       case "coordination": return "text-primary";
       case "financial": return "text-success";
       case "market": return "text-ice";
-      case "risk": return "text-warning";
+      case "risk": return "text-destructive";
       default: return "text-muted-foreground";
     }
+  };
+
+  const getAgentColor = (agent: string) => {
+    const colors = {
+      "Eden": "text-primary",
+      "Osiris": "text-success", 
+      "Orion": "text-ice",
+      "Atelius": "text-gold",
+      "Valyria": "text-purple-500",
+      "Celestia": "text-pink-500",
+      "Aurora": "text-cyan-500",
+      "Elysia": "text-emerald-500",
+      "Spring": "text-lime-500"
+    };
+    return colors[agent as keyof typeof colors] || "text-muted-foreground";
   };
 
   return (
@@ -81,20 +96,20 @@ export function AgentInsights() {
             <Bell className="w-5 h-5 text-primary" />
             <h2 className="font-display text-xl font-normal text-foreground">Agent Insights</h2>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-            <span className="text-sm text-success font-medium">Live Updates</span>
-          </div>
-        </div>
-        
-        <div className="flex items-center gap-2">
-          <Badge variant="outline" className="text-xs">
-            {agentInsights.filter(i => i.priority === "high").length} High Priority
-          </Badge>
-          <Badge variant="outline" className="text-xs">
-            {agentInsights.length} Total
-          </Badge>
-        </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+                  <span className="text-sm text-success font-medium">Live Updates</span>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="text-xs border-red-500/30 text-red-600 bg-red-500/5">
+                  {agentInsights.filter(i => i.priority === "high").length} High Priority
+                </Badge>
+                <Badge variant="outline" className="text-xs border-primary/30 text-primary bg-primary/5">
+                  {agentInsights.length} Total
+                </Badge>
+              </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -103,19 +118,19 @@ export function AgentInsights() {
           
           return (
             <Card key={insight.id} className={`dashboard-card cursor-pointer hover:border-primary/30 transition-all duration-200 ${
-              insight.priority === "high" ? "border-destructive/20 bg-destructive/5" : ""
+              insight.priority === "high" ? "border-red-500/20 bg-red-500/5" : ""
             }`}>
               <CardContent className="p-4">
                 <div className="flex items-start gap-3 mb-3">
                   <div className={`p-2 rounded-lg ${
-                    insight.priority === "high" ? "bg-destructive/10" : "bg-secondary"
+                    insight.priority === "high" ? "bg-red-500/10" : "bg-muted/50"
                   }`}>
                     <Icon className={`w-4 h-4 ${getTypeColor(insight.type)}`} />
                   </div>
                   
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between mb-1">
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="outline" className={`text-xs border-current ${getAgentColor(insight.agent)}`}>
                         {insight.agent}
                       </Badge>
                       <div className="flex items-center gap-2">

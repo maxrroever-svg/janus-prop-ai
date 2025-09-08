@@ -111,10 +111,10 @@ export function PropertyDetailView({ property, open, onClose }: PropertyDetailVi
                 {property.address}
               </DialogTitle>
               <div className="flex items-center gap-4 mt-2">
-                <Badge className="bg-gold text-gold-foreground">
+                <Badge className="bg-gold/10 text-gold border-gold/30">
                   Janus Score: {property.janusScore}
                 </Badge>
-                <Badge variant="outline" className="border-ice text-ice">
+                <Badge variant="outline" className="border-ice/30 text-ice bg-ice/5">
                   High Opportunity
                 </Badge>
                 <span className="text-sm text-muted-foreground">
@@ -288,15 +288,15 @@ export function PropertyDetailView({ property, open, onClose }: PropertyDetailVi
                           </div>
                           <div className="flex justify-between">
                             <span className="text-muted-foreground">Property Taxes</span>
-                            <span className="font-medium text-destructive">-$1,250</span>
+                            <span className="font-medium text-red-600">-$1,250</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-muted-foreground">Insurance</span>
-                            <span className="font-medium text-destructive">-$180</span>
+                            <span className="font-medium text-red-600">-$180</span>
                           </div>
                           <div className="flex justify-between">
                             <span className="text-muted-foreground">Maintenance</span>
-                            <span className="font-medium text-destructive">-$280</span>
+                            <span className="font-medium text-red-600">-$280</span>
                           </div>
                           <Separator />
                           <div className="flex justify-between font-semibold">

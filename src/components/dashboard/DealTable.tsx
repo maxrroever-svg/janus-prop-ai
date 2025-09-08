@@ -146,16 +146,16 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
   const [sortBy, setSortBy] = useState("lienScore");
 
   const getScoreColor = (score: number) => {
-    if (score >= 85) return "score-high";
-    if (score >= 70) return "score-medium"; 
-    return "score-low";
+    if (score >= 85) return "bg-success/10 text-success border-success/30";
+    if (score >= 70) return "bg-gold/10 text-gold border-gold/30"; 
+    return "bg-red-500/10 text-red-600 border-red-500/30";
   };
 
   const getRiskBadge = (risk: string) => {
     const variants = {
-      low: "bg-success/20 text-success border-success/30",
-      medium: "bg-warning/20 text-warning border-warning/30", 
-      high: "bg-destructive/20 text-destructive border-destructive/30"
+      low: "bg-success/10 text-success border-success/30",
+      medium: "bg-yellow-500/10 text-yellow-600 border-yellow-500/30", 
+      high: "bg-red-500/10 text-red-600 border-red-500/30"
     };
     return variants[risk as keyof typeof variants] || variants.medium;
   };
@@ -164,8 +164,8 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
     switch (prediction) {
       case "Strong Buy": return "text-success font-semibold";
       case "Buy": return "text-ice font-medium";
-      case "Buy w/ Conditions": return "text-warning font-medium";
-      case "Urgent Buy": return "text-gold font-semibold";
+      case "Buy w/ Conditions": return "text-yellow-600 font-medium";
+      case "Urgent Buy": return "text-gold font-semibold animate-pulse";
       default: return "text-muted-foreground";
     }
   };
@@ -205,49 +205,49 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
 
       {/* Quick Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <Card className="institutional-card">
+        <Card className="institutional-card bg-success/5 border-success/20">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <TrendingUp className="w-5 h-5 text-success" />
               <div>
                 <p className="text-sm text-muted-foreground">Strong Buys</p>
-                <p className="text-xl font-semibold text-foreground">3</p>
+                <p className="text-xl font-semibold text-success">3</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card className="institutional-card">
+        <Card className="institutional-card bg-gold/5 border-gold/20">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <DollarSign className="w-5 h-5 text-gold" />
               <div>
                 <p className="text-sm text-muted-foreground">Avg Cap Rate</p>
-                <p className="text-xl font-semibold text-foreground">15.2%</p>
+                <p className="text-xl font-semibold text-gold">15.2%</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card className="institutional-card">
+        <Card className="institutional-card bg-ice/5 border-ice/20">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <MapPin className="w-5 h-5 text-ice" />
               <div>
                 <p className="text-sm text-muted-foreground">Markets</p>
-                <p className="text-xl font-semibold text-foreground">3</p>
+                <p className="text-xl font-semibold text-ice">3</p>
               </div>
             </div>
           </CardContent>
         </Card>
         
-        <Card className="institutional-card">
+        <Card className="institutional-card bg-primary/5 border-primary/20">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
               <TrendingUp className="w-5 h-5 text-primary" />
               <div>
                 <p className="text-sm text-muted-foreground">Total Upside</p>
-                <p className="text-xl font-semibold text-foreground">$810K</p>
+                <p className="text-xl font-semibold text-primary">$810K</p>
               </div>
             </div>
           </CardContent>
@@ -282,6 +282,12 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
                   <span className="text-muted-foreground">Upside</span>
                   <span className="font-medium text-gold">{deal.upside}</span>
                 </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="text-muted-foreground">Risk Level</span>
+                  <Badge variant="outline" className={`text-xs ${getRiskBadge(deal.risk)}`}>
+                    {deal.risk}
+                  </Badge>
+                </div>
               </div>
 
               <div className="space-y-2 mb-3">
@@ -300,7 +306,7 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
                   <Button 
                     size="sm" 
                     variant="ghost"
-                    className="h-8 w-8 p-0"
+                    className="h-8 w-8 p-0 hover:bg-primary/10 hover:text-primary"
                     onClick={(e) => {
                       e.stopPropagation();
                       onPropertySelect(deal);
@@ -312,7 +318,7 @@ export function DealTable({ onPropertySelect }: DealTableProps) {
                   <Button 
                     size="sm" 
                     variant="ghost"
-                    className="h-8 w-8 p-0"
+                    className="h-8 w-8 p-0 hover:bg-gold/10 hover:text-gold"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <Star className="w-4 h-4" />

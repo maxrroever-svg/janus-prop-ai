@@ -97,9 +97,9 @@ const statusConfig = {
 };
 
 const priorityConfig = {
-  "high": { color: "bg-destructive/20 text-destructive border-destructive/30", label: "High" },
-  "medium": { color: "bg-warning/20 text-warning border-warning/30", label: "Medium" },
-  "low": { color: "bg-muted text-muted-foreground border-border", label: "Low" }
+  "high": { color: "bg-red-500/10 text-red-600 border-red-500/30", label: "High" },
+  "medium": { color: "bg-yellow-500/10 text-yellow-600 border-yellow-500/30", label: "Medium" },
+  "low": { color: "bg-green-500/10 text-green-600 border-green-500/30", label: "Low" }
 };
 
 export function LeadManagement() {
@@ -143,7 +143,7 @@ export function LeadManagement() {
                   variant={sortBy === 'recent' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setSortBy('recent')}
-                  className={sortBy === 'recent' ? 'bg-ice text-ice-foreground' : 'border-border'}
+                  className={sortBy === 'recent' ? 'bg-ice/90 text-ice-foreground hover:bg-ice' : 'border-border hover:bg-ice/10'}
                 >
                   Recent
                 </Button>
@@ -151,7 +151,7 @@ export function LeadManagement() {
                   variant={sortBy === 'priority' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setSortBy('priority')}
-                  className={sortBy === 'priority' ? 'bg-ice text-ice-foreground' : 'border-border'}
+                  className={sortBy === 'priority' ? 'bg-ice/90 text-ice-foreground hover:bg-ice' : 'border-border hover:bg-ice/10'}
                 >
                   Priority
                 </Button>
@@ -159,7 +159,7 @@ export function LeadManagement() {
                   variant={sortBy === 'days' ? 'default' : 'outline'}
                   size="sm"
                   onClick={() => setSortBy('days')}
-                  className={sortBy === 'days' ? 'bg-ice text-ice-foreground' : 'border-border'}
+                  className={sortBy === 'days' ? 'bg-ice/90 text-ice-foreground hover:bg-ice' : 'border-border hover:bg-ice/10'}
                 >
                   Pipeline Time
                 </Button>
@@ -273,20 +273,20 @@ export function LeadManagement() {
 
                             {/* Actions */}
                             <div className="flex items-center gap-3">
-                              <div className="flex items-center gap-3">
-                                <Button size="sm" variant="outline" className="border-border hover:bg-muted">
-                                  <Phone className="w-4 h-4 mr-2" />
-                                  Contact (Valyria)
-                                </Button>
-                                <Button size="sm" variant="outline" className="border-border hover:bg-muted">
-                                  <FileText className="w-4 h-4 mr-2" />
-                                  Update Analysis (Celestia)
-                                </Button>
-                                <Button size="sm" variant="outline" className="border-border hover:bg-muted">
-                                  <Calendar className="w-4 h-4 mr-2" />
-                                  Schedule (Aurora)
-                                </Button>
-                              </div>
+                            <div className="flex items-center gap-3">
+                              <Button size="sm" variant="outline" className="border-border hover:bg-ice/10 hover:border-ice/30">
+                                <Phone className="w-4 h-4 mr-2" />
+                                Contact (Valyria)
+                              </Button>
+                              <Button size="sm" variant="outline" className="border-border hover:bg-success/10 hover:border-success/30">
+                                <FileText className="w-4 h-4 mr-2" />  
+                                Update Analysis (Celestia)
+                              </Button>
+                              <Button size="sm" variant="outline" className="border-border hover:bg-gold/10 hover:border-gold/30">
+                                <Calendar className="w-4 h-4 mr-2" />
+                                Schedule (Aurora)
+                              </Button>
+                            </div>
                               <div className="flex items-center gap-2">
                                 <Button size="sm" variant="ghost" className="hover:bg-muted">
                                   <MoreHorizontal className="w-4 h-4" />

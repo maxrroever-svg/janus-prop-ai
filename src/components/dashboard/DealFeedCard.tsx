@@ -45,10 +45,20 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
 
   const getRiskColor = (risk: string) => {
     switch (risk) {
-      case "low": return "bg-green-500/20 text-green-400 border-green-500/30";
-      case "medium": return "bg-yellow-500/20 text-yellow-400 border-yellow-500/30";
-      case "high": return "bg-red-500/20 text-red-400 border-red-500/30";
+      case "low": return "bg-green-500/10 text-green-600 border-green-500/20";
+      case "medium": return "bg-yellow-500/10 text-yellow-600 border-yellow-500/20";
+      case "high": return "bg-red-500/10 text-red-600 border-red-500/20";
       default: return "bg-muted/20 text-muted-foreground border-border/30";
+    }
+  };
+
+  const getMetricColor = (type: string) => {
+    switch (type) {
+      case "price": return "text-ice";
+      case "arv": return "text-gold";
+      case "capRate": return "text-success";
+      case "roi": return "text-primary";
+      default: return "text-foreground";
     }
   };
 
@@ -102,9 +112,9 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
             <div className="space-y-2">
               {/* Rank Badge */}
               <div className="inline-flex">
-                <Badge className="bg-primary/20 text-primary border-primary/30 text-sm font-medium">
-                  #{rank}
-                </Badge>
+            <Badge className="bg-primary/10 text-primary border-primary/20 text-sm font-medium">
+              #{rank}
+            </Badge>
               </div>
               
               <h1 className="font-display text-2xl font-bold text-foreground glow-text leading-tight">
@@ -142,28 +152,28 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
               {/* Asking Price */}
               <div className="dashboard-card rounded-lg p-3 border border-border/20">
                 <div className="flex items-center space-x-2 mb-1">
-                  <DollarSign className="h-4 w-4 text-primary" />
+                  <DollarSign className="h-4 w-4 text-ice" />
                   <span className="text-xs text-muted-foreground uppercase tracking-wide">Asking</span>
                 </div>
-                <p className="text-lg font-bold text-foreground">{formatPrice(deal.askingPrice)}</p>
+                <p className="text-lg font-bold text-ice">{formatPrice(deal.askingPrice)}</p>
               </div>
 
               {/* ARV */}
               <div className="dashboard-card rounded-lg p-3 border border-border/20">
                 <div className="flex items-center space-x-2 mb-1">
-                  <TrendingUp className="h-4 w-4 text-primary" />
+                  <TrendingUp className="h-4 w-4 text-gold" />
                   <span className="text-xs text-muted-foreground uppercase tracking-wide">ARV</span>
                 </div>
-                <p className="text-lg font-bold text-foreground">{formatPrice(deal.arv)}</p>
+                <p className="text-lg font-bold text-gold">{formatPrice(deal.arv)}</p>
               </div>
 
               {/* Cap Rate */}
               <div className="dashboard-card rounded-lg p-3 border border-border/20">
                 <div className="flex items-center space-x-2 mb-1">
-                  <Target className="h-4 w-4 text-primary" />
+                  <Target className="h-4 w-4 text-success" />
                   <span className="text-xs text-muted-foreground uppercase tracking-wide">Cap Rate</span>
                 </div>
-                <p className="text-lg font-bold text-foreground">{formatPercentage(deal.capRate)}</p>
+                <p className="text-lg font-bold text-success">{formatPercentage(deal.capRate)}</p>
               </div>
 
               {/* ROI */}
@@ -172,7 +182,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
                   <TrendingUp className="h-4 w-4 text-primary" />
                   <span className="text-xs text-muted-foreground uppercase tracking-wide">Proj. ROI</span>
                 </div>
-                <p className="text-lg font-bold text-foreground">{formatPercentage(deal.roi)}</p>
+                <p className="text-lg font-bold text-primary">{formatPercentage(deal.roi)}</p>
               </div>
             </div>
           </div>
@@ -182,7 +192,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
             <Button 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground border-0 h-11 text-sm"
+              className="bg-primary/90 hover:bg-primary text-primary-foreground border-0 h-11 text-sm"
               onClick={() => console.log("View Investment Memo")}
             >
               <Eye className="h-4 w-4 mr-2" />
@@ -190,7 +200,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
             </Button>
             
             <Button 
-              className="bg-accent hover:bg-accent/90 text-accent-foreground border-0 h-11 text-sm"
+              className="bg-accent/90 hover:bg-accent text-accent-foreground border-0 h-11 text-sm"
               onClick={() => console.log("Underwrite with AI")}
             >
               <Brain className="h-4 w-4 mr-2" />
@@ -201,7 +211,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
           <div className="grid grid-cols-2 gap-3">
             <Button 
               variant="outline" 
-              className="dashboard-card border-border/30 text-foreground hover:bg-white/15 h-11 text-sm"
+              className="dashboard-card border-border/30 text-foreground hover:bg-accent/10 hover:border-accent/30 h-11 text-sm"
               onClick={() => console.log("Contact Seller")}
             >
               <Phone className="h-4 w-4 mr-2" />
@@ -210,10 +220,10 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
             
             <Button 
               variant="outline" 
-              className={`dashboard-card border-border/30 h-11 text-sm ${
+              className={`dashboard-card border-border/30 h-11 text-sm transition-all ${
                 isSaved 
-                  ? "bg-destructive/20 border-destructive/40 text-destructive" 
-                  : "text-foreground hover:bg-white/15"
+                  ? "bg-red-500/10 border-red-500/30 text-red-600 hover:bg-red-500/15" 
+                  : "text-foreground hover:bg-gold/10 hover:border-gold/30"
               }`}
               onClick={() => setIsSaved(!isSaved)}
             >
