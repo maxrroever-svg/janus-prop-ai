@@ -1066,79 +1066,22 @@ html {
   }
 
   /* ===========================================
-     DASHBOARD LAYOUT - SIDEBAR ALWAYS VISIBLE
+     CLEAN DASHBOARD LAYOUT
      =========================================== */
-
-  /* Force sidebar to always be visible in dashboard */
-  .janus-dashboard .sidebar {
-    display: flex !important;
-    flex-shrink: 0 !important;
-    width: 16rem !important;
-    height: 100vh !important;
-    background: hsl(var(--background)) !important;
-    border-right: 1px solid hsl(var(--border)) !important;
-    position: relative !important;
-    z-index: 30 !important;
+  
+  /* Remove any potential conflicts with simple layout */
+  .janus-dashboard * {
+    box-sizing: border-box;
   }
 
-  .janus-dashboard .sidebar-content {
-    background: hsl(var(--background)) !important;
-    height: 100% !important;
-  }
-
-  .janus-dashboard .sidebar-header {
-    background: hsl(var(--background)) !important;
-  }
-
-  /* Dashboard container layout */
-  .janus-dashboard {
-    display: flex !important;
-    min-height: 100vh !important;
-  }
-
-  .janus-dashboard .min-h-screen {
-    display: flex !important;
-    height: 100vh !important;
-    width: 100% !important;
-  }
-
-  .janus-dashboard .flex-1 {
-    flex: 1 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    min-width: 0 !important;
-  }
-
-  /* Header */
-  .janus-dashboard header,
-  .janus-dashboard .janus-header {
-    height: 4rem !important;
-    flex-shrink: 0 !important;
-    background: hsl(var(--background)) !important;
-    border-bottom: 1px solid hsl(var(--border)) !important;
-  }
-
-  /* Main content */
-  .janus-dashboard main {
-    flex: 1 !important;
-    overflow-y: auto !important;
-  }
-
-  /* Sidebar navigation styling */
-  .sidebar-menu-button {
-    background: transparent !important;
-  }
-
-  .sidebar-menu-button:hover {
-    background: hsl(var(--accent) / 0.1) !important;
-  }
-
-  .sidebar-menu-button.active {
-    background: hsl(var(--accent-green) / 0.1) !important;
-    color: hsl(var(--accent-green)) !important;
+  /* Simple glass effects */
+  .glass {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(8px);
+    border: 1px solid hsl(var(--border) / 0.2);
   }
 
   /* ===========================================
-     END DASHBOARD LAYOUT
+     END CLEAN LAYOUT
      =========================================== */
 }
