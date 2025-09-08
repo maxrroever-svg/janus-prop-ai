@@ -197,11 +197,13 @@ export default function LandingPage() {
         .landing #home .right-shift p,
         .landing #vision .right-shift p{ font-size:clamp(1.10rem,1.4vw,1.28rem); opacity:.98 }
 
-        /* ——— Header (transparent, sticky, no boxes) ——— */
+        /* ——— Header (transparent, sticky, visible) ——— */
         .landing .header{
-          position:sticky; top:0; left:0; right:0; z-index:40;
+          position:fixed; top:0; left:0; right:0; z-index:40;
           display:flex; align-items:center; justify-content:space-between;
-          padding:14px 16px; background:transparent; border:none; box-shadow:none;
+          padding:14px 16px; background:rgba(0,0,0,0.5); border:none; box-shadow:none;
+          backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         .landing .brand{ font-family:"GFS Didot",serif; font-size:1.2rem; letter-spacing:.02em }
         .landing .nav{ display:flex; gap:1.1rem; align-items:center; margin-left:auto }
