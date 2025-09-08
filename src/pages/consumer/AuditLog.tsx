@@ -163,11 +163,10 @@ const AuditLog = () => {
 
   return (
     <SidebarProvider>
-      <div className="janus janus-dashboard min-h-screen w-full flex overflow-hidden">
-        <ConsumerSidebar />
-        <div className="flex-1 flex flex-col min-w-0 relative">
-          <ConsumerHeader title="Audit Log" subtitle="Track system activity and agent operations" />
-          <main className="flex-1 overflow-y-auto p-6">
+      <ConsumerSidebar />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <ConsumerHeader title="Audit Log" subtitle="Track system activity and agent operations" />
+        <main className="flex-1 overflow-y-auto p-6">
             <div className="max-w-7xl mx-auto space-y-6">
 
               {/* AI Agents Status */}
@@ -263,8 +262,7 @@ const AuditLog = () => {
                 </CardContent>
               </Card>
             </div>
-          </main>
-        </div>
+        </main>
       </div>
     </SidebarProvider>
   );

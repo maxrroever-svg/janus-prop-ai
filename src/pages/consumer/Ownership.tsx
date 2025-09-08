@@ -6,14 +6,12 @@ import { AfterYouOwnIt } from "@/components/consumer/AfterYouOwnIt";
 const ConsumerOwnership = () => {
   return (
     <SidebarProvider>
-      <div className="janus janus-dashboard min-h-screen w-full flex overflow-hidden">
-        <ConsumerSidebar />
-        <div className="flex-1 flex flex-col min-w-0 relative">
-          <ConsumerHeader title="After You Own It" />
-          <main className="flex-1 overflow-y-auto p-6">
-            <AfterYouOwnIt />
-          </main>
-        </div>
+      <ConsumerSidebar />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <ConsumerHeader title="After You Own It" />
+        <main className="flex-1 overflow-y-auto p-6">
+          <AfterYouOwnIt />
+        </main>
       </div>
     </SidebarProvider>
   );
