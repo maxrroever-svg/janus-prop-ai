@@ -121,8 +121,6 @@ const consumerEmails = [
 ];
 
 const ConsumerOutreach = () => {
-  console.log('ConsumerOutreach page rendering');
-  
   const getStatusColor = (status: string) => {
     switch (status) {
       case "active": return "bg-success/10 text-success border-success/20";
@@ -156,9 +154,9 @@ const ConsumerOutreach = () => {
     <SidebarProvider>
       <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
-        <div className="flex-1 flex flex-col" style={{ minHeight: '100vh', paddingTop: '0' }}>
+        <div className="flex-1 flex flex-col min-h-screen">
           <ConsumerHeader title="Outreach" subtitle="Manage communications and follow-ups" />
-          <main className="flex-1 p-6" style={{ marginTop: '0', paddingTop: '1.5rem' }}>
+          <main className="flex-1 p-6">
             <div className="max-w-7xl mx-auto space-y-6">
 
               {/* AI Ranking Notice */}

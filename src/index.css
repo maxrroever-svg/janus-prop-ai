@@ -426,21 +426,12 @@ html {
     transform: translateY(-1px) !important;
   }
 
-  /* Dashboard headers with glass effect */
+  /* Dashboard headers with clean glass effect */
   .janus-dashboard .janus-header,
   .janus-dashboard header {
     background: rgba(255, 255, 255, 0.04) !important;
     backdrop-filter: blur(16px) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 50 !important;
-  }
-
-  /* Override any positioning conflicts for headers */
-  .janus-dashboard header[class*="sticky"] {
-    position: sticky !important;
-    top: 0 !important;
   }
 
   /* Dashboard sidebar styling */
