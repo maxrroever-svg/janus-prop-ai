@@ -14,7 +14,7 @@ export function ConsumerHeader({ title, subtitle }: ConsumerHeaderProps) {
   console.log('ConsumerHeader rendering:', title);
 
   return (
-    <header className="h-16 border-b border-border/30 dashboard-card flex items-center justify-between px-6">
+    <header className="h-16 border-b border-border/30 dashboard-card flex items-center justify-between px-6 relative" style={{ position: 'static', top: 0, zIndex: 1 }}>
       <div className="flex items-center gap-4">
         <SidebarTrigger className="text-foreground hover:bg-accent/10" />
         <div>
@@ -30,7 +30,7 @@ export function ConsumerHeader({ title, subtitle }: ConsumerHeaderProps) {
       <Button 
         variant="ghost" 
         onClick={() => navigate('/')}
-        className="font-display text-sm font-medium text-muted-foreground hover:text-foreground"
+        className="font-display text-xs font-medium text-muted-foreground hover:text-foreground"
       >
         Janus AI
       </Button>
