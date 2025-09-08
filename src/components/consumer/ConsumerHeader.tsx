@@ -15,13 +15,17 @@ export function ConsumerHeader({ title, subtitle }: ConsumerHeaderProps) {
 
   return (
     <header 
-      className="h-16 border-b border-border/30 dashboard-card flex items-center justify-between px-6 relative"
+      className="h-16 border-b border-border/30 dashboard-card flex items-center justify-between px-6 relative consumer-header-fix"
       style={{ 
-        position: 'static',
+        position: 'static' as const,
         top: 'auto',
         zIndex: 1,
         minHeight: '64px',
-        maxHeight: '64px'
+        maxHeight: '64px',
+        overflow: 'visible' as const,
+        width: '100%',
+        display: 'flex' as const,
+        flexShrink: 0
       }}
     >
       <div className="flex items-center gap-4">
