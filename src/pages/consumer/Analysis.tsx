@@ -28,14 +28,14 @@ import {
 const Analysis = () => {
   return (
     <SidebarProvider>
-      <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
+      <div className="janus janus-dashboard min-h-screen w-full flex overflow-hidden">
         <ConsumerSidebar />
-        <main className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-w-0 relative">
           <ConsumerHeader 
             title="Property Analysis" 
             subtitle="AI-powered insights including neighborhood analysis, crime rates, and building perks"
           />
-          <div className="flex-1 p-6">
+          <main className="flex-1 overflow-y-auto p-6">
             <div className="max-w-6xl mx-auto">
               {/* Property Search */}
               <Card className="mb-6">
@@ -442,8 +442,8 @@ const Analysis = () => {
                 </Card>
               </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
     </SidebarProvider>
   );

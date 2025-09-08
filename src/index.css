@@ -979,87 +979,87 @@ html {
   }
 
   /* ===========================================
-     DASHBOARD LAYOUT - FIXED POSITIONING 
+     DASHBOARD LAYOUT - COMPLETE RESET 
      =========================================== */
 
-  /* Dashboard Layout - Fixed positioning and overflow */
+  /* Force consistent layout structure */
+  .janus-dashboard {
+    min-height: 100vh !important;
+    overflow: hidden !important;
+  }
+
   .janus-dashboard .min-h-screen {
     overflow: hidden !important;
     height: 100vh !important;
+    display: flex !important;
   }
 
-  .janus-dashboard .flex-1 {
-    min-width: 0 !important; /* Prevent flex item from growing beyond container */
-    overflow: hidden !important;
-  }
-
-  /* Sidebar - Fixed positioning */
-  .sidebar {
-    flex-shrink: 0 !important; /* Prevent sidebar from shrinking */
+  /* Sidebar positioning - NEVER conflicts */
+  .janus-dashboard .sidebar {
+    flex-shrink: 0 !important;
     position: relative !important;
     z-index: 30 !important;
+    height: 100vh !important;
   }
 
-  /* Main content positioning */
-  .janus-dashboard main {
-    overflow-y: auto !important;
-    height: calc(100vh - 4rem) !important; /* Account for header height */
+  /* Main content container - Always proper flex */
+  .janus-dashboard .flex-1 {
+    min-width: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
-  /* Header positioning */
-  .janus-header {
+  /* Header - Always fixed height, no conflicts */
+  .janus-dashboard .janus-header,
+  .janus-dashboard header {
     flex-shrink: 0 !important;
+    height: 4rem !important;
+    border-bottom: 1px solid hsl(var(--border) / 0.3) !important;
     backdrop-filter: blur(12px) !important;
     -webkit-backdrop-filter: blur(12px) !important;
   }
 
-  /* Prevent horizontal scrolling */
+  /* Main content - Always scrollable */
+  .janus-dashboard main {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    height: calc(100vh - 4rem) !important;
+    position: relative !important;
+  }
+
+  /* Remove ALL conflicting backgrounds */
+  .janus-dashboard .bg-background {
+    background: transparent !important;
+  }
+
+  /* Consumer header specific */
+  .janus-dashboard .consumer-header {
+    flex-shrink: 0 !important;
+    min-height: 4rem !important;
+  }
+
+  /* Deal canvas layout */
+  .janus-dashboard .deal-canvas {
+    height: 100% !important;
+    overflow: hidden !important;
+  }
+
+  .janus-dashboard .deal-canvas .grid {
+    height: 100% !important;
+    overflow-y: auto !important;
+  }
+
+  /* Prevent any width expansion issues */
   .janus-dashboard * {
     box-sizing: border-box !important;
   }
 
-  /* Consumer specific layout */
-  .janus-dashboard .container {
-    max-width: none !important;
-    width: 100% !important;
-    padding: 0 2rem !important;
-  }
-
-  .janus-dashboard .band-content {
-    text-align: center !important;
-  }
-
-  /* Deal Canvas layout fix */
-  .deal-canvas {
-    height: 100% !important;
-    overflow: hidden !important;
-  }
-
-  .deal-canvas .grid {
-    height: 100% !important;
-    overflow-y: auto !important;
-  }
-
-  /* Ensure proper scrolling for dashboard sections */
-  .dashboard-card,
-  .glass {
-    overflow: hidden !important;
-  }
-
-  .dashboard-card .content,
-  .glass .content {
-    overflow-y: auto !important;
-  }
-
-  /* Fix any z-index conflicts */
-  .star-field {
-    pointer-events: none !important;
-  }
-
-  /* Responsive sidebar behavior */
+  /* Mobile responsive */
   @media (max-width: 768px) {
-    .janus-dashboard .nav {
-      display: none !important;
+    .janus-dashboard .sidebar {
+      position: fixed !important;
+      z-index: 50 !important;
     }
   }
 

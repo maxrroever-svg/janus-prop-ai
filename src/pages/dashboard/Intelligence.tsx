@@ -10,11 +10,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 const Intelligence = () => {
   return (
     <SidebarProvider>
-      <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
+      <div className="janus janus-dashboard min-h-screen w-full flex overflow-hidden">
         <DashboardSidebar />
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col min-w-0 relative">
           <DashboardHeader />
-          <main className="flex-1 p-6">
+          <main className="flex-1 overflow-y-auto p-6">
             <div className="max-w-7xl mx-auto">
               <div className="mb-6">
                 <h1 className="font-display text-2xl text-foreground mb-2">Intelligence Center</h1>
