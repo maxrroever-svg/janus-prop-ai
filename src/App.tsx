@@ -2,7 +2,10 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import Consumer from "./pages/Consumer";
 import Dashboard from "./pages/Dashboard";
-import DealFeed from "./pages/dashboard/DealFeed";
+import UploadDeals from "./pages/dashboard/UploadDeals";
+import DealRequests from "./pages/dashboard/DealRequests";
+import Forums from "./pages/dashboard/Forums";
+import DealAnalytics from "./pages/dashboard/DealAnalytics";
 import Deals from "./pages/dashboard/Deals";
 import Plans from "./pages/dashboard/Plans";
 import Intelligence from "./pages/dashboard/Intelligence";
@@ -44,7 +47,10 @@ export default function App() {
       <Route path="/consumer/settings" element={<ConsumerSettings />} />
       <Route path="/consumer/audit" element={<ConsumerAuditLog />} />
       <Route path="/investor" element={<Dashboard />} />
-      <Route path="/investor/feed" element={<DealFeed />} />
+      <Route path="/investor/upload" element={<UploadDeals />} />
+      <Route path="/investor/requests" element={<DealRequests />} />
+      <Route path="/investor/forums" element={<Forums />} />
+      <Route path="/investor/analytics" element={<DealAnalytics />} />
       <Route path="/investor/deals" element={<Deals />} />
       <Route path="/investor/plans" element={<Plans />} />
       <Route path="/investor/intelligence" element={<Intelligence />} />

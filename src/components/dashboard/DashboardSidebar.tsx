@@ -12,6 +12,8 @@ import {
   TrendingUp,
   CheckSquare,
   Database,
+  Upload,
+  Search,
 } from "lucide-react";
 import {
   Sidebar,
@@ -27,7 +29,10 @@ import {
 
 const navigation = [
   { name: "Deal Canvas", href: "/investor", icon: Home },
-  { name: "Janus Deal Feed", href: "/investor/feed", icon: Zap },
+  { name: "Upload Deals", href: "/investor/upload", icon: Upload },
+  { name: "Deal Requests", href: "/investor/requests", icon: Search },
+  { name: "Forums", href: "/investor/forums", icon: MessageSquare },
+  { name: "Deal Analytics", href: "/investor/analytics", icon: BarChart3 },
   { name: "Active Deals", href: "/investor/deals", icon: TrendingUp },
   { name: "Plans", href: "/investor/plans", icon: CheckSquare },
   { name: "Intelligence", href: "/investor/intelligence", icon: BarChart3 },
