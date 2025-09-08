@@ -7,14 +7,10 @@ export default function LandingPage() {
   // Simplified scrollspy with robust error handling
   useEffect(() => {
     // Wait for DOM to be fully ready
-    const timer = setTimeout(() => {
-      console.log('Initializing scrollspy...');
-      
+    const timer = setTimeout(() => {      
       const links = document.querySelectorAll('.landing .nav a[href^="#"]');
-      console.log('Found navigation links:', links.length);
       
       if (links.length === 0) {
-        console.warn('No navigation links found');
         return;
       }
 
@@ -46,7 +42,7 @@ export default function LandingPage() {
           });
           
         } catch (error) {
-          console.error('Scrollspy error:', error);
+          // Scrollspy error handling - silent for production
         }
       };
 

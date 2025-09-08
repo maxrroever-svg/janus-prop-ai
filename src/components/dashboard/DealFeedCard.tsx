@@ -193,7 +193,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
           <div className="grid grid-cols-2 gap-3">
             <Button 
               className="bg-primary/90 hover:bg-primary text-primary-foreground border-0 h-11 text-sm"
-              onClick={() => console.log("View Investment Memo")}
+              onClick={() => {}}
             >
               <Eye className="h-4 w-4 mr-2" />
               Investment Memo
@@ -201,7 +201,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
             
             <Button 
               className="bg-accent/90 hover:bg-accent text-accent-foreground border-0 h-11 text-sm"
-              onClick={() => console.log("Underwrite with AI")}
+              onClick={() => {}}
             >
               <Brain className="h-4 w-4 mr-2" />
               Underwrite AI
@@ -212,7 +212,7 @@ export const DealFeedCard = ({ deal, onNext, onPrevious, isFirst, isLast, rank }
             <Button 
               variant="outline" 
               className="dashboard-card border-border/30 text-foreground hover:bg-accent/10 hover:border-accent/30 h-11 text-sm"
-              onClick={() => console.log("Contact Seller")}
+              onClick={() => {}}
             >
               <Phone className="h-4 w-4 mr-2" />
               Contact Seller

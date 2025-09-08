@@ -4,8 +4,6 @@ import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { DealCanvas } from "@/components/dashboard/DealCanvas";
 
 const Dashboard = () => {
-  console.log("Dashboard component is rendering");
-  
   return (
     <SidebarProvider>
       <DashboardSidebar />

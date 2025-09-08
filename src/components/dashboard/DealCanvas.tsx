@@ -7,7 +7,6 @@ export function DealCanvas() {
 
   const handleCommand = async (command: string) => {
     // Orchestrator logic for AI command processing
-    console.log('Processing AI command:', command);
     // Future implementation: Send command to Eden AI orchestrator
   };
 

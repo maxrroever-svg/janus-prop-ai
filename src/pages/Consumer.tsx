@@ -4,8 +4,6 @@ import { ConsumerHeader } from "@/components/consumer/ConsumerHeader";
 import { SmartSearch } from "@/components/consumer/SmartSearch";
 
 const Consumer = () => {
-  console.log("Consumer component is rendering");
-  
   return (
     <SidebarProvider>
       <ConsumerSidebar />

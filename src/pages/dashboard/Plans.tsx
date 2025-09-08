@@ -374,11 +374,11 @@ const Plans = () => {
   };
 
   const assignTaskToAI = (playbookId: string, stepId: string) => {
-    console.log(`Assigning ${stepId} in ${playbookId} to AI agent`);
+    // Task assignment logic would go here
   };
 
   const runPlan = (playbookId: string) => {
-    console.log(`Running plan: ${playbookId}`);
+    // Plan execution logic would go here
   };
 
   return (
