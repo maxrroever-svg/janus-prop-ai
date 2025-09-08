@@ -158,13 +158,12 @@ const DealFeed = () => {
 
   return (
     <SidebarProvider>
-      <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
-        <DashboardSidebar />
-        <div className="flex-1 flex flex-col bg-background">
-          <DashboardHeader />
-          
-          {/* Main Feed */}
-          <div className="flex-1 relative overflow-hidden">
+      <DashboardSidebar />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <DashboardHeader title="Janus Deal Feed" subtitle="AI-curated investment opportunities ranked by potential" />
+        
+        {/* Main Feed */}
+        <main className="flex-1 relative overflow-hidden">
             {deals.length === 0 ? (
               <div className="h-full w-full flex items-center justify-center">
                 <div className="text-foreground text-xl font-display">Loading best deals...</div>
@@ -215,8 +214,7 @@ const DealFeed = () => {
                 )}
               </>
             )}
-          </div>
-        </div>
+        </main>
       </div>
     </SidebarProvider>
   );

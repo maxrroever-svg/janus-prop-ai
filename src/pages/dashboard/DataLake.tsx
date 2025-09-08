@@ -6,16 +6,14 @@ import { DataLakeSection } from "@/components/dashboard/DataLakeSection";
 const DataLake = () => {
   return (
     <SidebarProvider>
-      <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
-        <DashboardSidebar />
-        <div className="flex-1 flex flex-col">
-          <DashboardHeader />
-          <main className="flex-1 p-6">
-            <div className="max-w-7xl mx-auto">
-              <DataLakeSection />
-            </div>
-          </main>
-        </div>
+      <DashboardSidebar />
+      <div className="flex-1 flex flex-col min-h-screen">
+        <DashboardHeader title="Data Lake" subtitle="Access comprehensive property and market data" />
+        <main className="flex-1 overflow-y-auto p-6">
+          <div className="max-w-7xl mx-auto">
+            <DataLakeSection />
+          </div>
+        </main>
       </div>
     </SidebarProvider>
   );
