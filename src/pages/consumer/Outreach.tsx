@@ -154,9 +154,9 @@ const ConsumerOutreach = () => {
     <SidebarProvider>
       <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
-        <div className="flex-1 flex flex-col min-h-screen">
+        <main className="flex-1 flex flex-col">
           <ConsumerHeader title="Outreach" subtitle="Manage communications and follow-ups" />
-          <main className="flex-1 p-6">
+          <div className="flex-1 p-6">
             <div className="max-w-7xl mx-auto space-y-6">
 
               {/* AI Ranking Notice */}
@@ -395,8 +395,8 @@ const ConsumerOutreach = () => {
                 </TabsContent>
               </Tabs>
             </div>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     </SidebarProvider>
   );

@@ -30,12 +30,12 @@ const Analysis = () => {
     <SidebarProvider>
       <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
-        <div className="flex-1 flex flex-col">
+        <main className="flex-1 flex flex-col">
           <ConsumerHeader 
             title="Property Analysis" 
             subtitle="AI-powered insights including neighborhood analysis, crime rates, and building perks"
           />
-          <main className="flex-1 p-6">
+          <div className="flex-1 p-6">
             <div className="max-w-6xl mx-auto">
               {/* Property Search */}
               <Card className="mb-6">
@@ -442,8 +442,8 @@ const Analysis = () => {
                 </Card>
               </div>
             </div>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     </SidebarProvider>
   );

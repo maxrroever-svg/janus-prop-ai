@@ -57,22 +57,25 @@ export function DashboardSidebar() {
 
   const getNavClass = (path: string) => 
     isActive(path) 
-      ? "bg-primary/10 text-primary border-r-2 border-primary" 
-      : "text-muted-foreground hover:text-foreground hover:bg-muted/50";
+      ? "bg-accent-green/10 text-accent-green border-r-2 border-accent-green" 
+      : "text-muted-foreground hover:text-foreground hover:bg-accent-blue/10";
 
   return (
-    <Sidebar className={`sidebar dashboard-sidebar ${collapsed ? "w-16" : "w-64"}`} collapsible="icon">
+    <Sidebar className="sidebar dashboard-sidebar" collapsible="icon" data-state={collapsed ? "collapsed" : "expanded"}>
       <SidebarContent className="sidebar-content">
-        <SidebarGroup>
-          <SidebarGroupLabel className={collapsed ? "sr-only" : ""}>
+        <SidebarGroup className="sidebar-group">
+          <SidebarGroupLabel className={`sidebar-group-label ${collapsed ? "sr-only" : ""}`}>
             Main Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="sidebar-menu">
               {navigation.map((item) => (
-                <SidebarMenuItem key={item.name}>
+                <SidebarMenuItem key={item.name} className="sidebar-menu-item">
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.href} className={getNavClass(item.href)}>
+                    <NavLink 
+                      to={item.href} 
+                      className={`sidebar-menu-button ${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
+                    >
                       <item.icon className="h-4 w-4" />
                       {!collapsed && <span>{item.name}</span>}
                     </NavLink>
@@ -83,13 +86,16 @@ export function DashboardSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup className="mt-auto">
+        <SidebarGroup className="sidebar-group mt-auto">
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="sidebar-menu">
               {bottomNavigation.map((item) => (
-                <SidebarMenuItem key={item.name}>
+                <SidebarMenuItem key={item.name} className="sidebar-menu-item">
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.href} className={getNavClass(item.href)}>
+                    <NavLink 
+                      to={item.href} 
+                      className={`sidebar-menu-button ${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
+                    >
                       <item.icon className="h-4 w-4" />
                       {!collapsed && <span>{item.name}</span>}
                     </NavLink>

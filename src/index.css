@@ -717,26 +717,169 @@ html {
   }
 
   /* ===========================================
-     SIDEBAR INTERACTION FIXES
+     SIDEBAR SYSTEM COMPLETE OVERHAUL
      =========================================== */
 
-  /* Prevent sidebar content from interfering */
-  .janus-dashboard .sidebar-content {
-    overflow-y: auto !important;
+  /* Core sidebar structure */
+  .janus-dashboard [data-sidebar="sidebar"],
+  .janus-dashboard .sidebar {
+    position: relative !important;
+    z-index: 30 !important;
+    display: flex !important;
+    flex-direction: column !important;
     height: 100vh !important;
-    position: relative !important;
+    background: transparent !important;
+    border-right: 1px solid rgba(124, 156, 255, 0.15) !important;
+    backdrop-filter: blur(16px) !important;
+    flex-shrink: 0 !important;
   }
 
-  /* Fix sidebar trigger positioning */
-  .janus-dashboard .sidebar-trigger {
-    z-index: 36 !important;
-    position: relative !important;
-  }
-
-  /* Ensure sidebar doesn't affect main content flow */
-  .janus-dashboard .sidebar + * {
+  /* Sidebar content container */
+  .janus-dashboard .sidebar-content,
+  .janus-dashboard [data-sidebar="sidebar"] > * {
     flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  /* Sidebar trigger button positioning */
+  .janus-dashboard .sidebar-trigger {
+    position: relative !important;
+    z-index: 36 !important;
+    background: transparent !important;
+    border: 1px solid rgba(124, 156, 255, 0.2) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .janus-dashboard .sidebar-trigger:hover {
+    background: rgba(168, 255, 206, 0.1) !important;
+    border-color: rgba(168, 255, 206, 0.3) !important;
+  }
+
+  /* Sidebar navigation items with accent colors */
+  .janus-dashboard .sidebar nav a,
+  .janus-dashboard .sidebar .sidebar-menu-button {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: 0.375rem !important;
+    transition: all 0.2s ease !important;
+    background: transparent !important;
+    color: hsl(var(--muted-foreground)) !important;
+  }
+
+  .janus-dashboard .sidebar nav a:hover,
+  .janus-dashboard .sidebar .sidebar-menu-button:hover,
+  .janus-dashboard .sidebar .bg-accent-blue\/10 {
+    background: rgba(124, 156, 255, 0.1) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+
+  .janus-dashboard .sidebar nav a.active,
+  .janus-dashboard .sidebar .sidebar-menu-button.active,
+  .janus-dashboard .sidebar .bg-accent-green\/10 {
+    background: rgba(168, 255, 206, 0.15) !important;
+    color: hsl(var(--accent-green)) !important;
+    border-right: 2px solid hsl(var(--accent-green)) !important;
+  }
+
+  .janus-dashboard .sidebar .text-accent-green {
+    color: hsl(var(--accent-green)) !important;
+  }
+
+  .janus-dashboard .sidebar .border-accent-green {
+    border-color: hsl(var(--accent-green)) !important;
+  }
+
+  /* Main layout structure fixes */
+  .janus-dashboard .sidebar + main,
+  .janus-dashboard .sidebar + .flex-1 {
+    flex: 1 1 0% !important;
     min-width: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    overflow: hidden !important;
+  }
+
+  /* Content area within main */
+  .janus-dashboard main > .flex-1 {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    position: relative !important;
+  }
+
+  /* Sidebar width controls */
+  .janus-dashboard .sidebar.w-16 {
+    width: 4rem !important;
+    min-width: 4rem !important;
+  }
+
+  .janus-dashboard .sidebar.w-64 {
+    width: 16rem !important;
+    min-width: 16rem !important;
+  }
+
+  /* Header positioning in relation to sidebar */
+  .janus-dashboard .consumer-header,
+  .janus-dashboard .dashboard-header {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 35 !important;
+    flex-shrink: 0 !important;
+    height: 4rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 1.5rem !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(16px) !important;
+    border-bottom: 1px solid rgba(124, 156, 255, 0.15) !important;
+  }
+
+  /* Container layout structure */
+  .janus-dashboard .min-h-screen {
+    min-height: 100vh !important;
+    display: flex !important;
+    width: 100% !important;
+  }
+
+  /* Sidebar group and menu styling */
+  .janus-dashboard .sidebar-group {
+    padding: 0.5rem !important;
+  }
+
+  .janus-dashboard .sidebar-group-label {
+    font-size: 0.75rem !important;
+    color: hsl(var(--muted-foreground)) !important;
+    padding: 0.5rem 1rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .janus-dashboard .sidebar-menu {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .janus-dashboard .sidebar-menu-item {
+    padding: 0.125rem 0.5rem !important;
+  }
+
+  /* Fix collapsed state */
+  .janus-dashboard .sidebar.w-16 .sidebar-group-label,
+  .janus-dashboard .sidebar.w-16 .sr-only {
+    display: none !important;
+  }
+
+  .janus-dashboard .sidebar.w-16 .sidebar-menu-button span:not(.sr-only) {
+    display: none !important;
+  }
+
+  .janus-dashboard .sidebar.w-16 .sidebar-menu-button {
+    justify-content: center !important;
+    padding: 0.75rem 0.5rem !important;
   }
 
   /* ===========================================
@@ -819,16 +962,46 @@ html {
     border: 1px solid rgba(168, 255, 206, 0.3) !important;
   }
 
-  /* Clean sidebar and header interaction */
-  .janus-dashboard .sidebar ~ .flex-1 {
+  /* Clean sidebar and header interaction - UPDATED */
+  .janus-dashboard .sidebar ~ .flex-1,
+  .janus-dashboard .sidebar ~ main {
     flex: 1 1 0% !important;
     min-width: 0 !important;
     overflow-x: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
   /* Ensure proper text rendering */
   .janus-dashboard * {
     -webkit-font-smoothing: antialiased !important;
     text-rendering: optimizeLegibility !important;
+  }
+
+  /* ===========================================
+     FINAL LAYOUT STABILITY FIXES
+     =========================================== */
+
+  /* Prevent any layout shift during sidebar transitions */
+  .janus-dashboard .sidebar {
+    transition: width 0.2s ease !important;
+  }
+
+  /* Ensure SidebarProvider wrapper has proper flex */
+  .janus-dashboard .group\/sidebar-wrapper {
+    display: flex !important;
+    min-height: 100vh !important;
+    width: 100% !important;
+  }
+
+  /* Ensure all flex containers maintain proper height */
+  .janus-dashboard .min-h-screen,
+  .janus-dashboard .min-h-svh {
+    min-height: 100vh !important;
+  }
+
+  /* Final override for any remaining bg conflicts */
+  .janus-dashboard [class*="bg-"]:not([class*="bg-gradient"]):not([class*="bg-accent"]):not([class*="bg-primary"]):not([class*="bg-destructive"]) {
+    background: transparent !important;
   }
 }

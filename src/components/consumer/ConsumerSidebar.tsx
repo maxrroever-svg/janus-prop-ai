@@ -54,28 +54,31 @@ export function ConsumerSidebar() {
 
   const getNavClass = (path: string) => 
     isActive(path) 
-      ? "bg-accent/10 text-accent border-r-2 border-accent" 
-      : "text-muted-foreground hover:text-foreground hover:bg-muted/50";
+      ? "bg-accent-green/10 text-accent-green border-r-2 border-accent-green" 
+      : "text-muted-foreground hover:text-foreground hover:bg-accent-blue/10";
 
   return (
-    <Sidebar className={`sidebar ${collapsed ? "w-16" : "w-64"}`} collapsible="icon">
+    <Sidebar className="sidebar" collapsible="icon" data-state={collapsed ? "collapsed" : "expanded"}>
       <SidebarContent className="sidebar-content">
-        <div className="p-3 border-b border-border/30">
-          <h2 className={`font-display text-[10px] font-medium text-muted-foreground ${collapsed ? "sr-only" : ""}`}>
+        <div className="sidebar-header p-3 border-b border-border/30">
+          <h2 className={`sidebar-title font-display text-[10px] font-medium text-muted-foreground ${collapsed ? "sr-only" : ""}`}>
             Janus Consumer
           </h2>
         </div>
         
-        <SidebarGroup>
-          <SidebarGroupLabel className={collapsed ? "sr-only" : ""}>
+        <SidebarGroup className="sidebar-group">
+          <SidebarGroupLabel className={`sidebar-group-label ${collapsed ? "sr-only" : ""}`}>
             Main Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="sidebar-menu">
               {navigation.map((item) => (
-                <SidebarMenuItem key={item.name}>
+                <SidebarMenuItem key={item.name} className="sidebar-menu-item">
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.href} className={getNavClass(item.href)}>
+                    <NavLink 
+                      to={item.href} 
+                      className={`sidebar-menu-button ${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
+                    >
                       <item.icon className="h-4 w-4" />
                       {!collapsed && <span>{item.name}</span>}
                     </NavLink>
@@ -86,13 +89,16 @@ export function ConsumerSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup className="mt-auto">
+        <SidebarGroup className="sidebar-group mt-auto">
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="sidebar-menu">
               {bottomNavigation.map((item) => (
-                <SidebarMenuItem key={item.name}>
+                <SidebarMenuItem key={item.name} className="sidebar-menu-item">
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.href} className={getNavClass(item.href)}>
+                    <NavLink 
+                      to={item.href} 
+                      className={`sidebar-menu-button ${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
+                    >
                       <item.icon className="h-4 w-4" />
                       {!collapsed && <span>{item.name}</span>}
                     </NavLink>

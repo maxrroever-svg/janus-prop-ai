@@ -14,9 +14,9 @@ const ConsumerSettings = () => {
     <SidebarProvider>
       <div className="janus janus-dashboard min-h-screen w-full bg-background flex">
         <ConsumerSidebar />
-        <div className="flex-1 flex flex-col">
+        <main className="flex-1 flex flex-col">
           <ConsumerHeader title="Settings" subtitle="Manage your account and preferences" />
-          <main className="flex-1 p-6">
+          <div className="flex-1 p-6">
             <div className="max-w-4xl mx-auto space-y-6">
               {/* Profile Settings */}
               <Card className="institutional-card">
@@ -136,8 +136,8 @@ const ConsumerSettings = () => {
                 <Button className="btn-professional">Save Changes</Button>
               </div>
             </div>
-          </main>
-        </div>
+          </div>
+        </main>
       </div>
     </SidebarProvider>
   );
