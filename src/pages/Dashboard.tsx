@@ -1,4 +1,4 @@
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar-simple";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DealCanvas } from "@/components/dashboard/DealCanvas";
 import { Button } from "@/components/ui/button";

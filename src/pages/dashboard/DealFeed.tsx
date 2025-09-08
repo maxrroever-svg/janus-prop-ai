@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { DealFeedCard } from "@/components/dashboard/DealFeedCard";
 import { DealFeedControls } from "@/components/dashboard/DealFeedControls";
 import { mockDeals } from "@/lib/seedData";
-import { SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar-simple";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { Badge } from "@/components/ui/badge";

@@ -22,8 +22,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/sidebar-simple";
 
 const navigation = [
   { name: "Deal Canvas", href: "/investor", icon: Home },
@@ -45,8 +44,6 @@ const bottomNavigation = [
 
 export function DashboardSidebar() {
   const location = useLocation();
-  const { state } = useSidebar();
-  const collapsed = state === "collapsed";
   
   const isActive = (path: string) => {
     if (path === "/investor") {
@@ -61,10 +58,10 @@ export function DashboardSidebar() {
       : "text-muted-foreground hover:text-foreground hover:bg-accent-blue/10";
 
   return (
-    <Sidebar className="sidebar dashboard-sidebar" collapsible="icon" data-state={collapsed ? "collapsed" : "expanded"}>
+    <Sidebar className="sidebar dashboard-sidebar">
       <SidebarContent className="sidebar-content">
         <SidebarGroup className="sidebar-group">
-          <SidebarGroupLabel className={`sidebar-group-label ${collapsed ? "sr-only" : ""}`}>
+          <SidebarGroupLabel className="sidebar-group-label">
             Main Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -76,8 +73,8 @@ export function DashboardSidebar() {
                       to={item.href} 
                       className={`sidebar-menu-button ${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
                     >
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.name}</span>}
+                       <item.icon className="h-4 w-4" />
+                       <span>{item.name}</span>
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -96,8 +93,8 @@ export function DashboardSidebar() {
                       to={item.href} 
                       className={`sidebar-menu-button ${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''}`}
                     >
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.name}</span>}
+                       <item.icon className="h-4 w-4" />
+                       <span>{item.name}</span>
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
