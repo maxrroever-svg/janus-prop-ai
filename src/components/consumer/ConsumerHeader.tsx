@@ -10,8 +10,20 @@ interface ConsumerHeaderProps {
 export function ConsumerHeader({ title, subtitle }: ConsumerHeaderProps) {
   const navigate = useNavigate();
 
+  // Debug logging
+  console.log('ConsumerHeader rendering:', title);
+
   return (
-    <header className="h-16 border-b border-border/30 dashboard-card flex items-center justify-between px-6">
+    <header 
+      className="h-16 border-b border-border/30 dashboard-card flex items-center justify-between px-6 relative"
+      style={{ 
+        position: 'static',
+        top: 'auto',
+        zIndex: 1,
+        minHeight: '64px',
+        maxHeight: '64px'
+      }}
+    >
       <div className="flex items-center gap-4">
         <SidebarTrigger className="text-foreground hover:bg-accent/10" />
         <div>

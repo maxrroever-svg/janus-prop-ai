@@ -72,7 +72,9 @@ html, body {
 }
 
 /* Keep content above atmospherics */
-main, header, footer, section, nav, .relative { position: relative; z-index: 1; }
+main, footer, section, nav, .relative { position: relative; z-index: 1; }
+/* Headers get special treatment */
+header { position: static !important; z-index: 1; }
 
 @layer base {
   * {
@@ -105,9 +107,15 @@ main, header, footer, section, nav, .relative { position: relative; z-index: 1; 
   padding: 0.8rem 1.2rem;
 }
 
-/* Dashboard headers should NOT be sticky */
+/* Dashboard headers should NOT be sticky - CRITICAL FIX */
 .janus-dashboard header {
   position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important;
+  z-index: 1 !important;
 }
 
 /* Override for Janus landing specifically */
