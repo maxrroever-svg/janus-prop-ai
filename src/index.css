@@ -131,15 +131,16 @@ header { position: static !important; z-index: 1; }
 
 /* Glass tiles and grid styling */
 .glass-tile {
-  background: rgba(255, 255, 255, 0.02) !important;
+  background: transparent !important;
   backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(124, 156, 255, 0.15) !important;
   transition: all 0.3s ease !important;
+  border-radius: var(--radius) !important;
 }
 
 .glass-tile:hover {
-  background: rgba(255, 255, 255, 0.05) !important;
-  border-color: rgba(124, 156, 255, 0.3) !important;
+  background: rgba(168, 255, 206, 0.05) !important;
+  border-color: rgba(168, 255, 206, 0.3) !important;
   transform: translateY(-2px) !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
 }
@@ -148,18 +149,30 @@ header { position: static !important; z-index: 1; }
   display: grid;
   gap: 1.5rem;
   height: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  padding: 1rem;
 }
 
 /* Responsive glass grid */
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   .glass-grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .glass-grid-container {
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .glass-grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
   }
 }
 
@@ -413,14 +426,36 @@ html {
   .janus-dashboard [class*="card"],
   .janus-dashboard .dashboard-card {
     background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(124, 156, 255, 0.2) !important;
     border-radius: var(--radius) !important;
-    box-shadow: none !important;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
   }
   
-  /* Force dashboard text styling - OVERRIDE JANUS */
+  .janus-dashboard .glass:hover,
+  .janus-dashboard [class*="card"]:hover,
+  .janus-dashboard .dashboard-card:hover {
+    background: rgba(168, 255, 206, 0.05) !important;
+    border-color: rgba(168, 255, 206, 0.3) !important;
+    transform: translateY(-2px) !important;
+  }
+  
+  /* Force transparent backgrounds for all card-like elements */
+  .janus-dashboard .bg-card,
+  .janus-dashboard .bg-background {
+    background: transparent !important;
+  }
+
+  /* Force accent colors for buttons and highlights */
+  .janus-dashboard .bg-primary {
+    background: hsl(var(--accent-blue)) !important;
+  }
+
+  .janus-dashboard .bg-secondary {
+    background: hsl(var(--accent-green)) !important;
+  }
   .janus-dashboard * {
     color: inherit !important;
     -webkit-text-fill-color: unset !important;
@@ -605,23 +640,40 @@ html {
   }
 
   .dashboard-card {
-    background: rgba(255, 255, 255, 0.06) !important;
+    background: transparent !important;
     backdrop-filter: blur(16px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(124, 156, 255, 0.15) !important;
     border-radius: var(--radius) !important;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3) !important;
     transition: all 0.3s ease !important;
   }
 
   .dashboard-card:hover {
-    background: rgba(255, 255, 255, 0.08) !important;
-    border-color: rgba(255, 255, 255, 0.18) !important;
+    background: rgba(168, 255, 206, 0.05) !important;
+    border-color: rgba(168, 255, 206, 0.3) !important;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4) !important;
+    transform: translateY(-2px) !important;
   }
 
   .dashboard-surface {
     background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: blur(12px) !important;
     border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  }
+
+  /* Global overrides for consumer and dashboard transparency */
+  .janus-dashboard *[class*="bg-"]:not([class*="bg-gradient"]):not([class*="bg-accent"]) {
+    background: transparent !important;
+  }
+
+  /* Ensure accent colors work properly */
+  .janus-dashboard .bg-accent-blue {
+    background: hsl(var(--accent-blue)) !important;
+    color: hsl(var(--accent-blue-foreground)) !important;
+  }
+
+  .janus-dashboard .bg-accent-green {
+    background: hsl(var(--accent-green)) !important;
+    color: hsl(var(--accent-green-foreground)) !important;
   }
 }
