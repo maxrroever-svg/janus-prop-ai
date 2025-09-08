@@ -1066,81 +1066,76 @@ html {
   }
 
   /* ===========================================
-     DASHBOARD LAYOUT - RESTORED AND WORKING
+     DASHBOARD LAYOUT - SIDEBAR ALWAYS VISIBLE
      =========================================== */
 
-  /* Basic dashboard layout */
-  .janus-dashboard {
-    display: flex;
-    min-height: 100vh;
-  }
-
-  .janus-dashboard .min-h-screen {
-    display: flex;
-    height: 100vh;
-    width: 100%;
-  }
-
-  /* Sidebar - Always visible and functional */
+  /* Force sidebar to always be visible in dashboard */
   .janus-dashboard .sidebar {
-    width: 16rem;
-    height: 100vh;
-    background: hsl(var(--background));
-    border-right: 1px solid hsl(var(--border));
-    flex-shrink: 0;
-    position: relative;
-    z-index: 30;
+    display: flex !important;
+    flex-shrink: 0 !important;
+    width: 16rem !important;
+    height: 100vh !important;
+    background: hsl(var(--background)) !important;
+    border-right: 1px solid hsl(var(--border)) !important;
+    position: relative !important;
+    z-index: 30 !important;
   }
 
   .janus-dashboard .sidebar-content {
-    background: hsl(var(--background));
-    height: 100%;
+    background: hsl(var(--background)) !important;
+    height: 100% !important;
   }
 
   .janus-dashboard .sidebar-header {
-    background: hsl(var(--background));
+    background: hsl(var(--background)) !important;
   }
 
-  /* Main content area */
+  /* Dashboard container layout */
+  .janus-dashboard {
+    display: flex !important;
+    min-height: 100vh !important;
+  }
+
+  .janus-dashboard .min-h-screen {
+    display: flex !important;
+    height: 100vh !important;
+    width: 100% !important;
+  }
+
   .janus-dashboard .flex-1 {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 0 !important;
   }
 
   /* Header */
   .janus-dashboard header,
   .janus-dashboard .janus-header {
-    height: 4rem;
-    flex-shrink: 0;
-    background: hsl(var(--background));
-    border-bottom: 1px solid hsl(var(--border));
+    height: 4rem !important;
+    flex-shrink: 0 !important;
+    background: hsl(var(--background)) !important;
+    border-bottom: 1px solid hsl(var(--border)) !important;
   }
 
-  /* Main content scrolling */
+  /* Main content */
   .janus-dashboard main {
-    flex: 1;
-    overflow-y: auto;
+    flex: 1 !important;
+    overflow-y: auto !important;
   }
 
-  /* Sidebar navigation */
+  /* Sidebar navigation styling */
   .sidebar-menu-button {
-    background: transparent;
+    background: transparent !important;
   }
 
   .sidebar-menu-button:hover {
-    background: hsl(var(--accent) / 0.1);
+    background: hsl(var(--accent) / 0.1) !important;
   }
 
   .sidebar-menu-button.active {
-    background: hsl(var(--accent-green) / 0.1);
-    color: hsl(var(--accent-green));
-  }
-
-  /* Remove problematic overrides */
-  .janus-dashboard * {
-    box-sizing: border-box;
+    background: hsl(var(--accent-green) / 0.1) !important;
+    color: hsl(var(--accent-green)) !important;
   }
 
   /* ===========================================
