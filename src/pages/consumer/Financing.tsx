@@ -8,7 +8,7 @@ const ConsumerFinancing = () => {
     <SidebarProvider>
       <ConsumerSidebar />
       <div className="flex-1 flex flex-col min-h-screen">
-        <ConsumerHeader title="Financing Hub" />
+        <ConsumerHeader title="Financing Hub" subtitle="Compare rates, get pre-approved, and manage loans" />
         <main className="flex-1 overflow-y-auto p-6">
           <FinancingHub />
         </main>

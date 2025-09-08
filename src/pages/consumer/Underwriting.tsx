@@ -8,7 +8,7 @@ const ConsumerUnderwriting = () => {
     <SidebarProvider>
       <ConsumerSidebar />
       <div className="flex-1 flex flex-col min-h-screen">
-        <ConsumerHeader title="One-Click Underwriting" />
+        <ConsumerHeader title="One-Click Underwriting" subtitle="Generate bank-ready underwriting memos instantly" />
         <main className="flex-1 overflow-y-auto p-6">
           <OneClickUnderwriting />
         </main>

@@ -12,7 +12,7 @@ const Consumer = () => {
       
       {/* MAIN CONTENT */}
       <div className="flex-1 flex flex-col min-h-screen">
-        <ConsumerHeader title="Smart Search" />
+        <ConsumerHeader title="Smart Search" subtitle="AI-powered real estate search and analysis" />
         
         {/* Scrollable main content */}
         <main className="flex-1 overflow-y-auto">

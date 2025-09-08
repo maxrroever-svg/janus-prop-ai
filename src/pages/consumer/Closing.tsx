@@ -8,7 +8,7 @@ const ConsumerClosing = () => {
     <SidebarProvider>
       <ConsumerSidebar />
       <div className="flex-1 flex flex-col min-h-screen">
-        <ConsumerHeader title="Closing Room" />
+        <ConsumerHeader title="Closing Room" subtitle="Track closing timeline and manage requirements" />
         <main className="flex-1 overflow-y-auto p-6">
           <ClosingRoom />
         </main>

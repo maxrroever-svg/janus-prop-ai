@@ -12,7 +12,7 @@ const Dashboard = () => {
       
       {/* MAIN CONTENT */}
       <div className="flex-1 flex flex-col min-h-screen">
-        <DashboardHeader title="Deal Canvas" />
+        <DashboardHeader title="Deal Canvas" subtitle="AI-powered deal orchestration and property analysis" />
         
         {/* Scrollable main content */}
         <main className="flex-1 overflow-y-auto">
