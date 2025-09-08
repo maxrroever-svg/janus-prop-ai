@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { Search, Zap } from "lucide-react";
+import { Search, Zap, Upload } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 interface CommandBarProps {
   onCommand: (command: string) => void;
+  onUpload?: () => void;
 }
 
-export function CommandBar({ onCommand }: CommandBarProps) {
+export function CommandBar({ onCommand, onUpload }: CommandBarProps) {
   const [command, setCommand] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -38,6 +39,17 @@ export function CommandBar({ onCommand }: CommandBarProps) {
           <Zap className="w-4 h-4 mr-2" />
           Orchestrate
         </Button>
+        {onUpload && (
+          <Button 
+            type="button"
+            onClick={onUpload}
+            variant="outline"
+            className="glass text-foreground hover:bg-white/10 border border-white/20 px-6"
+          >
+            <Upload className="w-4 h-4 mr-2" />
+            Upload
+          </Button>
+        )}
       </form>
       
       <div className="mt-3 flex gap-2">
