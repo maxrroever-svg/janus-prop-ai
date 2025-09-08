@@ -15,17 +15,10 @@ export function DealCanvas() {
   };
 
   return (
-    <div className="h-screen flex flex-col overflow-hidden bg-background">
+    <div className="flex flex-col overflow-hidden">
       {/* Command Bar */}
       <div className="shrink-0 border-b border-border/30">
         <CommandBar onCommand={handleCommand} />
-      </div>
-      
-      {/* Deal Canvas Header - Simple */}
-      <div className="shrink-0 p-4 border-b border-border/30 bg-background/80 backdrop-blur-sm">
-        <h3 className="font-display text-xl font-bold text-foreground glow-text">
-          Deal Canvas
-        </h3>
       </div>
 
       {/* Address Input Section */}
