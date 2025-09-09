@@ -14,10 +14,7 @@ import {
   Database,
   Upload,
   Search,
-  ChevronRight,
-  ChevronDown,
 } from "lucide-react";
-import { useState } from "react";
 import {
   Sidebar,
   SidebarContent,
@@ -29,7 +26,6 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar-simple";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const navigation = [
   { name: "Deal Canvas", href: "/investor", icon: Home },
@@ -43,7 +39,7 @@ const navigation = [
   { name: "AI Assistant", href: "/investor/assistant", icon: MessageSquare },
 ];
 
-const dealFeedSubnav = [
+const dealFeedItems = [
   { name: "Upload Deals", href: "/investor/upload", icon: Upload },
   { name: "Deal Requests", href: "/investor/requests", icon: Search },
   { name: "Forums", href: "/investor/forums", icon: MessageSquare },
@@ -59,7 +55,6 @@ export function DashboardSidebar() {
   const location = useLocation();
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const [dealFeedOpen, setDealFeedOpen] = useState(false);
   
   const isActive = (path: string) => {
     if (path === "/investor") {
@@ -68,7 +63,7 @@ export function DashboardSidebar() {
     return location.pathname.startsWith(path);
   };
 
-  const isDealFeedActive = dealFeedSubnav.some(item => isActive(item.href));
+  const isDealFeedActive = dealFeedItems.some(item => isActive(item.href));
 
   const getNavClass = (path: string) => 
     isActive(path) 
@@ -90,7 +85,66 @@ export function DashboardSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navigation.map((item) => (
+              {/* Deal Canvas */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink 
+                    to="/investor" 
+                    className={`${getNavClass("/investor")} ${isActive("/investor") ? 'active' : ''}`}
+                  >
+                     <Home className="h-4 w-4" />
+                     {!collapsed && <span>Deal Canvas</span>}
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              {/* Active Deals */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink 
+                    to="/investor/deals" 
+                    className={`${getNavClass("/investor/deals")} ${isActive("/investor/deals") ? 'active' : ''}`}
+                  >
+                     <TrendingUp className="h-4 w-4" />
+                     {!collapsed && <span>Active Deals</span>}
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              {/* Deal Feed Section */}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavLink 
+                    to="/investor/upload" 
+                    className={`${isDealFeedActive ? 'bg-accent-green/10 text-accent-green border-r-2 border-accent-green' : 'text-muted-foreground hover:text-foreground hover:bg-accent/10'}`}
+                  >
+                     <Zap className="h-4 w-4" />
+                     {!collapsed && <span>Deal Feed</span>}
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              {/* Deal Feed Sub-items when active */}
+              {isDealFeedActive && (
+                <>
+                  {dealFeedItems.map((item) => (
+                    <SidebarMenuItem key={item.name} className="ml-4">
+                      <SidebarMenuButton asChild>
+                        <NavLink 
+                          to={item.href} 
+                          className={`${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''} text-sm`}
+                        >
+                           <item.icon className="h-3 w-3" />
+                           {!collapsed && <span className="text-sm">{item.name}</span>}
+                        </NavLink>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  ))}
+                </>
+              )}
+
+              {/* Rest of navigation */}
+              {navigation.slice(2).map((item) => (
                 <SidebarMenuItem key={item.name}>
                   <SidebarMenuButton asChild>
                     <NavLink 
@@ -103,40 +157,6 @@ export function DashboardSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
-              
-              {/* Deal Feed Collapsible Section */}
-              <SidebarMenuItem>
-                <Collapsible open={dealFeedOpen} onOpenChange={setDealFeedOpen}>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuButton 
-                      className={`${isDealFeedActive ? 'bg-accent-green/10 text-accent-green border-r-2 border-accent-green' : 'text-muted-foreground hover:text-foreground hover:bg-accent/10'} w-full justify-between`}
-                    >
-                      <div className="flex items-center">
-                        <Zap className="h-4 w-4" />
-                        {!collapsed && <span>Deal Feed</span>}
-                      </div>
-                      {!collapsed && (
-                        dealFeedOpen ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />
-                      )}
-                    </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="space-y-1">
-                    {dealFeedSubnav.map((item) => (
-                      <SidebarMenuItem key={item.name} className="ml-4">
-                        <SidebarMenuButton asChild>
-                          <NavLink 
-                            to={item.href} 
-                            className={`${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''} text-sm`}
-                          >
-                             <item.icon className="h-3 w-3" />
-                             {!collapsed && <span className="text-sm">{item.name}</span>}
-                          </NavLink>
-                        </SidebarMenuButton>
-                      </SidebarMenuItem>
-                    ))}
-                  </CollapsibleContent>
-                </Collapsible>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
