@@ -83,7 +83,7 @@ export function ExplainPanel({ deal, onClose }: ExplainPanelProps) {
       </Card>
       
       <div className="space-y-3">
-        <Button className="w-full glass text-foreground hover:bg-white/10 border border-white/20" size="sm">
+        <Button className="w-full glass text-foreground hover:bg-glass-hover border border-glass" size="sm">
           <FileText className="w-4 h-4 mr-2" />
           Generate IC Memo
         </Button>

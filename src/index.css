@@ -46,6 +46,8 @@
     --radius: 16px;
     
     /* Glass surfaces */
+    --glass: 0 0% 100% / 0.10;
+    --glass-hover: 0 0% 100% / 0.05;
     --surface: 0 0% 100% / 0.04;
     --surface-2: 0 0% 100% / 0.06;
     --border-strong: 0 0% 100% / 0.16;

@@ -150,7 +150,7 @@ export const DealUploader = ({ onClose }: DealUploaderProps) => {
                 Cancel
               </Button>
               <Button 
-                className="flex-1 glass text-foreground hover:bg-white/10 border border-white/20"
+                className="flex-1 glass text-foreground hover:bg-glass-hover border border-glass"
                 onClick={handleSubmit}
                 disabled={!dealName || files.length === 0 || isUploading}
               >

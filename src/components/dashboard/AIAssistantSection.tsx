@@ -123,7 +123,7 @@ export function AIAssistantSection() {
           />
           <Button 
             size="sm" 
-            className="glass text-foreground hover:bg-white/10 border border-white/20 shrink-0"
+            className="glass text-foreground hover:bg-glass-hover border border-glass shrink-0"
             disabled={!message.trim()}
             onClick={handleSendMessage}
           >

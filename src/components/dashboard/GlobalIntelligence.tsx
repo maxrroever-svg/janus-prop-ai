@@ -64,7 +64,7 @@ export function GlobalIntelligence() {
             <Filter className="w-4 h-4 mr-2" />
             Filter
           </Button>
-          <Button variant="default" size="sm" className="glass text-foreground hover:bg-white/10 border border-white/20">
+          <Button variant="default" size="sm" className="glass text-foreground hover:bg-glass-hover border border-glass">
             <Zap className="w-4 h-4 mr-2" />
             Launch Agent
           </Button>

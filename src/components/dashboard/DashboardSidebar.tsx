@@ -30,6 +30,7 @@ import {
 const navigation = [
   { name: "Deal Canvas", href: "/investor", icon: Home },
   { name: "Active Deals", href: "/investor/deals", icon: TrendingUp },
+  { name: "Deal Feed", href: "/investor/deal-feed", icon: Zap },
   { name: "Plans", href: "/investor/plans", icon: CheckSquare },
   { name: "Intelligence", href: "/investor/intelligence", icon: BarChart3 },
   { name: "IC Memos", href: "/investor/memos", icon: FileText },
@@ -37,13 +38,6 @@ const navigation = [
   { name: "Portfolio", href: "/investor/portfolio", icon: Target },
   { name: "Data Lake", href: "/investor/data-lake", icon: Database },
   { name: "AI Assistant", href: "/investor/assistant", icon: MessageSquare },
-];
-
-const dealFeedItems = [
-  { name: "Upload Deals", href: "/investor/upload", icon: Upload },
-  { name: "Deal Requests", href: "/investor/requests", icon: Search },
-  { name: "Forums", href: "/investor/forums", icon: MessageSquare },
-  { name: "Deal Analytics", href: "/investor/analytics", icon: BarChart3 },
 ];
 
 const bottomNavigation = [
@@ -62,8 +56,6 @@ export function DashboardSidebar() {
     }
     return location.pathname.startsWith(path);
   };
-
-  const isDealFeedActive = dealFeedItems.some(item => isActive(item.href));
 
   const getNavClass = (path: string) => 
     isActive(path) 
@@ -85,66 +77,7 @@ export function DashboardSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {/* Deal Canvas */}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <NavLink 
-                    to="/investor" 
-                    className={`${getNavClass("/investor")} ${isActive("/investor") ? 'active' : ''}`}
-                  >
-                     <Home className="h-4 w-4" />
-                     {!collapsed && <span>Deal Canvas</span>}
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
-              {/* Active Deals */}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <NavLink 
-                    to="/investor/deals" 
-                    className={`${getNavClass("/investor/deals")} ${isActive("/investor/deals") ? 'active' : ''}`}
-                  >
-                     <TrendingUp className="h-4 w-4" />
-                     {!collapsed && <span>Active Deals</span>}
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
-              {/* Deal Feed Section */}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild>
-                  <NavLink 
-                    to="/investor/upload" 
-                    className={`${isDealFeedActive ? 'bg-accent-green/10 text-accent-green border-r-2 border-accent-green' : 'text-muted-foreground hover:text-foreground hover:bg-accent/10'}`}
-                  >
-                     <Zap className="h-4 w-4" />
-                     {!collapsed && <span>Deal Feed</span>}
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-
-              {/* Deal Feed Sub-items when active */}
-              {isDealFeedActive && (
-                <>
-                  {dealFeedItems.map((item) => (
-                    <SidebarMenuItem key={item.name} className="ml-4">
-                      <SidebarMenuButton asChild>
-                        <NavLink 
-                          to={item.href} 
-                          className={`${getNavClass(item.href)} ${isActive(item.href) ? 'active' : ''} text-sm`}
-                        >
-                           <item.icon className="h-3 w-3" />
-                           {!collapsed && <span className="text-sm">{item.name}</span>}
-                        </NavLink>
-                      </SidebarMenuButton>
-                    </SidebarMenuItem>
-                  ))}
-                </>
-              )}
-
-              {/* Rest of navigation */}
-              {navigation.slice(2).map((item) => (
+              {navigation.map((item) => (
                 <SidebarMenuItem key={item.name}>
                   <SidebarMenuButton asChild>
                     <NavLink 

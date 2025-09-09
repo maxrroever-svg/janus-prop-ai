@@ -163,7 +163,7 @@ export function PropertyPreview({ property }: PropertyPreviewProps) {
         </h4>
         
         <div className="space-y-3">
-          <Button className="w-full justify-start glass text-foreground hover:bg-white/10 border border-white/20">
+          <Button className="w-full justify-start glass text-foreground hover:bg-glass-hover border border-glass">
             <Eye className="w-4 h-4 mr-2" />
             View Full Details
           </Button>
