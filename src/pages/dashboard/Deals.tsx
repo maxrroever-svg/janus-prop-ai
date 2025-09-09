@@ -5,7 +5,6 @@ import { SimplifiedDealTable } from "@/components/dashboard/SimplifiedDealTable"
 import { DealMap } from "@/components/dashboard/DealMap";
 import { ExplainPanel } from "@/components/dashboard/ExplainPanel";
 import { AgentInsights } from "@/components/dashboard/AgentInsights";
-import { JanusDealFeed } from "@/components/dashboard/JanusDealFeed";
 import { useState } from "react";
 
 const Deals = () => {
@@ -28,11 +27,6 @@ const Deals = () => {
               {/* Agent Insights Section */}
               <div className="shrink-0 p-6 border-b border-border bg-secondary/20">
                 <AgentInsights />
-              </div>
-              
-              {/* Janus Deal Feed Section */}
-              <div className="shrink-0 p-6 border-b border-border bg-secondary/30">
-                <JanusDealFeed />
               </div>
               
               {/* View Toggle */}
