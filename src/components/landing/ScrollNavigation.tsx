@@ -41,25 +41,38 @@ export const ScrollNavigation = () => {
       const scrollPosition = window.scrollY + 100;
       let activeId = 'hero';
       
-      // Special handling for consumer and investor (they're h2s inside twins section)
-      const twinsSection = document.getElementById('twins');
-      if (twinsSection) {
-        const { offsetTop, offsetHeight } = twinsSection;
-        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-          // We're in the twins section, determine if consumer or investor
-          const twinsMiddle = offsetTop + (offsetHeight / 2);
-          activeId = scrollPosition < twinsMiddle ? 'consumer' : 'investor';
-        }
-      }
+      // Check sections in order, including twins section handling
+      const allSections = ['hero', 'vision', 'agents', 'twins', 'pricing', 'contact'];
       
-      // Check other sections normally
-      const normalSections = ['hero', 'vision', 'agents', 'pricing', 'contact'];
-      for (const sectionId of normalSections) {
+      for (const sectionId of allSections) {
         const element = document.getElementById(sectionId);
         if (element) {
-          const { offsetTop } = element;
-          if (scrollPosition >= offsetTop) {
-            activeId = sectionId;
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            if (sectionId === 'twins') {
+              // We're in the twins section, determine if consumer or investor
+              const consumerEl = document.getElementById('consumer');
+              const investorEl = document.getElementById('investor');
+              
+              if (consumerEl && investorEl) {
+                const consumerTop = consumerEl.offsetTop;
+                const investorTop = investorEl.offsetTop;
+                
+                // Use the actual positions of the h2 elements
+                if (scrollPosition >= investorTop) {
+                  activeId = 'investor';
+                } else if (scrollPosition >= consumerTop) {
+                  activeId = 'consumer';
+                }
+              } else {
+                // Fallback to middle split
+                const twinsMiddle = offsetTop + (offsetHeight / 2);
+                activeId = scrollPosition < twinsMiddle ? 'consumer' : 'investor';
+              }
+            } else {
+              activeId = sectionId;
+            }
+            break;
           }
         }
       }

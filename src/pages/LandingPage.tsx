@@ -19,31 +19,43 @@ export default function LandingPage() {
           const scrollY = window.scrollY + 100; // offset for header
           let activeId = 'hero'; // default
 
-          // Special handling for consumer and investor (they're h2s inside twins section)
-          const twinsSection = document.getElementById('twins');
-          if (twinsSection) {
-            const twinsRect = twinsSection.getBoundingClientRect();
-            const twinsTop = window.scrollY + twinsRect.top;
-            const twinsBottom = twinsTop + twinsRect.height;
-            
-            if (scrollY >= twinsTop && scrollY < twinsBottom) {
-              // We're in the twins section, determine if consumer or investor
-              const twinsMiddle = twinsTop + (twinsRect.height / 2);
-              activeId = scrollY < twinsMiddle ? 'consumer' : 'investor';
-            }
-          }
-
-          // Check other sections normally
-          const sections = ['hero', 'vision', 'agents', 'pricing', 'contact'];
+          // Check sections in order, including twins section handling
+          const allSections = ['hero', 'vision', 'agents', 'twins', 'pricing', 'contact'];
           
-          for (const sectionId of sections) {
+          for (const sectionId of allSections) {
             const element = document.getElementById(sectionId);
             if (element) {
               const rect = element.getBoundingClientRect();
               const elementTop = window.scrollY + rect.top;
+              const elementBottom = elementTop + rect.height;
               
-              if (elementTop <= scrollY) {
-                activeId = sectionId;
+              if (scrollY >= elementTop && scrollY < elementBottom) {
+                if (sectionId === 'twins') {
+                  // We're in the twins section, determine if consumer or investor
+                  const consumerEl = document.getElementById('consumer');
+                  const investorEl = document.getElementById('investor');
+                  
+                  if (consumerEl && investorEl) {
+                    const consumerRect = consumerEl.getBoundingClientRect();
+                    const investorRect = investorEl.getBoundingClientRect();
+                    const consumerTop = window.scrollY + consumerRect.top;
+                    const investorTop = window.scrollY + investorRect.top;
+                    
+                    // Use the actual positions of the h2 elements
+                    if (scrollY >= investorTop) {
+                      activeId = 'investor';
+                    } else if (scrollY >= consumerTop) {
+                      activeId = 'consumer';
+                    }
+                  } else {
+                    // Fallback to middle split
+                    const twinsMiddle = elementTop + (rect.height / 2);
+                    activeId = scrollY < twinsMiddle ? 'consumer' : 'investor';
+                  }
+                } else {
+                  activeId = sectionId;
+                }
+                break;
               }
             }
           }
