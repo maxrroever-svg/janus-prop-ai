@@ -6,10 +6,11 @@ import { Button } from "@/components/ui/button";
 const sections = [
   { id: "hero", label: "Home" },
   { id: "vision", label: "Vision" },
+  { id: "agents", label: "Agents" },
   { id: "consumer", label: "Consumer" },
   { id: "investor", label: "Investor" },
-  { id: "lien-intelligence", label: "Lien Intelligence" },
-  { id: "demo", label: "Contact" },
+  { id: "pricing", label: "Pricing" },
+  { id: "contact", label: "Contact" },
 ];
 
 export const ScrollNavigation = () => {
@@ -17,7 +18,15 @@ export const ScrollNavigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
+    let element;
+    
+    if (sectionId === 'consumer' || sectionId === 'investor') {
+      // For consumer/investor, scroll to the h2 element inside twins
+      element = document.getElementById(sectionId);
+    } else {
+      element = document.getElementById(sectionId);
+    }
+    
     if (element) {
       element.scrollIntoView({ 
         behavior: "smooth",
@@ -30,17 +39,32 @@ export const ScrollNavigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 100;
+      let activeId = 'hero';
       
-      for (const section of sections) {
-        const element = document.getElementById(section.id);
+      // Special handling for consumer and investor (they're h2s inside twins section)
+      const twinsSection = document.getElementById('twins');
+      if (twinsSection) {
+        const { offsetTop, offsetHeight } = twinsSection;
+        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          // We're in the twins section, determine if consumer or investor
+          const twinsMiddle = offsetTop + (offsetHeight / 2);
+          activeId = scrollPosition < twinsMiddle ? 'consumer' : 'investor';
+        }
+      }
+      
+      // Check other sections normally
+      const normalSections = ['hero', 'vision', 'agents', 'pricing', 'contact'];
+      for (const sectionId of normalSections) {
+        const element = document.getElementById(sectionId);
         if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section.id);
-            break;
+          const { offsetTop } = element;
+          if (scrollPosition >= offsetTop) {
+            activeId = sectionId;
           }
         }
       }
+      
+      setActiveSection(activeId);
     };
 
     window.addEventListener("scroll", handleScroll);

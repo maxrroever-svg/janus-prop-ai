@@ -8,7 +8,7 @@ export default function LandingPage() {
   useEffect(() => {
     // Wait for DOM to be fully ready
     const timer = setTimeout(() => {      
-      const links = document.querySelectorAll('.landing .nav a[href^="#"]');
+      const links = document.querySelectorAll('.landing .nav a[href^="#"], .nav-link');
       
       if (links.length === 0) {
         return;
@@ -17,10 +17,24 @@ export default function LandingPage() {
       const updateActive = () => {
         try {
           const scrollY = window.scrollY + 100; // offset for header
-          let activeId = 'home'; // default
+          let activeId = 'hero'; // default
 
-          // Check each section
-          const sections = ['home', 'vision', 'agents', 'consumer', 'investor', 'pricing', 'contact'];
+          // Special handling for consumer and investor (they're h2s inside twins section)
+          const twinsSection = document.getElementById('twins');
+          if (twinsSection) {
+            const twinsRect = twinsSection.getBoundingClientRect();
+            const twinsTop = window.scrollY + twinsRect.top;
+            const twinsBottom = twinsTop + twinsRect.height;
+            
+            if (scrollY >= twinsTop && scrollY < twinsBottom) {
+              // We're in the twins section, determine if consumer or investor
+              const twinsMiddle = twinsTop + (twinsRect.height / 2);
+              activeId = scrollY < twinsMiddle ? 'consumer' : 'investor';
+            }
+          }
+
+          // Check other sections normally
+          const sections = ['hero', 'vision', 'agents', 'pricing', 'contact'];
           
           for (const sectionId of sections) {
             const element = document.getElementById(sectionId);
@@ -363,7 +377,7 @@ export default function LandingPage() {
         <header className="header" id="siteHeader">
           <Link className="brand" to="/">Janus</Link>
           <nav className="nav" id="siteNav">
-            <a href="#home">Home</a>
+            <a href="#hero">Home</a>
             <a href="#vision">Vision</a>
             <a href="#agents">Agents</a>
             <a href="#consumer">Consumer</a>
@@ -375,7 +389,7 @@ export default function LandingPage() {
 
         <main>
           {/* HERO */}
-          <section id="home" className="section">
+          <section id="hero" className="section">
             <div className="container">
               <div className="right-shift">
                 <h1>AI for Real Estate, Without<br/>the Noise.</h1>
