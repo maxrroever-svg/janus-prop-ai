@@ -16,51 +16,59 @@ export default function LandingPage() {
 
       const updateActive = () => {
         try {
-          const scrollY = window.scrollY + 100; // offset for header
-          let activeId = 'hero'; // default
+          const scrollY = window.scrollY + 120; // Increased offset for better detection
+          let activeId = 'hero';
 
-          // Check sections in order, including twins section handling
-          const allSections = ['hero', 'vision', 'agents', 'twins', 'pricing', 'contact'];
-          
-          for (const sectionId of allSections) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-              const rect = element.getBoundingClientRect();
-              const elementTop = window.scrollY + rect.top;
-              const elementBottom = elementTop + rect.height;
-              
-              if (scrollY >= elementTop && scrollY < elementBottom) {
-                if (sectionId === 'twins') {
-                  // We're in the twins section, determine if consumer or investor
-                  const consumerEl = document.getElementById('consumer');
-                  const investorEl = document.getElementById('investor');
+          // Get all section elements with their positions
+          const sectionElements = [
+            { id: 'hero', element: document.getElementById('hero') },
+            { id: 'vision', element: document.getElementById('vision') },
+            { id: 'agents', element: document.getElementById('agents') },
+            { id: 'twins', element: document.getElementById('twins') },
+            { id: 'pricing', element: document.getElementById('pricing') },
+            { id: 'contact', element: document.getElementById('contact') }
+          ].filter(item => item.element);
+
+          // Find the current section
+          for (let i = 0; i < sectionElements.length; i++) {
+            const current = sectionElements[i];
+            const next = sectionElements[i + 1];
+            
+            const currentTop = current.element.offsetTop;
+            const nextTop = next ? next.element.offsetTop : document.body.scrollHeight;
+            
+            if (scrollY >= currentTop && scrollY < nextTop) {
+              if (current.id === 'twins') {
+                // Special handling for twins section
+                const consumerEl = document.getElementById('consumer');
+                const investorEl = document.getElementById('investor');
+                
+                if (consumerEl && investorEl) {
+                  // Get the position of consumer and investor h2 elements
+                  const parentOffset = current.element.offsetTop;
+                  const consumerTop = parentOffset + consumerEl.offsetTop;
+                  const investorTop = parentOffset + investorEl.offsetTop;
                   
-                  if (consumerEl && investorEl) {
-                    const consumerRect = consumerEl.getBoundingClientRect();
-                    const investorRect = investorEl.getBoundingClientRect();
-                    const consumerTop = window.scrollY + consumerRect.top;
-                    const investorTop = window.scrollY + investorRect.top;
-                    
-                    // Use the actual positions of the h2 elements
-                    if (scrollY >= investorTop) {
-                      activeId = 'investor';
-                    } else if (scrollY >= consumerTop) {
-                      activeId = 'consumer';
-                    }
+                  if (scrollY >= investorTop) {
+                    activeId = 'investor';
+                  } else if (scrollY >= consumerTop) {
+                    activeId = 'consumer';
                   } else {
-                    // Fallback to middle split
-                    const twinsMiddle = elementTop + (rect.height / 2);
-                    activeId = scrollY < twinsMiddle ? 'consumer' : 'investor';
+                    activeId = 'consumer'; // Default to consumer if before both
                   }
                 } else {
-                  activeId = sectionId;
+                  // Fallback: split twins section in half
+                  const twinsMidpoint = currentTop + (current.element.offsetHeight / 2);
+                  activeId = scrollY >= twinsMidpoint ? 'investor' : 'consumer';
                 }
-                break;
+              } else {
+                activeId = current.id;
               }
+              break;
             }
           }
 
-          // Update active state
+          // Update active state for all navigation links
           links.forEach((link: Element) => {
             const href = link.getAttribute('href');
             const isActive = href === `#${activeId}`;
@@ -72,12 +80,24 @@ export default function LandingPage() {
         }
       };
 
+      // Throttle scroll events for better performance
+      let ticking = false;
+      const throttledUpdate = () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            updateActive();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+
       // Initial update
       updateActive();
 
       // Listen to scroll
       const handleScroll = () => {
-        requestAnimationFrame(updateActive);
+        throttledUpdate();
       };
 
       window.addEventListener('scroll', handleScroll, { passive: true });

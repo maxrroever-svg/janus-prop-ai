@@ -38,50 +38,77 @@ export const ScrollNavigation = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 120; // Increased offset for better detection
       let activeId = 'hero';
       
-      // Check sections in order, including twins section handling
-      const allSections = ['hero', 'vision', 'agents', 'twins', 'pricing', 'contact'];
-      
-      for (const sectionId of allSections) {
-        const element = document.getElementById(sectionId);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            if (sectionId === 'twins') {
-              // We're in the twins section, determine if consumer or investor
-              const consumerEl = document.getElementById('consumer');
-              const investorEl = document.getElementById('investor');
+      // Get all section elements with their positions
+      const sectionElements = [
+        { id: 'hero', element: document.getElementById('hero') },
+        { id: 'vision', element: document.getElementById('vision') },
+        { id: 'agents', element: document.getElementById('agents') },
+        { id: 'twins', element: document.getElementById('twins') },
+        { id: 'pricing', element: document.getElementById('pricing') },
+        { id: 'contact', element: document.getElementById('contact') }
+      ].filter(item => item.element);
+
+      // Find the current section
+      for (let i = 0; i < sectionElements.length; i++) {
+        const current = sectionElements[i];
+        const next = sectionElements[i + 1];
+        
+        const currentTop = current.element.offsetTop;
+        const nextTop = next ? next.element.offsetTop : document.body.scrollHeight;
+        
+        if (scrollPosition >= currentTop && scrollPosition < nextTop) {
+          if (current.id === 'twins') {
+            // Special handling for twins section
+            const consumerEl = document.getElementById('consumer');
+            const investorEl = document.getElementById('investor');
+            
+            if (consumerEl && investorEl) {
+              // Get the position of consumer and investor h2 elements relative to page
+              const consumerTop = consumerEl.offsetTop + current.element.offsetTop;
+              const investorTop = investorEl.offsetTop + current.element.offsetTop;
               
-              if (consumerEl && investorEl) {
-                const consumerTop = consumerEl.offsetTop;
-                const investorTop = investorEl.offsetTop;
-                
-                // Use the actual positions of the h2 elements
-                if (scrollPosition >= investorTop) {
-                  activeId = 'investor';
-                } else if (scrollPosition >= consumerTop) {
-                  activeId = 'consumer';
-                }
+              if (scrollPosition >= investorTop) {
+                activeId = 'investor';
+              } else if (scrollPosition >= consumerTop) {
+                activeId = 'consumer';
               } else {
-                // Fallback to middle split
-                const twinsMiddle = offsetTop + (offsetHeight / 2);
-                activeId = scrollPosition < twinsMiddle ? 'consumer' : 'investor';
+                activeId = 'consumer'; // Default to consumer if before both
               }
             } else {
-              activeId = sectionId;
+              // Fallback: split twins section in half
+              const twinsMidpoint = currentTop + (current.element.offsetHeight / 2);
+              activeId = scrollPosition >= twinsMidpoint ? 'investor' : 'consumer';
             }
-            break;
+          } else {
+            activeId = current.id;
           }
+          break;
         }
       }
       
       setActiveSection(activeId);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Throttle scroll events for better performance
+    let ticking = false;
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    // Initial call
+    handleScroll();
+    
+    window.addEventListener("scroll", throttledScroll, { passive: true });
+    return () => window.removeEventListener("scroll", throttledScroll);
   }, []);
 
   return (
