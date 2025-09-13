@@ -17,7 +17,13 @@ import {
   Brain,
   TrendingUp,
   DollarSign,
-  Calendar
+  Calendar,
+  Zap,
+  FileSpreadsheet,
+  Presentation,
+  ClipboardList,
+  Building,
+  Calculator
 } from "lucide-react";
 
 const generatedMemos = [
@@ -92,6 +98,96 @@ const inProgressMemos = [
     assignedAgents: ["Orion", "Atelius"],
     currentStep: "Initial market research by Orion",
     blockers: ["Owner contact information needed"]
+  }
+];
+
+const documentTemplates = [
+  {
+    id: 1,
+    name: "Investment Memo",
+    description: "Comprehensive investment analysis with risk assessment and financial projections",
+    icon: FileText,
+    estimatedTime: "2 minutes",
+    automationLevel: "Full",
+    inputs: ["Property address", "Financial data", "Market comps"],
+    outputs: ["Executive summary", "Financial analysis", "Risk factors", "Recommendation"]
+  },
+  {
+    id: 2,
+    name: "Deal Summary",
+    description: "Quick property overview for stakeholders and partners",
+    icon: Building,
+    estimatedTime: "30 seconds",
+    automationLevel: "Full", 
+    inputs: ["Property details", "Key metrics"],
+    outputs: ["Property profile", "Key financials", "Location analysis"]
+  },
+  {
+    id: 3,
+    name: "Due Diligence Questionnaire",
+    description: "Automated responses to standard DD questions based on property analysis",
+    icon: ClipboardList,
+    estimatedTime: "5 minutes",
+    automationLevel: "85%",
+    inputs: ["Property data", "Legal documents", "Financial records"],
+    outputs: ["Completed questionnaire", "Supporting documents list", "Risk flags"]
+  },
+  {
+    id: 4,
+    name: "Pro-Forma Report",
+    description: "Financial projections and cash flow analysis ready for lenders",
+    icon: Calculator,
+    estimatedTime: "1 minute",
+    automationLevel: "95%",
+    inputs: ["Purchase price", "Renovation costs", "Market rents"],
+    outputs: ["5-year projections", "Cash flow analysis", "ROI calculations"]
+  },
+  {
+    id: 5,
+    name: "Meeting Summary",
+    description: "Structured summaries of property walkthrough and partner meetings",
+    icon: Presentation,
+    estimatedTime: "1 minute",
+    automationLevel: "80%",
+    inputs: ["Meeting notes", "Action items", "Decisions made"],
+    outputs: ["Executive summary", "Action items", "Follow-up tasks"]
+  },
+  {
+    id: 6,
+    name: "Lender Package",
+    description: "Complete loan application package with all required documentation",
+    icon: FileSpreadsheet,
+    estimatedTime: "10 minutes",
+    automationLevel: "90%",
+    inputs: ["Property data", "Financial statements", "Personal financials"],
+    outputs: ["Loan application", "Property analysis", "Financial projections", "Supporting docs"]
+  }
+];
+
+const recentGenerations = [
+  {
+    id: 1,
+    template: "Investment Memo",
+    property: "1247 Atlantic Avenue",
+    generatedAt: "2 hours ago",
+    status: "Completed",
+    timeSaved: "3.5 hours"
+  },
+  {
+    id: 2,
+    template: "Due Diligence Questionnaire", 
+    property: "91-15 Corona Avenue",
+    generatedAt: "1 day ago",
+    status: "Completed",
+    timeSaved: "6 hours"
+  },
+  {
+    id: 3,
+    template: "Pro-Forma Report",
+    property: "156 MacDonough Street", 
+    generatedAt: "2 days ago",
+    status: "In Review",
+    timeSaved: "4 hours"
   }
 ];
 
@@ -189,8 +285,9 @@ const ICMemos = () => {
               </div>
 
               <Tabs defaultValue="generated" className="space-y-6">
-                <TabsList className="grid w-full grid-cols-2">
+                <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="generated">Generated Memos</TabsTrigger>
+                  <TabsTrigger value="automation">Document Automation</TabsTrigger>
                   <TabsTrigger value="progress">In Progress</TabsTrigger>
                 </TabsList>
 
@@ -269,6 +366,194 @@ const ICMemos = () => {
                         </CardContent>
                       </Card>
                     ))}
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="automation" className="space-y-6">
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <div>
+                        <h2 className="font-display text-lg text-foreground">Automated Document Generation</h2>
+                        <p className="text-sm text-muted-foreground">Eliminate repetitive paperwork with AI-powered document automation</p>
+                      </div>
+                      <Button size="sm" variant="outline">
+                        <Zap className="w-4 h-4 mr-2" />
+                        View Analytics
+                      </Button>
+                    </div>
+
+                    {/* Automation Stats */}
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                      <Card className="glass">
+                        <CardContent className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 bg-primary/10 rounded-lg">
+                              <Zap className="w-5 h-5 text-primary" />
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground">Time Saved</p>
+                              <p className="text-2xl font-semibold text-foreground">47 hrs</p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      <Card className="glass">
+                        <CardContent className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 bg-success/10 rounded-lg">
+                              <FileText className="w-5 h-5 text-success" />
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground">Documents Generated</p>
+                              <p className="text-2xl font-semibold text-foreground">156</p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      <Card className="glass">
+                        <CardContent className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 bg-ice/10 rounded-lg">
+                              <TrendingUp className="w-5 h-5 text-ice" />
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground">Accuracy Rate</p>
+                              <p className="text-2xl font-semibold text-foreground">94%</p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+
+                      <Card className="glass">
+                        <CardContent className="p-4">
+                          <div className="flex items-center gap-3">
+                            <div className="p-2 bg-warning/10 rounded-lg">
+                              <Clock className="w-5 h-5 text-warning" />
+                            </div>
+                            <div>
+                              <p className="text-sm text-muted-foreground">Avg. Generation Time</p>
+                              <p className="text-2xl font-semibold text-foreground">3 min</p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </div>
+
+                  {/* Document Templates */}
+                  <div className="space-y-4">
+                    <h3 className="font-display text-lg text-foreground">Available Document Templates</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {documentTemplates.map((template) => (
+                        <Card key={template.id} className="glass hover:shadow-lg transition-all duration-200 cursor-pointer group">
+                          <CardContent className="p-6">
+                            <div className="flex items-start gap-4 mb-4">
+                              <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                                <template.icon className="w-6 h-6 text-primary" />
+                              </div>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center justify-between mb-2">
+                                  <h4 className="font-medium text-foreground">{template.name}</h4>
+                                  <Badge variant="outline" className="text-xs">
+                                    {template.automationLevel} Auto
+                                  </Badge>
+                                </div>
+                                <p className="text-sm text-muted-foreground mb-3">{template.description}</p>
+                                <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                                  <span className="flex items-center gap-1">
+                                    <Clock className="w-3 h-3" />
+                                    {template.estimatedTime}
+                                  </span>
+                                  <span className="flex items-center gap-1">
+                                    <Zap className="w-3 h-3" />
+                                    Auto-generated
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="space-y-3">
+                              <div>
+                                <h5 className="font-medium text-foreground text-sm mb-2">Required Inputs</h5>
+                                <div className="flex flex-wrap gap-1">
+                                  {template.inputs.map((input, idx) => (
+                                    <Badge key={idx} variant="secondary" className="text-xs">
+                                      {input}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <div>
+                                <h5 className="font-medium text-foreground text-sm mb-2">Generated Outputs</h5>
+                                <div className="flex flex-wrap gap-1">
+                                  {template.outputs.map((output, idx) => (
+                                    <Badge key={idx} variant="outline" className="text-xs">
+                                      {output}
+                                    </Badge>
+                                  ))}
+                                </div>
+                              </div>
+
+                              <Button className="w-full mt-4 group-hover:bg-primary/90 transition-colors">
+                                <Brain className="w-4 h-4 mr-2" />
+                                Generate Document
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Recent Generations */}
+                  <div className="space-y-4">
+                    <h3 className="font-display text-lg text-foreground">Recent Generations</h3>
+                    <Card className="glass">
+                      <CardContent className="p-6">
+                        <div className="space-y-4">
+                          {recentGenerations.map((generation) => (
+                            <div key={generation.id} className="flex items-center justify-between p-4 bg-muted/20 rounded-lg">
+                              <div className="flex items-center gap-3">
+                                <div className="p-2 bg-success/10 rounded-lg">
+                                  <CheckCircle className="w-4 h-4 text-success" />
+                                </div>
+                                <div>
+                                  <h4 className="font-medium text-foreground">{generation.template}</h4>
+                                  <p className="text-sm text-muted-foreground">{generation.property}</p>
+                                </div>
+                              </div>
+                              <div className="text-right">
+                                <p className="text-sm font-medium text-foreground">Saved {generation.timeSaved}</p>
+                                <p className="text-xs text-muted-foreground">{generation.generatedAt}</p>
+                              </div>
+                              <div className="flex gap-2">
+                                <Button variant="ghost" size="sm">
+                                  <Eye className="w-4 h-4" />
+                                </Button>
+                                <Button variant="ghost" size="sm">
+                                  <Download className="w-4 h-4" />
+                                </Button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        <div className="mt-6 p-4 bg-primary/5 rounded-lg border border-primary/20">
+                          <div className="flex items-center gap-3">
+                            <Zap className="w-5 h-5 text-primary" />
+                            <div>
+                              <h4 className="font-medium text-foreground">Automation Impact</h4>
+                              <p className="text-sm text-muted-foreground">
+                                Document automation has eliminated 90% of repetitive paperwork, saving an average of 4.2 hours per deal.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
                   </div>
                 </TabsContent>
 
