@@ -114,10 +114,8 @@ interface PropertyAnalysis {
 }
 
 export function PropertyAnalyzer() {
-  const [searchAddress, setSearchAddress] = useState("");
+  const [searchAddress, setSearchAddress] = useState("156 Grand St, Brooklyn NY");
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [analysis, setAnalysis] = useState<PropertyAnalysis | null>(null);
-  const [activeScenario, setActiveScenario] = useState("base");
   const [assumptions, setAssumptions] = useState({
     downPayment: 20,
     interestRate: 7.5,
@@ -129,11 +127,153 @@ export function PropertyAnalyzer() {
     taxes: 1.2
   });
 
-  useEffect(() => {
-    const demoAddress = "156 Grand St, Brooklyn NY";
-    setSearchAddress(demoAddress);
-    handleAnalyze(demoAddress);
-  }, []);
+  // Initialize with demo analysis data to prevent visual glitch
+  const [analysis, setAnalysis] = useState<PropertyAnalysis>({
+    address: "156 Grand St, Brooklyn NY",
+    estimatedValue: 485000,
+    confidence: 87,
+    dealScore: 78,
+    dataSources: {
+      zillow: { value: 490000, date: "2024-01-15", confidence: 85 },
+      redfin: { value: 480000, date: "2024-01-12", confidence: 88 },
+      houseCanary: { value: 485000, date: "2024-01-18", confidence: 90 },
+      publicRecords: { assessedValue: 425000, lastSale: 380000, taxYear: "2023" }
+    },
+    propertyDetails: {
+      bedrooms: 2,
+      bathrooms: 1.5,
+      sqft: 750,
+      lotSize: 2500,
+      yearBuilt: 1925,
+      propertyType: "Condo",
+      parking: "Street",
+      hoa: 150
+    },
+    financials: {
+      purchasePrice: 485000,
+      downPayment: 97000,
+      loanAmount: 388000,
+      interestRate: 7.5,
+      monthlyPayment: 2710,
+      monthlyRent: 3200,
+      monthlyExpenses: 1245,
+      cashFlow: 485,
+      capRate: 6.1,
+      roi: 18.5,
+      irr: 15.2,
+      cocROI: 6.0,
+      dscr: 1.18
+    },
+    assumptions: {
+      vacancy: 5,
+      maintenance: 8,
+      capex: 5,
+      management: 10,
+      insurance: 0.5,
+      taxes: 1.2
+    },
+    market: {
+      avgRent: 3100,
+      rentGrowth: 4.2,
+      appreciation: 5.8,
+      pricePerSqft: 647,
+      daysOnMarket: 42,
+      neighborhood: "Nolita",
+      walkScore: 98,
+      transitScore: 85
+    },
+    neighborhood: {
+      crimeIndex: 25,
+      schoolRating: 8,
+      demographics: {
+        medianIncome: 95000,
+        populationGrowth: 2.1,
+        employment: 96.5,
+        avgAge: 32
+      },
+      amenities: {
+        restaurants: 85,
+        shopping: 45,
+        parks: 12,
+        hospitals: 3
+      }
+    },
+    risks: [
+      { 
+        type: "medium", 
+        category: "market",
+        title: "Market Correction Risk", 
+        description: "Property values in Brooklyn have risen 23% in 2 years, showing potential for correction.",
+        impact: "Could reduce property value by 5-10%"
+      },
+      { 
+        type: "low", 
+        category: "financial",
+        title: "Interest Rate Risk", 
+        description: "Current rates favorable but may rise affecting refinancing.",
+        impact: "Minor impact on cash flow"
+      },
+      { 
+        type: "medium", 
+        category: "property",
+        title: "Tenant Risk", 
+        description: "High rental demand but tenant turnover costs average $3,200.",
+        impact: "Potential vacancy costs"
+      }
+    ],
+    opportunities: [
+      {
+        title: "Value-Add Renovation",
+        description: "Unit renovation potential through modern fixtures and finishes",
+        potential: "$15K investment, +$200/month rent"
+      },
+      {
+        title: "Strong Rental Market",
+        description: "High demand area with consistent occupancy rates",
+        potential: "97% occupancy rates in area"
+      },
+      {
+        title: "ADU Conversion",
+        description: "Potential basement conversion to additional rental unit",
+        potential: "+$1,200/month additional income"
+      },
+      {
+        title: "Tax Benefits",
+        description: "Depreciation and expense deductions available",
+        potential: "$12K annual tax savings"
+      }
+    ],
+    comparables: [
+      { address: "142 Grand St", soldPrice: 475000, soldDate: "2024-01-10", distance: 0.1, sqft: 720, pricePerSqft: 659, bedrooms: 2, bathrooms: 1, daysOnMarket: 28 },
+      { address: "168 Grand St", soldPrice: 510000, soldDate: "2024-01-05", distance: 0.2, sqft: 780, pricePerSqft: 654, bedrooms: 2, bathrooms: 1.5, daysOnMarket: 35 },
+      { address: "134 Mott St", soldPrice: 465000, soldDate: "2023-12-28", distance: 0.3, sqft: 700, pricePerSqft: 664, bedrooms: 2, bathrooms: 1, daysOnMarket: 52 }
+    ],
+    recommendations: {
+      decision: 'buy',
+      reasoning: [
+        "Property priced 5% below market median with strong fundamentals",
+        "Positive cash flow from day one with conservative estimates",
+        "Neighborhood showing consistent 8-12% annual appreciation",
+        "Strong rental market with low vacancy rates"
+      ],
+      proscons: {
+        pros: [
+          "Below market price with immediate equity",
+          "Strong rental demand and pricing power",
+          "Value-add opportunities for increased returns",
+          "Stable, gentrifying neighborhood"
+        ],
+        cons: [
+          "Higher property taxes than surrounding areas",
+          "Potential interest rate increases",
+          "Limited parking affecting some tenant appeal",
+          "Older building may require maintenance"
+        ]
+      }
+    }
+  });
+  
+  const [activeScenario, setActiveScenario] = useState("base");
 
   const handleAnalyze = async (addr?: string) => {
     const address = (addr ?? searchAddress).trim();
