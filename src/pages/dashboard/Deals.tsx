@@ -5,11 +5,12 @@ import { SimplifiedDealTable } from "@/components/dashboard/SimplifiedDealTable"
 import { DealMap } from "@/components/dashboard/DealMap";
 import { ExplainPanel } from "@/components/dashboard/ExplainPanel";
 import { AgentInsights } from "@/components/dashboard/AgentInsights";
+import { PropertyAnalyzer } from "@/components/dashboard/PropertyAnalyzer";
 import { useState } from "react";
 
 const Deals = () => {
   const [selectedDeal, setSelectedDeal] = useState<any>(null);
-  const [view, setView] = useState<'deals' | 'map'>('deals');
+  const [view, setView] = useState<'deals' | 'map' | 'analyzer'>('deals');
 
   const handlePropertySelect = (property: any) => {
     setSelectedDeal(property);
@@ -43,6 +44,16 @@ const Deals = () => {
                     Deal Table
                   </button>
                   <button 
+                    onClick={() => setView('analyzer')} 
+                    className={`px-4 py-2 rounded-lg transition-colors ${
+                      view === 'analyzer' 
+                        ? 'bg-primary text-primary-foreground' 
+                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                    }`}
+                  >
+                    Property Analysis
+                  </button>
+                  <button 
                     onClick={() => setView('map')} 
                     className={`px-4 py-2 rounded-lg transition-colors ${
                       view === 'map' 
@@ -60,6 +71,10 @@ const Deals = () => {
                 {view === 'deals' ? (
                   <div className="w-full">
                     <SimplifiedDealTable onPropertySelect={handlePropertySelect} />
+                  </div>
+                ) : view === 'analyzer' ? (
+                  <div className="w-full">
+                    <PropertyAnalyzer />
                   </div>
                 ) : (
                   <div className="w-full h-full min-h-[600px]">

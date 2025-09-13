@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Upload, Search, BarChart3, Bot, Plus, FileText, HelpCircle, TrendingUp } from "lucide-react";
+import { Upload, Search, BarChart3, Bot, Plus, FileText, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +7,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DealMap } from "./DealMap";
 import { ExplainPanel } from "./ExplainPanel";
 import { AIDataSearch } from "./AIDataSearch";
-import { PropertyAnalyzer } from "./PropertyAnalyzer";
 
 export function DealWorkflow() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -41,14 +40,10 @@ export function DealWorkflow() {
     <div className="h-full flex flex-col">
       <div className="flex-1 overflow-y-auto p-6">
         <Tabs defaultValue="upload" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-4">
             <TabsTrigger value="upload" className="flex items-center gap-2">
               <Upload className="w-4 h-4" />
               Upload & Parse
-            </TabsTrigger>
-            <TabsTrigger value="analyzer" className="flex items-center gap-2">
-              <TrendingUp className="w-4 h-4" />
-              Property Analyzer
             </TabsTrigger>
             <TabsTrigger value="search" className="flex items-center gap-2">
               <Search className="w-4 h-4" />
@@ -95,10 +90,6 @@ export function DealWorkflow() {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-
-          <TabsContent value="analyzer" className="space-y-6">
-            <PropertyAnalyzer />
           </TabsContent>
 
           <TabsContent value="search" className="space-y-6">
