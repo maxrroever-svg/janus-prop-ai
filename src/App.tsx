@@ -15,8 +15,11 @@ import DataLake from "./pages/dashboard/DataLake";
 import Assistant from "./pages/dashboard/Assistant";
 import Settings from "./pages/dashboard/Settings";
 import AuditLog from "./pages/dashboard/AuditLog";
+import Agents from "./pages/dashboard/Agents";
+import InvestorDueDiligence from "./pages/investor/DueDiligence";
 
 // Consumer pages
+import ConsumerDueDiligence from "./pages/consumer/DueDiligence";
 import ConsumerAnalysis from "./pages/consumer/Analysis";
 import ConsumerMapView from "./pages/consumer/MapView";
 import ConsumerUnderwriting from "./pages/consumer/Underwriting";
@@ -45,6 +48,7 @@ export default function App() {
       <Route path="/consumer/assistant" element={<ConsumerAssistant />} />
       <Route path="/consumer/settings" element={<ConsumerSettings />} />
       <Route path="/consumer/audit" element={<ConsumerAuditLog />} />
+      <Route path="/consumer/due-diligence" element={<ConsumerDueDiligence />} />
       <Route path="/investor" element={<Dashboard />} />
       <Route path="/investor/deals" element={<Deals />} />
       <Route path="/investor/deal-feed" element={<DealFeed />} />
@@ -57,6 +61,8 @@ export default function App() {
       <Route path="/investor/assistant" element={<Assistant />} />
       <Route path="/investor/settings" element={<Settings />} />
       <Route path="/investor/audit" element={<AuditLog />} />
+      <Route path="/investor/agents" element={<Agents />} />
+      <Route path="/investor/due-diligence" element={<InvestorDueDiligence />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
