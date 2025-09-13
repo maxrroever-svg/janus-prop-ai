@@ -208,47 +208,49 @@ export function AIDataSearch() {
 
         <TabsContent value="search" className="flex-1 flex flex-col space-y-4">
           {/* Search Controls */}
-          <div className="flex gap-3 p-4 bg-muted/30 rounded-lg">
-            <div className="flex-1">
-              <Input
-                placeholder="Ask about your deals, documents, or market data..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                className="h-10"
-                disabled={isLoading}
-              />
+          <div className="flex flex-col gap-3 p-4 bg-muted/30 rounded-lg">
+            <div className="flex gap-3 items-center">
+              <div className="flex-1">
+                <Input
+                  placeholder="Ask about your deals, documents, or market data..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+                  className="h-10"
+                  disabled={isLoading}
+                />
+              </div>
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-[140px] shrink-0">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map((cat) => (
+                    <SelectItem key={cat.value} value={cat.value}>
+                      <div className="flex items-center gap-2">
+                        <cat.icon className="w-4 h-4" />
+                        {cat.label}
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe}>
+                <SelectTrigger className="w-[130px] shrink-0">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {timeframes.map((tf) => (
+                    <SelectItem key={tf.value} value={tf.value}>
+                      {tf.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button onClick={() => handleSearch()} disabled={isLoading || !query.trim()} className="shrink-0">
+                <Search className="w-4 h-4" />
+              </Button>
             </div>
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-              <SelectTrigger className="w-[140px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((cat) => (
-                  <SelectItem key={cat.value} value={cat.value}>
-                    <div className="flex items-center gap-2">
-                      <cat.icon className="w-4 h-4" />
-                      {cat.label}
-                    </div>
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select value={selectedTimeframe} onValueChange={setSelectedTimeframe}>
-              <SelectTrigger className="w-[130px]">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {timeframes.map((tf) => (
-                  <SelectItem key={tf.value} value={tf.value}>
-                    {tf.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Button onClick={() => handleSearch()} disabled={isLoading || !query.trim()}>
-              <Search className="w-4 h-4" />
-            </Button>
           </div>
 
           {/* Quick Suggestions */}
