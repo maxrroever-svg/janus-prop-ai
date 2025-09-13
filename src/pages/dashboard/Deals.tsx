@@ -2,7 +2,6 @@ import { SidebarProvider } from "@/components/ui/sidebar-simple";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { SimplifiedDealTable } from "@/components/dashboard/SimplifiedDealTable";
-import { DealMap } from "@/components/dashboard/DealMap";
 import { ExplainPanel } from "@/components/dashboard/ExplainPanel";
 import { AgentInsights } from "@/components/dashboard/AgentInsights";
 import { PropertyAnalyzer } from "@/components/dashboard/PropertyAnalyzer";
@@ -10,7 +9,7 @@ import { useState } from "react";
 
 const Deals = () => {
   const [selectedDeal, setSelectedDeal] = useState<any>(null);
-  const [view, setView] = useState<'deals' | 'map' | 'analyzer'>('deals');
+  const [view, setView] = useState<'deals' | 'analyzer'>('deals');
 
   const handlePropertySelect = (property: any) => {
     setSelectedDeal(property);
@@ -25,11 +24,6 @@ const Deals = () => {
           <div className="h-full flex flex-col">
             {/* Left Panel - Main Content */}
             <div className="flex-1 flex flex-col">
-              {/* Agent Insights Section */}
-              <div className="shrink-0 p-6 border-b border-border bg-secondary/20">
-                <AgentInsights />
-              </div>
-              
               {/* View Toggle */}
               <div className="shrink-0 p-4 border-b border-border bg-secondary/30">
                 <div className="flex gap-2">
@@ -41,7 +35,7 @@ const Deals = () => {
                         : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                     }`}
                   >
-                    Deal Table
+                    Active Deals
                   </button>
                   <button 
                     onClick={() => setView('analyzer')} 
@@ -53,32 +47,23 @@ const Deals = () => {
                   >
                     Property Analysis
                   </button>
-                  <button 
-                    onClick={() => setView('map')} 
-                    className={`px-4 py-2 rounded-lg transition-colors ${
-                      view === 'map' 
-                        ? 'bg-primary text-primary-foreground' 
-                        : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
-                    }`}
-                  >
-                    Map View
-                  </button>
                 </div>
               </div>
               
               {/* Content Area */}
               <div className="flex-1 p-6">
                 {view === 'deals' ? (
-                  <div className="w-full">
+                  <div className="w-full space-y-6">
+                    {/* Agent Insights Section - Integrated into deals view */}
+                    <div className="bg-secondary/20 rounded-lg p-6 border border-border">
+                      <AgentInsights />
+                    </div>
+                    {/* Deals Table */}
                     <SimplifiedDealTable onPropertySelect={handlePropertySelect} />
                   </div>
-                ) : view === 'analyzer' ? (
+                ) : (
                   <div className="w-full">
                     <PropertyAnalyzer />
-                  </div>
-                ) : (
-                  <div className="w-full h-full min-h-[600px]">
-                    <DealMap onDealSelect={setSelectedDeal} />
                   </div>
                 )}
               </div>
