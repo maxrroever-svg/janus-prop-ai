@@ -45,6 +45,16 @@
     --ring: 0 0% 100%;
     --radius: 16px;
     
+    /* Status colors */
+    --success: 142 76% 36%; /* Green */
+    --success-foreground: 0 0% 98%;
+    --warning: 48 96% 53%; /* Yellow */
+    --warning-foreground: 0 0% 4%;
+    --gold: 45 93% 58%; /* Gold */
+    --gold-foreground: 0 0% 4%;
+    --ice: 200 50% 85%; /* Light blue */
+    --ice-foreground: 0 0% 4%;
+    
     /* Glass surfaces */
     --glass: 0 0% 100% / 0.10;
     --glass-hover: 0 0% 100% / 0.05;
