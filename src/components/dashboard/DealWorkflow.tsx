@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Upload, Search, BarChart3, Database, Plus, FileText, HelpCircle } from "lucide-react";
+import { Upload, Search, BarChart3, Bot, Plus, FileText, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DealMap } from "./DealMap";
 import { ExplainPanel } from "./ExplainPanel";
+import { AIDataSearch } from "./AIDataSearch";
 
 export function DealWorkflow() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -53,8 +54,8 @@ export function DealWorkflow() {
               Deal Analysis
             </TabsTrigger>
             <TabsTrigger value="database" className="flex items-center gap-2">
-              <Database className="w-4 h-4" />
-              Deal Database
+              <Bot className="w-4 h-4" />
+              AI Data Search
             </TabsTrigger>
           </TabsList>
 
@@ -139,29 +140,12 @@ export function DealWorkflow() {
             <Card className="dashboard-card">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <Database className="w-5 h-5" />
-                  Deal Database
+                  <Bot className="w-5 h-5" />
+                  AI Data Search
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-4">
-                  {deals.map((deal) => (
-                    <div key={deal.id} className="p-4 border border-border rounded-lg hover:bg-muted/50 cursor-pointer">
-                      <div className="flex justify-between items-start">
-                        <div>
-                          <h3 className="font-semibold text-foreground">{deal.address}</h3>
-                          <p className="text-sm text-muted-foreground">{deal.city}</p>
-                          <p className="text-sm text-muted-foreground">{deal.type}</p>
-                        </div>
-                        <div className="text-right">
-                          <p className="font-semibold text-foreground">{deal.price}</p>
-                          <p className="text-sm text-muted-foreground">Cap Rate: {deal.capRate}</p>
-                          <p className="text-sm text-primary">Score: {deal.janusScore}</p>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                <AIDataSearch />
               </CardContent>
             </Card>
           </TabsContent>
