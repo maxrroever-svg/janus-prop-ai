@@ -769,75 +769,99 @@ export function PropertyAnalyzer() {
                           className="mt-2"
                         />
                       </div>
-                      <div>
-                        <Label>Vacancy Rate: {assumptions.vacancy}%</Label>
-                        <Slider
-                          value={[assumptions.vacancy]}
-                          onValueChange={(value) => updateAssumption('vacancy', value)}
-                          max={20}
-                          min={0}
-                          step={1}
-                          className="mt-2"
-                        />
-                      </div>
-                      <div>
-                        <Label>Maintenance: {assumptions.maintenance}%</Label>
-                        <Slider
-                          value={[assumptions.maintenance]}
-                          onValueChange={(value) => updateAssumption('maintenance', value)}
-                          max={20}
-                          min={2}
-                          step={1}
-                          className="mt-2"
-                        />
-                      </div>
+                       <div className="space-y-1">
+                         <div className="flex items-center justify-between">
+                           <Label>Vacancy Rate: {assumptions.vacancy}%</Label>
+                           <span className="text-xs text-muted-foreground">of monthly rent</span>
+                         </div>
+                         <p className="text-xs text-muted-foreground mb-2">Expected time property remains unoccupied between tenants</p>
+                         <Slider
+                           value={[assumptions.vacancy]}
+                           onValueChange={(value) => updateAssumption('vacancy', value)}
+                           max={20}
+                           min={0}
+                           step={1}
+                           className="mt-2"
+                         />
+                       </div>
+                       <div className="space-y-1">
+                         <div className="flex items-center justify-between">
+                           <Label>Maintenance & Repairs: {assumptions.maintenance}%</Label>
+                           <span className="text-xs text-muted-foreground">of monthly rent</span>
+                         </div>
+                         <p className="text-xs text-muted-foreground mb-2">Ongoing repairs, appliance maintenance, and small improvements</p>
+                         <Slider
+                           value={[assumptions.maintenance]}
+                           onValueChange={(value) => updateAssumption('maintenance', value)}
+                           max={20}
+                           min={2}
+                           step={1}
+                           className="mt-2"
+                         />
+                       </div>
                     </div>
                     
                     <div className="space-y-4">
-                      <div>
-                        <Label>CapEx Reserve: {assumptions.capex}%</Label>
-                        <Slider
-                          value={[assumptions.capex]}
-                          onValueChange={(value) => updateAssumption('capex', value)}
-                          max={15}
-                          min={0}
-                          step={1}
-                          className="mt-2"
-                        />
-                      </div>
-                      <div>
-                        <Label>Management: {assumptions.management}%</Label>
-                        <Slider
-                          value={[assumptions.management]}
-                          onValueChange={(value) => updateAssumption('management', value)}
-                          max={20}
-                          min={0}
-                          step={1}
-                          className="mt-2"
-                        />
-                      </div>
-                      <div>
-                        <Label>Insurance: {assumptions.insurance}%</Label>
-                        <Slider
-                          value={[assumptions.insurance]}
-                          onValueChange={(value) => updateAssumption('insurance', value)}
-                          max={2}
-                          min={0.2}
-                          step={0.1}
-                          className="mt-2"
-                        />
-                      </div>
-                      <div>
-                        <Label>Property Taxes: {assumptions.taxes}%</Label>
-                        <Slider
-                          value={[assumptions.taxes]}
-                          onValueChange={(value) => updateAssumption('taxes', value)}
-                          max={3}
-                          min={0.5}
-                          step={0.1}
-                          className="mt-2"
-                        />
-                      </div>
+                       <div className="space-y-1">
+                         <div className="flex items-center justify-between">
+                           <Label>Capital Expenditures: {assumptions.capex}%</Label>
+                           <span className="text-xs text-muted-foreground">of monthly rent</span>
+                         </div>
+                         <p className="text-xs text-muted-foreground mb-2">Major improvements: roof, HVAC, flooring, kitchen renovations</p>
+                         <Slider
+                           value={[assumptions.capex]}
+                           onValueChange={(value) => updateAssumption('capex', value)}
+                           max={15}
+                           min={0}
+                           step={1}
+                           className="mt-2"
+                         />
+                       </div>
+                       <div className="space-y-1">
+                         <div className="flex items-center justify-between">
+                           <Label>Property Management: {assumptions.management}%</Label>
+                           <span className="text-xs text-muted-foreground">of monthly rent</span>
+                         </div>
+                         <p className="text-xs text-muted-foreground mb-2">Professional management fees for tenant screening, rent collection</p>
+                         <Slider
+                           value={[assumptions.management]}
+                           onValueChange={(value) => updateAssumption('management', value)}
+                           max={20}
+                           min={0}
+                           step={1}
+                           className="mt-2"
+                         />
+                       </div>
+                       <div className="space-y-1">
+                         <div className="flex items-center justify-between">
+                           <Label>Property Insurance: {assumptions.insurance}%</Label>
+                           <span className="text-xs text-muted-foreground">of property value</span>
+                         </div>
+                         <p className="text-xs text-muted-foreground mb-2">Annual insurance premiums for property protection</p>
+                         <Slider
+                           value={[assumptions.insurance]}
+                           onValueChange={(value) => updateAssumption('insurance', value)}
+                           max={2}
+                           min={0.2}
+                           step={0.1}
+                           className="mt-2"
+                         />
+                       </div>
+                       <div className="space-y-1">
+                         <div className="flex items-center justify-between">
+                           <Label>Property Taxes: {assumptions.taxes}%</Label>
+                           <span className="text-xs text-muted-foreground">of property value</span>
+                         </div>
+                         <p className="text-xs text-muted-foreground mb-2">Annual municipal property tax assessments</p>
+                         <Slider
+                           value={[assumptions.taxes]}
+                           onValueChange={(value) => updateAssumption('taxes', value)}
+                           max={3}
+                           min={0.5}
+                           step={0.1}
+                           className="mt-2"
+                         />
+                       </div>
                     </div>
                   </div>
                   

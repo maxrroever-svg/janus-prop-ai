@@ -92,24 +92,22 @@ export function AgentInsights() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
+          <Bell className="w-5 h-5 text-primary" />
+          <h2 className="font-display text-xl font-normal text-foreground">Agent Insights</h2>
           <div className="flex items-center gap-2">
-            <Bell className="w-5 h-5 text-primary" />
-            <h2 className="font-display text-xl font-normal text-foreground">Agent Insights</h2>
+            <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+            <span className="text-sm text-success font-medium">Live Updates</span>
           </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
-                  <span className="text-sm text-success font-medium">Live Updates</span>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <Badge variant="outline" className="text-xs border-red-500/30 text-red-600 bg-red-500/5">
-                  {agentInsights.filter(i => i.priority === "high").length} High Priority
-                </Badge>
-                <Badge variant="outline" className="text-xs border-primary/30 text-primary bg-primary/5">
-                  {agentInsights.length} Total
-                </Badge>
-              </div>
+        </div>
+        
+        <div className="flex items-center gap-2">
+          <Badge variant="outline" className="text-xs border-red-500/30 text-red-600 bg-red-500/5">
+            {agentInsights.filter(i => i.priority === "high").length} High Priority
+          </Badge>
+          <Badge variant="outline" className="text-xs border-primary/30 text-primary bg-primary/5">
+            {agentInsights.length} Total
+          </Badge>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
