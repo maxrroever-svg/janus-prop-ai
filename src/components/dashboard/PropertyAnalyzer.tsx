@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Search, MapPin, TrendingUp, AlertTriangle, Calculator, Building, BarChart3, Home, DollarSign, Clock, Star, Zap, Target, Eye, FileText, CheckCircle, XCircle, ExternalLink, Settings, Info, Sliders, School, Shield, Users, Car, Wifi, Trees, Map, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -129,15 +129,22 @@ export function PropertyAnalyzer() {
     taxes: 1.2
   });
 
-  const handleAnalyze = async () => {
-    if (!searchAddress.trim()) return;
+  useEffect(() => {
+    const demoAddress = "156 Grand St, Brooklyn NY";
+    setSearchAddress(demoAddress);
+    handleAnalyze(demoAddress);
+  }, []);
+
+  const handleAnalyze = async (addr?: string) => {
+    const address = (addr ?? searchAddress).trim();
+    if (!address) return;
     
     setIsAnalyzing(true);
     
     // Simulate comprehensive API calls to multiple data sources
     setTimeout(() => {
       const mockAnalysis: PropertyAnalysis = {
-        address: searchAddress,
+        address: address,
         estimatedValue: 485000,
         confidence: 87,
         dealScore: 78,
@@ -373,7 +380,7 @@ export function PropertyAnalyzer() {
               onKeyDown={(e) => e.key === 'Enter' && handleAnalyze()}
               className="flex-1"
             />
-            <Button onClick={handleAnalyze} disabled={isAnalyzing || !searchAddress.trim()}>
+            <Button onClick={() => handleAnalyze()} disabled={isAnalyzing || !searchAddress.trim()}>
               {isAnalyzing ? (
                 <>
                   <Zap className="w-4 h-4 mr-2 animate-pulse" />

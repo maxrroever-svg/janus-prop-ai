@@ -36,6 +36,7 @@ const navigation = [
   { name: "IC Memos", href: "/investor/memos", icon: FileText },
   { name: "Outreach", href: "/investor/outreach", icon: MessageSquare },
   { name: "Portfolio", href: "/investor/portfolio", icon: Target },
+  { name: "Due Diligence", href: "/investor/due-diligence", icon: FileText },
   { name: "Data Lake", href: "/investor/data-lake", icon: Database },
   { name: "AI Assistant", href: "/investor/assistant", icon: MessageSquare },
 ];
