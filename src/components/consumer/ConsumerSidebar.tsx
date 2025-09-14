@@ -26,6 +26,7 @@ const navigation = [
   { name: "Smart Search", href: "/consumer", icon: Search },
   { name: "Property Analysis", href: "/consumer/analysis", icon: FileText },
   { name: "Map View", href: "/consumer/map", icon: MapPin },
+  { name: "Key Documents", href: "/consumer/documents", icon: FileText },
   { name: "Underwriting", href: "/consumer/underwriting", icon: FileText },
   { name: "Due Diligence", href: "/consumer/due-diligence", icon: FileText },
   { name: "Financing", href: "/consumer/financing", icon: CreditCard },

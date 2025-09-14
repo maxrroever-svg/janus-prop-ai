@@ -22,6 +22,7 @@ import InvestorDueDiligence from "./pages/investor/DueDiligence";
 import ConsumerDueDiligence from "./pages/consumer/DueDiligence";
 import ConsumerAnalysis from "./pages/consumer/Analysis";
 import ConsumerMapView from "./pages/consumer/MapView";
+import ConsumerDocuments from "./pages/consumer/Documents";
 import ConsumerUnderwriting from "./pages/consumer/Underwriting";
 import ConsumerFinancing from "./pages/consumer/Financing";
 import ConsumerClosing from "./pages/consumer/Closing";
@@ -39,6 +40,7 @@ export default function App() {
       <Route path="/consumer" element={<Consumer />} />
       <Route path="/consumer/analysis" element={<ConsumerAnalysis />} />
       <Route path="/consumer/map" element={<ConsumerMapView />} />
+      <Route path="/consumer/documents" element={<ConsumerDocuments />} />
       <Route path="/consumer/underwriting" element={<ConsumerUnderwriting />} />
       <Route path="/consumer/financing" element={<ConsumerFinancing />} />
       <Route path="/consumer/closing" element={<ConsumerClosing />} />
